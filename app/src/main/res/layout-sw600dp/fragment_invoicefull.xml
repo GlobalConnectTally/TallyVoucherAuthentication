@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragements.InvoicefullFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            app:titleTextColor="@color/color_white"
+            android:id="@+id/toolbarSomo"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        <RelativeLayout
+            android:layout_below="@+id/toolbarSomo"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:id="@+id/linear"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_marginTop="15dp"
+                        android:paddingStart="5dp"
+                        android:paddingLeft="5dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/color_black"
+                            android:text="Sales Transaction Invoice "
+                            android:textSize="@dimen/fontitem"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"/>
+
+
+
+                    <RelativeLayout
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_alignParentLeft="true"
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+
+                                android:id="@+id/txt_masteid1"
+                                android:paddingStart="5dp"
+                                android:paddingLeft="5dp"
+                                android:text="1"
+                                android:textStyle="bold"
+                                android:textSize="@dimen/fontitem"
+                                android:textColor="@color/color_black"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+
+
+                                android:paddingStart="5dp"
+                                android:paddingLeft="5dp"
+                                android:text="Item Name:"
+                                android:textSize="@dimen/fontsize"
+                                android:textColor="@color/color_black"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+
+
+
+
+                        <TextView
+                            android:textStyle="normal"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/text_itemn"
+                            android:text="Sample Item 1"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+
+
+
+
+                    </RelativeLayout>
+
+
+
+                    <RelativeLayout
+                        android:layout_marginHorizontal="7dp"
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_alignParentLeft="true"
+                            android:text="Batch Name: "
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+
+                        <TextView
+                            android:textStyle="normal"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/txt_parbatch"
+                            android:text="Primary Batch"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+
+
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+
+                        android:layout_marginTop="7dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:paddingStart="5dp"
+                            android:paddingLeft="5dp"
+                            android:layout_weight="1"
+                            android:text="MfgDate"
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                        <TextView
+                            android:id="@+id/txt_ivdate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="0dp"
+                            android:text="23/23/2019"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/fontndogo" />
+
+                    </RelativeLayout>
+
+
+
+
+
+
+                    <RelativeLayout
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+
+
+                        <TextView
+
+                            android:paddingStart="5dp"
+                            android:paddingLeft="5dp"
+                            android:layout_weight="1"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Amount"
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_centerHorizontal="true"
+                            android:paddingStart="5dp"
+                            android:paddingLeft="5dp"
+                            android:id="@+id/txt_invamount"
+                            android:layout_gravity="center_horizontal"
+                            android:text="2000939"
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+
+
+
+                    </RelativeLayout>
+
+
+
+
+                    <LinearLayout
+                        android:layout_marginTop="25dp"
+                        android:paddingStart="5dp"
+                        android:paddingLeft="5dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:gravity="center_horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="@color/color_black"
+                            android:text="Sales More detail"
+                            android:textSize="@dimen/fontsize"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"/>
+
+
+
+                    <RelativeLayout
+
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+
+                            android:paddingStart="5dp"
+                            android:paddingLeft="5dp"
+                            android:text="Quantity:"
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+
+
+
+
+
+
+
+
+                        <TextView
+                            android:textStyle="italic"
+                            android:id="@+id/txt_invqty"
+                            android:layout_gravity="center_horizontal"
+                            android:text="500 Nos"
+                            android:paddingRight="5dp"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+                            android:paddingStart="5dp"
+                            android:paddingLeft="5dp"
+                            android:text="Voucher Number"
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+
+
+
+
+
+                        <TextView
+                            android:textStyle="italic"
+                            android:id="@+id/txt_iVnumber"
+                            android:layout_gravity="center_horizontal"
+                            android:text="1"
+                            android:paddingRight="5dp"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+
+                            android:paddingStart="5dp"
+                            android:paddingLeft="5dp"
+                            android:text="Ledger Name:"
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+
+
+
+
+
+
+
+
+                        <TextView
+                            android:textStyle="italic"
+                            android:id="@+id/txt_ivtype2"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Sales"
+                            android:paddingRight="5dp"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+
+                            android:paddingStart="5dp"
+                            android:paddingLeft="5dp"
+                            android:text="Godown Name:"
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+
+
+
+
+
+
+
+
+                        <TextView
+                            android:textStyle="italic"
+                            android:id="@+id/txt_igodown"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Main Location"
+                            android:paddingRight="5dp"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:paddingStart="5dp"
+                            android:paddingLeft="5dp"
+                            android:text="Rate:"
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+
+
+
+
+
+
+
+
+                        <TextView
+                            android:textStyle="italic"
+                            android:id="@+id/txt_irate"
+                            android:layout_gravity="center_horizontal"
+                            android:text="20.0.0"
+                            android:paddingRight="5dp"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+
+                            android:paddingStart="5dp"
+                            android:paddingLeft="5dp"
+                            android:text="Discount Per(%)"
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+
+
+
+
+
+
+
+
+                        <TextView
+                            android:textStyle="italic"
+                            android:id="@+id/txt_iprc"
+                            android:layout_gravity="center_horizontal"
+                            android:text="0"
+                            android:paddingRight="5dp"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+
+                            android:paddingStart="5dp"
+                            android:paddingLeft="5dp"
+                            android:text="ExpDate:"
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+
+
+
+
+
+
+
+
+                        <TextView
+                            android:textStyle="italic"
+                            android:id="@+id/txt_iexdate"
+                            android:layout_gravity="center_horizontal"
+                            android:text="0"
+                            android:paddingRight="5dp"
+                            android:layout_alignParentRight="true"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </RelativeLayout>
+
+
+
+
+
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+
+</FrameLayout>

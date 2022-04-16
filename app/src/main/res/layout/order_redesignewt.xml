@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    app:cardBackgroundColor="@color/color_white"
+    android:background="@drawable/roundcard"
+    app:cardElevation="5dp"
+    app:cardCornerRadius="5dp"
+    app:contentPadding="2dp"
+    app:cardUseCompatPadding="true">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical"
+       android:weightSum="4"
+       android:background="@drawable/boda_kaki">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:layout_weight="1"
+           android:weightSum="2"
+           android:orientation="horizontal">
+
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="0.3"
+               android:text="Buyer "
+               android:textAppearance="?android:textAppearanceSmall"
+               android:textColor="@color/color_black"
+               android:textStyle="bold"
+               android:gravity="center_vertical"
+               android:paddingLeft="@dimen/_10sdp">
+           </TextView>
+
+           <TextView
+               android:id="@+id/texto_cuname"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="1.7"
+               android:text="Global Softwares "
+               android:textAppearance="?android:textAppearanceSmall"
+               android:textColor="@color/color_black"
+               android:gravity="center_vertical"
+               android:paddingLeft="@dimen/_10sdp">
+
+           </TextView>
+
+
+       </LinearLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:layout_weight="1"
+           android:weightSum="4"
+           android:orientation="horizontal"
+           >
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="0.7"
+               android:text="Amount "
+               android:textAppearance="?android:textAppearanceSmall"
+               android:textColor="@color/color_black"
+               android:textStyle="bold"
+               android:gravity="center_vertical"
+               android:paddingLeft="@dimen/_10sdp">
+
+           </TextView>
+           <TextView
+               android:id="@+id/texto_amount"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="0.8"
+               android:text="20000 "
+               android:textAppearance="?android:textAppearanceSmall"
+               android:textColor="@color/color_black"
+               android:gravity="center_vertical"
+               android:paddingLeft="@dimen/_10sdp">
+
+           </TextView>
+
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="0.9"
+               android:text="S.O.Name "
+               android:textAppearance="?android:textAppearanceSmall"
+               android:textColor="@color/color_black"
+               android:textStyle="bold"
+               android:gravity="center_vertical"
+               android:paddingLeft="@dimen/_10sdp">
+
+           </TextView>
+
+           <TextView
+               android:id="@+id/text_soname"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="1.3"
+               android:text="Global Softwares "
+               android:textAppearance="?android:textAppearanceSmall"
+               android:textColor="@color/color_black"
+               android:gravity="center_vertical"
+               android:paddingLeft="@dimen/_10sdp">
+
+           </TextView>
+           <ImageView
+               android:id="@+id/txti_more"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="0.3"
+               android:src="@drawable/ic_baseline_keyboard_arrow_right_24">
+
+           </ImageView>
+
+       </LinearLayout>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:layout_weight="1"
+           android:weightSum="4"
+           android:orientation="horizontal"
+           >
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="0.6"
+               android:text="Date "
+               android:textColor="@color/color_black"
+               android:textStyle="bold"
+               android:gravity="center_vertical"
+               android:textAppearance="?android:textAppearanceSmall"
+               android:paddingLeft="@dimen/_10sdp">
+
+           </TextView>
+           <TextView
+               android:id="@+id/texto_date"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="1"
+               android:text="30/11/2020 "
+               android:textAppearance="?android:textAppearanceSmall"
+               android:textColor="@color/color_black"
+               android:gravity="center_vertical"
+               android:paddingLeft="@dimen/_10sdp">
+
+           </TextView>
+
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="0.9"
+               android:text="Voucher No."
+               android:textColor="@color/color_black"
+               android:textStyle="bold"
+               android:textAppearance="?android:textAppearanceSmall"
+               android:gravity="center_vertical"
+               android:paddingLeft="@dimen/_10sdp">
+
+           </TextView>
+           <TextView
+               android:id="@+id/txt_vouchernrs"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="1.5"
+               android:text="GPCC/20-21/1787 "
+               android:textAppearance="?android:textAppearanceSmall"
+               android:textColor="@color/color_black"
+               android:gravity="center_vertical"
+               android:paddingLeft="@dimen/_10sdp">
+           </TextView>
+       </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:layout_weight="1"
+           android:background="@drawable/boda_kaki"
+           android:weightSum="3"
+           android:orientation="horizontal">
+
+           <TextView
+               android:id="@+id/txt_author"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="1"
+               android:drawableLeft="@drawable/ic_baseline_thumb_up_24"
+               android:text="Approve"
+               android:drawablePadding="5dp"
+               android:textColor="@color/color_black"
+               android:textStyle="bold"
+               android:textAppearance="?android:textAppearanceSmall"
+               android:gravity="center_vertical"
+               android:paddingLeft="@dimen/_10sdp">
+           </TextView>
+
+           <TextView
+               android:id="@+id/txt_cancel"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="1"
+               android:text="@string/reject"
+               android:textAppearance="?android:textAppearanceSmall"
+               android:textStyle="bold"
+               android:drawablePadding="5dp"
+               android:drawableStart="@drawable/ic_baseline_cancel_24"
+               android:textColor="@color/color_black"
+               android:gravity="center_vertical"
+               android:paddingStart="@dimen/_10sdp">
+           </TextView>
+
+           <TextView
+               android:id="@+id/report_more"
+               android:layout_width="0dp"
+               android:layout_height="match_parent"
+               android:layout_weight="1"
+               android:text="Report"
+               android:textAppearance="?android:textAppearanceSmall"
+               android:drawablePadding="5dp"
+               android:drawableLeft="@drawable/ic_baseline_description_24"
+               android:textColor="@color/color_black"
+               android:textStyle="bold"
+               android:gravity="center_vertical"
+               android:paddingLeft="@dimen/_10sdp">
+           </TextView>
+
+       </LinearLayout>
+   </LinearLayout>
+</androidx.cardview.widget.CardView>

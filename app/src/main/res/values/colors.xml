@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6CB9A0</color>
+    <color name="colorPrimaryDark">#B7F9D8</color>
+    <color name="color_black">#000000</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="colorAccent">#E01761</color>
+    <color name="colorred">#F50606</color>
+    <color name="color_kaki">#F2FCF6F6</color>
+
+    <color name="color_pauka">#30D200</color>
+    <color name="errorColor">#0DAE14</color>
+    <color name="greycolor">#fcf4f4</color>
+    <color name="lightgrey">#E4DFDF</color>
+
+
+    <color name="color_boda">#a59f9f</color>
+    <color name="color_txt">#828282</color>
+
+    <color name="color_bod">#42E695</color>
+    <color name="Wheat">#fff</color>
+    <color name="back">#6CB9A0</color>
+    <color name="splashscrren">#B7F9D8</color>
+<!--    <gradient android:angle="45"-->
+<!--        android:startColor="#42E695"-->
+<!--        android:endColor="#00BCD4"/>-->
+
+
+
+</resources>

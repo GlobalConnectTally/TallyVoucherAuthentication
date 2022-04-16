@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/color_white"
+
+    app:cardElevation="5dp"
+    app:cardCornerRadius="1dp"
+    app:contentPadding="1dp"
+    app:cardUseCompatPadding="true"
+    android:layout_margin="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="125dp">
+
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+
+                android:weightSum="2"
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+                            android:text="Item: "
+                            android:textStyle="bold"
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <HorizontalScrollView
+                            android:scrollbarSize="1dp"
+                            android:scrollbarThumbVertical="@color/colorPrimary"
+                            android:scrollbarStyle="outsideOverlay"
+                            android:layout_weight="1"
+                            android:scrollbars="horizontal"
+                            android:fadeScrollbars="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+
+                                android:id="@+id/txt_itemname"
+                                android:text="Sample Item 2"
+                                android:textSize="@dimen/fontndogo"
+                                android:textColor="@color/color_black"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+
+                        </HorizontalScrollView>
+
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Godown:"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/fontndogo" />
+
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txt_godwn"
+                            android:text="Main Location"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/fontndogo" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Qty: "
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/fontndogo" />
+
+                        <TextView
+                            android:textColor="@color/color_black"
+                            android:id="@+id/txt_quantity"
+                            android:text="500 Nos"
+                            android:textSize="@dimen/fontndogo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                        <LinearLayout
+
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" >
+
+
+
+
+
+                            <TextView
+                                android:textColor="@color/color_black"
+                                android:text=" * "
+                                android:textSize="@dimen/fontmin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:textStyle="bold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Rate : "
+                                android:textColor="@color/color_black"
+                                android:textSize="@dimen/fontndogo" />
+
+
+                            <TextView
+                                android:textStyle="italic"
+                                android:id="@+id/txt_Rate"
+                                android:layout_gravity="center_horizontal"
+                                android:text="20.00"
+                                android:paddingRight="5dp"
+                                android:layout_alignParentRight="true"
+                                android:textSize="@dimen/fontndogo"
+                                android:textColor="@color/color_black"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+
+
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Ledger: "
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/fontndogo" />
+
+                        <HorizontalScrollView
+                            android:scrollbarSize="1dp"
+                            android:scrollbarThumbVertical="@color/colorPrimary"
+                            android:scrollbarStyle="outsideOverlay"
+                            android:layout_weight="1"
+                            android:scrollbars="horizontal"
+                            android:fadeScrollbars="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+
+                            <TextView
+                                android:paddingRight="5dp"
+                                android:paddingEnd="5dp"
+                                android:id="@+id/txt_ledgername"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="Product"
+                                android:textColor="@color/color_black"
+                                android:textSize="@dimen/fontndogo" />
+
+
+                        </HorizontalScrollView>
+
+
+
+
+
+
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+
+                        <TextView
+                            android:id="@+id/fd_mdgdate"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="0dp"
+                            android:text="Mfg Date:"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/fontndogo" />
+
+
+                        <TextView
+                            android:id="@+id/txt_mfdate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="0dp"
+                            android:paddingStart="5dp"
+                            android:paddingLeft="5dp"
+                            android:text="20/009/39"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/fontndogo" />
+
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Batch: "
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <HorizontalScrollView
+                            android:scrollbarSize="1dp"
+                            android:scrollbarThumbVertical="@color/colorPrimary"
+                            android:scrollbarStyle="outsideOverlay"
+                            android:layout_weight="1"
+                            android:scrollbars="horizontal"
+                            android:fadeScrollbars="false"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:id="@+id/txt_batchname"
+                                android:text="Primary Batch"
+                                android:textSize="@dimen/fontndogo"
+                                android:textColor="@color/color_black"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+
+                        </HorizontalScrollView>
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Per:  "
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+
+                            android:id="@+id/txt_discM"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:text="Disc"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/fontndogo" />
+
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="5dp"
+                        android:orientation="horizontal"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:textStyle="bold"
+                            android:text="Amount:  "
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:id="@+id/txt_amount"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:text="2000939"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/fontndogo" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="32dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/fd_exdate"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="0dp"
+                            android:text="Exp Date:"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/fontndogo" />
+
+
+                        <TextView
+                            android:layout_gravity="center_vertical"
+                            android:id="@+id/txt_exdate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+
+                            android:layout_marginTop="0dp"
+                            android:paddingStart="5dp"
+                            android:paddingLeft="5dp"
+                            android:text="20/009/39"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/fontndogo" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+</androidx.cardview.widget.CardView>

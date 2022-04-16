@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="3">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/curr_partyname"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Party Name "
+            android:textColor="@color/color_black"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/_4sdp"
+                android:text="Bill Value"
+                android:textColor="@color/color_black"
+                android:textStyle="bold">
+
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/curr_billvalue"
+                android:background="@drawable/text_border"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:gravity="center_vertical|end"
+                android:paddingRight="7dp"
+                android:text="0014"
+                android:layout_margin="@dimen/_5sdp"
+                android:textColor="@color/color_black">
+
+
+            </TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/_4sdp"
+                android:text="Report As On :"
+                android:textColor="@color/color_black"
+                android:textStyle="bold">
+
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/curr_reportdate"
+                android:background="@drawable/text_border"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.1"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/_4sdp"
+                android:layout_margin="@dimen/_5sdp"
+                android:text="07-01-2021"
+                android:textColor="@color/color_black">
+
+
+            </TextView>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:weightSum="4"
+        android:background="@drawable/backgroundnav"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Opening"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingLeft="@dimen/_5sdp"
+            android:gravity="center_vertical">
+
+        </TextView>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Debit"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/_5sdp">
+
+        </TextView>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Credit"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingLeft="@dimen/_5sdp"
+            android:gravity="center_vertical">
+
+        </TextView>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Closing"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingLeft="@dimen/_5sdp"
+            android:gravity="center_vertical">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.5"
+        android:id="@+id/current_list">
+
+    </ListView>
+
+</LinearLayout>

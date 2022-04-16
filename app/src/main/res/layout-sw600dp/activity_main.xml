@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_torefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/background"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <RelativeLayout
+            android:layout_below="@+id/appbar"
+            android:layout_above="@+id/bottomnav"
+            android:background="@color/color_white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+
+                android:layout_marginTop="5dp"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/topt"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <TextView
+                    android:id="@+id/dash_cmpname"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/fontitem"
+                    android:textColor="@color/color_black"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textStyle="normal"
+                    android:text="Global Infosoft"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <View
+
+                    android:layout_below="@+id/topt"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimary"/>
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:background="@drawable/squareborder"
+                android:layout_below="@+id/topt"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:weightSum="3"
+
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:id="@+id/sales_order"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/squareborder"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RelativeLayout
+                            android:layout_marginTop="15dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="90dp"
+                            android:layout_height="90dp">
+
+                            <ImageView
+                                android:layout_alignParentBottom="true"
+                                android:id="@+id/imgs"
+                                android:layout_width="70dp"
+                                android:layout_height="70dp"
+                                android:src="@drawable/ic_file" />
+
+                            <com.nex3z.notificationbadge.NotificationBadge
+                                android:id="@+id/salesbadge"
+                                android:layout_toRightOf="@+id/imgs"
+                                android:layout_alignTop="@+id/imgs"
+                                android:layout_marginLeft="-16dp"
+                                android:layout_marginTop="-8dp"
+                                android:layout_width="28dp"
+                                android:layout_height="28dp"
+                                app:nbBackground="@drawable/badge_shadow"
+                                app:nbMaxTextLength="2">
+
+                            </com.nex3z.notificationbadge.NotificationBadge>
+
+                        </RelativeLayout>
+
+
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textSize="@dimen/fontsize"
+                            android:textStyle="normal"
+                            android:text="Sales"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                    <!--                <LinearLayout-->
+                    <!--                    android:id="@+id/payment"-->
+                    <!--                    android:gravity="center_vertical"-->
+                    <!--                    android:background="@drawable/squareborder"-->
+                    <!--                    android:layout_weight="1"-->
+                    <!--                    android:orientation="vertical"-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="wrap_content">-->
+
+                    <!--                    <RelativeLayout-->
+                    <!--                        android:layout_marginTop="15dp"-->
+                    <!--                        android:layout_gravity="center_horizontal"-->
+                    <!--                        android:layout_width="90dp"-->
+                    <!--                        android:layout_height="90dp">-->
+
+                    <!--                        <ImageView-->
+                    <!--                            android:layout_alignParentBottom="true"-->
+                    <!--                            android:id="@+id/imgspay"-->
+                    <!--                            android:layout_width="70dp"-->
+                    <!--                            android:layout_height="70dp"-->
+                    <!--                            android:src="@drawable/payment_method" />-->
+
+                    <!--                        <com.nex3z.notificationbadge.NotificationBadge-->
+                    <!--                            android:id="@+id/paymentrderbadge"-->
+                    <!--                            android:layout_toRightOf="@+id/imgspay"-->
+                    <!--                            android:layout_alignTop="@+id/imgspay"-->
+                    <!--                            android:layout_marginLeft="-16dp"-->
+                    <!--                            android:layout_marginTop="-8dp"-->
+                    <!--                            android:layout_width="28dp"-->
+                    <!--                            android:layout_height="28dp"-->
+                    <!--                            app:nbBackground="@drawable/badge_shadow"-->
+                    <!--                            app:nbMaxTextLength="2">-->
+
+                    <!--                        </com.nex3z.notificationbadge.NotificationBadge>-->
+
+                    <!--                    </RelativeLayout>-->
+
+
+
+                    <!--                    <TextView-->
+                    <!--                        android:gravity="center"-->
+                    <!--                        android:layout_gravity="center"-->
+                    <!--                        android:text="Payment"-->
+                    <!--                        android:textSize="@dimen/fontsize"-->
+                    <!--                        android:textStyle="normal"-->
+                    <!--                        android:textColor="@color/color_black"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content" />-->
+
+                    <!--                </LinearLayout>-->
+
+                    <LinearLayout
+                        android:id="@+id/help"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/squareborder"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <ImageView
+                            android:id="@+id/imghelp"
+                            android:layout_marginTop="15dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:src="@drawable/ic_programmer" />
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textSize="@dimen/fontsize"
+                            android:textStyle="normal"
+                            android:text="Settings"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:weightSum="3"
+
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!--                <LinearLayout-->
+
+                    <!--                    android:id="@+id/sales_invoice"-->
+                    <!--                    android:gravity="center_vertical"-->
+                    <!--                    android:background="@drawable/squareborder"-->
+                    <!--                    android:layout_weight="1"-->
+                    <!--                    android:orientation="vertical"-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="wrap_content">-->
+
+                    <!--                    <RelativeLayout-->
+                    <!--                        android:layout_marginTop="15dp"-->
+                    <!--                        android:layout_gravity="center_horizontal"-->
+                    <!--                        android:layout_width="90dp"-->
+                    <!--                        android:layout_height="90dp">-->
+
+                    <!--                        <ImageView-->
+                    <!--                            android:layout_alignParentBottom="true"-->
+                    <!--                            android:id="@+id/imgsorder"-->
+                    <!--                            android:layout_width="70dp"-->
+                    <!--                            android:layout_height="70dp"-->
+                    <!--                            android:src="@drawable/ic_credit_card"  />-->
+
+                    <!--                        <com.nex3z.notificationbadge.NotificationBadge-->
+                    <!--                            android:id="@+id/salesorderbadge"-->
+                    <!--                            android:layout_toRightOf="@+id/imgsorder"-->
+                    <!--                            android:layout_alignTop="@+id/imgsorder"-->
+                    <!--                            android:layout_marginLeft="-16dp"-->
+                    <!--                            android:layout_marginTop="-8dp"-->
+                    <!--                            android:layout_width="28dp"-->
+                    <!--                            android:layout_height="28dp"-->
+                    <!--                            app:nbBackground="@drawable/badge_shadow"-->
+                    <!--                            app:nbMaxTextLength="2">-->
+
+                    <!--                        </com.nex3z.notificationbadge.NotificationBadge>-->
+
+                    <!--                    </RelativeLayout>-->
+
+
+                    <!--                    <TextView-->
+                    <!--                        android:gravity="center"-->
+                    <!--                        android:layout_gravity="center"-->
+                    <!--                        android:textSize="@dimen/fontsize"-->
+                    <!--                        android:textStyle="normal"-->
+                    <!--                        android:text="Sales Order"-->
+                    <!--                        android:textColor="@color/color_black"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content" />-->
+
+                    <!--                </LinearLayout>-->
+
+
+                    <LinearLayout
+                        android:id="@+id/about"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/squareborder"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imgabout"
+                            android:layout_marginTop="15dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:src="@drawable/ic_conversation" />
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textSize="@dimen/fontsize"
+                            android:textStyle="normal"
+                            android:text="About Us"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/logout"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/squareborder"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <ImageView
+                            android:id="@+id/imglogout"
+                            android:layout_marginTop="15dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:src="@drawable/ic_exit" />
+
+                        <TextView
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:textSize="@dimen/fontsize"
+                            android:textStyle="normal"
+                            android:text="Log 0ut"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomnav"
+            app:itemIconTint="@color/white"
+            app:labelVisibilityMode="labeled"
+            app:itemTextColor="@color/color_white"
+            android:background="@drawable/background"
+            android:layout_alignParentBottom="true"
+            app:menu="@menu/activity_home_drawer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+
+    </RelativeLayout>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

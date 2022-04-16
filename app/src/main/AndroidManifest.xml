@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tallyadmin.gp.gpcropcare">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_foreground"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Activities.LimitActivity"
+            android:parentActivityName=".Activities.Sixreportactivity"></activity>
+        <activity android:name=".Activities.CurrentStatusActivity"
+            android:parentActivityName=".Activities.Sixreportactivity"/>
+        <activity android:name=".Activities.LastYearbusinessActivity"
+            android:parentActivityName=".Activities.Sixreportactivity"/>
+        <activity android:name=".Activities.BusinessdateActivity"
+            android:parentActivityName=".Activities.Sixreportactivity"/>
+        <activity android:name=".Activities.NCRDueBills"
+            android:parentActivityName=".Activities.Sixreportactivity"/>
+        <activity android:name=".Activities.Outstanding"
+            android:parentActivityName=".Activities.Sixreportactivity"/>
+        <activity android:name=".Activities.Sixreportactivity" />
+        <activity
+            android:name=".Activities.ReportActivity"
+            android:parentActivityName=".Activities.SalesOrderActivity" />
+        <activity android:name=".Activities.MainActivity" />
+        <activity
+            android:name=".Activities.PaytransActivity"
+            android:parentActivityName=".Activities.PaymentActivity" />
+        <activity android:name=".Activities.ShowpayActivity" />
+        <activity android:name=".Activities.ActivateLicenceActivity" />
+        <activity android:name=".Activities.DemoregisterActivity" />
+        <activity android:name=".Activities.LicenceActivity" />
+        <activity
+            android:name=".Activities.Fragement_OrderActivity"
+            android:parentActivityName=".Activities.SalesOrderActivity" />
+        <activity
+            android:name=".Activities.ShowtransactionOrderActivity"
+            android:parentActivityName=".Activities.SalesOrderActivity" />
+        <activity
+            android:name=".Activities.Fragement_managerActivity"
+            android:parentActivityName=".Activities.SalesActivity" />
+        <activity
+            android:name=".Activities.ShowtransactionActivity"
+            android:parentActivityName=".Activities.SalesActivity" />
+        <activity
+            android:name=".Activities.ShowinvoicesActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Activities.HelpActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Activities.PaymentActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Activities.SalesOrderActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Activities.SalesActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".Activities.SalesInvoiceActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AboutActivity"
+            android:parentActivityName=".HomeActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Splashscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

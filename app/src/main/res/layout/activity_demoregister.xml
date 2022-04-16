@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    tools:context=".Activities.DemoregisterActivity">
+
+
+
+
+    <androidx.appcompat.widget.Toolbar
+        app:titleTextColor="@color/color_white"
+        android:id="@+id/toolbarSoop"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+
+  <ScrollView
+      android:layout_below="@+id/toolbarSoop"
+      android:layout_marginTop="20dp"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <LinearLayout
+
+          android:layout_marginHorizontal="20dp"
+          android:orientation="vertical"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+
+          <com.google.android.material.textfield.TextInputLayout
+              app:hintTextAppearance="@style/HintText"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="@dimen/activity_horizontal_margin">
+
+              <com.google.android.material.textfield.TextInputEditText
+                  app:backgroundTint="@color/colorPrimary"
+                  android:id="@+id/text_cmpname"
+                  android:maxLines="1"
+                  android:drawablePadding="5dp"
+                  android:paddingStart="7dp"
+                  android:paddingLeft="7dp"
+                  android:textColorHint="@color/color_black"
+                  android:drawableLeft="@drawable/ic_store_black_24dp"
+                  android:textColor="@color/color_black"
+                  android:layout_marginTop="30dp"
+                  android:backgroundTint="@color/colorPrimary"
+                  android:inputType="text"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="Company Name" />
+
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+              app:hintTextAppearance="@style/HintText"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="@dimen/activity_horizontal_margin">
+
+
+              <EditText
+                  android:inputType="text"
+                  android:drawablePadding="5dp"
+                  android:padding="7dp"
+                  android:maxLines="1"
+                  android:backgroundTint="@color/colorPrimary"
+                  app:backgroundTint="@color/colorPrimary"
+                  android:layout_marginTop="15dp"
+                  android:textColor="@color/color_black"
+                  android:id="@+id/edt_contactp"
+                  android:drawableLeft="@drawable/ic_supervisor_account_black_24dp"
+                  android:textColorHint="@color/color_black"
+                  android:hint="Contact Person"
+                  android:layout_width="match_parent"
+                  android:layout_height="45dp" />
+
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+              app:hintTextAppearance="@style/HintText"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="@dimen/activity_horizontal_margin">
+
+
+              <EditText
+                  android:inputType="text"
+                  android:drawablePadding="5dp"
+                  android:padding="7dp"
+                  android:maxLines="1"
+                  android:backgroundTint="@color/colorPrimary"
+                  app:backgroundTint="@color/colorPrimary"
+                  android:layout_marginTop="15dp"
+                  android:textColor="@color/color_black"
+                  android:id="@+id/edt_country"
+                  android:drawableLeft="@drawable/ic_flag_black_24dp"
+                  android:textColorHint="@color/color_black"
+                  android:hint="Country"
+                  android:layout_width="match_parent"
+                  android:layout_height="45dp" />
+
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+              app:hintTextAppearance="@style/HintText"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="@dimen/activity_horizontal_margin">
+
+
+              <EditText
+                  android:inputType="phone"
+                  android:drawablePadding="5dp"
+                  android:padding="7dp"
+                  android:maxLines="1"
+                  android:backgroundTint="@color/colorPrimary"
+                  app:backgroundTint="@color/colorPrimary"
+                  android:layout_marginTop="15dp"
+                  android:textColor="@color/color_black"
+                  android:id="@+id/edt_contactno"
+                  android:drawableLeft="@drawable/ic_local_phone_black_24dp"
+                  android:textColorHint="@color/color_black"
+                  android:hint="Contact No"
+                  android:layout_width="match_parent"
+                  android:layout_height="45dp" />
+
+          </com.google.android.material.textfield.TextInputLayout>
+
+          <com.google.android.material.textfield.TextInputLayout
+              android:backgroundTint="@color/colorPrimary"
+              app:backgroundTint="@color/colorPrimary"
+              app:hintTextAppearance="@style/HintText"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_margin="@dimen/activity_horizontal_margin">
+
+
+              <EditText
+                  android:inputType="textEmailAddress"
+                  android:drawablePadding="5dp"
+                  android:padding="7dp"
+                  android:maxLines="1"
+                  android:layout_marginTop="15dp"
+                  android:textColor="@color/color_black"
+                  android:id="@+id/edt_maild"
+                  android:drawableLeft="@drawable/ic_email_black_24dp"
+                  android:textColorHint="@color/color_black"
+                  android:hint="Email Id"
+                  android:layout_width="match_parent"
+                  android:layout_height="45dp" />
+
+          </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+          <Button
+              android:layout_gravity="center_horizontal"
+              android:layout_marginTop="50dp"
+              android:background="@drawable/round_btn"
+              android:id="@+id/btn_submit"
+              android:text="SUBMIT"
+              android:textColor="@color/color_white"
+              android:layout_width="180dp"
+              android:layout_height="40dp" />
+
+      </LinearLayout>
+  </ScrollView>
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    tools:context=".Activities.ActivateLicenceActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        app:titleTextColor="@color/color_white"
+        android:id="@+id/toolbarSoopA"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+
+    <LinearLayout
+        android:layout_below="@+id/toolbarSoopA"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            app:hintTextAppearance="@style/HintText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/activity_horizontal_margin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                app:backgroundTint="@color/colorPrimary"
+                android:id="@+id/text_regmaild"
+                android:maxLines="1"
+                android:drawablePadding="5dp"
+                android:paddingStart="7dp"
+                android:paddingLeft="7dp"
+                android:textColorHint="@color/color_black"
+                android:textColor="@color/color_black"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Registration Mail Id" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="12dp"
+            app:hintTextAppearance="@style/HintText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/activity_horizontal_margin">
+
+
+            <EditText
+                android:inputType="text"
+                android:drawablePadding="5dp"
+                android:padding="7dp"
+                android:maxLines="1"
+                android:backgroundTint="@color/colorPrimary"
+                app:backgroundTint="@color/colorPrimary"
+
+                android:textColor="@color/color_black"
+                android:id="@+id/edt_serial"
+                android:textColorHint="@color/color_black"
+                android:hint="Enter Global Serial No"
+                android:layout_width="match_parent"
+                android:layout_height="45dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="10dp"
+            app:hintTextAppearance="@style/HintText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/activity_horizontal_margin">
+
+
+            <EditText
+                android:inputType="text"
+                android:padding="7dp"
+                android:maxLines="1"
+                android:backgroundTint="@color/colorPrimary"
+                app:backgroundTint="@color/colorPrimary"
+                android:textColor="@color/color_black"
+                android:id="@+id/edt_actkey"
+                android:textColorHint="@color/color_black"
+                android:hint="Enter Activation Key"
+                android:layout_width="match_parent"
+                android:layout_height="45dp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:id="@+id/radiobutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+
+            <RadioButton
+                android:buttonTint="@color/colorPrimary"
+                android:id="@+id/surrender"
+                android:text="Surrender License"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:buttonTint="@color/colorPrimary"
+                android:backgroundTint="@color/colorPrimary"
+                android:id="@+id/activate"
+                android:text="Activate License"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:weightSum="2"
+            android:background="@drawable/boxback"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <Button
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:id="@+id/btn_done"
+                android:text="done"
+                android:textColor="@color/color_white"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:layout_weight="1"
+               android:background="@drawable/boxback"
+                android:id="@+id/btn_cancel"
+                android:text="cancel"
+                android:textColor="@color/color_black"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

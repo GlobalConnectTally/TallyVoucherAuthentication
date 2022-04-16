@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/color_white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.SalesOrderActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        app:titleTextColor="@color/color_white"
+        android:id="@+id/toolbarSo"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/backgroundnav"
+        app:popupTheme="@style/AppTheme.PopupOverlay"/>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_below="@+id/toolbarSo"
+        android:id="@+id/juuu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+
+        <EditText
+            android:background="@drawable/roundcardn"
+            android:inputType="text"
+            android:drawablePadding="5dp"
+            android:padding="7dp"
+            android:maxLines="1"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="7dp"
+            android:textColor="@color/color_black"
+            android:id="@+id/edt_seac"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:textColorHint="@color/color_black"
+            android:hint="Search here"
+            android:layout_width="match_parent"
+            android:layout_height="43dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+    <FrameLayout
+       android:layout_marginTop="9dp"
+        android:layout_below="@+id/juuu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:scrollbars="vertical"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarSize="2dp"
+            android:fadeScrollbars="false"
+            android:scrollbarThumbVertical="@color/colorPrimary"
+            android:id="@+id/recyle_salesorder"
+
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </FrameLayout>
+
+
+
+
+</RelativeLayout>

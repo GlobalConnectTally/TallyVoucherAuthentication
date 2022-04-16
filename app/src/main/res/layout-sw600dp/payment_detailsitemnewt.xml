@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/color_white"
+
+    app:cardElevation="5dp"
+    app:cardCornerRadius="1dp"
+    app:contentPadding="1dp"
+    app:cardUseCompatPadding="true"
+    android:layout_margin="0dp">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="130dp">
+
+        <LinearLayout
+            android:id="@+id/ex"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/roundcard"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="35dp">
+
+            <LinearLayout
+                android:background="@drawable/roundcard"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="0dp"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:text="Paid By:"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/fontndogo" />
+                <HorizontalScrollView
+
+                    android:scrollbars="horizontal"
+                    android:fadeScrollbars="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical">
+
+
+                    <TextView
+                        android:id="@+id/txt_paidby"
+                        android:text="State Bank of India"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="0dp"
+                        android:paddingStart="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingEnd="2dp"
+                        android:paddingRight="2dp"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/fontndogo" />
+
+
+                </HorizontalScrollView>
+
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+
+                android:background="@drawable/roundcard"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="0dp"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:text="PaidTo:"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/fontndogo" />
+
+                <HorizontalScrollView
+                    android:scrollbars="horizontal"
+                    android:scrollbarSize="2dp"
+                    android:fadeScrollbars="false"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical">
+
+
+                    <TextView
+                        android:text="Lenovo International Ltd"
+                        android:id="@+id/txt_paidtop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:paddingStart="3dp"
+                        android:paddingLeft="3dp"
+                        android:paddingEnd="2dp"
+                        android:paddingRight="2dp"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/fontndogo" />
+
+
+                </HorizontalScrollView>
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:weightSum="2"
+            android:layout_below="@+id/ex"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="InstrNo:"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/fontndogo" />
+
+                    <TextView
+                        android:id="@+id/txt_instrument"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="1234"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/fontndogo" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentLeft="true"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:text="AccNo: "
+                        android:textSize="@dimen/fontndogo"
+                        android:textColor="@color/color_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <HorizontalScrollView
+                        android:scrollbarSize="2dp"
+                        android:scrollbarThumbVertical="@color/colorPrimary"
+
+                        android:layout_weight="1"
+                        android:scrollbars="horizontal"
+                        android:fadeScrollbars="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txt_bankn0"
+                            android:text="0123773663553"
+                            android:textSize="@dimen/fontndogo"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+
+                    </HorizontalScrollView>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="13dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:text="Transaction: "
+                        android:textSize="@dimen/fontndogo"
+                        android:textColor="@color/color_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <HorizontalScrollView
+                        android:scrollbarSize="1dp"
+                        android:scrollbarThumbVertical="@color/colorPrimary"
+                        android:scrollbarStyle="outsideOverlay"
+                        android:layout_weight="1"
+                        android:scrollbars="horizontal"
+                        android:fadeScrollbars="false"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:id="@+id/txt_paytypep"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Payment"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/fontndogo" />
+
+
+                    </HorizontalScrollView>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent">
+
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_gravity="right"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date:"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/fontndogo" />
+
+                    <TextView
+                        android:gravity="right"
+                        android:id="@+id/txt_pdatep"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="23-Jul-2019"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/fontndogo"/>
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:text="Bank: "
+                        android:textSize="@dimen/fontndogo"
+                        android:textColor="@color/color_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <HorizontalScrollView
+                        android:scrollbarSize="1dp"
+                        android:scrollbarThumbVertical="@color/colorPrimary"
+
+                        android:layout_weight="1"
+                        android:scrollbars="horizontal"
+                        android:fadeScrollbars="false"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+
+
+                        <TextView
+
+                            android:id="@+id/txt_bankname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Lenovo International Ltd"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/fontndogo" />
+
+
+                    </HorizontalScrollView>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:text="Ifsccode: "
+                        android:textSize="@dimen/fontndogo"
+                        android:textColor="@color/color_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/txt_ifscode"
+                        android:text="arr1224"
+                        android:textSize="@dimen/fontndogo"
+                        android:textColor="@color/color_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"  />
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+</androidx.cardview.widget.CardView>

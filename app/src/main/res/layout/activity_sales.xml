@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/color_white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.SalesOrderActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        app:titleTextColor="@color/color_white"
+        android:id="@+id/toolbarSo"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/backgroundnav"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+
+
+    <FrameLayout
+
+        android:layout_below="@+id/toolbarSo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+           android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="false"
+            android:scrollbarSize="2dp"
+            android:scrollbarThumbVertical="@color/colorPrimary"
+            android:id="@+id/recyle_salesorder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </FrameLayout>
+
+
+
+
+</RelativeLayout>

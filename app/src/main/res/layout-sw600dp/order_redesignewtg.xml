@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="142dp"
+    app:cardBackgroundColor="@color/color_white"
+    android:background="@drawable/roundcard"
+    app:cardElevation="7dp"
+    app:cardCornerRadius="5dp"
+    app:contentPadding="2dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+            <RelativeLayout
+
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_toLeftOf="@+id/amountlm"
+                   android:layout_alignLeft="@+id/amountlm"
+                    android:layout_marginTop="2dp"
+                    android:layout_alignParentLeft="true"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:text="Buyer: "
+                        android:textSize="@dimen/fontndogo"
+                        android:textColor="@color/color_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <HorizontalScrollView
+                        android:scrollbarStyle="outsideOverlay"
+                        android:fadeScrollbars="false"
+                        android:scrollbarSize="1dp"
+                        android:scrollbarAlwaysDrawHorizontalTrack="true"
+                        android:scrollbars="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+
+                        <TextView
+                            android:paddingRight="5dp"
+                            android:id="@+id/texto_cuname"
+                            android:text="Michael mussa"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </HorizontalScrollView>
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                   android:id="@+id/amountlm"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:textSize="@dimen/fontndogo"
+                        android:text="Amount: "
+                        android:textColor="@color/color_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+
+                        android:paddingStart="5dp"
+                        android:paddingLeft="5dp"
+                        android:id="@+id/texto_amount"
+                        android:layout_gravity="center_horizontal"
+                        android:text="2000939"
+                        android:textSize="@dimen/fontsize"
+                        android:textColor="@color/color_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </RelativeLayout>
+
+
+
+            <LinearLayout
+                android:weightSum="3"
+                android:layout_marginTop="18dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:text="Date: "
+                        android:textSize="@dimen/fontndogo"
+                        android:textColor="@color/color_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:textColor="@color/color_black"
+                        android:id="@+id/texto_date"
+                        android:text="23/23/2019"
+                        android:textSize="@dimen/fontndogo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="VoucherNO:"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/fontndogo" />
+
+                    <HorizontalScrollView
+                        android:scrollbarStyle="outsideOverlay"
+                        android:fadeScrollbars="false"
+                        android:scrollbarSize="1dp"
+                        android:scrollbarAlwaysDrawHorizontalTrack="true"
+                        android:scrollbars="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+                        <TextView
+                            android:id="@+id/txt_vouchernrs"
+                            android:textSize="@dimen/fontndogo"
+                            android:paddingStart="5dp"
+                            android:paddingLeft="5dp"
+                            android:layout_gravity="center_horizontal"
+                            android:text="inz178"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </HorizontalScrollView>
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_gravity="right"
+                        android:text="User: "
+                        android:textStyle="bold"
+                        android:textSize="@dimen/fontndogo"
+                        android:textColor="@color/color_black"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <HorizontalScrollView
+                        android:scrollbarStyle="outsideOverlay"
+                        android:fadeScrollbars="false"
+                        android:scrollbarSize="1dp"
+                        android:scrollbarAlwaysDrawHorizontalTrack="true"
+                        android:scrollbars="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" >
+
+
+                        <TextView
+                            android:textSize="@dimen/fontndogo"
+                            android:id="@+id/txt_createdbys"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Michael"
+                            android:textColor="@color/color_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </HorizontalScrollView>
+
+
+
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </LinearLayout>
+            <LinearLayout
+
+                android:layout_marginTop="20dp"
+                android:layout_gravity="bottom"
+                android:gravity="bottom"
+                android:weightSum="3"
+                android:background="@color/color_kaki"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="31dp">
+
+                <Button
+                    android:layout_weight="1"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_author"
+                    android:background="@drawable/round_green"
+                    android:layout_gravity="center_horizontal"
+                    android:drawableRight="@drawable/ic_done_black_24dp"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:text="Approve  "
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/fontndogo"
+                    android:textStyle="bold" />
+
+
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/txt_cancel"
+
+                    android:drawableRight="@drawable/ic_cancel_black_24dp"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:layout_marginHorizontal="4dp"
+                    android:background="@drawable/round_red"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Reject"
+                    android:textSize="@dimen/fontndogo"
+                    android:textColor="@color/color_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <Button
+                    android:id="@+id/txti_more"
+                    android:layout_width="wrap_content"
+
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_redp"
+                    android:drawableRight="@drawable/ic_more_vert_black_24dp"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:text="More"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/fontndogo" />
+
+
+            </LinearLayout>
+
+
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@android:color/darker_gray"/>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</androidx.cardview.widget.CardView>

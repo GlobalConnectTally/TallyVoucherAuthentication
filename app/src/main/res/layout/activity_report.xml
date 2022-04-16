@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.ReportActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        app:titleTextColor="@color/color_white"
+        android:id="@+id/toolbarSo"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/backgroundnav"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+
+    <LinearLayout
+        android:layout_below="@id/toolbarSo"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"
+        android:scrollbarStyle="insideOverlay"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+
+        android:layout_above="@+id/lnbtn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ExpandableListView
+                android:id="@+id/subcategoryty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:id="@+id/lnbtn"
+        android:layout_marginBottom="3dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="5dp"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:weightSum="2"
+        android:background="@color/color_white"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:layout_alignParentBottom="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_author"
+
+
+            android:gravity="center_vertical"
+            android:layout_gravity="center_horizontal"
+            android:drawableLeft="@drawable/ic_baseline_thumb_up_24"
+            android:paddingStart="5dp"
+            android:drawablePadding="3dp"
+            android:paddingLeft="5dp"
+            android:text="Approve  "
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/fontndogo"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/btn_reject"
+            android:layout_width="209dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="1dp"
+            android:layout_marginHorizontal="4dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_baseline_cancel_24"
+            android:drawablePadding="3dp"
+            android:gravity="center_vertical"
+            android:paddingStart="190dp"
+            android:paddingLeft="150dp"
+            android:text="Reject"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/fontndogo" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

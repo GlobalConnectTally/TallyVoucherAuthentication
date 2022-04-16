@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/juuk"
+            android:weightSum="4"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:text="Party Name"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_black"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_5sdp">
+
+                </TextView>
+                <TextView
+                    android:id="@+id/partnamesb"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.4"
+                    android:text="nirav prajapati"
+                    android:textColor="@color/color_black"
+                   android:paddingLeft="@dimen/_5sdp">
+
+                </TextView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:text="Category Name"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_black"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_5sdp">
+
+                </TextView>
+                <TextView
+                    android:id="@+id/category"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.4"
+                    android:text="nirav prajapati"
+                    android:textColor="@color/color_black"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_5sdp">
+
+                </TextView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:text="Allowed Sub Grp"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_black"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_5sdp">
+
+                </TextView>
+                <TextView
+                    android:id="@+id/allowed"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.4"
+                    android:text="nirav prajapati"
+                    android:textColor="@color/color_black"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_5sdp">
+
+                </TextView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="2"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:text="Sub Category"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_black"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_5sdp">
+
+                </TextView>
+                <ImageView
+                    android:id="@+id/txt_subccc"
+                    android:gravity="end"
+                    android:layout_marginTop="7dp"
+                    android:layout_weight="1.4"
+                    android:src="@drawable/ic_baseline_keyboard_arrow_down_24"
+                    android:textStyle="italic"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/juuull"
+            android:layout_marginTop="3dp"
+            android:layout_below="@+id/juuk"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/childrecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+            <!--            <include layout="@layout/reportsubitem"></include>-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_below="@+id/juuull"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <View
+                android:background="@color/color_txt"
+                android:layout_width = "match_parent"
+                android:layout_marginTop="3dp"
+                android:layout_below="@+id/b"
+                android:layout_height="1dp"
+                android:layout_marginLeft="5dp" />
+
+            <include layout="@layout/reportsubitemtotal"></include>
+            <View
+                android:background="@color/color_txt"
+                android:layout_width = "match_parent"
+                android:layout_marginTop="4dp"
+                android:layout_below="@+id/b"
+                android:layout_height="1dp"
+                android:layout_marginLeft="5dp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

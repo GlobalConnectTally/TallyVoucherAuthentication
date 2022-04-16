@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/color_white"
+    android:layout_height="match_parent"
+    tools:context=".AboutActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbars"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/backgroundnav"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <LinearLayout
+
+                android:id="@+id/top_dashboard"
+
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+                <TextView
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="@dimen/fontkubwa"
+                    android:text="About Us"
+                    android:fontFamily="sans-serif"
+
+                    android:textColor="@color/color_white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp" />
+
+            </LinearLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_below="@+id/toolbars"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <LinearLayout
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/squareborderus"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="40dp"
+                        android:src="@drawable/ic_baseline_person_24"
+                        android:layout_height="40dp" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+                            android:paddingStart="15dp"
+                            android:paddingLeft="15dp"
+                            android:padding="2dp"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_black"
+                            android:text="Company"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:paddingStart="15dp"
+                            android:paddingLeft="15dp"
+                            android:padding="5dp"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_txt"
+                            android:text="Gp Crop Care"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/ic_email_black_24dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+                            android:paddingStart="15dp"
+                            android:paddingLeft="15dp"
+                            android:padding="5dp"
+                            android:textSize="20sp"
+                            android:textColor="@color/color_black"
+                            android:text="Email"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:paddingStart="15dp"
+                            android:paddingLeft="15dp"
+                            android:padding="2dp"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_txt"
+                            android:text="info@gpcropcare.com"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/ic_baseline_web_24"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+                            android:paddingStart="15dp"
+                            android:paddingLeft="15dp"
+                            android:padding="2dp"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_black"
+                            android:text="Website"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:paddingStart="15dp"
+                            android:paddingLeft="15dp"
+                            android:padding="2dp"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_txt"
+                            android:text="www.gpcropcare.com"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/ic_local_phone_black_24dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:padding="2dp"
+                            android:paddingStart="15dp"
+                            android:paddingLeft="15dp"
+                            android:text="Contact"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/fontsize"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="2dp"
+                            android:paddingStart="15dp"
+                            android:paddingLeft="15dp"
+                            android:text="07929704122"
+
+                            android:textColor="@color/color_txt"
+                            android:textSize="@dimen/fontsize" />
+
+                    </LinearLayout>
+
+
+
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/squareborderus"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:background="@drawable/squareborder"
+                    android:paddingStart="15dp"
+                    android:paddingLeft="15dp"
+                    android:padding="5dp"
+                    android:textSize="@dimen/fontsize"
+                    android:textColor="@color/color_black"
+                    android:text="About"
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:paddingStart="15dp"
+                    android:paddingLeft="15dp"
+                    android:padding="5dp"
+                    android:textSize="@dimen/fontsize"
+                    android:textColor="@color/color_txt"
+                    android:text="@string/about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/squareborderus"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+
+
+
+
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="40dp"
+                        android:src="@drawable/finallogo"
+                        android:layout_height="40dp" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+                            android:paddingStart="15dp"
+                            android:paddingLeft="15dp"
+                            android:padding="2dp"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_black"
+                            android:text="Deleloped by"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:paddingStart="15dp"
+                            android:paddingLeft="15dp"
+                            android:padding="5dp"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_txt"
+                            android:text="Global Software"
+
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="40dp"
+                        android:src="@drawable/ic_baseline_info_24"
+                        android:layout_height="40dp" />
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+
+                            android:paddingStart="15dp"
+                            android:paddingLeft="15dp"
+                            android:padding="2dp"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_black"
+                            android:text="Version"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_gravity="center"
+                            android:paddingStart="15dp"
+                            android:paddingLeft="15dp"
+                            android:padding="5dp"
+                            android:textSize="@dimen/fontsize"
+                            android:textColor="@color/color_txt"
+                            android:text="9.0"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+
+
+
+</ScrollView>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Gpcropcare</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Tally Admin</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="about">Shri Bhikabhai G.Patel, Managing Director of Gp Crop Care has having 30 Years Experience of Manufacturing  &amp; Marketing, Gujarat Pesticides (An ISO 9001:2008 CERTIFIED COMPANY) established in the year 1983 and manufacturing right from beginning. The company has Moto of "Service to Agriculture" with the Passion for quality and serving. Gp has a large in-house formulation Plant with fully automated and semi-automated lines for producing assorted products in HDPE, Pet,Polyester, Tin and Aluminium Packs.</string>
+    <string name="appbar_scrolling_view_behavior" translatable="true">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="reject">Reject</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+</resources>

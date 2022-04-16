@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="2dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:text="Credit Days"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/fontsize"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:text="Credit Amount"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/fontsize"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:text="Sales Quantity"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/fontsize"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:text="Sales Amount"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/fontsize"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:text="120 Days"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/fontsize"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:text="180 Days"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/fontsize"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+
+                android:layout_marginTop="2dp"
+                android:layout_alignParentRight="true"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+
+                <TextView
+                    android:id="@+id/crdday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:text=": 60"
+                    android:textColor="@color/color_boda"
+                    android:textSize="@dimen/fontsize"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/crdamt"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:textStyle="bold"
+                    android:text=": 150000"
+                    android:textSize="@dimen/fontsize"
+                    android:textColor="@color/color_boda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/crdqnt"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:textStyle="bold"
+                    android:text=": 12ltr"
+                    android:textSize="@dimen/fontsize"
+                    android:textColor="@color/color_boda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:id="@+id/slesamt"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:textStyle="bold"
+                    android:text=": 3000"
+                    android:textSize="@dimen/fontsize"
+                    android:textColor="@color/color_boda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:id="@+id/miaishi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:text=": 30000"
+                    android:textColor="@color/color_boda"
+                    android:textSize="@dimen/fontsize"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/miathem"
+                    android:paddingStart="5dp"
+                    android:paddingLeft="5dp"
+                    android:textStyle="bold"
+                    android:text=": 40000"
+                    android:textSize="@dimen/fontsize"
+                    android:textColor="@color/color_boda"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Activities.ShowinvoicesActivity">
+
+
+
+    <RelativeLayout
+
+
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <!--<TextView-->
+        <!--android:background="@drawable/squareborder"-->
+        <!--android:layout_weight="1"-->
+        <!--android:id="@+id/voucherd1"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:textSize="@dimen/fontsize"-->
+        <!--android:text="12"-->
+        <!--android:textColor="@color/color_black"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent" />-->
+
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/squareborder"
+            android:id="@+id/ledgerdi"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="@dimen/fontsize"
+            android:text="maik"
+            android:textColor="@color/color_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/squareborder"
+            android:layout_weight="1"
+            android:id="@+id/prddi"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="@dimen/fontsize"
+            android:text="prc"
+            android:textColor="@color/color_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_alignParentRight="true"
+            android:id="@+id/amountdi"
+            android:background="@drawable/squareborder"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="@dimen/fontsize"
+            android:text="Amount"
+            android:textColor="@color/color_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+
+
+
+
+</LinearLayout>
