@@ -242,9 +242,6 @@ public class LimitActivity extends AppCompatActivity {
                                 String cl19 = formatter119.format(c19);
                                 dst3.setText(cl19);
 
-
-
-
                             }
 
                             Hhdprogress.dismiss();
@@ -258,7 +255,7 @@ public class LimitActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override

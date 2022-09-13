@@ -32,7 +32,7 @@ public class Splashscreen extends AwesomeSplash {
         configSplash.setPathSplashStrokeSize(3); //I advise value be <5
         configSplash.setPathSplashStrokeColor(R.color.splashscrren); //any color you want form colors.xml
         configSplash.setAnimPathFillingDuration(3000);
-        configSplash.setPathSplashFillColor(R.color.white); //path object filling color
+        configSplash.setPathSplashFillColor(R.color.color_white); //path object filling color
 
 
         //Customize Title

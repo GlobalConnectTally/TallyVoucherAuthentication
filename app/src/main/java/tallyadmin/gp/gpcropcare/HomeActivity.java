@@ -226,7 +226,6 @@ public class HomeActivity extends AppCompatActivity
                     @Override
                     public void onResponse(String response) {
 
-
                         try {
 
                             JSONObject obj = new JSONObject(response);
@@ -346,7 +345,7 @@ public class HomeActivity extends AppCompatActivity
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override

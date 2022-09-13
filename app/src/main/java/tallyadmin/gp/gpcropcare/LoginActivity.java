@@ -1,15 +1,14 @@
 package tallyadmin.gp.gpcropcare;
 
+import static tallyadmin.gp.gpcropcare.Common.Common.URL_DASHBOARDSBADGES;
+import static tallyadmin.gp.gpcropcare.Common.Common.URL_LOGIN;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,15 +17,24 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.kaopiz.kprogresshud.KProgressHUD;
+import com.nex3z.notificationbadge.NotificationBadge;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,12 +45,11 @@ import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Sharepreference.Session;
 import tallyadmin.gp.gpcropcare.Sharepreference.UserInfo;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
-import static tallyadmin.gp.gpcropcare.Common.Common.URL_LOGIN;
 
 
 public class LoginActivity extends AppCompatActivity {
     Button btn;
-    EditText txt_username,txt_password;
+    EditText txt_username, txt_password;
     ProgressDialog mProgressDialog;
     Companysave companydata;
     UserInfo userInfo;
@@ -51,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
     Company company;
     AlertDialog alertDialog;
     Context context;
+    NotificationBadge mBage;
 
 
     @Override
@@ -58,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mProgressDialog =  new ProgressDialog(this);
+        mProgressDialog = new ProgressDialog(this);
         companydata = new Companysave(getApplicationContext());
         userInfo = new UserInfo(getApplicationContext());
         session = new Session(getApplicationContext());
@@ -97,7 +105,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 userLogin();
-                    //                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                //                startActivity(new Intent(LoginActivity.this, MainActivity.class));
 //                finish();
             }
         });
@@ -129,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
                 .setDimAmount(0.5f);
 
 
-        Hhdprogress.setCancellable(new  DialogInterface.OnCancelListener() {
+        Hhdprogress.setCancellable(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
                 dialog.dismiss();
@@ -145,49 +153,51 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                            try {
-                                JSONObject obj = new JSONObject(response);
-                                Saleslist = new ArrayList<>();
-                                JSONArray dataArray  = obj.getJSONArray("response");
+                        try {
+                            JSONObject obj = new JSONObject(response);
+                            Saleslist = new ArrayList<>();
+                            JSONArray dataArray = obj.getJSONArray("response");
 
-                                Log.d("Response::" , dataArray.toString());
+                            Log.d("Response::", dataArray.toString());
 
-                                if (dataArray.length() != 0){
-                                    Hhdprogress.dismiss();
-                                    session.setLogin(true);
-                                    userInfo.setAppLoginUserID(username);
-                                    userInfo.setpassword(password);
+                            if (dataArray.length() != 0) {
+                                Hhdprogress.dismiss();
+                                session.setLogin(true);
+                                userInfo.setAppLoginUserID(username);
+                                userInfo.setpassword(password);
 
-                                    for (int i = 0; i < dataArray.length(); i++) {
-                                        Company playerModel = new Company();
-                                        JSONObject dataobj = dataArray.getJSONObject(i);
-
-
-                                        playerModel.setAllowReject(dataobj.getString("AllowReject"));
-                                        playerModel.setAllowedApprove(dataobj.getString("AllowApprove"));
+                                for (int i = 0; i < dataArray.length(); i++) {
+                                    Company companyModel = new Company();
+                                    JSONObject dataobj = dataArray.getJSONObject(i);
 
 
-                                        playerModel.setCmpGUID(dataobj.getString("CmpGUID"));
-                                        playerModel.setCompanyName(dataobj.getString("CompanyName"));
-                                        Saleslist.add(playerModel);
-                                    }
-                                    cmpndialog();
+                                    companyModel.setAllowReject(dataobj.getString("AllowReject"));
+                                    companyModel.setAllowedApprove(dataobj.getString("AllowApprove"));
+
+
+                                    companyModel.setCmpGUID(dataobj.getString("CmpGUID"));
+                                    companyModel.setCompanyName(dataobj.getString("CompanyName"));
+
+                                    companyModel.setPendingSales(dataobj.getInt("PendingSales"));
+
+                                    Saleslist.add(companyModel);
                                 }
-                                else if (dataArray.length() == 0){
-                                    Hhdprogress.dismiss();
-                                    session.setLogin(false);
-                                   // Toast.makeText(LoginActivity.this,"Login Failed please check you credential's", Toast.LENGTH_LONG).show();
-                                }
-
-                          } catch (JSONException e) {
-                                 e.printStackTrace();
+                                cmpndialog();
+                            } else if (dataArray.length() == 0) {
+                                Hhdprogress.dismiss();
+                                session.setLogin(false);
+                                Toast.makeText(LoginActivity.this, "Login Failed please check you credential's", Toast.LENGTH_LONG).show();
                             }
-                     }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                       Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override
@@ -199,6 +209,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
+
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
@@ -209,11 +220,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private  void cmpndialog(){
-        AlertDialog.Builder settingdialog = new AlertDialog.Builder(this,R.style.MyDialog);
+    private void cmpndialog() {
+        AlertDialog.Builder settingdialog = new AlertDialog.Builder(this, R.style.MyDialog);
         LayoutInflater inflater = this.getLayoutInflater();
         View settinview = inflater.inflate(R.layout.setting_layoutrc, null);
-        final CompanyAdapter companyAdapter= new CompanyAdapter(Saleslist,getApplicationContext(),LoginActivity.this);
+        final CompanyAdapter companyAdapter = new CompanyAdapter(Saleslist, getApplicationContext(), LoginActivity.this);
         RecyclerView recyclercpm = settinview.findViewById(R.id.recyler_bottomm);
         recyclercpm.setAdapter(companyAdapter);
         recyclercpm.setHasFixedSize(true);
@@ -223,14 +234,16 @@ public class LoginActivity extends AppCompatActivity {
         alertDialog = settingdialog.create();
 
         alertDialog.show();
-        alertDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,900); //Controlling width and height.
+        alertDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 900); //Controlling width and height.
 
     }
+
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (alertDialog != null){
+        if (alertDialog != null) {
             alertDialog.dismiss();
         }
 

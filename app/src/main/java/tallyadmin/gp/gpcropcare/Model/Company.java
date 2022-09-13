@@ -2,9 +2,11 @@ package tallyadmin.gp.gpcropcare.Model;
 
 public class Company {
 
-    String CmpGUID,CompanyName;
+    String CmpGUID, CompanyName;
     private boolean isSelected;
-    private String allowedApprove,allowReject;
+    private Integer pendingSales;
+    private String allowedApprove, allowReject;
+
 
     public boolean isSelected() {
         return isSelected;
@@ -20,16 +22,28 @@ public class Company {
         this.isSelected = isSelected;
     }
 
-    public Company(String cmpGUID, String companyName, boolean isSelected, String allowedApprove, String allowReject) {
-        CmpGUID = cmpGUID;
-        CompanyName = companyName;
-        this.isSelected = isSelected;
-        this.allowedApprove = allowedApprove;
-        this.allowReject = allowReject;
+    public String getCmpGUID() {
+        return CmpGUID;
     }
 
-    public Company() {
+    public void setCmpGUID(String cmpGUID) {
+        CmpGUID = cmpGUID;
+    }
 
+    public String getCompanyName() {
+        return CompanyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        CompanyName = companyName;
+    }
+
+    public Integer getPendingSales() {
+        return pendingSales;
+    }
+
+    public void setPendingSales(Integer pendingSales) {
+        this.pendingSales = pendingSales;
     }
 
     public String getAllowedApprove() {
@@ -48,19 +62,16 @@ public class Company {
         this.allowReject = allowReject;
     }
 
-    public String getCmpGUID() {
-        return CmpGUID;
-    }
-
-    public void setCmpGUID(String cmpGUID) {
+    public Company(String cmpGUID, String companyName, boolean isSelected, Integer pendingSales, String allowedApprove, String allowReject) {
         CmpGUID = cmpGUID;
-    }
-
-    public String getCompanyName() {
-        return CompanyName;
-    }
-
-    public void setCompanyName(String companyName) {
         CompanyName = companyName;
+        this.isSelected = isSelected;
+        this.pendingSales = pendingSales;
+        this.allowedApprove = allowedApprove;
+        this.allowReject = allowReject;
     }
+    public Company() {
+
+    }
+
 }
