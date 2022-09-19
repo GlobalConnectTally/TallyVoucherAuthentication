@@ -267,6 +267,7 @@ public class HomeActivity extends AppCompatActivity
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("CmpGUID",companydata.getKeyCmpnGid());
+
                 return params;
             }
         };
@@ -466,6 +467,8 @@ public class HomeActivity extends AppCompatActivity
     public void onRecyclerViewItemClicked(int position, Company data) {
         dashcmp.setText(data.getCompanyName());
         mBage.setText(data.getPendingSales().toString());
+        companydata.setCompanyGid(data.getCmpGUID());
+        companydata.setcompany(data.getCompanyName());
         alertDialog.dismiss();
         if(data.getPendingSales() != null && data.getPendingSales() != 0){
             mBage.setVisibility(View.VISIBLE);
@@ -474,3 +477,6 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 }
+
+
+
