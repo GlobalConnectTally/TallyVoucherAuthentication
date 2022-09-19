@@ -234,6 +234,7 @@ public class LoginActivity extends AppCompatActivity {
         alertDialog = settingdialog.create();
 
         alertDialog.show();
+        alertDialog.setCancelable(false);
         alertDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, 900); //Controlling width and height.
 
     }
