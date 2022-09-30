@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
+
         txt_username = findViewById(R.id.username);
         txt_password = findViewById(R.id.edt_password);
 
@@ -103,7 +104,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-
 
     private void userLogin() {
         final String username = txt_username.getText().toString();
@@ -202,12 +202,10 @@ public class LoginActivity extends AppCompatActivity {
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
-
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
-
 
     private  void cmpndialog(){
         AlertDialog.Builder settingdialog = new AlertDialog.Builder(this,R.style.MyDialog);

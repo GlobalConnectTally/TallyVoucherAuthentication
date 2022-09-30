@@ -55,8 +55,7 @@ public class UserInfo {
 
     public String getAllowApprove(){return prefs.getString(KEY_ACCEPT, "");}
 
-    public String getImei() {
-        return prefs.getString(KEY_IMEI, null);}
+    public String getImei() { return prefs.getString(KEY_IMEI, null);}
 
     public String getPassWord(){return prefs.getString(KEY_NAME, "");}
 

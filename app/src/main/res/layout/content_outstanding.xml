@@ -12,12 +12,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:weightSum="10"
+            android:weightSum="13"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:orientation="vertical"
                 android:weightSum="2">
 
@@ -100,7 +101,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -330,7 +330,6 @@
                     android:background="#a59f9f"
                     android:layout_width="1dp"
                     android:layout_height="match_parent" />
-
 
                 <TextView
                     android:id="@+id/pgr100"
@@ -568,7 +567,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
-                    android:text="130-180"
+                    android:text="130-150"
                     android:gravity="center_vertical|end"
                     android:textStyle="bold"
                     android:paddingRight="@dimen/_5sdp"
@@ -693,7 +692,132 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
-                    android:text="180-250"
+                    android:text="150-180"
+                    android:gravity="center_vertical|end"
+                    android:textStyle="bold"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:textColor="@color/color_black">
+
+                </TextView>
+
+                <View
+                    android:background="#a59f9f"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
+
+
+                <TextView
+                    android:id="@+id/pgr150"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="99"
+                    android:gravity="center_vertical|end"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:textColor="@color/color_black">
+
+                </TextView>
+
+                <View
+                    android:background="#a59f9f"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/psd150"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="99"
+                    android:gravity="center_vertical|end"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:textColor="@color/color_black">
+
+                </TextView>
+
+                <View
+                    android:background="#a59f9f"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/ryl150"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="90"
+                    android:gravity="center_vertical|end"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:textColor="@color/color_black">
+
+                </TextView>
+
+                <View
+                    android:background="#a59f9f"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/prm150"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="52"
+                    android:gravity="center_vertical|end"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:textColor="@color/color_black">
+                </TextView>
+
+                <View
+                    android:background="#a59f9f"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/clsc150"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="74"
+                    android:gravity="center_vertical|end"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:textColor="@color/color_black">
+                </TextView>
+
+                <View
+                    android:background="#a59f9f"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/dust150"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="45"
+                    android:gravity="center_vertical|end"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:textColor="@color/color_black">
+                </TextView>
+
+            </LinearLayout>
+            <View
+                android:background="#a59f9f"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="10.5"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="180-210"
                     android:gravity="center_vertical|end"
                     android:textStyle="bold"
                     android:paddingRight="@dimen/_5sdp"
@@ -723,6 +847,7 @@
                     android:background="#a59f9f"
                     android:layout_width="1dp"
                     android:layout_height="match_parent" />
+
 
                 <TextView
                     android:id="@+id/psd180"
@@ -792,6 +917,132 @@
 
                 <TextView
                     android:id="@+id/dust180"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="45"
+                    android:gravity="center_vertical|end"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:textColor="@color/color_black">
+                </TextView>
+
+            </LinearLayout>
+            <View
+                android:background="#a59f9f"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="10.5"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="210-250"
+                    android:gravity="center_vertical|end"
+                    android:textStyle="bold"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:textColor="@color/color_black">
+
+                </TextView>
+
+                <View
+                    android:background="#a59f9f"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
+
+
+                <TextView
+                    android:id="@+id/pgr210"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="99"
+                    android:gravity="center_vertical|end"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:textColor="@color/color_black">
+
+                </TextView>
+
+                <View
+                    android:background="#a59f9f"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
+
+
+                <TextView
+                    android:id="@+id/psd210"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="99"
+                    android:gravity="center_vertical|end"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:textColor="@color/color_black">
+
+                </TextView>
+
+                <View
+                    android:background="#a59f9f"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/ryl210"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="90"
+                    android:gravity="center_vertical|end"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:textColor="@color/color_black">
+
+                </TextView>
+
+                <View
+                    android:background="#a59f9f"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/prm210"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="52"
+                    android:gravity="center_vertical|end"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:textColor="@color/color_black">
+                </TextView>
+
+                <View
+                    android:background="#a59f9f"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/clsc210"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="74"
+                    android:gravity="center_vertical|end"
+                    android:paddingRight="@dimen/_5sdp"
+                    android:textColor="@color/color_black">
+                </TextView>
+
+                <View
+                    android:background="#a59f9f"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/dust210"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
@@ -959,7 +1210,7 @@
 
 
                 <TextView
-                    android:id="@+id/pgr360"
+                    android:id="@+id/pgr365"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
@@ -1192,6 +1443,5 @@
         </LinearLayout>
 
     </HorizontalScrollView>
-
 
 </RelativeLayout>

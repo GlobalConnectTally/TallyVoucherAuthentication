@@ -24,8 +24,4 @@
     <include layout="@layout/content_sixreportactivity" />
 
 
-
-
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

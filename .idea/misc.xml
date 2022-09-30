@@ -3,14 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout-sw600dp/content_outstanding.xml" value="0.5" />
         <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_about.xml" value="0.25" />
         <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_login.xml" value="0.15" />
         <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_outstanding.xml" value="0.33" />
         <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_showtransactionew.xml" value="0.25" />
+        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_sixreportactivity.xml" value="0.25" />
         <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/app_bar_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/content_home.xml" value="0.25" />
+        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/content_outstanding.xml" value="0.25" />
         <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/content_showtransactionew.xml" value="0.1296875" />
+        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/content_sixreportactivity.xml" value="0.21" />
         <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/order_redesignewt.xml" value="0.19" />
         <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/setting_layoutrc.xml" value="0.20416666666666666" />
       </map>

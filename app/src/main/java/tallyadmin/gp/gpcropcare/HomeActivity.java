@@ -72,15 +72,15 @@ public class HomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-            getSupportActionBar().setTitle("Dashboard");
+        getSupportActionBar().setTitle("Dashboard");
 
-            companydata = new Companysave(getApplicationContext());
-            userInfo = new UserInfo(getApplicationContext());
-            session = new Session(getApplicationContext());
+        companydata = new Companysave(getApplicationContext());
+        userInfo = new UserInfo(getApplicationContext());
+        session = new Session(getApplicationContext());
 
-            mProgressDialog =  new ProgressDialog(HomeActivity.this);
-            swipe = findViewById(R.id.swipe_torefresh);
-            swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        mProgressDialog =  new ProgressDialog(HomeActivity.this);
+        swipe = findViewById(R.id.swipe_torefresh);
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
                 public void onRefresh() {
                     showbadges();
@@ -96,15 +96,15 @@ public class HomeActivity extends AppCompatActivity
             });
 
 
-            System.out.println("Allow Approve + Reject ");
-            System.out.println(userInfo.getAllowApprove());
-            System.out.println(userInfo.getAllowReject());
+        System.out.println("Allow Approve + Reject ");
+        System.out.println(userInfo.getAllowApprove());
+        System.out.println(userInfo.getAllowReject());
 
-            mBage = findViewById(R.id.salesbadge);
-            //            paybadge = findViewById(R.id.paymentrderbadge);
-//            orderbadge = findViewById(R.id.salesorderbadge);
-            showbadges();
+        mBage = findViewById(R.id.salesbadge);
+            //paybadge = findViewById(R.id.paymentrderbadge);
+            //orderbadge = findViewById(R.id.salesorderbadge);
 
+       showbadges();
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -119,7 +119,7 @@ public class HomeActivity extends AppCompatActivity
             bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                    Handle navigation view item clicks here.
+                   // Handle navigation view item clicks here.
                     int id = item.getItemId();
 
                     if (id == R.id.nav_home) {
@@ -144,7 +144,7 @@ public class HomeActivity extends AppCompatActivity
                 }
             });
 
-       //        LinearLayout about = findViewById(R.id.about);
+          //        LinearLayout about = findViewById(R.id.about);
 //        ImageView imgabout = findViewById(R.id.imgabout);
 //            imgabout.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -245,7 +245,6 @@ public class HomeActivity extends AppCompatActivity
 //                               orderbadge.setNumber(pendingorders);
 ////                               Toast.makeText(HomeActivity.this, ""+pendingorders,Toast.LENGTH_SHORT).show();
 //                           }
-
 //                            if (pendingpay!=0){
 //                                paybadge.setNumber(pendingpay);
 ////                                Toast.makeText(HomeActivity.this, ""+pendingpay,Toast.LENGTH_SHORT).show();
