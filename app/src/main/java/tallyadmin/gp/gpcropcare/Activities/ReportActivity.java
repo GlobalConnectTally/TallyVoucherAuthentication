@@ -224,17 +224,9 @@ public class ReportActivity extends AppCompatActivity {
 //
                                     }
 
-
-
-
-
                                 }
 
-
-
                                     playerModel.setChildItemList(listchildren);
-
-
 
                                 Saleslist.add(playerModel);
 
@@ -251,7 +243,7 @@ public class ReportActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
                 }) {
@@ -283,7 +275,6 @@ public class ReportActivity extends AppCompatActivity {
 
         expandableListAdapter = new ReportExpandableListAdapter(this, Saleslist);
         expandableListView.setAdapter(expandableListAdapter);
-
 
     }
 
@@ -358,8 +349,6 @@ public class ReportActivity extends AppCompatActivity {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-
-
                             }
                         },
                         new Response.ErrorListener() {
@@ -389,7 +378,6 @@ public class ReportActivity extends AppCompatActivity {
 
         alertDialog.show();
     }
-
 
 
     private void Authorize() {
@@ -456,8 +444,6 @@ public class ReportActivity extends AppCompatActivity {
 
 
 
-
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URLNA,
                 new Response.Listener<String>() {
                     @Override
@@ -516,7 +502,5 @@ public class ReportActivity extends AppCompatActivity {
         VolleySingleton.getInstance(ReportActivity.this).addToRequestQueue(stringRequest);
 
     }
-
-
 
 }

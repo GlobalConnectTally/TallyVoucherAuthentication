@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DesignSurface">
-    <option name="filePathToZoomLevelMap">
-      <map>
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout-sw600dp/content_outstanding.xml" value="0.5" />
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_about.xml" value="0.25" />
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_login.xml" value="0.15" />
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_outstanding.xml" value="0.33" />
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_showtransactionew.xml" value="0.25" />
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_sixreportactivity.xml" value="0.25" />
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/app_bar_home.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/content_home.xml" value="0.25" />
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/content_outstanding.xml" value="0.25" />
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/content_showtransactionew.xml" value="0.1296875" />
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/content_sixreportactivity.xml" value="0.21" />
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/order_redesignewt.xml" value="0.19" />
-        <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/setting_layoutrc.xml" value="0.20416666666666666" />
-      </map>
-    </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
-  </component>
+    <component name="DesignSurface">
+        <option name="filePathToZoomLevelMap">
+            <map>
+                <entry key="..\:/Office Projects/app/src/main/res/layout-sw600dp/activity_licence.xml" value="0.190625" />
+                <entry key="..\:/Office Projects/app/src/main/res/layout-sw600dp/activity_main.xml" value="0.190625" />
+                <entry key="..\:/Office Projects/app/src/main/res/layout-sw600dp/setting_layoutrc.xml" value="0.190625" />
+                <entry key="..\:/Office Projects/app/src/main/res/layout/activity_about.xml" value="0.25416666666666665" />
+                <entry key="..\:/Office Projects/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
+                <entry key="..\:/Office Projects/app/src/main/res/layout/activity_licence.xml" value="0.25416666666666665" />
+                <entry key="..\:/Office Projects/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
+                <entry key="..\:/Office Projects/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+                <entry key="..\:/Office Projects/app/src/main/res/layout/setting_layoutrc.xml" value="0.25416666666666665" />
+                <entry key="..\:/Office Projects/app/src/main/res/layout/spinner_layoutb.xml" value="0.25416666666666665" />
+                <entry key="..\:/Office Projects/app/src/main/res/menu/activity_home_drawer.xml" value="0.25416666666666665" />
+                <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_about.xml" value="0.25" />
+                <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
+                <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_login.xml" value="0.15" />
+                <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
+                <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_showtransactionew.xml" value="0.25" />
+                <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/app_bar_home.xml" value="0.20416666666666666" />
+                <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/content_home.xml" value="0.25" />
+                <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/content_showtransactionew.xml" value="0.1296875" />
+                <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/order_redesignewt.xml" value="0.19" />
+                <entry key="..\:/Users/gil_t/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/setting_layoutrc.xml" value="0.20416666666666666" />
+            </map>
+        </option>
+    </component>
+    <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+        <output url="file://$PROJECT_DIR$/build/classes" />
+    </component>
+    <component name="ProjectType">
+        <option name="id" value="Android" />
+    </component>
 </project>

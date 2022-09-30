@@ -23,9 +23,6 @@
         android:background="@color/colorPrimary"/>
 
 
-
-
-
     <ScrollView
         android:background="@color/color_white"
         android:layout_width="match_parent"

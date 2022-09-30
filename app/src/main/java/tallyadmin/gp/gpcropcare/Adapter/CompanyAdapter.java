@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.nex3z.notificationbadge.NotificationBadge;
+
 import java.util.ArrayList;
 
 import tallyadmin.gp.gpcropcare.HomeActivity;
@@ -27,6 +29,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
     Companysave companydata;
     LoginActivity loginActivity;
     UserInfo userInfo;
+
 
 
     public ArrayList<Company> getCompanieslist() {
@@ -53,6 +56,14 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
     @Override
     public void onBindViewHolder(@NonNull final CompanyAdapter.CompanyViewHolder holder, final int position) {
         holder.companygname.setText(companieslist.get(holder.getAdapterPosition()).getCompanyName());
+        if ( companieslist.get(holder.getAdapterPosition()).getPendingSales()!= null &&
+                companieslist.get(holder.getAdapterPosition()).getPendingSales()!= 0){
+            holder.mBage.setNumber(companieslist.get(holder.getAdapterPosition()).getPendingSales());
+            holder.mBage.setVisibility(View.VISIBLE);
+        }else {
+            holder.mBage.setVisibility(View.GONE);
+        }
+
 
 
 
@@ -70,6 +81,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
                                             -------------    */
                 userInfo.setAllowApprove(companieslist.get(holder.getAdapterPosition()).getAllowedApprove().toString());
                 userInfo.setAllowReject(companieslist.get(holder.getAdapterPosition()).getAllowReject().toString());
+
             }
         });
 
@@ -103,12 +115,16 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
         }
 
         TextView companyguid,companygname;
+        NotificationBadge mBage;
+
+
 
 
         public CompanyViewHolder(@NonNull View view) {
             super(view);
 
               companygname = view.findViewById(R.id.text_cmpn1);
+              mBage = view.findViewById(R.id.salesbadge);
 
 
                view.setOnClickListener(this);

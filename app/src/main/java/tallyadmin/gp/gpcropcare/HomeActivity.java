@@ -54,7 +54,7 @@ import static tallyadmin.gp.gpcropcare.Common.Common.URL_LOGIN;
 
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, CompanyHomeAdapter.OnRecyclerViewItemClickListener {
     AlertDialog alertDialog;
     Companysave companydata;
     UserInfo userInfo;
@@ -64,9 +64,10 @@ public class HomeActivity extends AppCompatActivity
 
     NotificationBadge mBage,paybadge,orderbadge;
     SwipeRefreshLayout swipe;
+    private TextView dashcmp;
 
 
-        @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
@@ -216,7 +217,7 @@ public class HomeActivity extends AppCompatActivity
 //            }
 //        });
 
-            TextView dashcmp = findViewById(R.id.dash_cmpname);
+             dashcmp = findViewById(R.id.dash_cmpname);
             dashcmp.setText(companydata.getKeyName());
     }
 
@@ -225,7 +226,6 @@ public class HomeActivity extends AppCompatActivity
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
 
                         try {
 
@@ -266,6 +266,7 @@ public class HomeActivity extends AppCompatActivity
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("CmpGUID",companydata.getKeyCmpnGid());
+
                 return params;
             }
         };
@@ -332,6 +333,7 @@ public class HomeActivity extends AppCompatActivity
                                     JSONObject dataobj = dataArray.getJSONObject(i);
                                     playerModel.setCmpGUID(dataobj.getString("CmpGUID"));
                                     playerModel.setCompanyName(dataobj.getString("CompanyName"));
+                                    playerModel.setPendingSales(dataobj.getInt("PendingSales"));
                                     Saleslist.add(playerModel);
                                 }
                                Hhdprogress.dismiss();
@@ -345,7 +347,7 @@ public class HomeActivity extends AppCompatActivity
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override
@@ -406,7 +408,7 @@ public class HomeActivity extends AppCompatActivity
         AlertDialog.Builder settingdialog = new AlertDialog.Builder(this,R.style.MyDialog);
         LayoutInflater inflater = this.getLayoutInflater();
         View settinview= inflater.inflate(R.layout.setting_layoutrc, null);
-        final CompanyHomeAdapter companyAdapter= new CompanyHomeAdapter(Saleslist,getApplicationContext(),HomeActivity.this);
+        final CompanyHomeAdapter companyAdapter= new CompanyHomeAdapter(Saleslist,getApplicationContext(),HomeActivity.this,this);
         RecyclerView recyclercpm = settinview.findViewById(R.id.recyler_bottomm);
         recyclercpm.setAdapter(companyAdapter);
         recyclercpm.setHasFixedSize(true);
@@ -460,4 +462,20 @@ public class HomeActivity extends AppCompatActivity
         showbadges();
     }
 
+    @Override
+    public void onRecyclerViewItemClicked(int position, Company data) {
+        dashcmp.setText(data.getCompanyName());
+        mBage.setText(data.getPendingSales().toString());
+        companydata.setCompanyGid(data.getCmpGUID());
+        companydata.setcompany(data.getCompanyName());
+        alertDialog.dismiss();
+        if(data.getPendingSales() != null && data.getPendingSales() != 0){
+            mBage.setVisibility(View.VISIBLE);
+        }else{
+            mBage.setVisibility(View.GONE);
+        }
+    }
 }
+
+
+

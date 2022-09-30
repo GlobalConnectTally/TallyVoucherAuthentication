@@ -163,7 +163,7 @@ public class Fragement_OrderActivity extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(Fragement_OrderActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Fragement_OrderActivity.this, error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }) {
                     @Override

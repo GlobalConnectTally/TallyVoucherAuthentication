@@ -38,8 +38,6 @@ public class SalesActivity extends AppCompatActivity {
     ArrayList<SalesOrder> Saleslist;
     private SalesAdapter salesOrderAdapter;
     private static ProgressDialog mProgressDialog;
-
-
     RecyclerView recyclerOrder;
     Companysave companydata;
     UserInfo userInfo;
@@ -134,7 +132,6 @@ public class SalesActivity extends AppCompatActivity {
 
                                 alert.show();
 
-
                             }
 
                             for (int i = 0; i < dataArray.length(); i++) {
@@ -166,7 +163,7 @@ public class SalesActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override

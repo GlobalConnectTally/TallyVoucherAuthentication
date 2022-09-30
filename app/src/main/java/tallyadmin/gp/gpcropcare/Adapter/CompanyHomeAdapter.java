@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nex3z.notificationbadge.NotificationBadge;
+
 import java.util.ArrayList;
 
 import tallyadmin.gp.gpcropcare.HomeActivity;
@@ -20,22 +22,22 @@ import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 
 public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.CompanyViewHolder> {
     private ArrayList<Company> companieslist;
-    ArrayList<ArrayList<Company>> checkedTeachers=new ArrayList<ArrayList<Company>>();
+    ArrayList<ArrayList<Company>> checkedTeachers = new ArrayList<ArrayList<Company>>();
     Context context;
     Companysave companydata;
     HomeActivity Activity;
-
-
+    OnRecyclerViewItemClickListener listener;
 
 
     public ArrayList<Company> getCompanieslist() {
         return companieslist;
     }
 
-    public CompanyHomeAdapter(ArrayList<Company> companieslist, Context context, HomeActivity Activity) {
+    public CompanyHomeAdapter(ArrayList<Company> companieslist, Context context, HomeActivity Activity,OnRecyclerViewItemClickListener listener) {
         this.companieslist = companieslist;
         this.context = context;
         this.Activity = Activity;
+        this.listener = listener;
 
     }
 
@@ -46,30 +48,39 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
                 .inflate(R.layout.spinner_layoutb, parent, false);
 
 
-
         return new CompanyViewHolder(itemView);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull final CompanyHomeAdapter.CompanyViewHolder holder, final int position) {
         holder.companygname.setText(companieslist.get(position).getCompanyName());
+        if (companieslist.get(position).getPendingSales() != null &&
+                companieslist.get(position).getPendingSales() != 0) {
+            holder.mBage.setNumber(companieslist.get(position).getPendingSales());
+            holder.mBage.setVisibility(View.VISIBLE);
+        } else {
+            holder.mBage.setVisibility(View.GONE);
+        }
 
+        holder.companygname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onRecyclerViewItemClicked(position,companieslist.get(position));
+            }
+        });
 
         holder.setListener(new ItemClickListener() {
             @Override
             public void onClick(View v) {
 
-                showConfirmDialog(companieslist.get(position).getCmpGUID(),companieslist.get(position).getCompanyName());
+                showConfirmDialog(companieslist.get(position).getCmpGUID(), companieslist.get(position).getCompanyName());
 
 //                Activity.cmpDialogExit();
 
 
             }
         });
-
-
-
-
 
     }
 
@@ -84,11 +95,11 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
 //            public void onClick(DialogInterface dialog, int which) {
 
 //                Toast.makeText(context,"1"+cmpGUID, Toast.LENGTH_LONG).show();
-                companydata = new Companysave(context.getApplicationContext());
-                companydata.setCompanyGid(cmpGUID);
-                companydata.setcompany(companyName);
-                Activity.cmpDialogExit();
-                Toast.makeText(context,"Company changed success full", Toast.LENGTH_LONG).show();
+        companydata = new Companysave(context.getApplicationContext());
+        companydata.setCompanyGid(cmpGUID);
+        companydata.setcompany(companyName);
+        Activity.cmpDialogExit();
+        Toast.makeText(context, "Company changed success full", Toast.LENGTH_LONG).show();
 ////
 //
 //            }
@@ -116,18 +127,17 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
             this.listener = listener;
         }
 
-        TextView companyguid,companygname;
+        TextView companyguid, companygname;
+        NotificationBadge mBage;
 
 
         public CompanyViewHolder(@NonNull View view) {
             super(view);
 
-                 companygname = view.findViewById(R.id.text_cmpn1);
+            companygname = view.findViewById(R.id.text_cmpn1);
+            mBage = view.findViewById(R.id.salesbadge);
 
-
-               view.setOnClickListener(this);
-
-
+            view.setOnClickListener(this);
 
         }
 
@@ -138,4 +148,11 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
         }
 
     }
+
+
+    public interface OnRecyclerViewItemClickListener {
+        public void onRecyclerViewItemClicked(int position, Company data);
+    }
+
 }
+
