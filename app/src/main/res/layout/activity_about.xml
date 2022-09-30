@@ -22,7 +22,6 @@
             <LinearLayout
 
                 android:id="@+id/top_dashboard"
-
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="60dp">
@@ -101,7 +100,6 @@
                             android:paddingStart="15dp"
                             android:paddingLeft="15dp"
                             android:text="Gp Crop Care"
-
                             android:textColor="@color/color_txt"
                             android:textSize="@dimen/fontsize" />
 
@@ -140,7 +138,7 @@
                             android:paddingLeft="15dp"
                             android:text="Email"
                             android:textColor="@color/color_black"
-                            android:textSize="20sp"
+                            android:textSize="13sp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -232,7 +230,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
                             android:padding="2dp"
                             android:paddingStart="15dp"
                             android:paddingLeft="15dp"
@@ -248,8 +245,7 @@
                             android:padding="2dp"
                             android:paddingStart="15dp"
                             android:paddingLeft="15dp"
-                            android:text="07929704122"
-
+                            android:text="0000000000"
                             android:textColor="@color/color_txt"
                             android:textSize="@dimen/fontsize" />
 
@@ -330,7 +326,7 @@
                             android:padding="2dp"
                             android:paddingStart="15dp"
                             android:paddingLeft="15dp"
-                            android:text="Deleloped by"
+                            android:text="Developed by"
                             android:textColor="@color/color_black"
                             android:textSize="@dimen/fontsize"
                             android:textStyle="bold" />
