@@ -1,6 +1,5 @@
 package tallyadmin.gp.gpcropcare;
 
-import static tallyadmin.gp.gpcropcare.Common.Common.URL_DASHBOARDSBADGES;
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_LOGIN;
 
 import android.app.ProgressDialog;
@@ -62,7 +61,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -104,14 +104,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 userLogin();
-                //                startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//                finish();
+                // startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                // finish();
             }
         });
 
     }
 
-    private void userLogin() {
+    private void userLogin()
+    {
         final String username = txt_username.getText().toString();
         final String password = txt_password.getText().toString();
 
@@ -165,6 +166,7 @@ public class LoginActivity extends AppCompatActivity {
                                 userInfo.setpassword(password);
 
                                 for (int i = 0; i < dataArray.length(); i++) {
+
                                     Company companyModel = new Company();
                                     JSONObject dataobj = dataArray.getJSONObject(i);
 
@@ -172,6 +174,8 @@ public class LoginActivity extends AppCompatActivity {
                                     companyModel.setAllowReject(dataobj.getString("AllowReject"));
                                     companyModel.setAllowedApprove(dataobj.getString("AllowApprove"));
 
+                                    companyModel.setFirstLevel(dataobj.getString("FirstLevel"));
+                                    companyModel.setSecondLevel(dataobj.getString("SecondLevel"));
 
                                     companyModel.setCmpGUID(dataobj.getString("CmpGUID"));
                                     companyModel.setCompanyName(dataobj.getString("CompanyName"));
@@ -180,7 +184,9 @@ public class LoginActivity extends AppCompatActivity {
 
                                     Saleslist.add(companyModel);
                                 }
+
                                 cmpndialog();
+
                             } else if (dataArray.length() == 0) {
                                 Hhdprogress.dismiss();
                                 session.setLogin(false);
@@ -211,13 +217,15 @@ public class LoginActivity extends AppCompatActivity {
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
-    private boolean isNetworkConnected() {
+    private boolean isNetworkConnected()
+    {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
 
 
-    private void cmpndialog() {
+    private void cmpndialog()
+    {
         AlertDialog.Builder settingdialog = new AlertDialog.Builder(this, R.style.MyDialog);
         LayoutInflater inflater = this.getLayoutInflater();
         View settinview = inflater.inflate(R.layout.setting_layoutrc, null);
@@ -237,7 +245,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onDestroy()
+    {
         super.onDestroy();
         if (alertDialog != null) {
             alertDialog.dismiss();

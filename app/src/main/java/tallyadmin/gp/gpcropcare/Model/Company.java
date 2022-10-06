@@ -6,6 +6,24 @@ public class Company {
     private boolean isSelected;
     private Integer pendingSales;
     private String allowedApprove, allowReject;
+    private String FirstLevel, SecondLevel;
+
+    public Company() {
+
+    }
+
+    public Company(String cmpGUID, String companyName, boolean isSelected, Integer pendingSales,
+                   String allowedApprove, String allowReject, String firstLevel, String secondLevel)
+    {
+        CmpGUID = cmpGUID;
+        CompanyName = companyName;
+        this.isSelected = isSelected;
+        this.pendingSales = pendingSales;
+        this.allowedApprove = allowedApprove;
+        this.allowReject = allowReject;
+        FirstLevel = firstLevel;
+        SecondLevel = secondLevel;
+    }
 
 
     public boolean isSelected() {
@@ -16,7 +34,8 @@ public class Company {
         isSelected = selected;
     }
 
-    public Company(String cmpGUID, String companyName, boolean isSelected) {
+    public Company(String cmpGUID, String companyName, boolean isSelected)
+    {
         CmpGUID = cmpGUID;
         CompanyName = companyName;
         this.isSelected = isSelected;
@@ -26,7 +45,8 @@ public class Company {
         return CmpGUID;
     }
 
-    public void setCmpGUID(String cmpGUID) {
+    public void setCmpGUID(String cmpGUID)
+    {
         CmpGUID = cmpGUID;
     }
 
@@ -62,16 +82,20 @@ public class Company {
         this.allowReject = allowReject;
     }
 
-    public Company(String cmpGUID, String companyName, boolean isSelected, Integer pendingSales, String allowedApprove, String allowReject) {
-        CmpGUID = cmpGUID;
-        CompanyName = companyName;
-        this.isSelected = isSelected;
-        this.pendingSales = pendingSales;
-        this.allowedApprove = allowedApprove;
-        this.allowReject = allowReject;
+    public String getFirstLevel() {
+        return FirstLevel;
     }
-    public Company() {
 
+    public void setFirstLevel(String firstLevel) {
+        FirstLevel = firstLevel;
+    }
+
+    public String getSecondLevel() {
+        return SecondLevel;
+    }
+
+    public void setSecondLevel(String secondLevel) {
+        SecondLevel = secondLevel;
     }
 
 }

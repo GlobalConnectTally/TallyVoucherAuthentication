@@ -14,6 +14,8 @@ public class UserInfo {
     Context ctx;
     private static final String KEY_ACCEPT = "accept";
     private static final String KEY_REJECT = "reject";
+    private static final String KEY_FIRST_LEVEL = "firstLevel";
+    private static final String KEY_SECOND_LEVEL = "secondLevel";
 
     public UserInfo(Context ctx) {
         this.ctx = ctx;
@@ -26,8 +28,18 @@ public class UserInfo {
         editor.apply();
     }
 
-    public void  setAllowApprove(String approve){
+    public void setAllowApprove(String approve){
         editor.putString(KEY_ACCEPT, approve);
+        editor.apply();
+    }
+
+    public void  setFirstLevel(String firstLevel){
+        editor.putString(KEY_FIRST_LEVEL, firstLevel);
+        editor.apply();
+    }
+
+    public void setSecondLevel(String secondLevel){
+        editor.putString(KEY_SECOND_LEVEL, secondLevel);
         editor.apply();
     }
 
@@ -54,6 +66,10 @@ public class UserInfo {
     public String getAllowReject(){return prefs.getString(KEY_REJECT, "");}
 
     public String getAllowApprove(){return prefs.getString(KEY_ACCEPT, "");}
+
+    public String getFirstLevel(){return prefs.getString(KEY_FIRST_LEVEL, "");}
+
+    public String getSecondLevel(){return prefs.getString(KEY_SECOND_LEVEL, "");}
 
     public String getImei() { return prefs.getString(KEY_IMEI, null);}
 

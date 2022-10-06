@@ -68,7 +68,8 @@ public class HomeActivity extends AppCompatActivity
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -102,22 +103,26 @@ public class HomeActivity extends AppCompatActivity
         System.out.println(userInfo.getAllowReject());
 
         mBage = findViewById(R.id.salesbadge);
-            //paybadge = findViewById(R.id.paymentrderbadge);
-            //orderbadge = findViewById(R.id.salesorderbadge);
+        //paybadge = findViewById(R.id.paymentrderbadge);
+        //orderbadge = findViewById(R.id.salesorderbadge);
 
-       showbadges();
+        showbadges();
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this,
+                drawer,
+                toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnav);
-            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener()
+                {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                    // Handle navigation view item clicks here.
@@ -189,10 +194,10 @@ public class HomeActivity extends AppCompatActivity
 //        });
 
             //-----sales on click go to dashboard to Sales order activity-----//
-         LinearLayout salesorder = findViewById(R.id.sales_order);
+        LinearLayout salesorder = findViewById(R.id.sales_order);
 
-         ImageView imgs = findViewById(R.id.imgs);
-            imgs.setOnClickListener(new View.OnClickListener() {
+        ImageView imgs = findViewById(R.id.imgs);
+        imgs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, SalesOrderActivity.class));
@@ -217,11 +222,12 @@ public class HomeActivity extends AppCompatActivity
 //            }
 //        });
 
-             dashcmp = findViewById(R.id.dash_cmpname);
-            dashcmp.setText(companydata.getKeyName());
+        dashcmp = findViewById(R.id.dash_cmpname);
+        dashcmp.setText(companydata.getKeyName());
     }
 
-    public void showbadges() {
+    public void showbadges()
+    {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DASHBOARDSBADGES,
                 new Response.Listener<String>() {
                     @Override
@@ -273,18 +279,19 @@ public class HomeActivity extends AppCompatActivity
 
         VolleySingleton.getInstance(HomeActivity.this).addToRequestQueue(stringRequest);
 
-
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -299,7 +306,8 @@ public class HomeActivity extends AppCompatActivity
     }
 
 
-    private void companyseting() {
+    private void companyseting()
+    {
         final KProgressHUD Hhdprogress = KProgressHUD.create(HomeActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel("Please wait")
@@ -369,7 +377,8 @@ public class HomeActivity extends AppCompatActivity
 
     //Navigation item
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(MenuItem item)
+    {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -398,8 +407,10 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     //check internet connectivity.....
-    private boolean isNetworkConnected() {
+    private boolean isNetworkConnected()
+       {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }

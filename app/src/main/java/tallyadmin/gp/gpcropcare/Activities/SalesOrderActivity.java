@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import tallyadmin.gp.gpcropcare.Adapter.SalesOrderAdapter;
-import tallyadmin.gp.gpcropcare.Model.Company;
+
 import tallyadmin.gp.gpcropcare.Model.SalesOrder;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
@@ -41,7 +41,8 @@ import static tallyadmin.gp.gpcropcare.Common.Common.URL_SALES;
 
 
 //------Sales order activity-----//
-public class SalesOrderActivity extends AppCompatActivity {
+public class SalesOrderActivity extends AppCompatActivity
+{
     ArrayList<SalesOrder> Saleslist;
     private SalesOrderAdapter salesOrderAdapter;
     private static ProgressDialog mProgressDialog;
@@ -52,7 +53,8 @@ public class SalesOrderActivity extends AppCompatActivity {
     EditText editsearch;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales_order);
 
@@ -94,7 +96,8 @@ public class SalesOrderActivity extends AppCompatActivity {
         seachcust();
     }
 
-    public void fetchingJSON() {
+    public void fetchingJSON()
+    {
         final KProgressHUD Hhdprogress = KProgressHUD.create(SalesOrderActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel("Please wait")
@@ -191,7 +194,8 @@ public class SalesOrderActivity extends AppCompatActivity {
                 })
         {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() throws AuthFailureError
+            {
                 Map<String, String> params = new HashMap<>();
                 params.put("AppLoginUserID", userInfo.getAppLoginUserID());
                 params.put("CmpGUID", companydata.getKeyCmpnGid());
@@ -203,14 +207,16 @@ public class SalesOrderActivity extends AppCompatActivity {
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
-    private void setupRecycler() {
+    private void setupRecycler()
+    {
         recyclerOrder.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerOrder.setHasFixedSize(true);
         salesOrderAdapter = new SalesOrderAdapter(Saleslist, getApplicationContext(), SalesOrderActivity.this);
         recyclerOrder.setAdapter(salesOrderAdapter);
     }
 
-    private void seachcust() {
+    private void seachcust()
+    {
         editsearch.addTextChangedListener(new TextWatcher() {
             @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -230,7 +236,8 @@ public class SalesOrderActivity extends AppCompatActivity {
         });
     }
 
-    private void filter(String text) {
+    private void filter(String text)
+    {
 
         text = text.toLowerCase();
         ArrayList<SalesOrder> filterdNames = new ArrayList<>();
@@ -246,7 +253,8 @@ public class SalesOrderActivity extends AppCompatActivity {
         salesOrderAdapter.filterList(filterdNames);
     }
 
-    private boolean isNetworkConnected() {
+    private boolean isNetworkConnected()
+    {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }

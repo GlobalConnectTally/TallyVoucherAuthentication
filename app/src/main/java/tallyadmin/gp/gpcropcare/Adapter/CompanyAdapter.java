@@ -22,21 +22,21 @@ import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Sharepreference.UserInfo;
 
-public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyViewHolder> {
+public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyViewHolder>
+{
     private ArrayList<Company> companieslist;
-    ArrayList<ArrayList<Company>> checkedTeachers=new ArrayList<ArrayList<Company>>();
+    ArrayList<ArrayList<Company>> checkedTeachers = new ArrayList<ArrayList<Company>>();
     Context context;
     Companysave companydata;
     LoginActivity loginActivity;
     UserInfo userInfo;
 
-
-
     public ArrayList<Company> getCompanieslist() {
         return companieslist;
     }
 
-    public CompanyAdapter(ArrayList<Company> companieslist, Context context, LoginActivity loginActivity) {
+    public CompanyAdapter(ArrayList<Company> companieslist, Context context, LoginActivity loginActivity)
+    {
         this.companieslist = companieslist;
         this.context = context;
         this.loginActivity = loginActivity;
@@ -45,16 +45,17 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
 
     @NonNull
     @Override
-    public CompanyAdapter.CompanyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        final View itemView = LayoutInflater.from(context)
-                .inflate(R.layout.spinner_layoutb, parent, false);
-
-
+    public CompanyAdapter.CompanyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i)
+    {
+        final View itemView = LayoutInflater.from(context).inflate(R.layout.spinner_layoutb,
+                  parent,
+                false);
         return new CompanyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final CompanyAdapter.CompanyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final CompanyAdapter.CompanyViewHolder holder, final int position)
+    {
         holder.companygname.setText(companieslist.get(holder.getAdapterPosition()).getCompanyName());
         if ( companieslist.get(holder.getAdapterPosition()).getPendingSales()!= null &&
                 companieslist.get(holder.getAdapterPosition()).getPendingSales()!= 0){
@@ -64,31 +65,33 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
             holder.mBage.setVisibility(View.GONE);
         }
 
-
-
-
         holder.setListener(new ItemClickListener() {
             @Override
             public void onClick(View v) {
-               //                companydata = new Companysave(context.getApplicationContext());
-//                companydata.setCompanyGid(companieslist.get(position).getCmpGUID());
-//                Toast.makeText(context,"1"+companieslist.get(position).getCmpGUID(), Toast.LENGTH_LONG).show();
-//                context.startActivity(new Intent(context,HomeActivity.class));
+
+                /*
+                companydata = new Companysave(context.getApplicationContext());
+                companydata.setCompanyGid(companieslist.get(position).getCmpGUID());
+                Toast.makeText(context,"1"+companieslist.get(position).getCmpGUID(), Toast.LENGTH_LONG).show();
+                context.startActivity(new Intent(context,HomeActivity.class));
+                */
+
                 showConfirmDialog(companieslist.get(holder.getAdapterPosition()).getCmpGUID(),companieslist.get(holder.getAdapterPosition()).getCompanyName());
 
-                /*-----
-                           SET RULES HERE
-                                            -------------    */
+                /*  -----     SET RULES HERE   -------------    */
+                userInfo.setFirstLevel(companieslist.get(holder.getAdapterPosition()).getFirstLevel().toString());
+                userInfo.setSecondLevel(companieslist.get(holder.getAdapterPosition()).getSecondLevel().toString());
+
                 userInfo.setAllowApprove(companieslist.get(holder.getAdapterPosition()).getAllowedApprove().toString());
                 userInfo.setAllowReject(companieslist.get(holder.getAdapterPosition()).getAllowReject().toString());
 
             }
         });
 
-
     }
 
-    private void showConfirmDialog(final String cmpGUID, final String companyName) {
+    private void showConfirmDialog(final String cmpGUID, final String companyName)
+    {
         companydata = new Companysave(context.getApplicationContext());
         companydata.setCompanyGid(cmpGUID);
         companydata.setcompany(companyName);
@@ -106,7 +109,8 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
         return companieslist.size();
     }
 
-    public class CompanyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class CompanyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    {
 
         ItemClickListener listener;
 
@@ -117,22 +121,14 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
         TextView companyguid,companygname;
         NotificationBadge mBage;
 
-
-
-
         public CompanyViewHolder(@NonNull View view) {
             super(view);
 
               companygname = view.findViewById(R.id.text_cmpn1);
               mBage = view.findViewById(R.id.salesbadge);
 
-
-               view.setOnClickListener(this);
-
-
-
+              view.setOnClickListener(this);
         }
-
 
         @Override
         public void onClick(View v) {
