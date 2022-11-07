@@ -72,7 +72,8 @@ public class LoginActivity extends AppCompatActivity {
         session = new Session(getApplicationContext());
         context = this;
 
-        if (!isNetworkConnected()) {
+        if (!isNetworkConnected())
+        {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             // Set the Alert Dialog Message
             builder.setMessage("Please make sure you are connected to a stable network and try again")
@@ -91,7 +92,8 @@ public class LoginActivity extends AppCompatActivity {
             alert.show();
         }
 
-        if (session.isLoggedIn()) {
+        if (session.isLoggedIn())
+        {
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
@@ -100,7 +102,8 @@ public class LoginActivity extends AppCompatActivity {
         txt_password = findViewById(R.id.edt_password);
 
         btn = findViewById(R.id.btn_login);
-        btn.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 userLogin();
@@ -170,7 +173,6 @@ public class LoginActivity extends AppCompatActivity {
                                     Company companyModel = new Company();
                                     JSONObject dataobj = dataArray.getJSONObject(i);
 
-
                                     companyModel.setAllowReject(dataobj.getString("AllowReject"));
                                     companyModel.setAllowedApprove(dataobj.getString("AllowApprove"));
 
@@ -188,9 +190,11 @@ public class LoginActivity extends AppCompatActivity {
                                 cmpndialog();
 
                             } else if (dataArray.length() == 0) {
+
                                 Hhdprogress.dismiss();
                                 session.setLogin(false);
                                 Toast.makeText(LoginActivity.this, "Login Failed please check you credential's", Toast.LENGTH_LONG).show();
+
                             }
 
                         } catch (JSONException e) {
@@ -222,7 +226,6 @@ public class LoginActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
-
 
     private void cmpndialog()
     {

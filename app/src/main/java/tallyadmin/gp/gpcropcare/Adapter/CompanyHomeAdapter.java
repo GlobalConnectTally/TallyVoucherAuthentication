@@ -47,7 +47,6 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
         final View itemView = LayoutInflater.from(context)
                 .inflate(R.layout.spinner_layoutb, parent, false);
 
-
         return new CompanyViewHolder(itemView);
     }
 
@@ -56,7 +55,8 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
     public void onBindViewHolder(@NonNull final CompanyHomeAdapter.CompanyViewHolder holder, final int position) {
         holder.companygname.setText(companieslist.get(position).getCompanyName());
         if (companieslist.get(position).getPendingSales() != null &&
-                companieslist.get(position).getPendingSales() != 0) {
+                companieslist.get(position).getPendingSales() != 0)
+        {
             holder.mBage.setNumber(companieslist.get(position).getPendingSales());
             holder.mBage.setVisibility(View.VISIBLE);
         } else {
@@ -85,16 +85,15 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
     }
 
     private void showConfirmDialog(final String cmpGUID, final String companyName) {
-//        final AlertDialog.Builder settingdialog = new AlertDialog.Builder(Activity,R.style.my_dialog);
-//        View settinview = LayoutInflater.from(context )
-//                .inflate(R.layout.setting_layoutb, null);
+//      final AlertDialog.Builder settingdialog = new AlertDialog.Builder(Activity,R.style.my_dialog);
+//      View settinview = LayoutInflater.from(context ).inflate(R.layout.setting_layoutb, null);
 //
-//        settingdialog.setView(settinview);
-//        settingdialog.setPositiveButton("CONFIRM TO CONTINUE", new DialogInterface.OnClickListener() {
+//      settingdialog.setView(settinview);
+//      settingdialog.setPositiveButton("CONFIRM TO CONTINUE", new DialogInterface.OnClickListener() {
 //            @Override
-//            public void onClick(DialogInterface dialog, int which) {
+//          public void onClick(DialogInterface dialog, int which) {
+//        Toast.makeText(context,"1"+cmpGUID, Toast.LENGTH_LONG).show();
 
-//                Toast.makeText(context,"1"+cmpGUID, Toast.LENGTH_LONG).show();
         companydata = new Companysave(context.getApplicationContext());
         companydata.setCompanyGid(cmpGUID);
         companydata.setcompany(companyName);

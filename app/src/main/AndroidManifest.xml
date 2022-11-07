@@ -15,18 +15,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.LimitActivity"
-            android:parentActivityName=".Activities.Sixreportactivity"></activity>
-        <activity android:name=".Activities.CurrentStatusActivity"
-            android:parentActivityName=".Activities.Sixreportactivity"/>
-        <activity android:name=".Activities.LastYearbusinessActivity"
-            android:parentActivityName=".Activities.Sixreportactivity"/>
-        <activity android:name=".Activities.BusinessdateActivity"
-            android:parentActivityName=".Activities.Sixreportactivity"/>
-        <activity android:name=".Activities.NCRDueBills"
-            android:parentActivityName=".Activities.Sixreportactivity"/>
-        <activity android:name=".Activities.Outstanding"
-            android:parentActivityName=".Activities.Sixreportactivity"/>
+        <activity
+            android:name=".Activities.StockReportActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Activities.LimitActivity"
+            android:parentActivityName=".Activities.Sixreportactivity" />
+        <activity
+            android:name=".Activities.CurrentStatusActivity"
+            android:parentActivityName=".Activities.Sixreportactivity" />
+        <activity
+            android:name=".Activities.LastYearbusinessActivity"
+            android:parentActivityName=".Activities.Sixreportactivity" />
+        <activity
+            android:name=".Activities.BusinessdateActivity"
+            android:parentActivityName=".Activities.Sixreportactivity" />
+        <activity
+            android:name=".Activities.NCRDueBills"
+            android:parentActivityName=".Activities.Sixreportactivity" />
+        <activity
+            android:name=".Activities.Outstanding"
+            android:parentActivityName=".Activities.Sixreportactivity" />
         <activity android:name=".Activities.Sixreportactivity" />
         <activity
             android:name=".Activities.ReportActivity"

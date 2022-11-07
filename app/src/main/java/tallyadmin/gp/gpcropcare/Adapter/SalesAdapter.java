@@ -49,8 +49,6 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
     int masterID;
     String ordernn,mobilenumber;
 
-
-
     public SalesAdapter(ArrayList<SalesOrder> orderArrayList, Context context, SalesActivity salesOrderActivity) {
         this.orderArrayList = orderArrayList;
         this.context = context;
@@ -58,11 +56,10 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
     }
 
 
-
-
     @NonNull
     @Override
-    public SalesAdapter.SalesOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+    public SalesAdapter.SalesOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i)
+    {
         View itemView = LayoutInflater.from(context)
                 .inflate(R.layout.order_redesignewt, parent, false);
 
@@ -70,37 +67,43 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final SalesAdapter.SalesOrderViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final SalesAdapter.SalesOrderViewHolder holder, final int position)
+    {
         String valuecustomername = orderArrayList.get(position).getPartyName();
         if (valuecustomername.equals("#~#") || valuecustomername.equals("")){
             holder.customer_name.setText("");
         }else{
             holder.customer_name.setText(valuecustomername);
         }
+
         String valuedate = orderArrayList.get(position).getDate();
         if (valuedate.equals("#~#") || valuedate.equals("")){
             holder.date.setText("");
         }else{
             holder.date.setText(valuedate);
         }
+
         String  vauleorderamount  = String.valueOf(orderArrayList.get(position).getTotalAmt());
         if (vauleorderamount.equals("#~#") || vauleorderamount.equals("")){
             holder.order_amount.setText("");
         }else{
             holder.order_amount.setText(vauleorderamount);
         }
+
         String valuetxtauthenticated = orderArrayList.get(position).getVoucherNumber();
         if (valuetxtauthenticated.equals("#~#") || valuetxtauthenticated.equals("")){
             holder.txt_authenticated.setText("");
         }else{
             holder.txt_authenticated.setText(valuetxtauthenticated);
         }
-       String valueprderno = orderArrayList.get(position).getTallyUserName();
+
+        String valueprderno = orderArrayList.get(position).getTallyUserName();
         if (valueprderno.equals("#~#") || valueprderno.equals("")){
             holder.order_no.setText("");
         }else{
             holder.order_no.setText(valueprderno);
         }
+
         String valuesoname = orderArrayList.get(position).getBuyerName();
         if (valuesoname.equals("#~#") || valuesoname.equals("")){
             holder.txt_soname.setText("");
@@ -117,7 +120,7 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
                 companydata = new Companysave(context.getApplicationContext());
                 companydata.setVoucher(orderArrayList.get(position).getVoucherNumber());
                 Intent intent = new Intent(context, ShowtransactionActivity.class);
-//                intent.putExtra()
+//              intent.putExtra()
                 intent.putExtra("BayerName",orderArrayList.get(position).getBuyerName());
                 intent.putExtra("PartName",orderArrayList.get(position).getPartyName());
                 intent.putExtra("Date",orderArrayList.get(position).getDate());
@@ -125,7 +128,7 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
                 intent.putExtra("Vouchertype",orderArrayList.get(position).getVoucherTypeName());
                 ordernn = orderArrayList.get(position).getVoucherNumber();
                 intent.putExtra("VoucherNo",ordernn);
-//                intent.putExtra("Address",orderArrayList.get(position).getBuyerAddress());
+//              intent.putExtra("Address",orderArrayList.get(position).getBuyerAddress());
                 intent.putExtra("Narration",orderArrayList.get(position).getNarration());
                 intent.putExtra("Reffno",orderArrayList.get(position).getReffNo());
                 intent.putExtra("MasterId",orderArrayList.get(position).getMasterID());
@@ -143,7 +146,7 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
             }
         });
 
-//VIEW MORE
+        //VIEW MORE
         holder.txt_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,7 +179,6 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
         });
 
 
-
         //HANDLE Authentication
         holder.txto_author.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,14 +199,10 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
             }
         });
 
-
-
-
-
-
     }
 
-    private void Rejectinvo() {
+    private void Rejectinvo()
+    {
         companydata = new Companysave(context.getApplicationContext());
         userInfo = new UserInfo(context.getApplicationContext());
         //rejectmethod
@@ -240,7 +238,9 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
                 }
 
 
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_AUTHORIZE,
+                StringRequest stringRequest = new StringRequest(
+                        Request.Method.POST,
+                        URL_AUTHORIZE,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -248,35 +248,21 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
                                 try {
 
                                     JSONObject obj = new JSONObject(response);
-
                                     int result = obj.getInt("Status");
-                                    if (result==1){
+
+                                    if ( result == 1){
+
                                         Toast.makeText(context,"Authorized success full",Toast.LENGTH_SHORT).show();
                                         sendmessager();
                                         salesOrderActivity.fetchingJSON();
-                                    }
-                                    else {
+
+                                    } else {
                                         Toast.makeText(context,"Authorization Failed"+ "  "+result,Toast.LENGTH_SHORT).show();
                                     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-
 
                             }
                         },
@@ -296,9 +282,6 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
                         params.put("Remark",remark);
                         params.put("TransactionType","1");
                         return params;
-
-
-
                     }
                 };
 
@@ -311,19 +294,20 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
         alertDialog.show();
     }
 
-    private void Authorize() {
+    private void Authorize()
+    {
         //authorize method
         companydata = new Companysave(context.getApplicationContext());
         userInfo = new UserInfo(context.getApplicationContext());
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_AUTHORIZE,
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                URL_AUTHORIZE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-
                         try {
-
                             JSONObject obj = new JSONObject(response);
 
                             int result = obj.getInt("Status");
@@ -337,24 +321,9 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
                                 Toast.makeText(context,"Authorization Failed"+ "  "+result,Toast.LENGTH_SHORT).show();
                             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
 
                     }
                 },
@@ -363,9 +332,11 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }) {
+                })
+        {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() throws AuthFailureError
+            {
                 Map<String, String> params = new HashMap<>();
                 params.put("AppLoginUserID",userInfo.getAppLoginUserID());
                 params.put("CmpGUID",companydata.getKeyCmpnGid());
@@ -381,7 +352,8 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
 
     }
 
-    private void sendmessage() {
+    private void sendmessage()
+    {
 
         String msg = "Dear User Your Transaction With OrderNo -" +ordernn+ "  is been Approved";
         //String mobilenumber = mobilenumber;
@@ -389,17 +361,14 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
         String URLNA = "http://smsidea.co.in/SMS/API/SendTallySMS.aspx?mobile=9879518214&pass=9879518214&to="+mobilenumber+"&msg="+msg+"&senderid=GPCCPL&route=4";
 
 
-
-
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLNA,
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET,
+                URLNA,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
                         Toast.makeText(context," "+response.toString(),Toast.LENGTH_SHORT).show();
-
-
 
                     }
                 },
@@ -416,7 +385,8 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
 
     }
 
-    private void sendmessager() {
+    private void sendmessager()
+    {
 
         String msg = "Dear User Your Transaction With OrderNo -" +ordernn+ "  is been Rejected";
 
@@ -426,15 +396,13 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
         String URLNA = "http://smsidea.co.in/SMS/API/SendTallySMS.aspx?mobile=9879518214&pass=9879518214&to="+mobilenumber+"&msg="+msg+"&senderid=GPCCPL&route=4";
 
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URLNA,
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.GET,
+                URLNA,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         Toast.makeText(context," "+response.toString(),Toast.LENGTH_SHORT).show();
-
-
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -442,12 +410,12 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }) {
+                })
+        {
 
         };
 
         VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
-
     }
 
 
@@ -474,8 +442,8 @@ public class SalesAdapter extends RecyclerView.Adapter<SalesAdapter.SalesOrderVi
             order_no = itemView.findViewById(R.id.txt_createdbys);
             order_amount = itemView.findViewById(R.id.texto_amount);
             txt_authenticated = itemView.findViewById(R.id.txt_vouchernrs);
-//            txt_master = itemView.findViewById(R.id.txto_master);
-//            txt_sales = itemView.findViewById(R.id.txt_type);
+//          txt_master = itemView.findViewById(R.id.txto_master);
+//          txt_sales = itemView.findViewById(R.id.txt_type);
             txt_soname = itemView.findViewById(R.id.text_soname);
 
             txto_author = itemView.findViewById(R.id.txt_author);

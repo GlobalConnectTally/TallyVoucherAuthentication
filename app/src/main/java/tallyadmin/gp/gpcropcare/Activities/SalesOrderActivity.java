@@ -122,11 +122,13 @@ public class SalesOrderActivity extends AppCompatActivity
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try {
                             JSONObject obj = new JSONObject(response);
                             System.out.println("response"+obj);
                             Saleslist = new ArrayList<>();
                             JSONArray dataArray = obj.getJSONArray("SalesTransactions");
+
                             if (dataArray.length() == 0) {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(SalesOrderActivity.this);
                                 // Set the Alert Dialog Message
@@ -142,8 +144,8 @@ public class SalesOrderActivity extends AppCompatActivity
                                                         finish();
                                                     }
                                                 });
-                                AlertDialog alert = builder.create();
 
+                                AlertDialog alert = builder.create();
                                 alert.show();
                             }
 
@@ -165,7 +167,7 @@ public class SalesOrderActivity extends AppCompatActivity
                                 playerModel.setLedgerMasterId(dataobj.getString("LedgerMasterId"));
                                 playerModel.setTallyUsermobileno(dataobj.getString("TallyUserMobNo"));
 
-                                /*---- FROM SHAREPREFERENCE -------*/
+                                /*----  FROM SHAREPREFERENCE  -------*/
                                 playerModel.setAllowApprove(userInfo.getAllowApprove());
                                 playerModel.setAllowReject(userInfo.getAllowReject());
 

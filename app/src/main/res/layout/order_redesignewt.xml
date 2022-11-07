@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/color_white"
     android:background="@drawable/roundcard"
     app:cardElevation="5dp"
@@ -15,13 +15,12 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:orientation="vertical"
-       android:weightSum="4"
        android:background="@drawable/boda_kaki">
 
        <LinearLayout
+           android:padding="@dimen/_4sdp"
            android:layout_width="match_parent"
-           android:layout_height="0dp"
-           android:layout_weight="1"
+           android:layout_height="wrap_content"
            android:weightSum="2"
            android:orientation="horizontal">
 
@@ -52,10 +51,11 @@
 
 
        </LinearLayout>
+
        <LinearLayout
+           android:padding="@dimen/_4sdp"
            android:layout_width="match_parent"
-           android:layout_height="0dp"
-           android:layout_weight="1"
+           android:layout_height="wrap_content"
            android:weightSum="4"
            android:orientation="horizontal"
            >
@@ -109,6 +109,7 @@
                android:paddingLeft="@dimen/_10sdp">
 
            </TextView>
+
            <ImageView
                android:id="@+id/txti_more"
                android:layout_width="0dp"
@@ -119,10 +120,11 @@
            </ImageView>
 
        </LinearLayout>
+
        <LinearLayout
+           android:padding="@dimen/_4sdp"
            android:layout_width="match_parent"
-           android:layout_height="0dp"
-           android:layout_weight="1"
+           android:layout_height="wrap_content"
            android:weightSum="4"
            android:orientation="horizontal"
            >
@@ -177,9 +179,9 @@
        </LinearLayout>
 
        <LinearLayout
+           android:padding="@dimen/_4sdp"
            android:layout_width="match_parent"
-           android:layout_height="0dp"
-           android:layout_weight="1"
+           android:layout_height="wrap_content"
            android:background="@drawable/boda_kaki"
            android:weightSum="3"
            android:orientation="horizontal">
@@ -230,5 +232,6 @@
            </TextView>
 
        </LinearLayout>
+
    </LinearLayout>
 </androidx.cardview.widget.CardView>

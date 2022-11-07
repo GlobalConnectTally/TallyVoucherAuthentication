@@ -79,18 +79,21 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
         }else{
             holder.customer_name.setText(valuecustomername);
         }
+
         String valuedate = orderArrayList.get(position).getDate();
         if (valuedate.equals("#~#") || valuedate.equals("")){
             holder.date.setText("");
         }else{
             holder.date.setText(valuedate);
         }
+
         String  vauleorderamount  = String.valueOf(orderArrayList.get(position).getTotalAmt());
         if (vauleorderamount.equals("#~#") || vauleorderamount.equals("")){
             holder.order_amount.setText("");
         }else{
             holder.order_amount.setText(vauleorderamount);
         }
+
         String valuetxtauthenticated = orderArrayList.get(position).getVoucherNumber();
         if (valuetxtauthenticated.equals("#~#") || valuetxtauthenticated.equals("")){
             holder.txt_authenticated.setText("");
@@ -175,7 +178,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 companydata.setPartyName(orderArrayList.get(position).getPartyName());
                 companydata.setTallyUsermobile(orderArrayList.get(position).getTallyUsermobileno());
                 Intent intent = new Intent(context, ShowtransactionOrderActivity.class);
-//                /intent.putExtra
+//              /intent.putExtra
                 companydata.setLegId(Legid);
                 companydata.setBillAmount(orderArrayList.get(position).getTotalAmt());
                 companydata.setVocherdate(orderArrayList.get(position).getDate());
@@ -197,8 +200,6 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 intent.putExtra("TallyUserMobNo",orderArrayList.get(position).getTallyUsermobileno());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
-
-
             }
         });
         //HANDLE Authentication
@@ -207,7 +208,6 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
             public void onClick(View v) {
                 masterID  = orderArrayList.get(position).getMasterID();
                 Authorize();
-
             }
         });
 
@@ -217,7 +217,6 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
             public void onClick(View v) {
                 masterID  = orderArrayList.get(position).getMasterID();
                 Rejectinvo();
-
             }
         });
 
@@ -262,10 +261,10 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
             }
         });
 
-
         Okbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 companydata = new Companysave(context.getApplicationContext());
                 userInfo = new UserInfo(context.getApplicationContext());
 
@@ -277,8 +276,9 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                     return;
                 }
 
-
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_AUTHORIZE,
+                StringRequest stringRequest = new StringRequest(
+                        Request.Method.POST,
+                        URL_AUTHORIZE,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
@@ -303,7 +303,6 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                                     e.printStackTrace();
                                 }
 
-
                             }
                         },
                         new Response.ErrorListener() {
@@ -311,7 +310,8 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                             public void onErrorResponse(VolleyError error) {
                                 Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-                        }) {
+                        })
+                  {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
@@ -323,13 +323,12 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                         params.put("TransactionType","1");
                         return params;
                     }
-                };
+                 };
 
                 VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
 
             }
         });
-
 
         alertDialog.show();
     }
@@ -399,7 +398,6 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
 
     }
 
-
     private void sendmessage() {
 
         String msg = "Dear User Your Transaction With OrderNo -" +ordernn+ "  is been Approved ";
@@ -447,7 +445,6 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
         VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
 
     }
-
 
     private void sendmessaged() {
 

@@ -43,6 +43,7 @@ import java.util.HashMap;
 import java.util.Map;
 import tallyadmin.gp.gpcropcare.Activities.SalesOrderActivity;
 import tallyadmin.gp.gpcropcare.Activities.Sixreportactivity;
+import tallyadmin.gp.gpcropcare.Activities.StockReportActivity;
 import tallyadmin.gp.gpcropcare.Adapter.CompanyHomeAdapter;
 import tallyadmin.gp.gpcropcare.Model.Company;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
@@ -150,7 +151,7 @@ public class HomeActivity extends AppCompatActivity
                 }
             });
 
-          //        LinearLayout about = findViewById(R.id.about);
+            //  LinearLayout about = findViewById(R.id.about);
 //        ImageView imgabout = findViewById(R.id.imgabout);
 //            imgabout.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -194,24 +195,24 @@ public class HomeActivity extends AppCompatActivity
 //        });
 
             //-----sales on click go to dashboard to Sales order activity-----//
-        LinearLayout salesorder = findViewById(R.id.sales_order);
+         LinearLayout salesorder = findViewById(R.id.sales_order);
 
-        ImageView imgs = findViewById(R.id.imgs);
-        imgs.setOnClickListener(new View.OnClickListener() {
+         ImageView imgs = findViewById(R.id.imgs);
+         imgs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, SalesOrderActivity.class));
             }
-        });
+          });
 
-          /*  //------Report on click go to dashboard to Report activity-----//
-            LinearLayout report = findViewById(R.id.report);
-            report.setOnClickListener(new View.OnClickListener() {
+          //------Report on click go to dashboard to Report activity-----//
+          LinearLayout report = findViewById(R.id.report);
+          report.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(HomeActivity.this, Sixreportactivity.class));
+                    startActivity(new Intent(HomeActivity.this, StockReportActivity.class));
                 }
-            });*/
+            });
           //        LinearLayout payment = findViewById(R.id.payment);
 //        ImageView imgspay = findViewById(R.id.imgspay);
 //            imgspay.setOnClickListener(new View.OnClickListener() {
@@ -222,13 +223,15 @@ public class HomeActivity extends AppCompatActivity
 //            }
 //        });
 
-        dashcmp = findViewById(R.id.dash_cmpname);
-        dashcmp.setText(companydata.getKeyName());
+          dashcmp = findViewById(R.id.dash_cmpname);
+          dashcmp.setText(companydata.getKeyName());
     }
 
     public void showbadges()
     {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DASHBOARDSBADGES,
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                URL_DASHBOARDSBADGES,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -314,8 +317,8 @@ public class HomeActivity extends AppCompatActivity
                 .setCancellable(true)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f);
-//        Hhdprogress.setCancellable()
-        Hhdprogress.setCancellable(new DialogInterface.OnCancelListener() {
+         //Hhdprogress.setCancellable()
+         Hhdprogress.setCancellable(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
                 dialog.dismiss();
@@ -337,12 +340,14 @@ public class HomeActivity extends AppCompatActivity
                                 Saleslist = new ArrayList<>();
                                 JSONArray dataArray  = obj.getJSONArray("response");
                                 for (int i = 0; i < dataArray.length(); i++) {
+
                                     Company playerModel = new Company();
                                     JSONObject dataobj = dataArray.getJSONObject(i);
                                     playerModel.setCmpGUID(dataobj.getString("CmpGUID"));
                                     playerModel.setCompanyName(dataobj.getString("CompanyName"));
                                     playerModel.setPendingSales(dataobj.getInt("PendingSales"));
                                     Saleslist.add(playerModel);
+
                                 }
                                Hhdprogress.dismiss();
                                 cmpndialog();
@@ -368,10 +373,8 @@ public class HomeActivity extends AppCompatActivity
         };
 
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
-
-
-
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
 
@@ -387,8 +390,6 @@ public class HomeActivity extends AppCompatActivity
             finish();
         } else if (id == R.id.nav_about) {
             startActivity(new Intent(HomeActivity.this,AboutActivity.class));
-
-
         }
          else if (id == R.id.nav_logout) {
             startActivity(new Intent(HomeActivity.this,LoginActivity.class));
@@ -409,8 +410,7 @@ public class HomeActivity extends AppCompatActivity
     }
 
     //check internet connectivity.....
-    private boolean isNetworkConnected()
-       {
+    private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
@@ -418,13 +418,12 @@ public class HomeActivity extends AppCompatActivity
     private  void cmpndialog(){
         AlertDialog.Builder settingdialog = new AlertDialog.Builder(this,R.style.MyDialog);
         LayoutInflater inflater = this.getLayoutInflater();
-        View settinview= inflater.inflate(R.layout.setting_layoutrc, null);
+        View settinview = inflater.inflate(R.layout.setting_layoutrc, null);
         final CompanyHomeAdapter companyAdapter= new CompanyHomeAdapter(Saleslist,getApplicationContext(),HomeActivity.this,this);
         RecyclerView recyclercpm = settinview.findViewById(R.id.recyler_bottomm);
         recyclercpm.setAdapter(companyAdapter);
         recyclercpm.setHasFixedSize(true);
         recyclercpm.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-
 
         settingdialog.setView(settinview);
 
@@ -432,7 +431,6 @@ public class HomeActivity extends AppCompatActivity
 
         alertDialog.show();
         alertDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,900); //Controlling width and height.
-
 
     }
 
@@ -479,6 +477,7 @@ public class HomeActivity extends AppCompatActivity
         mBage.setText(data.getPendingSales().toString());
         companydata.setCompanyGid(data.getCmpGUID());
         companydata.setcompany(data.getCompanyName());
+
         alertDialog.dismiss();
         if(data.getPendingSales() != null && data.getPendingSales() != 0){
             mBage.setVisibility(View.VISIBLE);

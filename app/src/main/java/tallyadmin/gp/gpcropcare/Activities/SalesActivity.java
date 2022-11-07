@@ -44,7 +44,8 @@ public class SalesActivity extends AppCompatActivity {
     Session session;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales);
         Toolbar toolbar = findViewById(R.id.toolbarSo);
@@ -83,7 +84,8 @@ public class SalesActivity extends AppCompatActivity {
 
     }
 
-    public void fetchingJSON() {
+    public void fetchingJSON()
+    {
 
         final KProgressHUD Hhdprogress = KProgressHUD.create(SalesActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -91,6 +93,7 @@ public class SalesActivity extends AppCompatActivity {
                 .setCancellable(true)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f);
+
         Hhdprogress.setCancellable(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -100,7 +103,9 @@ public class SalesActivity extends AppCompatActivity {
         });
 
         Hhdprogress.show();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_SALES,
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                URL_SALES,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -165,7 +170,8 @@ public class SalesActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }) {
+                })
+        {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
@@ -175,21 +181,22 @@ public class SalesActivity extends AppCompatActivity {
                 return params;
             }
         };
+
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
-    private void setupRecycler() {
-
+    private void setupRecycler()
+    {
         recyclerOrder.setHasFixedSize(true);
         recyclerOrder.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         salesOrderAdapter = new SalesAdapter(Saleslist, getApplicationContext(), SalesActivity.this);
         salesOrderAdapter.notifyDataSetChanged();
         recyclerOrder.setAdapter(salesOrderAdapter);
-
     }
 
 
-    private boolean isNetworkConnected() {
+    private boolean isNetworkConnected()
+    {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
