@@ -202,6 +202,35 @@ public class SalesOrderActivity extends AppCompatActivity
                 params.put("AppLoginUserID", userInfo.getAppLoginUserID());
                 params.put("CmpGUID", companydata.getKeyCmpnGid());
                 params.put("TransactionType", "Sales");
+
+                /*---   USER-LEVELS ------------*/
+                String accessLevel = " ";
+                if (  userInfo.getFirstLevel().equalsIgnoreCase("Yes") &&
+                         userInfo.getSecondLevel().equalsIgnoreCase("Yes")
+                  ){
+
+                    accessLevel = " ";
+
+                 }else if (  userInfo.getFirstLevel().equalsIgnoreCase("Yes")
+                             && userInfo.getSecondLevel().equalsIgnoreCase("No")
+                   ){
+
+                    accessLevel = "P";
+
+                }else if (  userInfo.getFirstLevel().equalsIgnoreCase("No")
+                             && userInfo.getSecondLevel().equalsIgnoreCase("Yes")){
+
+                    accessLevel = "A1";
+
+                }else if (  userInfo.getFirstLevel().equalsIgnoreCase("No")
+                         && userInfo.getFirstLevel().equalsIgnoreCase("No")){
+
+                    accessLevel = " ";
+
+                }
+
+                params.put("AuthenticationFlag", accessLevel);
+
                 return params;
             }
         };

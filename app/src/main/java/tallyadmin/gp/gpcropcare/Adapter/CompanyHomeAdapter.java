@@ -19,6 +19,7 @@ import tallyadmin.gp.gpcropcare.Interface.ItemClickListener;
 import tallyadmin.gp.gpcropcare.Model.Company;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
+import tallyadmin.gp.gpcropcare.Sharepreference.UserInfo;
 
 public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.CompanyViewHolder> {
     private ArrayList<Company> companieslist;
@@ -27,6 +28,7 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
     Companysave companydata;
     HomeActivity Activity;
     OnRecyclerViewItemClickListener listener;
+    UserInfo userInfo;
 
 
     public ArrayList<Company> getCompanieslist() {
@@ -38,7 +40,7 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
         this.context = context;
         this.Activity = Activity;
         this.listener = listener;
-
+        this.userInfo = new UserInfo(context.getApplicationContext());
     }
 
     @NonNull
@@ -73,19 +75,14 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
         holder.setListener(new ItemClickListener() {
             @Override
             public void onClick(View v) {
-
                 showConfirmDialog(companieslist.get(position).getCmpGUID(), companieslist.get(position).getCompanyName());
-
-//                Activity.cmpDialogExit();
-
-
             }
         });
 
     }
 
     private void showConfirmDialog(final String cmpGUID, final String companyName) {
-//      final AlertDialog.Builder settingdialog = new AlertDialog.Builder(Activity,R.style.my_dialog);
+      //      final AlertDialog.Builder settingdialog = new AlertDialog.Builder(Activity,R.style.my_dialog);
 //      View settinview = LayoutInflater.from(context ).inflate(R.layout.setting_layoutb, null);
 //
 //      settingdialog.setView(settinview);
@@ -150,7 +147,7 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
 
 
     public interface OnRecyclerViewItemClickListener {
-        public void onRecyclerViewItemClicked(int position, Company data);
+         public void onRecyclerViewItemClicked(int position, Company data);
     }
 
 }

@@ -54,8 +54,10 @@ import static tallyadmin.gp.gpcropcare.Common.Common.URL_DASHBOARDSBADGES;
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_LOGIN;
 
 
-public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, CompanyHomeAdapter.OnRecyclerViewItemClickListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        CompanyHomeAdapter.OnRecyclerViewItemClickListener
+{
+
     AlertDialog alertDialog;
     Companysave companydata;
     UserInfo userInfo;
@@ -195,6 +197,7 @@ public class HomeActivity extends AppCompatActivity
 //        });
 
             //-----sales on click go to dashboard to Sales order activity-----//
+
          LinearLayout salesorder = findViewById(R.id.sales_order);
 
          ImageView imgs = findViewById(R.id.imgs);
@@ -213,15 +216,16 @@ public class HomeActivity extends AppCompatActivity
                     startActivity(new Intent(HomeActivity.this, StockReportActivity.class));
                 }
             });
-          //        LinearLayout payment = findViewById(R.id.payment);
-//        ImageView imgspay = findViewById(R.id.imgspay);
-//            imgspay.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(HomeActivity.this, PaymentActivity.class));
-//
-//            }
-//        });
+
+          //   LinearLayout payment = findViewById(R.id.payment);
+          //  ImageView imgspay = findViewById(R.id.imgspay);
+          //  imgspay.setOnClickListener(new View.OnClickListener() {
+          //        @Override
+          //         public void onClick(View v) {
+          //              startActivity(new Intent(HomeActivity.this, PaymentActivity.class));
+          //
+          //     }
+          //   });
 
           dashcmp = findViewById(R.id.dash_cmpname);
           dashcmp.setText(companydata.getKeyName());
@@ -337,6 +341,8 @@ public class HomeActivity extends AppCompatActivity
 
                             try {
                                 JSONObject obj = new JSONObject(response);
+
+                                System.out.println("Dat::"+obj.toString());
                                 Saleslist = new ArrayList<>();
                                 JSONArray dataArray  = obj.getJSONArray("response");
                                 for (int i = 0; i < dataArray.length(); i++) {
@@ -346,6 +352,14 @@ public class HomeActivity extends AppCompatActivity
                                     playerModel.setCmpGUID(dataobj.getString("CmpGUID"));
                                     playerModel.setCompanyName(dataobj.getString("CompanyName"));
                                     playerModel.setPendingSales(dataobj.getInt("PendingSales"));
+
+
+
+                                    playerModel.setFirstLevel(dataobj.getString("FirstLevel"));
+                                    playerModel.setSecondLevel(dataobj.getString("SecondLevel"));
+                                    playerModel.setAllowReject(dataobj.getString("AllowReject"));
+                                    playerModel.setAllowedApprove(dataobj.getString("AllowApprove"));
+
                                     Saleslist.add(playerModel);
 
                                 }
@@ -410,12 +424,14 @@ public class HomeActivity extends AppCompatActivity
     }
 
     //check internet connectivity.....
-    private boolean isNetworkConnected() {
+    private boolean isNetworkConnected()
+    {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
 
-    private  void cmpndialog(){
+    private  void cmpndialog()
+    {
         AlertDialog.Builder settingdialog = new AlertDialog.Builder(this,R.style.MyDialog);
         LayoutInflater inflater = this.getLayoutInflater();
         View settinview = inflater.inflate(R.layout.setting_layoutrc, null);
@@ -434,13 +450,15 @@ public class HomeActivity extends AppCompatActivity
 
     }
 
-    public void cmpDialogExit(){
+    public void cmpDialogExit()
+    {
         alertDialog.dismiss();
     }
 
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         showbadges();
 
         new AlertDialog.Builder(this)
@@ -472,11 +490,20 @@ public class HomeActivity extends AppCompatActivity
     }
 
     @Override
-    public void onRecyclerViewItemClicked(int position, Company data) {
+    public void onRecyclerViewItemClicked(int position, Company data)
+    {
         dashcmp.setText(data.getCompanyName());
         mBage.setText(data.getPendingSales().toString());
         companydata.setCompanyGid(data.getCmpGUID());
         companydata.setcompany(data.getCompanyName());
+
+        //Activity.cmpDialogExit();
+        /*  -----     SET RULES HERE   -------------    */
+        userInfo.setFirstLevel(data.getFirstLevel().toString());
+        userInfo.setSecondLevel(data.getSecondLevel().toString());
+
+        userInfo.setAllowApprove(data.getAllowedApprove().toString());
+        userInfo.setAllowReject(data.getAllowReject().toString());
 
         alertDialog.dismiss();
         if(data.getPendingSales() != null && data.getPendingSales() != 0){

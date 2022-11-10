@@ -9,7 +9,8 @@ import com.viksaa.sssplash.lib.model.ConfigSplash;
 public class Splashscreen extends AwesomeSplash {
 
     @Override
-    public void initSplash(ConfigSplash configSplash) {
+    public void initSplash(ConfigSplash configSplash)
+    {
 
         /* you don't have to override every property */
 
@@ -45,7 +46,8 @@ public class Splashscreen extends AwesomeSplash {
     }
 
     @Override
-    public void animationsFinished() {
+    public void animationsFinished()
+    {
         Intent i = new Intent(Splashscreen.this,LoginActivity.class);
         startActivity(i);
         finish();

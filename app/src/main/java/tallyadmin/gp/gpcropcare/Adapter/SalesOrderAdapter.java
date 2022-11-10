@@ -121,10 +121,12 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
         }else {
             holder.txt_cancel.setVisibility(View.INVISIBLE);
         }
+        /*
 
-        //        holder.order_no.setText(orderArrayList.get(position).getTallyUserName());
-//        holder.txt_sales.setText(orderArrayList.get(position).getVoucherTypeName());
-//        holder.txt_master.setText(new StringBuffer("").append(orderArrayList.get(position).getMasterID()).append(":").toString());
+        holder.order_no.setText(orderArrayList.get(position).getTallyUserName());
+        holder.txt_sales.setText(orderArrayList.get(position).getVoucherTypeName());
+        holder.txt_master.setText(new StringBuffer("").append(orderArrayList.get(position).getMasterID()).append(":").toString());
+*/
 
         ordernn = orderArrayList.get(position).getVoucherNumber();
 
@@ -202,6 +204,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 context.startActivity(intent);
             }
         });
+
         //HANDLE Authentication
         holder.txto_author.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -291,9 +294,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                                     if (result==1){
                                         salesOrderActivity.fetchingJSON();
                                         Toast.makeText(context,"Authorized success full",Toast.LENGTH_SHORT).show();
-
                                         sendmessaged();
-
                                     }
                                     else {
                                         Toast.makeText(context,"Authorization Failed"+ "  "+result,Toast.LENGTH_SHORT).show();
@@ -353,7 +354,12 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                             int result = obj.getInt("Status");
                             if (result==1){
                                 salesOrderActivity.fetchingJSON();
-                                sendmessage();
+
+                                if (userInfo.getSecondLevel().equalsIgnoreCase("Yes"))
+                                {
+                                     sendmessage();
+                                }
+
                                 Toast.makeText(context,"Authorized success full",Toast.LENGTH_SHORT).show();
                             }
                             else {
@@ -365,13 +371,13 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                         }
 
 
+                       /*
+                       if (Stutas==(response.equals("Status")) {
 
-//                        if (Stutas==(response.equals("Status"))
-//                                {
-//
-//                        }
-//                       Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
-//                        Toast.makeText(getContext(),"CLICKEDDDDD",Toast.LENGTH_SHORT);
+                        }
+                        Toast.makeText(getContext(),response,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"CLICKEDDDDD",Toast.LENGTH_SHORT);
+                        */
 
                     }
                 },
@@ -387,7 +393,14 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 params.put("AppLoginUserID",userInfo.getAppLoginUserID());
                 params.put("CmpGUID",companydata.getKeyCmpnGid());
                 params.put("MasterID",String.valueOf(masterID));
-                params.put("AuthenticationFlag","A");
+
+                /*---- USER-LEVEL AUTHENTICATION----------*/
+                params.put(
+                        "AuthenticationFlag",
+                                userInfo.getFirstLevel().equalsIgnoreCase("Yes")
+                                ? "A1"
+                                : "A2");
+
                 params.put("Remark",".");
                 params.put("TransactionType","1");
                 return params;
@@ -400,16 +413,13 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
 
     private void sendmessage() {
 
-        String msg = "Dear User Your Transaction With OrderNo -" +ordernn+ "  is been Approved ";
+         String msg = "Dear User Your Transaction With OrderNo -" +ordernn+ "  is been Approved ";
 
-//        http://smsidea.co.in/SMS/API/SendTallySMS.aspx?mobile=9879518214&pass=9879518214&to=9427036393&msg=YOURMESSAGE&senderid=GPCCPL&route=4
+        // http://smsidea.co.in/SMS/API/SendTallySMS.aspx?mobile=9879518214&pass=9879518214&to=9427036393&msg=YOURMESSAGE&senderid=GPCCPL&route=4
         String mobile_number = tallymobilenumber;
 
 
         String URLNA = "http://smsidea.co.in/SMS/API/SendTallySMS.aspx?mobile=9879518214&pass=9879518214&to="+mobile_number+"&msg="+msg+"&senderid=GPCCPL&route=4";
-
-
-
 
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URLNA,
@@ -419,8 +429,6 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
 
                         Toast.makeText(context," "+response.toString(),Toast.LENGTH_SHORT).show();
 
-
-
                     }
                 },
                 new Response.ErrorListener() {
@@ -429,7 +437,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                         Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }) {
-//            @Override
+           //            @Override
 //            protected Map<String, String> getParams() throws AuthFailureError {
 //                Map<String, String> params = new HashMap<>();
 //                params.put("mobile","9879518214");
@@ -446,7 +454,8 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
 
     }
 
-    private void sendmessaged() {
+    private void sendmessaged()
+    {
 
         String msg = "Dear User Your Transaction With OrderNo -" +ordernn+ "  is been Rejected";
         String mobile_number = tallymobilenumber;
