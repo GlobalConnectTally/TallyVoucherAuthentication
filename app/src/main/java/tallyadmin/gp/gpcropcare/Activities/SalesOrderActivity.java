@@ -171,6 +171,8 @@ public class SalesOrderActivity extends AppCompatActivity
                                 playerModel.setAllowApprove(userInfo.getAllowApprove());
                                 playerModel.setAllowReject(userInfo.getAllowReject());
 
+                                playerModel.setAuthenticationFlag(dataobj.getString("AuthenticationFlag"));
+
                                 Saleslist.add(playerModel);
 
                             }
@@ -206,26 +208,29 @@ public class SalesOrderActivity extends AppCompatActivity
                 /*---   USER-LEVELS ------------*/
                 String accessLevel = " ";
                 if (  userInfo.getFirstLevel().equalsIgnoreCase("Yes") &&
-                         userInfo.getSecondLevel().equalsIgnoreCase("Yes")
-                  ){
+                         userInfo.getSecondLevel().equalsIgnoreCase("Yes")){
 
-                    accessLevel = " ";
+                    //B - For Both P & A1
+                    accessLevel = "B";
 
                  }else if (  userInfo.getFirstLevel().equalsIgnoreCase("Yes")
                              && userInfo.getSecondLevel().equalsIgnoreCase("No")
                    ){
 
+                    //P - Pending
                     accessLevel = "P";
 
                 }else if (  userInfo.getFirstLevel().equalsIgnoreCase("No")
                              && userInfo.getSecondLevel().equalsIgnoreCase("Yes")){
 
+                    //A1 - Approved By First Level
                     accessLevel = "A1";
 
                 }else if (  userInfo.getFirstLevel().equalsIgnoreCase("No")
                          && userInfo.getFirstLevel().equalsIgnoreCase("No")){
 
-                    accessLevel = " ";
+                    //Unknown - Returns Empty
+                    accessLevel = "Unknown";
 
                 }
 

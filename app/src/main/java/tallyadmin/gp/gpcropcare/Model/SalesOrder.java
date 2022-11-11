@@ -3,8 +3,9 @@ package tallyadmin.gp.gpcropcare.Model;
 public class SalesOrder {
     String CmpGUID,VoucherTypeName,PartyName,ReffNo,BuyerName,BuyerAddress,Narration,TotalAmt,Date,TallyUserName,VoucherNumber,TallyUsermobileno,LedgerMasterId,AllowApprove,AllowReject;
     int MasterID;
+    String AuthenticationFlag;
 
-    public SalesOrder(String cmpGUID, String voucherTypeName, String partyName, String reffNo, String buyerName, String buyerAddress, String narration, String totalAmt, String date, String tallyUserName, String voucherNumber, String tallyUsermobileno, String ledgerMasterId, int masterID, String approve, String reject) {
+    public SalesOrder(String cmpGUID, String voucherTypeName, String partyName, String reffNo, String buyerName, String buyerAddress, String narration, String totalAmt, String date, String tallyUserName, String voucherNumber, String tallyUsermobileno, String ledgerMasterId, String allowApprove, String allowReject, int masterID, String authenticationFlag) {
         CmpGUID = cmpGUID;
         VoucherTypeName = voucherTypeName;
         PartyName = partyName;
@@ -18,9 +19,10 @@ public class SalesOrder {
         VoucherNumber = voucherNumber;
         TallyUsermobileno = tallyUsermobileno;
         LedgerMasterId = ledgerMasterId;
+        AllowApprove = allowApprove;
+        AllowReject = allowReject;
         MasterID = masterID;
-        AllowApprove  = approve;
-        AllowReject = reject ;
+        AuthenticationFlag = authenticationFlag;
     }
 
     public SalesOrder() {
@@ -153,5 +155,36 @@ public class SalesOrder {
 
     public void setMasterID(int masterID) {
         MasterID = masterID;
+    }
+
+    public String getAuthenticationFlag() {
+        return AuthenticationFlag;
+    }
+
+    public void setAuthenticationFlag(String authenticationFlag) {
+        AuthenticationFlag = authenticationFlag;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "CmpGUID='" + CmpGUID + '\'' +
+                ", VoucherTypeName='" + VoucherTypeName + '\'' +
+                ", PartyName='" + PartyName + '\'' +
+                ", ReffNo='" + ReffNo + '\'' +
+                ", BuyerName='" + BuyerName + '\'' +
+                ", BuyerAddress='" + BuyerAddress + '\'' +
+                ", Narration='" + Narration + '\'' +
+                ", TotalAmt='" + TotalAmt + '\'' +
+                ", Date='" + Date + '\'' +
+                ", TallyUserName='" + TallyUserName + '\'' +
+                ", VoucherNumber='" + VoucherNumber + '\'' +
+                ", TallyUsermobileno='" + TallyUsermobileno + '\'' +
+                ", LedgerMasterId='" + LedgerMasterId + '\'' +
+                ", AllowApprove='" + AllowApprove + '\'' +
+                ", AllowReject='" + AllowReject + '\'' +
+                ", MasterID=" + MasterID +
+                ", AuthenticationFlag='" + AuthenticationFlag + '\'' +
+                '}';
     }
 }

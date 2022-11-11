@@ -52,7 +52,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
     SalesOrderActivity salesOrderActivity;
     int masterID;
     String Legid;
-    String ordernn,tallymobilenumber;
+    String ordernn,tallymobilenumber,AuthenticationFlag;
 
 
     public SalesOrderAdapter(ArrayList<SalesOrder> orderArrayList, Context context, SalesOrderActivity salesOrderActivity) {
@@ -121,6 +121,14 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
         }else {
             holder.txt_cancel.setVisibility(View.INVISIBLE);
         }
+
+        String authFlag = orderArrayList.get(position).getAuthenticationFlag().toString();
+        if (authFlag.equals("A1")){
+            holder.authFlagText.setVisibility(View.VISIBLE);
+        }else {
+            holder.authFlagText.setVisibility(View.INVISIBLE);
+        }
+
         /*
 
         holder.order_no.setText(orderArrayList.get(position).getTallyUserName());
@@ -145,7 +153,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 companydata.setBillAmount(orderArrayList.get(position).getTotalAmt());
                 companydata.setVocherdate(orderArrayList.get(position).getDate());
                 Intent intent = new Intent(context, ShowtransactionOrderActivity.class);
-//                intent.putExtra()
+                //intent.putExtra()
                 intent.putExtra("BayerName",orderArrayList.get(position).getBuyerName());
                 intent.putExtra("PartName",orderArrayList.get(position).getPartyName());
                 intent.putExtra("Date",orderArrayList.get(position).getDate());
@@ -155,6 +163,8 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 intent.putExtra("Narration",orderArrayList.get(position).getNarration());
                 intent.putExtra("Reffno",orderArrayList.get(position).getReffNo());
                 intent.putExtra("MasterId",orderArrayList.get(position).getMasterID());
+                intent.putExtra("AuthenticationFlag",orderArrayList.get(position).getAuthenticationFlag());
+
                 String name = orderArrayList.get(position).getBuyerAddress();
                 String noad = "No address added!";
                 if(name.isEmpty()){ name = noad; }
@@ -200,6 +210,8 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 intent.putExtra("Reffno",orderArrayList.get(position).getReffNo());
                 intent.putExtra("MasterId",orderArrayList.get(position).getMasterID());
                 intent.putExtra("TallyUserMobNo",orderArrayList.get(position).getTallyUsermobileno());
+                intent.putExtra("AuthenticationFlag",orderArrayList.get(position).getAuthenticationFlag());
+
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
@@ -210,6 +222,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
             @Override
             public void onClick(View v) {
                 masterID  = orderArrayList.get(position).getMasterID();
+                AuthenticationFlag = orderArrayList.get(position).getAuthenticationFlag();
                 Authorize();
             }
         });
@@ -219,6 +232,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
             @Override
             public void onClick(View v) {
                 masterID  = orderArrayList.get(position).getMasterID();
+                AuthenticationFlag = orderArrayList.get(position).getAuthenticationFlag();
                 Rejectinvo();
             }
         });
@@ -355,8 +369,9 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                             if (result==1){
                                 salesOrderActivity.fetchingJSON();
 
-                                if (userInfo.getSecondLevel().equalsIgnoreCase("Yes"))
-                                {
+                                if (    userInfo.getSecondLevel().equalsIgnoreCase("Yes") &&
+                                        AuthenticationFlag.equalsIgnoreCase("A1")) {
+
                                      sendmessage();
                                 }
 
@@ -395,12 +410,37 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 params.put("MasterID",String.valueOf(masterID));
 
                 /*---- USER-LEVEL AUTHENTICATION----------*/
-                params.put(
-                        "AuthenticationFlag",
-                                userInfo.getFirstLevel().equalsIgnoreCase("Yes")
-                                ? "A1"
-                                : "A2");
+                String accessLevel = " ";
+                if (  userInfo.getFirstLevel().equalsIgnoreCase("Yes") &&
+                        userInfo.getSecondLevel().equalsIgnoreCase("Yes")){
 
+                  if (AuthenticationFlag.equalsIgnoreCase("P")){
+                      //B - For Both P & A1
+                      accessLevel = "A1";
+
+                  }else {
+                      //B - For Both P & A1
+                      accessLevel = "A2";
+                  }
+
+                }else if (  userInfo.getFirstLevel().equalsIgnoreCase("Yes")
+                        && userInfo.getSecondLevel().equalsIgnoreCase("No")){
+                    //P - Pending
+                    accessLevel = "A1";
+
+                }else if (  userInfo.getFirstLevel().equalsIgnoreCase("No")
+                        && userInfo.getSecondLevel().equalsIgnoreCase("Yes")){
+                    //A1 - Approved By First Level
+                    accessLevel = "A2";
+
+                }else if (  userInfo.getFirstLevel().equalsIgnoreCase("No")
+                        && userInfo.getFirstLevel().equalsIgnoreCase("No")){
+                    //Unknown - Returns Empty
+                    accessLevel = "Unknown";
+
+                }
+
+                params.put("AuthenticationFlag", accessLevel);
                 params.put("Remark",".");
                 params.put("TransactionType","1");
                 return params;
@@ -497,9 +537,10 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
         return orderArrayList.size();
     }
 
-    public class SalesOrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class SalesOrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+    {
         public TextView customer_name, date, order_no,order_amount,txt_authenticated,txt_master,txt_sales,txt_soname;
-        TextView txto_author,txt_cancel,report_more;
+        TextView txto_author,txt_cancel,report_more,authFlagText;
         ItemClickListener itemClickListener;
         ImageView txt_more;
 
@@ -525,7 +566,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
             txto_author = itemView.findViewById(R.id.txt_author);
             txt_cancel= itemView.findViewById(R.id.txt_cancel);
             txt_more = itemView.findViewById(R.id.txti_more);
-
+            authFlagText = itemView.findViewById(R.id.authFlag);
             itemView.setOnClickListener(this);
 
         }

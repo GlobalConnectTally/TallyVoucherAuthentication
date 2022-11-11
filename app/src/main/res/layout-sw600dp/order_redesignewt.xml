@@ -23,32 +23,47 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="2"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.3"
                 android:text="Buyer "
+                android:textAppearance="?android:textAppearanceSmall"
                 android:textColor="@color/color_black"
                 android:textStyle="bold"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/_10sdp">
-
             </TextView>
+
             <TextView
                 android:id="@+id/texto_cuname"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.7"
+                android:layout_weight="1.6"
                 android:text="Global Softwares "
+                android:textAppearance="?android:textAppearanceSmall"
                 android:textColor="@color/color_black"
                 android:gravity="center_vertical"
-                android:paddingLeft="@dimen/_10sdp">
+                android:paddingLeft="@dimen/_10sdp"/>
+
+            <TextView
+                android:visibility="gone"
+                android:background="@color/red"
+                android:id="@+id/authFlag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:text="s"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/white"
+                android:gravity="center">
 
             </TextView>
-        </LinearLayout>
 
+
+        </LinearLayout>
 
         <LinearLayout
             android:padding="@dimen/_4sdp"
@@ -220,9 +235,6 @@
 
 
         </LinearLayout>
-
-
-
 
     </LinearLayout>
 

@@ -63,7 +63,7 @@ public class ShowtransactionOrderActivity extends AppCompatActivity {
     private SalesTransaAdapter salesOrderAdapter;
     LinearLayout hideview,hidemoon2;
     ImageView hidebtn;
-    String ordernn,tallymobileno;
+    String ordernn,tallymobileno,AuthenticationFlag;
 
 
     @Override
@@ -169,6 +169,7 @@ public class ShowtransactionOrderActivity extends AppCompatActivity {
 
     private void getData() {
 
+        AuthenticationFlag = getIntent().getStringExtra("AuthenticationFlag");
         String names = getIntent().getStringExtra("Address");
         //List<String> list = Arrays.asList(names.split(","));
          /*
@@ -344,7 +345,11 @@ public class ShowtransactionOrderActivity extends AppCompatActivity {
                             if (result==1){
                                 Toast.makeText(ShowtransactionOrderActivity.this,"Authorized success full",Toast.LENGTH_SHORT).show();
 
-                                sendmessage();
+                                if ( userInfo.getSecondLevel().equalsIgnoreCase("Yes") &&
+                                        AuthenticationFlag.equalsIgnoreCase("A1")) {
+                                    sendmessage();
+                                }
+
                                 startActivity(new Intent(ShowtransactionOrderActivity.this,SalesOrderActivity.class));
                                 finish();
                             }
@@ -369,7 +374,38 @@ public class ShowtransactionOrderActivity extends AppCompatActivity {
                 params.put("AppLoginUserID",userInfo.getAppLoginUserID());
                 params.put("CmpGUID",companysave.getKeyCmpnGid());
                 params.put("MasterID",masterId);
-                params.put("AuthenticationFlag","A");
+
+                String accessLevel = " ";
+                if (  userInfo.getFirstLevel().equalsIgnoreCase("Yes") &&
+                        userInfo.getSecondLevel().equalsIgnoreCase("Yes")){
+
+                    if (AuthenticationFlag.equalsIgnoreCase("P")){
+                        //B - For Both P & A1
+                        accessLevel = "A1";
+
+                    }else {
+                        //B - For Both P & A1
+                        accessLevel = "A2";
+                    }
+
+                }else if (  userInfo.getFirstLevel().equalsIgnoreCase("Yes")
+                        && userInfo.getSecondLevel().equalsIgnoreCase("No")){
+                    //P - Pending
+                    accessLevel = "A1";
+
+                }else if (  userInfo.getFirstLevel().equalsIgnoreCase("No")
+                        && userInfo.getSecondLevel().equalsIgnoreCase("Yes")){
+                    //A1 - Approved By First Level
+                    accessLevel = "A2";
+
+                }else if (  userInfo.getFirstLevel().equalsIgnoreCase("No")
+                        && userInfo.getFirstLevel().equalsIgnoreCase("No")){
+                    //Unknown - Returns Empty
+                    accessLevel = "Unknown";
+                }
+
+                params.put("AuthenticationFlag", accessLevel);
+
                 params.put("Remark",".");
                 params.put("TransactionType","1");
                 return params;
