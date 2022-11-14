@@ -175,6 +175,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        salesorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, SalesOrderActivity.class));
+
+            }
+        });
+
         TextView dashcmp = findViewById(R.id.dash_cmpname);
         dashcmp.setText(companydata.getKeyName());
     }

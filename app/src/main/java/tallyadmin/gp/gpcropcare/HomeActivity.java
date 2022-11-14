@@ -38,8 +38,14 @@ import com.nex3z.notificationbadge.NotificationBadge;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import tallyadmin.gp.gpcropcare.Activities.SalesOrderActivity;
 import tallyadmin.gp.gpcropcare.Activities.Sixreportactivity;
@@ -68,6 +74,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     NotificationBadge mBage,paybadge,orderbadge;
     SwipeRefreshLayout swipe;
     private TextView dashcmp;
+    TextView dateText , timeText;
 
 
     @Override
@@ -99,6 +106,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     }, 1000);
                 }
             });
+
+        dateText = findViewById(R.id.date);
+        timeText = findViewById(R.id.time);
 
 
         System.out.println("Allow Approve + Reject ");
@@ -196,9 +206,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //            }
 //        });
 
+         timeText.setText(currentTIme().toString());
+         Date date = new Date();
+         dateText.setText(getFormatedDate(todayformatDate()));
+
             //-----sales on click go to dashboard to Sales order activity-----//
 
          LinearLayout salesorder = findViewById(R.id.sales_order);
+         salesorder.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 startActivity(new Intent(HomeActivity.this, SalesOrderActivity.class));
+             }
+         });
 
          ImageView imgs = findViewById(R.id.imgs);
          imgs.setOnClickListener(new View.OnClickListener() {
@@ -511,6 +531,40 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }else{
             mBage.setVisibility(View.GONE);
         }
+    }
+
+    public String todayformatDate()
+    {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Date date = new Date();
+        return formatter.format(date);
+    }
+
+    public String currentTIme()
+    {
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        Date time = Calendar.getInstance().getTime();
+        return timeFormatter.format(time);
+    }
+
+    public String getFormatedDate(String data)
+    {
+        final SimpleDateFormat ymdFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        final SimpleDateFormat EEEddMMMyyyy = new SimpleDateFormat("EEE, d MMM yyyy", Locale.getDefault());
+        return parseDate(data, ymdFormat, EEEddMMMyyyy);
+    }
+
+    public  String parseDate(String inputDateString, SimpleDateFormat inputDateFormat, SimpleDateFormat outputDateFormat)
+    {
+        Date date = null;
+        String outputDateString = null;
+        try {
+            date = inputDateFormat.parse(inputDateString);
+            outputDateString = outputDateFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return outputDateString;
     }
 }
 

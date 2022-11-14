@@ -8,45 +8,80 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".HomeActivity"
-    tools:showIn="@layout/app_bar_home">
+    tools:showIn="@layout/app_bar_home"
+    android:background="@color/white">
 
     <RelativeLayout
-        android:background="@color/color_white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_marginTop="5dp"
-            android:layout_centerHorizontal="true"
+        <RelativeLayout
             android:id="@+id/topt"
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/invoice_count_bottom"
+            android:orientation="vertical">
 
-            
+            <LinearLayout
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:gravity="center_vertical"
+                android:padding="@dimen/_10sdp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="@dimen/_10sdp"
+                    app:drawableLeftCompat="@drawable/time"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:text="Fri , 20 Sept , 2022"
+                    android:layout_weight="50"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/time"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_gravity="end"
+                    android:textAlignment="textEnd"
+                    android:text="22::00"
+                    android:layout_weight="50"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
             <TextView
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:id="@+id/dash_cmpname"
-                android:layout_gravity="center_horizontal"
-                android:textSize="@dimen/fontitem"
-                android:textColor="@color/color_black"
-                android:textStyle="normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
                 android:text="Global Infosoft"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/fontitem"
+                android:textStyle="bold" />
 
+            <!-- <View
+                 android:layout_below="@+id/topt"
+                 android:layout_marginTop="10dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="1dp"
+                 android:background="@color/colorPrimary"/>-->
 
-            <View
+        </RelativeLayout>
 
-                android:layout_below="@+id/topt"
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:background="@color/colorPrimary"/>
-
-
-
-        </LinearLayout>
-
+       <!--
         <RelativeLayout
             android:id="@+id/lnnn"
             android:layout_width="match_parent"
@@ -140,8 +175,6 @@
 
             </LinearLayout>
 
-
-
             <com.nex3z.notificationbadge.NotificationBadge
                 android:id="@+id/salesbadge"
                 android:layout_width="wrap_content"
@@ -157,274 +190,383 @@
 
             </com.nex3z.notificationbadge.NotificationBadge>
 
-            <!--            <LinearLayout-->
-            <!--                android:weightSum="3"-->
+            &lt;!&ndash;            <LinearLayout&ndash;&gt;
+            &lt;!&ndash;                android:weightSum="3"&ndash;&gt;
 
-            <!--                android:layout_weight="1"-->
-            <!--                android:orientation="vertical"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="match_parent">-->
+            &lt;!&ndash;                android:layout_weight="1"&ndash;&gt;
+            &lt;!&ndash;                android:orientation="vertical"&ndash;&gt;
+            &lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;
+            &lt;!&ndash;                android:layout_height="match_parent">&ndash;&gt;
 
-            <!--                <LinearLayout-->
-            <!--                    android:id="@+id/sales_order"-->
-            <!--                    android:gravity="center_vertical"-->
-            <!--                    android:background="@drawable/squareborder"-->
-            <!--                    android:layout_weight="1"-->
-            <!--                    android:orientation="vertical"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content">-->
+            &lt;!&ndash;                <LinearLayout&ndash;&gt;
+            &lt;!&ndash;                    android:id="@+id/sales_order"&ndash;&gt;
+            &lt;!&ndash;                    android:gravity="center_vertical"&ndash;&gt;
+            &lt;!&ndash;                    android:background="@drawable/squareborder"&ndash;&gt;
+            &lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;
+            &lt;!&ndash;                    android:orientation="vertical"&ndash;&gt;
+            &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;
+            &lt;!&ndash;                    android:layout_height="wrap_content">&ndash;&gt;
 
-            <!--                    <RelativeLayout-->
-            <!--                        android:layout_marginTop="15dp"-->
-            <!--                        android:layout_gravity="center_horizontal"-->
-            <!--                        android:layout_width="90dp"-->
-            <!--                        android:layout_height="90dp">-->
+            &lt;!&ndash;                    <RelativeLayout&ndash;&gt;
+            &lt;!&ndash;                        android:layout_marginTop="15dp"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_gravity="center_horizontal"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_width="90dp"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_height="90dp">&ndash;&gt;
 
-            <!--                        <ImageView-->
-            <!--                            android:layout_alignParentBottom="true"-->
-            <!--                            android:id="@+id/imgs"-->
-            <!--                            android:layout_width="70dp"-->
-            <!--                            android:layout_height="70dp"-->
-            <!--                            android:src="@drawable/ic_file" />-->
+            &lt;!&ndash;                        <ImageView&ndash;&gt;
+            &lt;!&ndash;                            android:layout_alignParentBottom="true"&ndash;&gt;
+            &lt;!&ndash;                            android:id="@+id/imgs"&ndash;&gt;
+            &lt;!&ndash;                            android:layout_width="70dp"&ndash;&gt;
+            &lt;!&ndash;                            android:layout_height="70dp"&ndash;&gt;
+            &lt;!&ndash;                            android:src="@drawable/ic_file" />&ndash;&gt;
 
-            <!--                        <com.nex3z.notificationbadge.NotificationBadge-->
-            <!--                            android:id="@+id/salesbadge"-->
-            <!--                            android:layout_toRightOf="@+id/imgs"-->
-            <!--                            android:layout_alignTop="@+id/imgs"-->
-            <!--                            android:layout_marginLeft="-16dp"-->
-            <!--                            android:layout_marginTop="-8dp"-->
-            <!--                            android:layout_width="28dp"-->
-            <!--                            android:layout_height="28dp"-->
-            <!--                            app:nbBackground="@drawable/badge_shadow"-->
-            <!--                            app:nbMaxTextLength="2">-->
+            &lt;!&ndash;                        <com.nex3z.notificationbadge.NotificationBadge&ndash;&gt;
+            &lt;!&ndash;                            android:id="@+id/salesbadge"&ndash;&gt;
+            &lt;!&ndash;                            android:layout_toRightOf="@+id/imgs"&ndash;&gt;
+            &lt;!&ndash;                            android:layout_alignTop="@+id/imgs"&ndash;&gt;
+            &lt;!&ndash;                            android:layout_marginLeft="-16dp"&ndash;&gt;
+            &lt;!&ndash;                            android:layout_marginTop="-8dp"&ndash;&gt;
+            &lt;!&ndash;                            android:layout_width="28dp"&ndash;&gt;
+            &lt;!&ndash;                            android:layout_height="28dp"&ndash;&gt;
+            &lt;!&ndash;                            app:nbBackground="@drawable/badge_shadow"&ndash;&gt;
+            &lt;!&ndash;                            app:nbMaxTextLength="2">&ndash;&gt;
 
-            <!--                        </com.nex3z.notificationbadge.NotificationBadge>-->
+            &lt;!&ndash;                        </com.nex3z.notificationbadge.NotificationBadge>&ndash;&gt;
 
-            <!--                    </RelativeLayout>-->
-
-
-            <!--                    <TextView-->
-            <!--                        android:gravity="center"-->
-            <!--                        android:layout_gravity="center"-->
-            <!--                        android:textSize="@dimen/fontsize"-->
-            <!--                        android:textStyle="normal"-->
-            <!--                        android:text="Sales"-->
-            <!--                        android:textColor="@color/color_black"-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content" />-->
-
-            <!--                </LinearLayout>-->
+            &lt;!&ndash;                    </RelativeLayout>&ndash;&gt;
 
 
-            <!--&lt;!&ndash;                <LinearLayout&ndash;&gt;-->
-            <!--&lt;!&ndash;                    android:id="@+id/payment"&ndash;&gt;-->
-            <!--&lt;!&ndash;                    android:gravity="center_vertical"&ndash;&gt;-->
-            <!--&lt;!&ndash;                    android:background="@drawable/squareborder"&ndash;&gt;-->
-            <!--&lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;-->
-            <!--&lt;!&ndash;                    android:orientation="vertical"&ndash;&gt;-->
-            <!--&lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;                    android:layout_height="wrap_content">&ndash;&gt;-->
+            &lt;!&ndash;                    <TextView&ndash;&gt;
+            &lt;!&ndash;                        android:gravity="center"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_gravity="center"&ndash;&gt;
+            &lt;!&ndash;                        android:textSize="@dimen/fontsize"&ndash;&gt;
+            &lt;!&ndash;                        android:textStyle="normal"&ndash;&gt;
+            &lt;!&ndash;                        android:text="Sales"&ndash;&gt;
+            &lt;!&ndash;                        android:textColor="@color/color_black"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_height="wrap_content" />&ndash;&gt;
 
-            <!--&lt;!&ndash;                    <RelativeLayout&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:layout_marginTop="15dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:layout_gravity="center_horizontal"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:layout_width="90dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:layout_height="90dp">&ndash;&gt;-->
-
-            <!--&lt;!&ndash;                        <ImageView&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_alignParentBottom="true"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:id="@+id/imgspay"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_width="70dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_height="70dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:src="@drawable/payment_method" />&ndash;&gt;-->
-
-            <!--&lt;!&ndash;                        <com.nex3z.notificationbadge.NotificationBadge&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:id="@+id/paymentrderbadge"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_toRightOf="@+id/imgspay"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_alignTop="@+id/imgspay"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_marginLeft="-16dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_marginTop="-8dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_width="28dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_height="28dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            app:nbBackground="@drawable/badge_shadow"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            app:nbMaxTextLength="2">&ndash;&gt;-->
-
-            <!--&lt;!&ndash;                        </com.nex3z.notificationbadge.NotificationBadge>&ndash;&gt;-->
-
-            <!--&lt;!&ndash;                    </RelativeLayout>&ndash;&gt;-->
+            &lt;!&ndash;                </LinearLayout>&ndash;&gt;
 
 
-            <!--&lt;!&ndash;                    <TextView&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:gravity="center"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:layout_gravity="center"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:text="Payment"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:textSize="@dimen/fontsize"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:textStyle="normal"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:textColor="@color/color_black"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:layout_height="wrap_content" />&ndash;&gt;-->
+            &lt;!&ndash;&lt;!&ndash;                <LinearLayout&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                    android:id="@+id/payment"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                    android:gravity="center_vertical"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                    android:background="@drawable/squareborder"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                    android:orientation="vertical"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                    android:layout_height="wrap_content">&ndash;&gt;&ndash;&gt;
 
-            <!--&lt;!&ndash;                </LinearLayout>&ndash;&gt;-->
+            &lt;!&ndash;&lt;!&ndash;                    <RelativeLayout&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:layout_marginTop="15dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:layout_gravity="center_horizontal"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:layout_width="90dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:layout_height="90dp">&ndash;&gt;&ndash;&gt;
 
-            <!--                <LinearLayout-->
-            <!--                    android:id="@+id/help"-->
-            <!--                    android:gravity="center_vertical"-->
-            <!--                    android:background="@drawable/squareborder"-->
-            <!--                    android:layout_weight="1"-->
-            <!--                    android:orientation="vertical"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content">-->
+            &lt;!&ndash;&lt;!&ndash;                        <ImageView&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_alignParentBottom="true"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:id="@+id/imgspay"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_width="70dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_height="70dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:src="@drawable/payment_method" />&ndash;&gt;&ndash;&gt;
 
+            &lt;!&ndash;&lt;!&ndash;                        <com.nex3z.notificationbadge.NotificationBadge&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:id="@+id/paymentrderbadge"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_toRightOf="@+id/imgspay"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_alignTop="@+id/imgspay"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_marginLeft="-16dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_marginTop="-8dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_width="28dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_height="28dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            app:nbBackground="@drawable/badge_shadow"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            app:nbMaxTextLength="2">&ndash;&gt;&ndash;&gt;
 
-            <!--                    <ImageView-->
-            <!--                        android:id="@+id/imghelp"-->
-            <!--                        android:layout_marginTop="15dp"-->
-            <!--                        android:layout_gravity="center_horizontal"-->
-            <!--                        android:layout_width="70dp"-->
-            <!--                        android:layout_height="70dp"-->
-            <!--                        android:src="@drawable/ic_programmer" />-->
+            &lt;!&ndash;&lt;!&ndash;                        </com.nex3z.notificationbadge.NotificationBadge>&ndash;&gt;&ndash;&gt;
 
-            <!--                    <TextView-->
-            <!--                        android:gravity="center"-->
-            <!--                        android:layout_gravity="center"-->
-            <!--                        android:textSize="@dimen/fontsize"-->
-            <!--                        android:textStyle="normal"-->
-            <!--                        android:text="Settings"-->
-            <!--                        android:textColor="@color/color_black"-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content" />-->
-
-            <!--                </LinearLayout>-->
+            &lt;!&ndash;&lt;!&ndash;                    </RelativeLayout>&ndash;&gt;&ndash;&gt;
 
 
-            <!--            </LinearLayout>-->
+            &lt;!&ndash;&lt;!&ndash;                    <TextView&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:gravity="center"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:layout_gravity="center"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:text="Payment"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:textSize="@dimen/fontsize"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:textStyle="normal"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:textColor="@color/color_black"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:layout_height="wrap_content" />&ndash;&gt;&ndash;&gt;
+
+            &lt;!&ndash;&lt;!&ndash;                </LinearLayout>&ndash;&gt;&ndash;&gt;
+
+            &lt;!&ndash;                <LinearLayout&ndash;&gt;
+            &lt;!&ndash;                    android:id="@+id/help"&ndash;&gt;
+            &lt;!&ndash;                    android:gravity="center_vertical"&ndash;&gt;
+            &lt;!&ndash;                    android:background="@drawable/squareborder"&ndash;&gt;
+            &lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;
+            &lt;!&ndash;                    android:orientation="vertical"&ndash;&gt;
+            &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;
+            &lt;!&ndash;                    android:layout_height="wrap_content">&ndash;&gt;
 
 
-            <!--            <LinearLayout-->
-            <!--                android:weightSum="3"-->
+            &lt;!&ndash;                    <ImageView&ndash;&gt;
+            &lt;!&ndash;                        android:id="@+id/imghelp"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_marginTop="15dp"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_gravity="center_horizontal"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_width="70dp"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_height="70dp"&ndash;&gt;
+            &lt;!&ndash;                        android:src="@drawable/ic_programmer" />&ndash;&gt;
 
-            <!--                android:layout_weight="1"-->
-            <!--                android:orientation="vertical"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="match_parent">-->
+            &lt;!&ndash;                    <TextView&ndash;&gt;
+            &lt;!&ndash;                        android:gravity="center"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_gravity="center"&ndash;&gt;
+            &lt;!&ndash;                        android:textSize="@dimen/fontsize"&ndash;&gt;
+            &lt;!&ndash;                        android:textStyle="normal"&ndash;&gt;
+            &lt;!&ndash;                        android:text="Settings"&ndash;&gt;
+            &lt;!&ndash;                        android:textColor="@color/color_black"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_height="wrap_content" />&ndash;&gt;
 
-            <!--&lt;!&ndash;                <LinearLayout&ndash;&gt;-->
-
-            <!--&lt;!&ndash;                    android:id="@+id/sales_invoice"&ndash;&gt;-->
-            <!--&lt;!&ndash;                    android:gravity="center_vertical"&ndash;&gt;-->
-            <!--&lt;!&ndash;                    android:background="@drawable/squareborder"&ndash;&gt;-->
-            <!--&lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;-->
-            <!--&lt;!&ndash;                    android:orientation="vertical"&ndash;&gt;-->
-            <!--&lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;-->
-            <!--&lt;!&ndash;                    android:layout_height="wrap_content">&ndash;&gt;-->
-
-            <!--&lt;!&ndash;                    <RelativeLayout&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:layout_marginTop="15dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:layout_gravity="center_horizontal"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:layout_width="90dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:layout_height="90dp">&ndash;&gt;-->
-
-            <!--&lt;!&ndash;                        <ImageView&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_alignParentBottom="true"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:id="@+id/imgsorder"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_width="70dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_height="70dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:src="@drawable/ic_credit_card"  />&ndash;&gt;-->
-
-            <!--&lt;!&ndash;                        <com.nex3z.notificationbadge.NotificationBadge&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:id="@+id/salesorderbadge"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_toRightOf="@+id/imgsorder"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_alignTop="@+id/imgsorder"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_marginLeft="-16dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_marginTop="-8dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_width="28dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            android:layout_height="28dp"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            app:nbBackground="@drawable/badge_shadow"&ndash;&gt;-->
-            <!--&lt;!&ndash;                            app:nbMaxTextLength="2">&ndash;&gt;-->
-
-            <!--&lt;!&ndash;                        </com.nex3z.notificationbadge.NotificationBadge>&ndash;&gt;-->
-
-            <!--&lt;!&ndash;                    </RelativeLayout>&ndash;&gt;-->
+            &lt;!&ndash;                </LinearLayout>&ndash;&gt;
 
 
-            <!--&lt;!&ndash;                    <TextView&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:gravity="center"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:layout_gravity="center"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:textSize="@dimen/fontsize"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:textStyle="normal"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:text="Sales Order"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:textColor="@color/color_black"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;-->
-            <!--&lt;!&ndash;                        android:layout_height="wrap_content" />&ndash;&gt;-->
-
-            <!--&lt;!&ndash;                </LinearLayout>&ndash;&gt;-->
+            &lt;!&ndash;            </LinearLayout>&ndash;&gt;
 
 
-            <!--                <LinearLayout-->
-            <!--                    android:id="@+id/about"-->
-            <!--                    android:gravity="center_vertical"-->
-            <!--                    android:background="@drawable/squareborder"-->
-            <!--                    android:layout_weight="1"-->
-            <!--                    android:orientation="vertical"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content">-->
+            &lt;!&ndash;            <LinearLayout&ndash;&gt;
+            &lt;!&ndash;                android:weightSum="3"&ndash;&gt;
 
-            <!--                    <ImageView-->
-            <!--                        android:id="@+id/imgabout"-->
-            <!--                        android:layout_marginTop="15dp"-->
-            <!--                        android:layout_gravity="center_horizontal"-->
-            <!--                        android:layout_width="70dp"-->
-            <!--                        android:layout_height="70dp"-->
-            <!--                        android:src="@drawable/ic_conversation" />-->
+            &lt;!&ndash;                android:layout_weight="1"&ndash;&gt;
+            &lt;!&ndash;                android:orientation="vertical"&ndash;&gt;
+            &lt;!&ndash;                android:layout_width="match_parent"&ndash;&gt;
+            &lt;!&ndash;                android:layout_height="match_parent">&ndash;&gt;
 
-            <!--                    <TextView-->
-            <!--                        android:gravity="center"-->
-            <!--                        android:layout_gravity="center"-->
-            <!--                        android:textSize="@dimen/fontsize"-->
-            <!--                        android:textStyle="normal"-->
-            <!--                        android:text="About Us"-->
-            <!--                        android:textColor="@color/color_black"-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content" />-->
+            &lt;!&ndash;&lt;!&ndash;                <LinearLayout&ndash;&gt;&ndash;&gt;
 
+            &lt;!&ndash;&lt;!&ndash;                    android:id="@+id/sales_invoice"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                    android:gravity="center_vertical"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                    android:background="@drawable/squareborder"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                    android:orientation="vertical"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                    android:layout_height="wrap_content">&ndash;&gt;&ndash;&gt;
 
-            <!--                </LinearLayout>-->
-            <!--                <LinearLayout-->
-            <!--                    android:id="@+id/logout"-->
-            <!--                    android:gravity="center_vertical"-->
-            <!--                    android:background="@drawable/squareborder"-->
-            <!--                    android:layout_weight="1"-->
-            <!--                    android:orientation="vertical"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content">-->
+            &lt;!&ndash;&lt;!&ndash;                    <RelativeLayout&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:layout_marginTop="15dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:layout_gravity="center_horizontal"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:layout_width="90dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:layout_height="90dp">&ndash;&gt;&ndash;&gt;
 
+            &lt;!&ndash;&lt;!&ndash;                        <ImageView&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_alignParentBottom="true"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:id="@+id/imgsorder"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_width="70dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_height="70dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:src="@drawable/ic_credit_card"  />&ndash;&gt;&ndash;&gt;
 
-            <!--                    <ImageView-->
-            <!--                        android:id="@+id/imglogout"-->
-            <!--                        android:layout_marginTop="15dp"-->
-            <!--                        android:layout_gravity="center_horizontal"-->
-            <!--                        android:layout_width="70dp"-->
-            <!--                        android:layout_height="70dp"-->
-            <!--                        android:src="@drawable/ic_exit" />-->
+            &lt;!&ndash;&lt;!&ndash;                        <com.nex3z.notificationbadge.NotificationBadge&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:id="@+id/salesorderbadge"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_toRightOf="@+id/imgsorder"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_alignTop="@+id/imgsorder"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_marginLeft="-16dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_marginTop="-8dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_width="28dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            android:layout_height="28dp"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            app:nbBackground="@drawable/badge_shadow"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                            app:nbMaxTextLength="2">&ndash;&gt;&ndash;&gt;
 
-            <!--                    <TextView-->
-            <!--                        android:gravity="center"-->
-            <!--                        android:layout_gravity="center"-->
-            <!--                        android:textSize="@dimen/fontsize"-->
-            <!--                        android:textStyle="normal"-->
-            <!--                        android:text="Log 0ut"-->
-            <!--                        android:textColor="@color/color_black"-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content" />-->
+            &lt;!&ndash;&lt;!&ndash;                        </com.nex3z.notificationbadge.NotificationBadge>&ndash;&gt;&ndash;&gt;
 
-            <!--                </LinearLayout>-->
+            &lt;!&ndash;&lt;!&ndash;                    </RelativeLayout>&ndash;&gt;&ndash;&gt;
 
 
-            <!--            </LinearLayout>-->
+            &lt;!&ndash;&lt;!&ndash;                    <TextView&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:gravity="center"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:layout_gravity="center"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:textSize="@dimen/fontsize"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:textStyle="normal"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:text="Sales Order"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:textColor="@color/color_black"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;&ndash;&gt;
+            &lt;!&ndash;&lt;!&ndash;                        android:layout_height="wrap_content" />&ndash;&gt;&ndash;&gt;
+
+            &lt;!&ndash;&lt;!&ndash;                </LinearLayout>&ndash;&gt;&ndash;&gt;
 
 
-        </RelativeLayout>
+            &lt;!&ndash;                <LinearLayout&ndash;&gt;
+            &lt;!&ndash;                    android:id="@+id/about"&ndash;&gt;
+            &lt;!&ndash;                    android:gravity="center_vertical"&ndash;&gt;
+            &lt;!&ndash;                    android:background="@drawable/squareborder"&ndash;&gt;
+            &lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;
+            &lt;!&ndash;                    android:orientation="vertical"&ndash;&gt;
+            &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;
+            &lt;!&ndash;                    android:layout_height="wrap_content">&ndash;&gt;
 
+            &lt;!&ndash;                    <ImageView&ndash;&gt;
+            &lt;!&ndash;                        android:id="@+id/imgabout"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_marginTop="15dp"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_gravity="center_horizontal"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_width="70dp"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_height="70dp"&ndash;&gt;
+            &lt;!&ndash;                        android:src="@drawable/ic_conversation" />&ndash;&gt;
+
+            &lt;!&ndash;                    <TextView&ndash;&gt;
+            &lt;!&ndash;                        android:gravity="center"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_gravity="center"&ndash;&gt;
+            &lt;!&ndash;                        android:textSize="@dimen/fontsize"&ndash;&gt;
+            &lt;!&ndash;                        android:textStyle="normal"&ndash;&gt;
+            &lt;!&ndash;                        android:text="About Us"&ndash;&gt;
+            &lt;!&ndash;                        android:textColor="@color/color_black"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_height="wrap_content" />&ndash;&gt;
+
+
+            &lt;!&ndash;                </LinearLayout>&ndash;&gt;
+            &lt;!&ndash;                <LinearLayout&ndash;&gt;
+            &lt;!&ndash;                    android:id="@+id/logout"&ndash;&gt;
+            &lt;!&ndash;                    android:gravity="center_vertical"&ndash;&gt;
+            &lt;!&ndash;                    android:background="@drawable/squareborder"&ndash;&gt;
+            &lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;
+            &lt;!&ndash;                    android:orientation="vertical"&ndash;&gt;
+            &lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;
+            &lt;!&ndash;                    android:layout_height="wrap_content">&ndash;&gt;
+
+
+            &lt;!&ndash;                    <ImageView&ndash;&gt;
+            &lt;!&ndash;                        android:id="@+id/imglogout"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_marginTop="15dp"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_gravity="center_horizontal"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_width="70dp"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_height="70dp"&ndash;&gt;
+            &lt;!&ndash;                        android:src="@drawable/ic_exit" />&ndash;&gt;
+
+            &lt;!&ndash;                    <TextView&ndash;&gt;
+            &lt;!&ndash;                        android:gravity="center"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_gravity="center"&ndash;&gt;
+            &lt;!&ndash;                        android:textSize="@dimen/fontsize"&ndash;&gt;
+            &lt;!&ndash;                        android:textStyle="normal"&ndash;&gt;
+            &lt;!&ndash;                        android:text="Log 0ut"&ndash;&gt;
+            &lt;!&ndash;                        android:textColor="@color/color_black"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_width="wrap_content"&ndash;&gt;
+            &lt;!&ndash;                        android:layout_height="wrap_content" />&ndash;&gt;
+
+            &lt;!&ndash;                </LinearLayout>&ndash;&gt;
+
+
+            &lt;!&ndash;            </LinearLayout>&ndash;&gt;
+
+
+        </RelativeLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/bottomnav"
+            android:layout_below="@id/topt"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <LinearLayout
+                    android:id="@+id/sales_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_1sdp"
+                    android:weightSum="100">
+
+                    <RelativeLayout
+                        android:layout_width="90dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="10">
+
+                        <ImageView
+                            android:id="@+id/imgs"
+                            android:layout_width="90dp"
+                            android:layout_height="70dp"
+                            android:src="@mipmap/invoice" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="50"
+                        android:text="Sales Invoice"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/fontsizen"
+                        android:textStyle="normal" />
+
+                    <com.nex3z.notificationbadge.NotificationBadge
+                        android:id="@+id/salesbadge"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|center_vertical"
+                        android:layout_weight="40"
+                        android:padding="@dimen/_5sdp"
+                        android:textSize="@dimen/_15sdp"
+                        app:nbBackground="@drawable/badge_shadow"
+                        app:nbMaxTextLength="5">
+
+                    </com.nex3z.notificationbadge.NotificationBadge>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_1sdp">
+
+                <LinearLayout
+                    android:id="@+id/report"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_1sdp"
+                    android:visibility="visible"
+                    android:weightSum="100">
+
+                    <RelativeLayout
+                        android:layout_width="90dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="10">
+
+                        <ImageView
+                            android:id="@+id/report_img"
+                            android:layout_width="90dp"
+                            android:layout_height="70dp"
+                            android:src="@mipmap/stock_report" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="80"
+                        android:gravity="start"
+                        android:text="Stock Report"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/fontsizen"
+                        android:textStyle="normal" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:layout_weight="10"
+                        android:src="@drawable/forward_arrow" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomnav"
@@ -440,9 +582,5 @@
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     </RelativeLayout>
-
-
-
-
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
