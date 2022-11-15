@@ -1,5 +1,6 @@
 package tallyadmin.gp.gpcropcare.Activities;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -10,6 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+
 import tallyadmin.gp.gpcropcare.R;
 
 public class StockReportActivity extends AppCompatActivity {
@@ -18,6 +24,7 @@ public class StockReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_report);
+
 
         Toolbar toolbar = findViewById(R.id.toolbarStockReport);
         setSupportActionBar(toolbar);
@@ -48,6 +55,9 @@ public class StockReportActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+
     }
 
 }

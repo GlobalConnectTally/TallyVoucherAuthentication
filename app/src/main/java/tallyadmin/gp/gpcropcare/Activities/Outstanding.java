@@ -32,7 +32,6 @@ import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_REPORTNrc;
 
 
-
 public class Outstanding extends AppCompatActivity {
     Companysave companydata;
 
@@ -79,7 +78,8 @@ public class Outstanding extends AppCompatActivity {
     }
 
 
-    public void fetchingJSON() {
+    public void fetchingJSON()
+    {
 
         //String urlno = "?CmpGUID=" + companydata.getKeyCmpnGid() + "&LedgerName="+companydata.getKeyPartyName()+ "&LedgerID="+companydata.getKeyLegId()+ "&VchNumber=" + companydata.getVoucher();
         //System.out.println("url:"+urlno);
@@ -111,7 +111,6 @@ public class Outstanding extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         try {
-
 
                             JSONObject obj = new JSONObject(response);
                             System.out.println("response:"+obj);
@@ -549,9 +548,11 @@ public class Outstanding extends AppCompatActivity {
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
-
-    private boolean isNetworkConnected() {
+    private boolean isNetworkConnected()
+    {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
-    }
+
+
+}

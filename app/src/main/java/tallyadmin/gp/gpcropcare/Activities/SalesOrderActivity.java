@@ -122,11 +122,13 @@ public class SalesOrderActivity extends AppCompatActivity
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try {
                             JSONObject obj = new JSONObject(response);
                             System.out.println("response"+obj);
                             Saleslist = new ArrayList<>();
                             JSONArray dataArray = obj.getJSONArray("SalesTransactions");
+
                             if (dataArray.length() == 0) {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(SalesOrderActivity.this);
                                 // Set the Alert Dialog Message
@@ -142,8 +144,8 @@ public class SalesOrderActivity extends AppCompatActivity
                                                         finish();
                                                     }
                                                 });
-                                AlertDialog alert = builder.create();
 
+                                AlertDialog alert = builder.create();
                                 alert.show();
                             }
 
@@ -165,9 +167,11 @@ public class SalesOrderActivity extends AppCompatActivity
                                 playerModel.setLedgerMasterId(dataobj.getString("LedgerMasterId"));
                                 playerModel.setTallyUsermobileno(dataobj.getString("TallyUserMobNo"));
 
-                                /*---- FROM SHAREPREFERENCE -------*/
+                                /*----  FROM SHAREPREFERENCE  -------*/
                                 playerModel.setAllowApprove(userInfo.getAllowApprove());
                                 playerModel.setAllowReject(userInfo.getAllowReject());
+
+                                playerModel.setAuthenticationFlag(dataobj.getString("AuthenticationFlag"));
 
                                 Saleslist.add(playerModel);
 
@@ -200,6 +204,38 @@ public class SalesOrderActivity extends AppCompatActivity
                 params.put("AppLoginUserID", userInfo.getAppLoginUserID());
                 params.put("CmpGUID", companydata.getKeyCmpnGid());
                 params.put("TransactionType", "Sales");
+
+                /*---   USER-LEVELS ------------*/
+                String accessLevel = " ";
+                if (  userInfo.getFirstLevel().equalsIgnoreCase("Yes") &&
+                         userInfo.getSecondLevel().equalsIgnoreCase("Yes")){
+
+                    //B - For Both P & A1
+                    accessLevel = "B";
+
+                 }else if (  userInfo.getFirstLevel().equalsIgnoreCase("Yes")
+                             && userInfo.getSecondLevel().equalsIgnoreCase("No")
+                   ){
+
+                    //P - Pending
+                    accessLevel = "P";
+
+                }else if (  userInfo.getFirstLevel().equalsIgnoreCase("No")
+                             && userInfo.getSecondLevel().equalsIgnoreCase("Yes")){
+
+                    //A1 - Approved By First Level
+                    accessLevel = "A1";
+
+                }else if (  userInfo.getFirstLevel().equalsIgnoreCase("No")
+                         && userInfo.getFirstLevel().equalsIgnoreCase("No")){
+
+                    //Unknown - Returns Empty
+                    accessLevel = "Unknown";
+
+                }
+
+                params.put("AuthenticationFlag", accessLevel);
+
                 return params;
             }
         };

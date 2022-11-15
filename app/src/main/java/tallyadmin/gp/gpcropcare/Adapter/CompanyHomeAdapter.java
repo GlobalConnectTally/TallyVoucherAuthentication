@@ -19,6 +19,7 @@ import tallyadmin.gp.gpcropcare.Interface.ItemClickListener;
 import tallyadmin.gp.gpcropcare.Model.Company;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
+import tallyadmin.gp.gpcropcare.Sharepreference.UserInfo;
 
 public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.CompanyViewHolder> {
     private ArrayList<Company> companieslist;
@@ -27,6 +28,7 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
     Companysave companydata;
     HomeActivity Activity;
     OnRecyclerViewItemClickListener listener;
+    UserInfo userInfo;
 
 
     public ArrayList<Company> getCompanieslist() {
@@ -38,7 +40,7 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
         this.context = context;
         this.Activity = Activity;
         this.listener = listener;
-
+        this.userInfo = new UserInfo(context.getApplicationContext());
     }
 
     @NonNull
@@ -46,7 +48,6 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
     public CompanyHomeAdapter.CompanyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         final View itemView = LayoutInflater.from(context)
                 .inflate(R.layout.spinner_layoutb, parent, false);
-
 
         return new CompanyViewHolder(itemView);
     }
@@ -56,7 +57,8 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
     public void onBindViewHolder(@NonNull final CompanyHomeAdapter.CompanyViewHolder holder, final int position) {
         holder.companygname.setText(companieslist.get(position).getCompanyName());
         if (companieslist.get(position).getPendingSales() != null &&
-                companieslist.get(position).getPendingSales() != 0) {
+                companieslist.get(position).getPendingSales() != 0)
+        {
             holder.mBage.setNumber(companieslist.get(position).getPendingSales());
             holder.mBage.setVisibility(View.VISIBLE);
         } else {
@@ -73,28 +75,22 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
         holder.setListener(new ItemClickListener() {
             @Override
             public void onClick(View v) {
-
                 showConfirmDialog(companieslist.get(position).getCmpGUID(), companieslist.get(position).getCompanyName());
-
-//                Activity.cmpDialogExit();
-
-
             }
         });
 
     }
 
     private void showConfirmDialog(final String cmpGUID, final String companyName) {
-//        final AlertDialog.Builder settingdialog = new AlertDialog.Builder(Activity,R.style.my_dialog);
-//        View settinview = LayoutInflater.from(context )
-//                .inflate(R.layout.setting_layoutb, null);
+      //      final AlertDialog.Builder settingdialog = new AlertDialog.Builder(Activity,R.style.my_dialog);
+//      View settinview = LayoutInflater.from(context ).inflate(R.layout.setting_layoutb, null);
 //
-//        settingdialog.setView(settinview);
-//        settingdialog.setPositiveButton("CONFIRM TO CONTINUE", new DialogInterface.OnClickListener() {
+//      settingdialog.setView(settinview);
+//      settingdialog.setPositiveButton("CONFIRM TO CONTINUE", new DialogInterface.OnClickListener() {
 //            @Override
-//            public void onClick(DialogInterface dialog, int which) {
+//          public void onClick(DialogInterface dialog, int which) {
+//        Toast.makeText(context,"1"+cmpGUID, Toast.LENGTH_LONG).show();
 
-//                Toast.makeText(context,"1"+cmpGUID, Toast.LENGTH_LONG).show();
         companydata = new Companysave(context.getApplicationContext());
         companydata.setCompanyGid(cmpGUID);
         companydata.setcompany(companyName);
@@ -151,7 +147,7 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
 
 
     public interface OnRecyclerViewItemClickListener {
-        public void onRecyclerViewItemClicked(int position, Company data);
+         public void onRecyclerViewItemClicked(int position, Company data);
     }
 
 }

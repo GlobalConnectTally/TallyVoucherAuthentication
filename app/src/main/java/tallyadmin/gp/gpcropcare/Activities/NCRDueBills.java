@@ -112,7 +112,9 @@ public void fetchingJSON() {
 
     Hhdprogress.show();
 
-    StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_REPORTNrc,
+    StringRequest stringRequest = new StringRequest(
+            Request.Method.POST,
+            URL_REPORTNrc,
             new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {

@@ -38,8 +38,14 @@ import com.nex3z.notificationbadge.NotificationBadge;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import tallyadmin.gp.gpcropcare.Activities.SalesOrderActivity;
 import tallyadmin.gp.gpcropcare.Activities.Sixreportactivity;
@@ -54,8 +60,10 @@ import static tallyadmin.gp.gpcropcare.Common.Common.URL_DASHBOARDSBADGES;
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_LOGIN;
 
 
-public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, CompanyHomeAdapter.OnRecyclerViewItemClickListener {
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        CompanyHomeAdapter.OnRecyclerViewItemClickListener
+{
+
     AlertDialog alertDialog;
     Companysave companydata;
     UserInfo userInfo;
@@ -66,6 +74,7 @@ public class HomeActivity extends AppCompatActivity
     NotificationBadge mBage,paybadge,orderbadge;
     SwipeRefreshLayout swipe;
     private TextView dashcmp;
+    TextView dateText , timeText;
 
 
     @Override
@@ -97,6 +106,9 @@ public class HomeActivity extends AppCompatActivity
                     }, 1000);
                 }
             });
+
+        dateText = findViewById(R.id.date);
+        timeText = findViewById(R.id.time);
 
 
         System.out.println("Allow Approve + Reject ");
@@ -151,7 +163,7 @@ public class HomeActivity extends AppCompatActivity
                 }
             });
 
-          //        LinearLayout about = findViewById(R.id.about);
+            //  LinearLayout about = findViewById(R.id.about);
 //        ImageView imgabout = findViewById(R.id.imgabout);
 //            imgabout.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -194,16 +206,28 @@ public class HomeActivity extends AppCompatActivity
 //            }
 //        });
 
-            //-----sales on click go to dashboard to Sales order activity-----//
-        LinearLayout salesorder = findViewById(R.id.sales_order);
+         timeText.setText(currentTIme().toString());
+         Date date = new Date();
+         dateText.setText(getFormatedDate(todayformatDate()));
 
-        ImageView imgs = findViewById(R.id.imgs);
-        imgs.setOnClickListener(new View.OnClickListener() {
+            //-----sales on click go to dashboard to Sales order activity-----//
+
+         LinearLayout salesorder = findViewById(R.id.sales_order);
+         salesorder.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 startActivity(new Intent(HomeActivity.this, SalesOrderActivity.class));
+             }
+         });
+
+         ImageView imgs = findViewById(R.id.imgs);
+         imgs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, SalesOrderActivity.class));
             }
-        });
+          });
+
 
         ImageView stockReportImageView = findViewById(R.id.imgReport);
         stockReportImageView.setOnClickListener(new View.OnClickListener() {
@@ -214,30 +238,38 @@ public class HomeActivity extends AppCompatActivity
         });
 
           /*  //------Report on click go to dashboard to Report activity-----//
-            LinearLayout report = findViewById(R.id.report);
-            report.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(HomeActivity.this, Sixreportactivity.class));
-                }
-            });*/
-          //        LinearLayout payment = findViewById(R.id.payment);
-//        ImageView imgspay = findViewById(R.id.imgspay);
-//            imgspay.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(HomeActivity.this, PaymentActivity.class));
-//
-//            }
-//        });
+       //     LinearLayout report = findViewById(R.id.report);
+       //     report.setOnClickListener(new View.OnClickListener() {
 
-        dashcmp = findViewById(R.id.dash_cmpname);
-        dashcmp.setText(companydata.getKeyName());
+          //------Report on click go to dashboard to Report activity-----//
+      //    LinearLayout report = findViewById(R.id.report);
+      //    report.setOnClickListener(new View.OnClickListener() {
+
+       //         @Override
+      //          public void onClick(View view) {
+      //              startActivity(new Intent(HomeActivity.this, StockReportActivity.class));
+      //          }
+      //      });
+
+          //   LinearLayout payment = findViewById(R.id.payment);
+          //  ImageView imgspay = findViewById(R.id.imgspay);
+          //  imgspay.setOnClickListener(new View.OnClickListener() {
+          //        @Override
+          //         public void onClick(View v) {
+          //              startActivity(new Intent(HomeActivity.this, PaymentActivity.class));
+          //
+          //     }
+          //   });
+
+          dashcmp = findViewById(R.id.dash_cmpname);
+          dashcmp.setText(companydata.getKeyName());
     }
 
     public void showbadges()
     {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DASHBOARDSBADGES,
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                URL_DASHBOARDSBADGES,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -323,8 +355,8 @@ public class HomeActivity extends AppCompatActivity
                 .setCancellable(true)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f);
-//        Hhdprogress.setCancellable()
-        Hhdprogress.setCancellable(new DialogInterface.OnCancelListener() {
+         //Hhdprogress.setCancellable()
+         Hhdprogress.setCancellable(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
                 dialog.dismiss();
@@ -343,15 +375,27 @@ public class HomeActivity extends AppCompatActivity
 
                             try {
                                 JSONObject obj = new JSONObject(response);
+
+                                System.out.println("Dat::"+obj.toString());
                                 Saleslist = new ArrayList<>();
                                 JSONArray dataArray  = obj.getJSONArray("response");
                                 for (int i = 0; i < dataArray.length(); i++) {
+
                                     Company playerModel = new Company();
                                     JSONObject dataobj = dataArray.getJSONObject(i);
                                     playerModel.setCmpGUID(dataobj.getString("CmpGUID"));
                                     playerModel.setCompanyName(dataobj.getString("CompanyName"));
                                     playerModel.setPendingSales(dataobj.getInt("PendingSales"));
+
+
+
+                                    playerModel.setFirstLevel(dataobj.getString("FirstLevel"));
+                                    playerModel.setSecondLevel(dataobj.getString("SecondLevel"));
+                                    playerModel.setAllowReject(dataobj.getString("AllowReject"));
+                                    playerModel.setAllowedApprove(dataobj.getString("AllowApprove"));
+
                                     Saleslist.add(playerModel);
+
                                 }
                                Hhdprogress.dismiss();
                                 cmpndialog();
@@ -377,10 +421,8 @@ public class HomeActivity extends AppCompatActivity
         };
 
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
-
-
-
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
 
@@ -396,8 +438,6 @@ public class HomeActivity extends AppCompatActivity
             finish();
         } else if (id == R.id.nav_about) {
             startActivity(new Intent(HomeActivity.this,AboutActivity.class));
-
-
         }
          else if (id == R.id.nav_logout) {
             startActivity(new Intent(HomeActivity.this,LoginActivity.class));
@@ -419,21 +459,21 @@ public class HomeActivity extends AppCompatActivity
 
     //check internet connectivity.....
     private boolean isNetworkConnected()
-       {
+    {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
 
-    private  void cmpndialog(){
+    private  void cmpndialog()
+    {
         AlertDialog.Builder settingdialog = new AlertDialog.Builder(this,R.style.MyDialog);
         LayoutInflater inflater = this.getLayoutInflater();
-        View settinview= inflater.inflate(R.layout.setting_layoutrc, null);
+        View settinview = inflater.inflate(R.layout.setting_layoutrc, null);
         final CompanyHomeAdapter companyAdapter= new CompanyHomeAdapter(Saleslist,getApplicationContext(),HomeActivity.this,this);
         RecyclerView recyclercpm = settinview.findViewById(R.id.recyler_bottomm);
         recyclercpm.setAdapter(companyAdapter);
         recyclercpm.setHasFixedSize(true);
         recyclercpm.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-
 
         settingdialog.setView(settinview);
 
@@ -442,16 +482,17 @@ public class HomeActivity extends AppCompatActivity
         alertDialog.show();
         alertDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,900); //Controlling width and height.
 
-
     }
 
-    public void cmpDialogExit(){
+    public void cmpDialogExit()
+    {
         alertDialog.dismiss();
     }
 
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         showbadges();
 
         new AlertDialog.Builder(this)
@@ -483,17 +524,61 @@ public class HomeActivity extends AppCompatActivity
     }
 
     @Override
-    public void onRecyclerViewItemClicked(int position, Company data) {
+    public void onRecyclerViewItemClicked(int position, Company data)
+    {
         dashcmp.setText(data.getCompanyName());
         mBage.setText(data.getPendingSales().toString());
         companydata.setCompanyGid(data.getCmpGUID());
         companydata.setcompany(data.getCompanyName());
+
+        //Activity.cmpDialogExit();
+        /*  -----     SET RULES HERE   -------------    */
+        userInfo.setFirstLevel(data.getFirstLevel().toString());
+        userInfo.setSecondLevel(data.getSecondLevel().toString());
+
+        userInfo.setAllowApprove(data.getAllowedApprove().toString());
+        userInfo.setAllowReject(data.getAllowReject().toString());
+
         alertDialog.dismiss();
         if(data.getPendingSales() != null && data.getPendingSales() != 0){
             mBage.setVisibility(View.VISIBLE);
         }else{
             mBage.setVisibility(View.GONE);
         }
+    }
+
+    public String todayformatDate()
+    {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Date date = new Date();
+        return formatter.format(date);
+    }
+
+    public String currentTIme()
+    {
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        Date time = Calendar.getInstance().getTime();
+        return timeFormatter.format(time);
+    }
+
+    public String getFormatedDate(String data)
+    {
+        final SimpleDateFormat ymdFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        final SimpleDateFormat EEEddMMMyyyy = new SimpleDateFormat("EEE, d MMM yyyy", Locale.getDefault());
+        return parseDate(data, ymdFormat, EEEddMMMyyyy);
+    }
+
+    public  String parseDate(String inputDateString, SimpleDateFormat inputDateFormat, SimpleDateFormat outputDateFormat)
+    {
+        Date date = null;
+        String outputDateString = null;
+        try {
+            date = inputDateFormat.parse(inputDateString);
+            outputDateString = outputDateFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return outputDateString;
     }
 }
 

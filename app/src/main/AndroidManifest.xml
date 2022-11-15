@@ -16,9 +16,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
+
             android:name=".Activities.StateReportActivity"
             android:exported="false" />
         <activity
+
             android:name=".Activities.StockReportActivity"
             android:exported="false" />
         <activity

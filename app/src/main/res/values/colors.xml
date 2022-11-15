@@ -21,6 +21,8 @@
     <color name="Wheat">#fff</color>
     <color name="back">#6CB9A0</color>
     <color name="splashscrren">#B7F9D8</color>
+
+
 <!--    <gradient android:angle="45"-->
 <!--        android:startColor="#42E695"-->
 <!--        android:endColor="#00BCD4"/>-->
