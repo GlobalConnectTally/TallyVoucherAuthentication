@@ -43,6 +43,7 @@ import java.util.HashMap;
 import java.util.Map;
 import tallyadmin.gp.gpcropcare.Activities.SalesOrderActivity;
 import tallyadmin.gp.gpcropcare.Activities.Sixreportactivity;
+import tallyadmin.gp.gpcropcare.Activities.StockReportActivity;
 import tallyadmin.gp.gpcropcare.Adapter.CompanyHomeAdapter;
 import tallyadmin.gp.gpcropcare.Model.Company;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
@@ -201,6 +202,14 @@ public class HomeActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this, SalesOrderActivity.class));
+            }
+        });
+
+        ImageView stockReportImageView = findViewById(R.id.imgReport);
+        stockReportImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this, StockReportActivity.class));
             }
         });
 
