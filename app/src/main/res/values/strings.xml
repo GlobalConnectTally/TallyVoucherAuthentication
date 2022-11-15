@@ -12,6 +12,9 @@
     <string name="reject">Reject</string>
     <string name="aboutus">AboutUs</string>
     <string name="logout">Logout</string>
+    <string name="from">From</string>
+    <string name="date_select">From</string>
+    <string name="date_select_to">To</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

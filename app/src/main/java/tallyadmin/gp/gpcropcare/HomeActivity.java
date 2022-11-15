@@ -227,14 +227,28 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
           });
 
+
+        ImageView stockReportImageView = findViewById(R.id.imgReport);
+        stockReportImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this, StockReportActivity.class));
+            }
+        });
+
+          /*  //------Report on click go to dashboard to Report activity-----//
+       //     LinearLayout report = findViewById(R.id.report);
+       //     report.setOnClickListener(new View.OnClickListener() {
+
           //------Report on click go to dashboard to Report activity-----//
-          LinearLayout report = findViewById(R.id.report);
-          report.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(HomeActivity.this, StockReportActivity.class));
-                }
-            });
+      //    LinearLayout report = findViewById(R.id.report);
+      //    report.setOnClickListener(new View.OnClickListener() {
+
+       //         @Override
+      //          public void onClick(View view) {
+      //              startActivity(new Intent(HomeActivity.this, StockReportActivity.class));
+      //          }
+      //      });
 
           //   LinearLayout payment = findViewById(R.id.payment);
           //  ImageView imgspay = findViewById(R.id.imgspay);
