@@ -96,7 +96,7 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
         companydata.setcompany(companyName);
         Activity.cmpDialogExit();
         Toast.makeText(context, "Company changed success full", Toast.LENGTH_LONG).show();
-////
+       ////
 //
 //            }
 //        }).setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {

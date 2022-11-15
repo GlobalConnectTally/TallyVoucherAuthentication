@@ -230,7 +230,7 @@
 
             </LinearLayout>
 
-            <!--            <LinearLayout-->
+               <LinearLayout-->
             <!--                android:weightSum="3"-->
 
             <!--                android:layout_weight="1"-->
@@ -495,7 +495,7 @@
 
             <!--            </LinearLayout>-->
 
-            &lt;!&ndash;            <LinearLayout&ndash;&gt;
+          <!--  &lt;!&ndash;            <LinearLayout&ndash;&gt;
             &lt;!&ndash;                android:weightSum="3"&ndash;&gt;
 
             &lt;!&ndash;                android:layout_weight="1"&ndash;&gt;

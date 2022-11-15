@@ -162,7 +162,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
 
-            //  LinearLayout about = findViewById(R.id.about);
+        //  LinearLayout about = findViewById(R.id.about);
 //        ImageView imgabout = findViewById(R.id.imgabout);
 //            imgabout.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -209,8 +209,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
          Date date = new Date();
          dateText.setText(getFormatedDate(todayformatDate()));
 
-            //-----sales on click go to dashboard to Sales order activity-----//
-
+         //-----sales on click go to dashboard to Sales order activity-----//
          LinearLayout salesorder = findViewById(R.id.sales_order);
          salesorder.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -227,28 +226,22 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
           });
 
-
-        ImageView stockReportImageView = findViewById(R.id.imgReport);
+         /*  ImageView stockReportImageView = findViewById(R.id.imgReport);
         stockReportImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HomeActivity.this, StockReportActivity.class));
             }
-        });
-
-          /*  //------Report on click go to dashboard to Report activity-----//
-       //     LinearLayout report = findViewById(R.id.report);
-       //     report.setOnClickListener(new View.OnClickListener() {
+         });*/
 
           //------Report on click go to dashboard to Report activity-----//
-      //    LinearLayout report = findViewById(R.id.report);
-      //    report.setOnClickListener(new View.OnClickListener() {
-
-       //         @Override
-      //          public void onClick(View view) {
-      //              startActivity(new Intent(HomeActivity.this, StockReportActivity.class));
-      //          }
-      //      });
+          LinearLayout report = findViewById(R.id.report);
+          report.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(HomeActivity.this, StockReportActivity.class));
+                }
+            });
 
           //   LinearLayout payment = findViewById(R.id.payment);
           //  ImageView imgspay = findViewById(R.id.imgspay);
@@ -263,6 +256,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
           dashcmp = findViewById(R.id.dash_cmpname);
           dashcmp.setText(companydata.getKeyName());
     }
+
 
     public void showbadges()
     {
