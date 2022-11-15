@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,6 +74,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
 
     @Override
     public void onBindViewHolder(@NonNull final SalesOrderAdapter.SalesOrderViewHolder holder, final int position) {
+
         String valuecustomername = orderArrayList.get(position).getPartyName();
         if (valuecustomername.equals("#~#") || valuecustomername.equals("")){
             holder.customer_name.setText("");
@@ -124,9 +126,15 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
 
         String authFlag = orderArrayList.get(position).getAuthenticationFlag().toString();
         if (authFlag.equals("A1")){
+
             holder.authFlagText.setVisibility(View.VISIBLE);
+            holder.approveOrRejectBy.setVisibility(View.VISIBLE);
+
         }else {
-            holder.authFlagText.setVisibility(View.INVISIBLE);
+
+            holder.authFlagText.setVisibility(View.GONE);
+            holder.approveOrRejectBy.setVisibility(View.GONE);
+
         }
 
         /*
@@ -376,8 +384,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                                 }
 
                                 Toast.makeText(context,"Authorized success full",Toast.LENGTH_SHORT).show();
-                            }
-                            else {
+                            } else {
                                 Toast.makeText(context,"Authorization Failed"+ "  "+result,Toast.LENGTH_SHORT).show();
                             }
 
@@ -540,9 +547,10 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
     public class SalesOrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         public TextView customer_name, date, order_no,order_amount,txt_authenticated,txt_master,txt_sales,txt_soname;
-        TextView txto_author,txt_cancel,report_more,authFlagText;
+        TextView txto_author,txt_cancel,report_more,authFlagText,textApprRejBy;
         ItemClickListener itemClickListener;
         ImageView txt_more;
+        LinearLayout approveOrRejectBy;
 
 
         public void setItemClickListener(ItemClickListener itemClickListener) {
@@ -567,6 +575,10 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
             txt_cancel= itemView.findViewById(R.id.txt_cancel);
             txt_more = itemView.findViewById(R.id.txti_more);
             authFlagText = itemView.findViewById(R.id.authFlag);
+            textApprRejBy = itemView.findViewById(R.id.textApprRejBy);
+            approveOrRejectBy = itemView.findViewById(R.id.approveOrRejectBy);
+
+
             itemView.setOnClickListener(this);
 
         }

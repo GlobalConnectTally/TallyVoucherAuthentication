@@ -18,6 +18,24 @@
        android:background="@drawable/boda_kaki">
 
        <LinearLayout
+           android:visibility="gone"
+           android:id="@+id/approveOrRejectBy"
+           android:background="@color/colorPrimary"
+           android:padding="@dimen/_5sdp"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+           <TextView
+               android:id="@+id/textApprRejBy"
+               android:gravity="center_horizontal"
+               android:text="Name"
+               android:textColor="@color/white"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"/>
+
+       </LinearLayout>
+
+       <LinearLayout
            android:padding="@dimen/_4sdp"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
@@ -49,7 +67,7 @@
 
            <TextView
                android:visibility="gone"
-               android:background="@color/red"
+               android:background="@color/colorPrimary"
                android:id="@+id/authFlag"
                android:layout_width="0dp"
                android:layout_height="wrap_content"
@@ -60,7 +78,6 @@
                android:gravity="center">
 
            </TextView>
-
 
        </LinearLayout>
 
@@ -197,6 +214,7 @@
            android:background="@drawable/boda_kaki"
            android:weightSum="3"
            android:orientation="horizontal">
+
 
            <TextView
                android:id="@+id/txt_author"

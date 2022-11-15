@@ -230,7 +230,7 @@ public class SalesOrderActivity extends AppCompatActivity
                          && userInfo.getFirstLevel().equalsIgnoreCase("No")){
 
                     //Unknown - Returns Empty
-                    accessLevel = "Unknown";
+                    accessLevel = "P";
 
                 }
 

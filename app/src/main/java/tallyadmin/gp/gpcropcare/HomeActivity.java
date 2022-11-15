@@ -76,7 +76,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private TextView dashcmp;
     TextView dateText , timeText;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
