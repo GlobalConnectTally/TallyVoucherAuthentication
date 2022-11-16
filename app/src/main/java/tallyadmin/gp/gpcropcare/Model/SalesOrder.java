@@ -4,8 +4,9 @@ public class SalesOrder {
     String CmpGUID,VoucherTypeName,PartyName,ReffNo,BuyerName,BuyerAddress,Narration,TotalAmt,Date,TallyUserName,VoucherNumber,TallyUsermobileno,LedgerMasterId,AllowApprove,AllowReject;
     int MasterID;
     String AuthenticationFlag;
+    String ApprovedRejectedBy;
 
-    public SalesOrder(String cmpGUID, String voucherTypeName, String partyName, String reffNo, String buyerName, String buyerAddress, String narration, String totalAmt, String date, String tallyUserName, String voucherNumber, String tallyUsermobileno, String ledgerMasterId, String allowApprove, String allowReject, int masterID, String authenticationFlag) {
+    public SalesOrder(String cmpGUID, String voucherTypeName, String partyName, String reffNo, String buyerName, String buyerAddress, String narration, String totalAmt, String date, String tallyUserName, String voucherNumber, String tallyUsermobileno, String ledgerMasterId, String allowApprove, String allowReject, int masterID, String authenticationFlag, String approvedRejectedBy) {
         CmpGUID = cmpGUID;
         VoucherTypeName = voucherTypeName;
         PartyName = partyName;
@@ -23,6 +24,7 @@ public class SalesOrder {
         AllowReject = allowReject;
         MasterID = masterID;
         AuthenticationFlag = authenticationFlag;
+        ApprovedRejectedBy = approvedRejectedBy;
     }
 
     public SalesOrder() {
@@ -165,6 +167,14 @@ public class SalesOrder {
         AuthenticationFlag = authenticationFlag;
     }
 
+    public String getApprovedRejectedBy() {
+        return ApprovedRejectedBy;
+    }
+
+    public void setApprovedRejectedBy(String approvedRejectedBy) {
+        ApprovedRejectedBy = approvedRejectedBy;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -185,6 +195,7 @@ public class SalesOrder {
                 ", AllowReject='" + AllowReject + '\'' +
                 ", MasterID=" + MasterID +
                 ", AuthenticationFlag='" + AuthenticationFlag + '\'' +
+                ", ApprovedRejectedBy='" + ApprovedRejectedBy + '\'' +
                 '}';
     }
 }

@@ -152,6 +152,7 @@ public class SalesOrderActivity extends AppCompatActivity
                             for (int i = 0; i < dataArray.length(); i++) {
 
                                 JSONObject dataobj = dataArray.getJSONObject(i);
+
                                 SalesOrder playerModel = new SalesOrder();
                                 playerModel.setBuyerName(dataobj.getString("BuyerName"));
                                 playerModel.setPartyName(dataobj.getString("PartyName"));
@@ -167,11 +168,14 @@ public class SalesOrderActivity extends AppCompatActivity
                                 playerModel.setLedgerMasterId(dataobj.getString("LedgerMasterId"));
                                 playerModel.setTallyUsermobileno(dataobj.getString("TallyUserMobNo"));
 
+
                                 /*----  FROM SHAREPREFERENCE  -------*/
                                 playerModel.setAllowApprove(userInfo.getAllowApprove());
                                 playerModel.setAllowReject(userInfo.getAllowReject());
 
+                                /*------ 2 Level Authentication -----------*/
                                 playerModel.setAuthenticationFlag(dataobj.getString("AuthenticationFlag"));
+                                playerModel.setApprovedRejectedBy(dataobj.getString("ApprovedRejectedBy"));
 
                                 Saleslist.add(playerModel);
 
@@ -207,33 +211,34 @@ public class SalesOrderActivity extends AppCompatActivity
 
                 /*---   USER-LEVELS ------------*/
                 String accessLevel = " ";
-                if (  userInfo.getFirstLevel().equalsIgnoreCase("Yes") &&
-                         userInfo.getSecondLevel().equalsIgnoreCase("Yes")){
+                if (userInfo.getFirstLevel().equalsIgnoreCase("Yes") && userInfo.getSecondLevel().equalsIgnoreCase("Yes"))
+                {
 
                     //B - For Both P & A1
                     accessLevel = "B";
 
-                 }else if (  userInfo.getFirstLevel().equalsIgnoreCase("Yes")
-                             && userInfo.getSecondLevel().equalsIgnoreCase("No")
-                   ){
+                 }
+                else if (userInfo.getFirstLevel().equalsIgnoreCase("Yes") && userInfo.getSecondLevel().equalsIgnoreCase("No"))
+                {
 
                     //P - Pending
                     accessLevel = "P";
 
-                }else if (  userInfo.getFirstLevel().equalsIgnoreCase("No")
-                             && userInfo.getSecondLevel().equalsIgnoreCase("Yes")){
+                }
+                else if (userInfo.getFirstLevel().equalsIgnoreCase("No") && userInfo.getSecondLevel().equalsIgnoreCase("Yes"))
+                {
 
                     //A1 - Approved By First Level
                     accessLevel = "A1";
 
-                }else if (  userInfo.getFirstLevel().equalsIgnoreCase("No")
-                         && userInfo.getFirstLevel().equalsIgnoreCase("No")){
+                }
+                else if (userInfo.getFirstLevel().equalsIgnoreCase("No") && userInfo.getFirstLevel().equalsIgnoreCase("No"))
+                {
 
                     //Unknown - Returns Empty
                     accessLevel = "P";
 
                 }
-
                 params.put("AuthenticationFlag", accessLevel);
 
                 return params;

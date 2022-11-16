@@ -255,7 +255,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
           dashcmp.setText(companydata.getKeyName());
     }
 
-
     public void showbadges()
     {
         StringRequest stringRequest = new StringRequest(
@@ -272,21 +271,21 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             //badges number
 
                             int PendingSales = obj.getInt("PendingSales");
-//                            int pendingorders = obj.getInt("PendingSalesOrder");
-//                            int pendingpay = obj.getInt("PendingPayment");
+                            // int pendingorders = obj.getInt("PendingSalesOrder");
+                            //int pendingpay = obj.getInt("PendingPayment");
 
                             if (PendingSales !=0){
-//                                Toast.makeText(HomeActivity.this, ""+PendingSales,Toast.LENGTH_SHORT).show();
+                             //  Toast.makeText(HomeActivity.this, ""+PendingSales,Toast.LENGTH_SHORT).show();
                                 mBage.setNumber(PendingSales);
                             }
-//                           if (pendingorders!=0){
-//                               orderbadge.setNumber(pendingorders);
-////                               Toast.makeText(HomeActivity.this, ""+pendingorders,Toast.LENGTH_SHORT).show();
-//                           }
-//                            if (pendingpay!=0){
-//                                paybadge.setNumber(pendingpay);
-////                                Toast.makeText(HomeActivity.this, ""+pendingpay,Toast.LENGTH_SHORT).show();
-//                            }
+                        //  if (pendingorders!=0){
+                        //      orderbadge.setNumber(pendingorders);
+                        ////        Toast.makeText(HomeActivity.this, ""+pendingorders,Toast.LENGTH_SHORT).show();
+                        //         }
+                        //     if (pendingpay!=0){
+                        //           paybadge.setNumber(pendingpay);
+                        ////       Toast.makeText(HomeActivity.this, ""+pendingpay,Toast.LENGTH_SHORT).show();
+                        //     }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -304,7 +303,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("CmpGUID",companydata.getKeyCmpnGid());
-
+                params.put("FirstLevel",userInfo.getFirstLevel().toString());
+                params.put("SecondLevel",userInfo.getSecondLevel().toString());
                 return params;
             }
         };

@@ -8,7 +8,7 @@
     tools:context=".HomeActivity">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:elevation="@dimen/_1sdp"
+        app:elevation="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
