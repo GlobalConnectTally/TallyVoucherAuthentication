@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/drawable/backgroundnav.xml" value="0.1485" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/drawable/invoice_count_bottom.xml" value="0.1635" />
+        <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/drawable/roundbgi.xml" value="0.1895" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout-land/activity_stock_report.xml" value="0.22916666666666666" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout-small/activity_stock_report.xml" value="0.16673792218896966" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout-sw600dp/activity_home.xml" value="0.15537059056678557" />
@@ -15,10 +16,13 @@
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_home.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_main.xml" value="0.1675929884566054" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_reportn.xml" value="0.1675929884566054" />
-        <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_sixreportactivity.xml" value="0.1675929884566054" />
+        <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_showtransactionew.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_sixreportactivity.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_stock_report.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/app_bar_home.xml" value="0.1675929884566054" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/content_home.xml" value="0.15875912408759124" />
+        <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/content_showtransactionew.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/content_sixreportactivity.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/order_redesignewt.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/spinner_layoutb.xml" value="0.1675929884566054" />
         <entry key="..\:/Office Projects/app/src/main/res/layout-sw600dp/activity_licence.xml" value="0.190625" />

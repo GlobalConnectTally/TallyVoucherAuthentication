@@ -120,7 +120,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         showbadges();
 
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -205,9 +204,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //            }
 //        });
 
-         timeText.setText(currentTIme().toString());
-         Date date = new Date();
-         dateText.setText(getFormatedDate(todayformatDate()));
+        timeText.setText(currentTIme().toString());
+        dateText.setText(getFormatedDate(todayformatDate()));
 
          //-----sales on click go to dashboard to Sales order activity-----//
          LinearLayout salesorder = findViewById(R.id.sales_order);
