@@ -255,7 +255,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
           dashcmp.setText(companydata.getKeyName());
     }
 
-    public void showbadges()
+    public  void showbadges()
     {
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
@@ -275,9 +275,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             //int pendingpay = obj.getInt("PendingPayment");
 
                             if (PendingSales !=0){
-                             //  Toast.makeText(HomeActivity.this, ""+PendingSales,Toast.LENGTH_SHORT).show();
-                                mBage.setNumber(PendingSales);
+                                 //Toast.makeText(HomeActivity.this, ""+PendingSales,Toast.LENGTH_SHORT).show();
+                                //mBage.setNumber(PendingSales);
+                                session.setBadgeCounting(String.valueOf(PendingSales));
+                                mBage.setNumber(Integer.parseInt(session.getBadgeCounting()));
                             }
+
                         //  if (pendingorders!=0){
                         //      orderbadge.setNumber(pendingorders);
                         ////        Toast.makeText(HomeActivity.this, ""+pendingorders,Toast.LENGTH_SHORT).show();
@@ -507,14 +510,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onRestart()
-    {
-        super.onRestart();
-        // do some stuff here
-        showbadges();
-    }
-
-    @Override
     public void onRecyclerViewItemClicked(int position, Company data)
     {
         dashcmp.setText(data.getCompanyName());
@@ -571,6 +566,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         return outputDateString;
     }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        showbadges();
+    }
+
+
 }
 
 

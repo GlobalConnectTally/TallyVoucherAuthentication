@@ -1,5 +1,6 @@
 package tallyadmin.gp.gpcropcare.Activities;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -31,6 +32,7 @@ import java.util.Locale;
 import java.util.Map;
 import tallyadmin.gp.gpcropcare.Adapter.SalesOrderAdapter;
 
+import tallyadmin.gp.gpcropcare.HomeActivity;
 import tallyadmin.gp.gpcropcare.Model.SalesOrder;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
@@ -51,6 +53,7 @@ public class SalesOrderActivity extends AppCompatActivity
     UserInfo userInfo;
     Session session;
     EditText editsearch;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -298,5 +301,10 @@ public class SalesOrderActivity extends AppCompatActivity
     {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
