@@ -61,8 +61,7 @@ import static tallyadmin.gp.gpcropcare.Common.Common.URL_LOGIN;
 
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        CompanyHomeAdapter.OnRecyclerViewItemClickListener
-{
+        CompanyHomeAdapter.OnRecyclerViewItemClickListener {
 
     AlertDialog alertDialog;
     Companysave companydata;

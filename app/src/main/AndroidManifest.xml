@@ -20,80 +20,118 @@
             android:name=".Activities.StateReportActivity"
             android:exported="false" />
         <activity
-
             android:name=".Activities.StockReportActivity"
             android:exported="false" />
+
         <activity
             android:name=".Activities.LimitActivity"
-            android:parentActivityName=".Activities.Sixreportactivity" />
+            android:parentActivityName=".Activities.Sixreportactivity"
+            android:exported="false"/>
         <activity
             android:name=".Activities.CurrentStatusActivity"
-            android:parentActivityName=".Activities.Sixreportactivity" />
+            android:parentActivityName=".Activities.Sixreportactivity"
+            android:exported="false"/>
+
         <activity
             android:name=".Activities.LastYearbusinessActivity"
-            android:parentActivityName=".Activities.Sixreportactivity" />
+            android:parentActivityName=".Activities.Sixreportactivity"
+            android:exported="false"/>
+
         <activity
             android:name=".Activities.BusinessdateActivity"
-            android:parentActivityName=".Activities.Sixreportactivity" />
+            android:parentActivityName=".Activities.Sixreportactivity"
+            android:exported="false"/>
+
         <activity
             android:name=".Activities.NCRDueBills"
-            android:parentActivityName=".Activities.Sixreportactivity" />
+            android:parentActivityName=".Activities.Sixreportactivity"
+            android:exported="false"/>
+
         <activity
             android:name=".Activities.Outstanding"
-            android:parentActivityName=".Activities.Sixreportactivity" />
-        <activity android:name=".Activities.Sixreportactivity" />
+            android:parentActivityName=".Activities.Sixreportactivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".Activities.Sixreportactivity"
+            android:exported="false"/>
+
         <activity
             android:name=".Activities.ReportActivity"
-            android:parentActivityName=".Activities.SalesOrderActivity" />
-        <activity android:name=".Activities.MainActivity" />
+            android:parentActivityName=".Activities.SalesOrderActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".Activities.MainActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".Activities.PaytransActivity"
-            android:parentActivityName=".Activities.PaymentActivity" />
-        <activity android:name=".Activities.ShowpayActivity" />
-        <activity android:name=".Activities.ActivateLicenceActivity" />
-        <activity android:name=".Activities.DemoregisterActivity" />
-        <activity android:name=".Activities.LicenceActivity" />
+            android:parentActivityName=".Activities.PaymentActivity"
+            android:exported="false"/>
+
+        <activity android:name=".Activities.ShowpayActivity"    android:exported="false" />
+        <activity android:name=".Activities.ActivateLicenceActivity"    android:exported="false"/>
+        <activity android:name=".Activities.DemoregisterActivity"    android:exported="false"/>
+        <activity android:name=".Activities.LicenceActivity"    android:exported="false" />
+
         <activity
             android:name=".Activities.Fragement_OrderActivity"
-            android:parentActivityName=".Activities.SalesOrderActivity" />
+            android:parentActivityName=".Activities.SalesOrderActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activities.ShowtransactionOrderActivity"
-            android:parentActivityName=".Activities.SalesOrderActivity" />
+            android:parentActivityName=".Activities.SalesOrderActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activities.Fragement_managerActivity"
-            android:parentActivityName=".Activities.SalesActivity" />
+            android:parentActivityName=".Activities.SalesActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activities.ShowtransactionActivity"
-            android:parentActivityName=".Activities.SalesActivity" />
+            android:parentActivityName=".Activities.SalesActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activities.ShowinvoicesActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HomeActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activities.HelpActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HomeActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activities.PaymentActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HomeActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activities.SalesOrderActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HomeActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activities.SalesActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HomeActivity"
+            android:exported="false"/>
         <activity
             android:name=".Activities.SalesInvoiceActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HomeActivity"
+            android:exported="false" />
         <activity
             android:name=".HomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:exported="false" />
         <activity
             android:name=".AboutActivity"
-            android:parentActivityName=".HomeActivity" />
+            android:parentActivityName=".HomeActivity"
+            android:exported="false"/>
         <activity
             android:name=".LoginActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".Splashscreen">
+            android:screenOrientation="portrait"
+            android:exported="false"/>
+
+        <activity
+            android:name=".Splashscreen"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
