@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,18 +17,20 @@ import tallyadmin.gp.gpcropcare.R;
 
 //-----six reports activity-----//
 public class Sixreportactivity extends AppCompatActivity {
-    RelativeLayout outstanding,ncrduebill,businessdate,lastyearbus,currentstatus,limit;
+    LinearLayout outstanding,ncrduebill,businessdate,lastyearbus,currentstatus,limit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sixreportactivity);
-        outstanding = (RelativeLayout)findViewById(R.id.outstanding);
-        ncrduebill = (RelativeLayout)findViewById(R.id.ncrduebill);
-        businessdate = (RelativeLayout)findViewById(R.id.businessdate);
-        lastyearbus = (RelativeLayout)findViewById(R.id.lastyearbus);
-        currentstatus = (RelativeLayout)findViewById(R.id.currentstatus);
-        limit = (RelativeLayout)findViewById(R.id.limit);
+
+        outstanding = (LinearLayout)findViewById(R.id.outstanding);
+        ncrduebill = (LinearLayout)findViewById(R.id.ncrduebill);
+        businessdate = (LinearLayout)findViewById(R.id.businessdate);
+        lastyearbus = (LinearLayout)findViewById(R.id.lastyearbus);
+        currentstatus = (LinearLayout)findViewById(R.id.currentstatus);
+        limit = (LinearLayout)findViewById(R.id.limit);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -73,7 +73,8 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final SalesOrderAdapter.SalesOrderViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final SalesOrderAdapter.SalesOrderViewHolder holder, final int position)
+    {
 
         String valuecustomername = orderArrayList.get(position).getPartyName();
         if (valuecustomername.equals("#~#") || valuecustomername.equals("")){
@@ -125,16 +126,15 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
         }
 
         String authFlag = orderArrayList.get(position).getAuthenticationFlag().toString();
-        if (authFlag.equals("A1")){
+        String approvedBy = orderArrayList.get(position).getApprovedRejectedBy().toUpperCase().toString();
 
+        if (authFlag.equals("A1")){
             holder.authFlagText.setVisibility(View.VISIBLE);
             holder.approveOrRejectBy.setVisibility(View.VISIBLE);
-
+            holder.textApprRejByView.setText(approvedBy);
         }else {
-
             holder.authFlagText.setVisibility(View.GONE);
             holder.approveOrRejectBy.setVisibility(View.GONE);
-
         }
 
         /*
@@ -198,7 +198,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 companydata.setPartyName(orderArrayList.get(position).getPartyName());
                 companydata.setTallyUsermobile(orderArrayList.get(position).getTallyUsermobileno());
                 Intent intent = new Intent(context, ShowtransactionOrderActivity.class);
-//              /intent.putExtra
+               //intent.putExtra
                 companydata.setLegId(Legid);
                 companydata.setBillAmount(orderArrayList.get(position).getTotalAmt());
                 companydata.setVocherdate(orderArrayList.get(position).getDate());
@@ -267,7 +267,8 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
 
     }
 
-    private void Rejectinvo() {
+    private void Rejectinvo()
+    {
         //rejectmethod
         final AlertDialog.Builder settingdialog = new AlertDialog.Builder(salesOrderActivity);
 
@@ -356,7 +357,8 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
         alertDialog.show();
     }
 
-    private void Authorize() {
+    private void Authorize()
+    {
         //authorize method
         companydata = new Companysave(context.getApplicationContext());
         userInfo = new UserInfo(context.getApplicationContext());
@@ -458,7 +460,8 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
 
     }
 
-    private void sendmessage() {
+    private void sendmessage()
+    {
 
          String msg = "Dear User Your Transaction With OrderNo -" +ordernn+ "  is been Approved ";
 
@@ -547,7 +550,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
     public class SalesOrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         public TextView customer_name, date, order_no,order_amount,txt_authenticated,txt_master,txt_sales,txt_soname;
-        TextView txto_author,txt_cancel,report_more,authFlagText,textApprRejBy;
+        TextView txto_author,txt_cancel,report_more,authFlagText,textApprRejByView;
         ItemClickListener itemClickListener;
         ImageView txt_more;
         LinearLayout approveOrRejectBy;
@@ -575,7 +578,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
             txt_cancel= itemView.findViewById(R.id.txt_cancel);
             txt_more = itemView.findViewById(R.id.txti_more);
             authFlagText = itemView.findViewById(R.id.authFlag);
-            textApprRejBy = itemView.findViewById(R.id.textApprRejBy);
+            textApprRejByView = itemView.findViewById(R.id.textApprRejBy);
             approveOrRejectBy = itemView.findViewById(R.id.approveOrRejectBy);
 
 

@@ -61,8 +61,7 @@ import static tallyadmin.gp.gpcropcare.Common.Common.URL_LOGIN;
 
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-        CompanyHomeAdapter.OnRecyclerViewItemClickListener
-{
+        CompanyHomeAdapter.OnRecyclerViewItemClickListener {
 
     AlertDialog alertDialog;
     Companysave companydata;
@@ -119,7 +118,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //orderbadge = findViewById(R.id.salesorderbadge);
 
         showbadges();
-
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -205,9 +203,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //            }
 //        });
 
-         timeText.setText(currentTIme().toString());
-         Date date = new Date();
-         dateText.setText(getFormatedDate(todayformatDate()));
+        timeText.setText(currentTIme().toString());
+        dateText.setText(getFormatedDate(todayformatDate()));
 
          //-----sales on click go to dashboard to Sales order activity-----//
          LinearLayout salesorder = findViewById(R.id.sales_order);
@@ -257,8 +254,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
           dashcmp.setText(companydata.getKeyName());
     }
 
-
-    public void showbadges()
+    public  void showbadges()
     {
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
@@ -275,21 +271,24 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             //badges number
 
                             int PendingSales = obj.getInt("PendingSales");
-//                            int pendingorders = obj.getInt("PendingSalesOrder");
-//                            int pendingpay = obj.getInt("PendingPayment");
+                            // int pendingorders = obj.getInt("PendingSalesOrder");
+                            //int pendingpay = obj.getInt("PendingPayment");
 
                             if (PendingSales !=0){
-//                                Toast.makeText(HomeActivity.this, ""+PendingSales,Toast.LENGTH_SHORT).show();
-                                mBage.setNumber(PendingSales);
+                                 //Toast.makeText(HomeActivity.this, ""+PendingSales,Toast.LENGTH_SHORT).show();
+                                //mBage.setNumber(PendingSales);
+                                session.setBadgeCounting(String.valueOf(PendingSales));
+                                mBage.setNumber(Integer.parseInt(session.getBadgeCounting()));
                             }
-//                           if (pendingorders!=0){
-//                               orderbadge.setNumber(pendingorders);
-////                               Toast.makeText(HomeActivity.this, ""+pendingorders,Toast.LENGTH_SHORT).show();
-//                           }
-//                            if (pendingpay!=0){
-//                                paybadge.setNumber(pendingpay);
-////                                Toast.makeText(HomeActivity.this, ""+pendingpay,Toast.LENGTH_SHORT).show();
-//                            }
+
+                        //  if (pendingorders!=0){
+                        //      orderbadge.setNumber(pendingorders);
+                        ////        Toast.makeText(HomeActivity.this, ""+pendingorders,Toast.LENGTH_SHORT).show();
+                        //         }
+                        //     if (pendingpay!=0){
+                        //           paybadge.setNumber(pendingpay);
+                        ////       Toast.makeText(HomeActivity.this, ""+pendingpay,Toast.LENGTH_SHORT).show();
+                        //     }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -307,7 +306,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
                 params.put("CmpGUID",companydata.getKeyCmpnGid());
-
+                params.put("FirstLevel",userInfo.getFirstLevel().toString());
+                params.put("SecondLevel",userInfo.getSecondLevel().toString());
                 return params;
             }
         };
@@ -510,14 +510,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    public void onRestart()
-    {
-        super.onRestart();
-        // do some stuff here
-        showbadges();
-    }
-
-    @Override
     public void onRecyclerViewItemClicked(int position, Company data)
     {
         dashcmp.setText(data.getCompanyName());
@@ -574,6 +566,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         return outputDateString;
     }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        showbadges();
+    }
+
+
 }
 
 

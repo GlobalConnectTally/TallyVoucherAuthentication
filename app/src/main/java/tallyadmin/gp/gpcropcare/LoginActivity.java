@@ -172,9 +172,11 @@ public class LoginActivity extends AppCompatActivity {
                                     Company companyModel = new Company();
                                     JSONObject dataobj = dataArray.getJSONObject(i);
 
+                                    /*-------- Authentication ---------*/
                                     companyModel.setAllowReject(dataobj.getString("AllowReject"));
                                     companyModel.setAllowedApprove(dataobj.getString("AllowApprove"));
 
+                                    /*--------   2 Level Authentication ------------*/
                                     companyModel.setFirstLevel(dataobj.getString("FirstLevel"));
                                     companyModel.setSecondLevel(dataobj.getString("SecondLevel"));
 
