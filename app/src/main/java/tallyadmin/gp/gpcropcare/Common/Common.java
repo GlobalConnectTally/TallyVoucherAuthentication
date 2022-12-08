@@ -5,7 +5,7 @@ public class Common {
     //public static final String BASE_URL = "http://110.227.252.89:3232/api/";
     //public static final String BASE_URL = "http://20.213.11.187:1024/api/";
     public static final String URL_LOGIN = BASE_URL + "AppLogin";
-
+    public static final String URL_ITEMS = BASE_URL + "SendStockDetails";
     public static final String URL_AUTHORIZE = BASE_URL + "TransactionAuthentication";
 
     public static final String URL_SALES = BASE_URL + "SendSalesDetails";

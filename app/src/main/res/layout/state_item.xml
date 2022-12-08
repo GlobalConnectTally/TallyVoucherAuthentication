@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="2dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:background="@drawable/stock_item_border"
+        >
+
+        <TextView
+            android:id="@+id/CmpShortNameId"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="GUJARAT"
+            android:textColor="@color/color_black"
+            />
+        <TextView
+            android:id="@+id/oneLtrId"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/color_black"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/fiveHundredMl"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/color_black"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/twoFiftyMlId"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/color_black"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/oneHundredMlId"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/color_black"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/twentyMlId"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/color_black"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/totalMlId"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="@color/color_black"
+            android:gravity="center"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

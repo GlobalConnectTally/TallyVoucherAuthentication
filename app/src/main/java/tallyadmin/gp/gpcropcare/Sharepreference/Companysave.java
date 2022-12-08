@@ -16,6 +16,7 @@ public class Companysave {
     private static final String Vocherdate = "Date";
     private static final String BillAmount = "TotalAmt";
     private static final String PartyName = "PartyName";
+    private static final String CmpShortName = "CmpShortName";
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
     Context ctx;
@@ -75,6 +76,12 @@ public class Companysave {
         editor.apply();
     }
 
+    public void setCmpShortName(String CmpShortNameValue)
+    {
+        editor.putString(CmpShortName, CmpShortNameValue);
+        editor.apply();
+    }
+
     public void clearCompany(){
         editor.clear();
         editor.commit();
@@ -88,6 +95,7 @@ public class Companysave {
         return prefs.getString(TALLY_USERMOBILE, "");}
 
     public String getKeyCmpnGid(){return prefs.getString(CMPGID, "");}
+    public String getCmpShortName(){return prefs.getString(CmpShortName, "");}
 
     public int getKeyMasterId(){
         return prefs.getInt(MasterId, 0);}
@@ -99,5 +107,7 @@ public class Companysave {
         return prefs.getInt(Leghtsize, 0);}
 
     public String getVoucher(){return prefs.getString(VOUCHER, "");}
+
+
 
 }

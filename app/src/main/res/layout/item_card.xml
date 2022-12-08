@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:weightSum="100"
+    android:orientation="horizontal"
+    android:background="@drawable/stock_item_border">
+
+    <TextView
+        android:id="@+id/itemNameId"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="18"
+        android:text="1 LTR"
+        android:textColor="@color/color_black"
+        android:gravity="center_vertical"
+        android:paddingLeft="2dp"
+        />
+    <TextView
+        android:id="@+id/itemOpenValueId"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="20"
+        android:text="0"
+        android:gravity="center"
+        android:textColor="@color/color_black"
+        />
+    <TextView
+        android:id="@+id/itemInValueId"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="20"
+        android:text="0"
+        android:gravity="center"
+        android:textColor="@color/color_black"
+        />
+    <TextView
+        android:id="@+id/itemOutValueId"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="20"
+        android:text="0"
+        android:gravity="center"
+        android:textColor="@color/color_black"
+
+        />
+    <TextView
+        android:id="@+id/itemCloseValueId"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="20"
+        android:text="0"
+        android:gravity="center"
+        android:textColor="@color/color_black"
+        />
+
+</LinearLayout>
+
+

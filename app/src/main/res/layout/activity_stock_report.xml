@@ -30,12 +30,11 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+            android:id="@+id/searchViewId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:queryHint="Search here"
             app:iconifiedByDefault="false"
-
 
             />
 
@@ -113,12 +112,19 @@
 
 
             </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/stateRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <!--
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="2dp"
                 android:background="@drawable/stock_item_border"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 >
 
                 <TextView
@@ -179,6 +185,8 @@
                 android:orientation="horizontal"
                 android:background="@drawable/stock_item_border"
                 android:paddingLeft="2dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 >
 
                 <TextView
@@ -239,6 +247,8 @@
                 android:orientation="horizontal"
                 android:background="@drawable/stock_item_border"
                 android:paddingLeft="2dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 >
 
                 <TextView
@@ -299,6 +309,8 @@
                 android:orientation="horizontal"
                 android:background="@drawable/stock_item_border"
                 android:paddingLeft="2dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 >
 
                 <TextView
@@ -359,6 +371,8 @@
                 android:orientation="horizontal"
                 android:background="@drawable/stock_item_border"
                 android:paddingLeft="2dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 >
 
                 <TextView
@@ -419,6 +433,8 @@
                 android:orientation="horizontal"
                 android:background="@drawable/stock_item_border"
                 android:paddingLeft="2dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 >
 
                 <TextView
@@ -479,6 +495,8 @@
                 android:orientation="horizontal"
                 android:background="@drawable/stock_item_border"
                 android:paddingLeft="2dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 >
 
                 <TextView
@@ -539,6 +557,8 @@
                 android:orientation="horizontal"
                 android:background="@drawable/stock_item_border"
                 android:paddingLeft="2dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 >
 
                 <TextView
@@ -599,6 +619,8 @@
                 android:orientation="horizontal"
                 android:background="@drawable/stock_item_border"
                 android:paddingLeft="2dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 >
 
                 <TextView
@@ -659,6 +681,8 @@
                 android:orientation="horizontal"
                 android:background="@drawable/stock_item_border"
                 android:paddingLeft="2dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 >
 
                 <TextView
@@ -719,6 +743,8 @@
                 android:orientation="horizontal"
                 android:background="@drawable/stock_item_border"
                 android:paddingLeft="2dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 >
 
                 <TextView
@@ -773,24 +799,14 @@
 
 
             </LinearLayout>
-
-
-
-
+            -->
 
         </LinearLayout>
 
 
     </HorizontalScrollView>
 
-    <Button
-        android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="next"
-        android:background="@color/color_white"
-        android:textColor="@color/color_white"
-        />
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 
