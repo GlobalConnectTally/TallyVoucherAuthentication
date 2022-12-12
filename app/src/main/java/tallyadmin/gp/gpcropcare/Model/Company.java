@@ -6,14 +6,14 @@ public class Company {
     private boolean isSelected;
     private Integer pendingSales;
     private String allowedApprove, allowReject;
-    private String FirstLevel, SecondLevel;
+    private String FirstLevel, SecondLevel,CmpShortName;
 
     public Company() {
 
     }
 
     public Company(String cmpGUID, String companyName, boolean isSelected, Integer pendingSales,
-                   String allowedApprove, String allowReject, String firstLevel, String secondLevel)
+                   String allowedApprove, String allowReject, String firstLevel, String secondLevel,String CmpShortName)
     {
         CmpGUID = cmpGUID;
         CompanyName = companyName;
@@ -21,6 +21,7 @@ public class Company {
         this.pendingSales = pendingSales;
         this.allowedApprove = allowedApprove;
         this.allowReject = allowReject;
+        this.CmpShortName = CmpShortName;
         FirstLevel = firstLevel;
         SecondLevel = secondLevel;
     }
@@ -98,4 +99,11 @@ public class Company {
         SecondLevel = secondLevel;
     }
 
+    public String getCmpShortName() {
+        return CmpShortName;
+    }
+
+    public void setCmpShortName(String cmpShortName) {
+        CmpShortName = cmpShortName;
+    }
 }

@@ -263,7 +263,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void onResponse(String response) {
 
-                        try {
+                        try
+                        {
 
                             JSONObject obj = new JSONObject(response);
 
@@ -297,7 +298,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HomeActivity.this, String.valueOf(error.getMessage()), Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override

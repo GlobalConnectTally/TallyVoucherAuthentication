@@ -160,7 +160,6 @@ public class LoginActivity extends AppCompatActivity {
                             JSONObject obj = new JSONObject(response);
                             Saleslist = new ArrayList<>();
                             JSONArray dataArray = obj.getJSONArray("response");
-
                             Log.d("Response::", dataArray.toString());
 
                             if (dataArray.length() != 0) {
@@ -188,6 +187,7 @@ public class LoginActivity extends AppCompatActivity {
                                     companyModel.setCompanyName(dataobj.getString("CompanyName"));
 
                                     companyModel.setPendingSales(dataobj.getInt("PendingSales"));
+                                    companyModel.setCmpShortName(dataobj.getString("CmpShortName"));
 
                                     Saleslist.add(companyModel);
                                 }

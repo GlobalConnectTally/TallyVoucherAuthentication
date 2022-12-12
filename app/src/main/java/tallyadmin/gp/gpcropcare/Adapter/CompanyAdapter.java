@@ -47,9 +47,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
     @Override
     public CompanyAdapter.CompanyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i)
     {
-        final View itemView = LayoutInflater.from(context).inflate(R.layout.spinner_layoutb,
-                  parent,
-                false);
+        final View itemView = LayoutInflater.from(context).inflate(R.layout.spinner_layoutb, parent, false);
         return new CompanyViewHolder(itemView);
     }
 
@@ -76,7 +74,7 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
                 context.startActivity(new Intent(context,HomeActivity.class));
                 */
 
-                showConfirmDialog(companieslist.get(holder.getAdapterPosition()).getCmpGUID(),companieslist.get(holder.getAdapterPosition()).getCompanyName());
+                showConfirmDialog(companieslist.get(holder.getAdapterPosition()).getCmpGUID(),companieslist.get(holder.getAdapterPosition()).getCompanyName(),companieslist.get(holder.getAdapterPosition()).getCmpShortName());
 
                 /*  -----     SET RULES HERE   -------------    */
                 userInfo.setFirstLevel(companieslist.get(holder.getAdapterPosition()).getFirstLevel().toString());
@@ -90,11 +88,12 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
 
     }
 
-    private void showConfirmDialog(final String cmpGUID, final String companyName)
+    private void showConfirmDialog(final String cmpGUID, final String companyName, final String CmpShortName)
     {
         companydata = new Companysave(context.getApplicationContext());
         companydata.setCompanyGid(cmpGUID);
         companydata.setcompany(companyName);
+        companydata.setCmpShortName(CmpShortName);
 
         Intent intent = new Intent(context, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
