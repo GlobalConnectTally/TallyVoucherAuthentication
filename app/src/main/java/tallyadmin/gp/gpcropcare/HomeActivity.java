@@ -294,8 +294,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         }
 
                     }
-                },
-                new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();

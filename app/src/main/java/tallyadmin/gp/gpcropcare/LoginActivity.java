@@ -155,6 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try {
                             JSONObject obj = new JSONObject(response);
                             Saleslist = new ArrayList<>();
@@ -163,12 +164,14 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("Response::", dataArray.toString());
 
                             if (dataArray.length() != 0) {
+
                                 Hhdprogress.dismiss();
                                 session.setLogin(true);
                                 userInfo.setAppLoginUserID(username);
                                 userInfo.setpassword(password);
 
-                                for (int i = 0; i < dataArray.length(); i++) {
+                                for (int i = 0; i < dataArray.length(); i++)
+                                {
 
                                     Company companyModel = new Company();
                                     JSONObject dataobj = dataArray.getJSONObject(i);
