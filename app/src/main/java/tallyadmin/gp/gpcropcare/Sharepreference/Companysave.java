@@ -103,11 +103,9 @@ public class Companysave {
         return prefs.getString(LegId, "");}
     public String getKeyPartyName(){return prefs.getString(PartyName, "");}
 
-    public int getSizel(){
-        return prefs.getInt(Leghtsize, 0);}
+    public int getSizel(){return prefs.getInt(Leghtsize, 0);}
 
     public String getVoucher(){return prefs.getString(VOUCHER, "");}
-
 
 
 }

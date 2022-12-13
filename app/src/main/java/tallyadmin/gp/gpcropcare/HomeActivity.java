@@ -369,7 +369,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             try {
                                 JSONObject obj = new JSONObject(response);
 
-                                System.out.println("Dat::"+obj.toString());
+                                System.out.println("Data Resp::"+obj.toString());
                                 Saleslist = new ArrayList<>();
                                 JSONArray dataArray  = obj.getJSONArray("response");
                                 for (int i = 0; i < dataArray.length(); i++) {
@@ -379,7 +379,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                                     playerModel.setCmpGUID(dataobj.getString("CmpGUID"));
                                     playerModel.setCompanyName(dataobj.getString("CompanyName"));
                                     playerModel.setPendingSales(dataobj.getInt("PendingSales"));
-
+                                    playerModel.setCmpShortName(dataobj.getString("CmpShortName"));
 
 
                                     playerModel.setFirstLevel(dataobj.getString("FirstLevel"));
@@ -402,6 +402,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Hhdprogress.dismiss();
+
                     }
                 }) {
             @Override
@@ -418,7 +420,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
     @SuppressWarnings("StatementWithEmptyBody")
-
     //Navigation item
     @Override
     public boolean onNavigationItemSelected(MenuItem item)
@@ -482,7 +483,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         alertDialog.dismiss();
     }
 
-
     @Override
     public void onBackPressed()
     {
@@ -511,10 +511,14 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onRecyclerViewItemClicked(int position, Company data)
     {
+
+        System.out.println("Short-Name - 3:: " + data.getCmpShortName());
+
         dashcmp.setText(data.getCompanyName());
         mBage.setText(data.getPendingSales().toString());
         companydata.setCompanyGid(data.getCmpGUID());
         companydata.setcompany(data.getCompanyName());
+        companydata.setCmpShortName(data.getCmpShortName());
 
         //Activity.cmpDialogExit();
         /*  -----     SET RULES HERE   -------------    */

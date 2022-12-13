@@ -59,4 +59,17 @@ public class State
     public void setTotalMl(String totalMl) {
         this.totalMl = totalMl;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "CmpShortName='" + CmpShortName + '\'' +
+                ", oneLtr='" + oneLtr + '\'' +
+                ", fiveHundredMl='" + fiveHundredMl + '\'' +
+                ", twoFiftyMl='" + twoFiftyMl + '\'' +
+                ", oneHundredMl='" + oneHundredMl + '\'' +
+                ", twentyMl='" + twentyMl + '\'' +
+                ", totalMl='" + totalMl + '\'' +
+                '}';
+    }
 }

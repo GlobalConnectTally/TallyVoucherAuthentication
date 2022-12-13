@@ -20,6 +20,9 @@ public interface LocalDbDAOs
     @Query("SELECT * FROM itemList WHERE CmpShortName = :CmpShortNameValue")
     List<Item> getItemsByCompany(String CmpShortNameValue);
 
+    @Query("SELECT * FROM itemList WHERE ItemParent GLOB '*' || :itemParentName|| '*'")
+    List<Item> getItemsByParentName(String itemParentName);
+
     /*------------------------ DELETE ----------------------*/
     @Query("DELETE FROM itemList")
     void deleteItems();

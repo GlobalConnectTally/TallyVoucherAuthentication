@@ -90,6 +90,9 @@ public class CompanyAdapter extends RecyclerView.Adapter<CompanyAdapter.CompanyV
 
     private void showConfirmDialog(final String cmpGUID, final String companyName, final String CmpShortName)
     {
+
+        System.out.println("Short-Name - 1:: " + CmpShortName);
+
         companydata = new Companysave(context.getApplicationContext());
         companydata.setCompanyGid(cmpGUID);
         companydata.setcompany(companyName);

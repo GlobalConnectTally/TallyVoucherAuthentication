@@ -27,13 +27,15 @@ public class RoomRepository
         return roomAppDatabase.getDAOs().getItemsByCompany(CmpShortNameValue);
     }
 
+    public List<Item> getItemByParentName(String itemParent)
+    {
+        return roomAppDatabase.getDAOs().getItemsByParentName(itemParent);
+    }
+
     /*------------------------ DELETE ----------------------*/
     public void deleteItems()
     {
         roomAppDatabase.getDAOs().deleteItems();
     }
-
-
-
 
 }

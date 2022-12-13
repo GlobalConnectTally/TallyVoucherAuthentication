@@ -55,7 +55,9 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull final CompanyHomeAdapter.CompanyViewHolder holder, final int position) {
+
         holder.companygname.setText(companieslist.get(position).getCompanyName());
+
         if (companieslist.get(position).getPendingSales() != null &&
                 companieslist.get(position).getPendingSales() != 0)
         {
@@ -75,13 +77,18 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
         holder.setListener(new ItemClickListener() {
             @Override
             public void onClick(View v) {
-                showConfirmDialog(companieslist.get(position).getCmpGUID(), companieslist.get(position).getCompanyName());
+                showConfirmDialog(
+                        companieslist.get(position).getCmpGUID().toString(),
+                        companieslist.get(position).getCompanyName().toString(),
+                        companieslist.get(position).getCmpShortName().toString()
+                );
             }
         });
 
     }
 
-    private void showConfirmDialog(final String cmpGUID, final String companyName) {
+    private void showConfirmDialog(final String cmpGUID, final String companyName ,final String companyShortName)
+    {
       //      final AlertDialog.Builder settingdialog = new AlertDialog.Builder(Activity,R.style.my_dialog);
 //      View settinview = LayoutInflater.from(context ).inflate(R.layout.setting_layoutb, null);
 //
@@ -91,9 +98,12 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
 //          public void onClick(DialogInterface dialog, int which) {
 //        Toast.makeText(context,"1"+cmpGUID, Toast.LENGTH_LONG).show();
 
+        System.out.println("Short-Name - 2:: " + companyShortName);
+
         companydata = new Companysave(context.getApplicationContext());
         companydata.setCompanyGid(cmpGUID);
         companydata.setcompany(companyName);
+        companydata.setCmpShortName(companyShortName);
         Activity.cmpDialogExit();
         Toast.makeText(context, "Company changed success full", Toast.LENGTH_LONG).show();
        ////

@@ -33,8 +33,8 @@ public class Item
     @ColumnInfo(name = "ItemClosing")
     private String ItemClosing;
 
-    public Item()
-    {
+    public Item() {
+
     }
 
     public Item(String cmpShortName, String itemName, String itemParent, String itemOpening, String itemInwards, String itemOutwards, String itemClosing)
