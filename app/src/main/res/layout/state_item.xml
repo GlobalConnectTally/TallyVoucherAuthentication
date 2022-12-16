@@ -6,12 +6,10 @@
     >
 
     <LinearLayout
+        android:padding="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingLeft="2dp"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
         android:background="@drawable/stock_item_border"
         >
 

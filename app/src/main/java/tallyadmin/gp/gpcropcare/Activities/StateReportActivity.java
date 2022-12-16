@@ -33,6 +33,7 @@ public class StateReportActivity extends AppCompatActivity
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     ItemAdapter itemAdapter;
+    String ItemParent;
 
     int totalOpening =0;
     int totalInward  =0;
@@ -55,16 +56,17 @@ public class StateReportActivity extends AppCompatActivity
         if (getIntent().getStringExtra("CmpShortName")== null || getIntent().getStringExtra("CmpShortName").equals("") )
         {
             CmpShortNameValue = "NO Name";
-        }
-        else
-        {
+        } else {
             CmpShortNameValue = getIntent().getStringExtra("CmpShortName");
         }
+
+        ItemParent = getIntent().getStringExtra("ItemParent");
+
         stateNameTextView = findViewById(R.id.stateNameId);
         stateNameTextView.setText(CmpShortNameValue);
 
         roomRepository = new RoomRepository(this);
-        getItemsByCompany(CmpShortNameValue);
+        getItemsByCompany(CmpShortNameValue,ItemParent);
 
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView = findViewById(R.id.stateReportRecyclerView);
@@ -73,7 +75,6 @@ public class StateReportActivity extends AppCompatActivity
         totalInwardTextView  = findViewById(R.id.totalInward);
         totalOutwardTextView = findViewById(R.id.totalOutward);
         totalClosingTextView = findViewById(R.id.totalClosing);
-
 
     }
 
@@ -89,7 +90,7 @@ public class StateReportActivity extends AppCompatActivity
         totalClosingTextView.setText(String.valueOf(totalClosing));
     }
 
-    private void getItemsByCompany(String cmpShortName)
+    private void getItemsByCompany(String cmpShortName, String ItemParent)
     {
         items = new ArrayList<Item>();
 
@@ -97,7 +98,7 @@ public class StateReportActivity extends AppCompatActivity
             @Override
             public void run()
             {
-                items = roomRepository.getItemsByCompany(cmpShortName);
+                items = roomRepository.getItemsByCompanyAndParent(cmpShortName,ItemParent);
 
                 if (items != null)
                 {

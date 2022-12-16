@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -24,6 +25,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.HorizontalScrollView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
@@ -41,12 +44,17 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 import tallyadmin.gp.gpcropcare.Adapter.StateAdapter;
 import tallyadmin.gp.gpcropcare.LoginActivity;
+
 import tallyadmin.gp.gpcropcare.Model.Company;
 import tallyadmin.gp.gpcropcare.Model.Item;
+import tallyadmin.gp.gpcropcare.Model.ListOfCompanyShortName;
 import tallyadmin.gp.gpcropcare.Model.State;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
@@ -65,8 +73,10 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
     LinearLayoutManager linearLayoutManager;
     StateAdapter stateAdapter;
     SearchView searchView;
-    String[] CmpShortNameArray = {"GS","GJ","AS","CH","BI","MA","MP","OD","RJ","WB","UP"};
-
+    String[] CmpShortNameArray = new String[]{"GS","GJ","AS","CH","BI","MA","MP","OD","RJ","WB","UP"};
+    HorizontalScrollView horizontalScrollView;
+    LinearLayout linearLayoutError;
+    List<ListOfCompanyShortName> cmpShortNameList;
 
 
     @Override
@@ -87,18 +97,34 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
         states = new ArrayList<>();
 
+        cmpShortNameList = new ArrayList<>();
+
         roomRepository = new RoomRepository(this);
         companyData = new Companysave(this);
         System.out.println("CmpShortName-1: "+companyData.getCmpShortName());
 
+        horizontalScrollView = findViewById(R.id.horizontalView);
+        linearLayoutError = findViewById(R.id.errorMessage);
+
+        horizontalScrollView.setVisibility(View.GONE);
+        linearLayoutError.setVisibility(View.VISIBLE);
+
 
         getItemsFromApi();
-
-        getStatesByCompany();
+        //getItemsFromApiaLL();
+        //getStatesByCompany();
+        //getCompanyShortNames();
 
         linearLayoutManager = new LinearLayoutManager(this);
         stateRecyclerView = findViewById(R.id.stateRecyclerView);
         stateRecyclerView.setLayoutManager(linearLayoutManager);
+
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               showItemDialog();
+            }
+        });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
         {
@@ -121,37 +147,156 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
     }
 
+    private void getCompanyShortNames(){
+
+        ThreadManager.getInstance(this).executeTask(new Runnable() {
+            @Override
+            public void run() {
+                cmpShortNameList =  roomRepository.getCompanyShortNames();
+                System.out.println(cmpShortNameList.toString());
+            }
+        });
+    }
+
+    private void showItemDialog() {
+    }
+
     private void filterByItemParent(String query) {
 
         ThreadManager.getInstance(this).executeTask(new Runnable() {
             @Override
             public void run() {
+
                 System.out.println(query);
+                JSONArray jsonArray = new JSONArray();
                 String cmpShortName = companyData.getCmpShortName();
-                List<Item> itemList = roomRepository.getItemByParentName(query);
 
-                System.out.println(itemList);
+                if (cmpShortName.toUpperCase().equalsIgnoreCase("ALL"))
+                {
 
-                if (itemList.size() == 0){
+                    List<Item> itemList1 = new ArrayList<>();
+                    for (ListOfCompanyShortName list: cmpShortNameList) {
+                          System.out.println(list.getCmpShortName());
+                          itemList1 = roomRepository.getItemsByCompanyAndParent(
+                                  list.getCmpShortName().toUpperCase(Locale.ROOT),
+                                  query.toUpperCase(Locale.ROOT)
+                          );
+                          System.out.println(itemList1.toString());
+                        try {
 
-                    runOnUiThread(() -> {
-                         states.clear();
-                         initializeAdapter(states);
-                    });
+                            JSONObject data =  doSomeOperations(itemList1,list.getCmpShortName());;
+                            if (data.length() != 0){
+                                jsonArray.put(data);
+                            }
 
-                }else {
-                    manipulateTheDatas(itemList,cmpShortName);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
+                else
+                {
+
+                    List<Item> itemList = roomRepository.getItemByParentName(query);
+                    try {
+                       JSONObject data = doSomeOperations(itemList,cmpShortName);
+                        if (data.length() != 0){
+                            jsonArray.put(data);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                System.out.println("States-D");
+                System.out.println(jsonArray);
+
+                populateDataToRecycler(jsonArray);
             }
         });
     }
 
-    private void getStates()
-    {
-        for(String s:CmpShortNameArray)
-        {
-            Log.d("cname: ",s);
-            getStatesByCompany();
+    private void populateDataToRecycler(JSONArray jsonArray) {
+
+        if (jsonArray.length() != 0){
+
+            for (int i = 0; i < jsonArray.length(); i++){
+
+                State state = new State();
+
+                try {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    if (jsonObject != null){
+                        if (jsonObject.has("CmpShortName")){
+                            state.setCmpShortName(jsonObject.getString("CmpShortName"));
+                        }
+
+                        if (jsonObject.has("ItemParent")){
+                            state.setItemParent(jsonObject.getString("ItemParent"));
+                        }
+
+                        if (jsonObject.has("FiveHundredMl")){
+                            state.setFiveHundredMl(String.valueOf(jsonObject.getInt("FiveHundredMl")));
+                        }
+
+                        if (jsonObject.has("OneHundredMl")){
+                            state.setOneHundredMl(String.valueOf(jsonObject.getString("OneHundredMl")));
+                        }
+
+                        if (jsonObject.has("OneLtr")){
+                            state.setOneLtr(String.valueOf(jsonObject.getString("OneLtr")));
+                        }
+
+                        if (jsonObject.has("TwoFiftyMl")){
+                            state.setTwoFiftyMl(String.valueOf(jsonObject.getString("TwoFiftyMl")));
+                        }
+
+                        if (jsonObject.has("TwentyMl")){
+                            state.setTwentyMl(String.valueOf(jsonObject.getString("TwentyMl")));
+                        }
+
+                        if (jsonObject.has("TotalMl")){
+                            state.setTotalMl(String.valueOf(jsonObject.getString("TotalMl")));
+                        }
+                    }
+
+                  runOnUiThread(new Runnable() {
+                      @Override
+                      public void run() {
+                          states.add(state);
+                      }
+                  });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        System.out.println("Datas::");
+        //System.out.println(states.toString());
+
+        runOnUiThread(() -> {
+            initializeAdapter(states);
+        });
+    }
+
+    private JSONObject doSomeOperations(List<Item> itemList , String cmpShortName) throws JSONException {
+
+        if (itemList.size() == 0){
+
+            runOnUiThread(() -> {
+                horizontalScrollView.setVisibility(View.INVISIBLE);
+                linearLayoutError.setVisibility(View.VISIBLE);
+                states.clear();
+                initializeAdapter(states);
+            });
+
+            return new JSONObject();
+
+        }else {
+            return manipulateTheDatas(itemList,cmpShortName);
         }
     }
 
@@ -185,7 +330,12 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
             }
         });
 
-        Hhdprogress.show();
+       runOnUiThread(new Runnable() {
+           @Override
+           public void run() {
+               Hhdprogress.show();
+           }
+       });
 
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
@@ -219,11 +369,33 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                                                 itemJson = dataArray.getJSONObject(i);
                                                 item.setCmpShortName(itemJson.getString("CmpShortName"));
                                                 item.setItemName(itemJson.getString("ItemName"));
-                                                item.setItemParent(itemJson.getString("ItemParent"));
-                                                item.setItemOpening(itemJson.getString("ItemOpening"));
-                                                item.setItemInwards(itemJson.getString("ItemInwards"));
-                                                item.setItemOutwards(itemJson.getString("ItemOutwards"));
-                                                item.setItemClosing(itemJson.getString("ItemClosing"));
+                                                item.setItemParent(itemJson.getString("ItemParent").toUpperCase(Locale.ROOT));
+
+                                                if (itemJson.getString("ItemOpening").isEmpty()){
+                                                    item.setItemOpening("0");
+                                                }else {
+                                                    item.setItemOpening(itemJson.getString("ItemOpening"));
+                                                }
+
+                                                if (itemJson.getString("ItemInwards").isEmpty()){
+                                                    item.setItemInwards("0");
+
+                                                }else {
+                                                    item.setItemInwards(itemJson.getString("ItemInwards"));
+                                                }
+
+                                                if (itemJson.getString("ItemOutwards").isEmpty()){
+                                                    item.setItemOutwards( "0" );
+                                                }else {
+                                                    item.setItemOutwards( itemJson.getString("ItemOutwards"));
+                                                }
+
+                                                if (itemJson.getString("ItemClosing").isEmpty()){
+                                                    item.setItemClosing("0" );
+                                                }else {
+                                                    item.setItemClosing( itemJson.getString("ItemClosing"));
+                                                }
+
                                                 items.add(item);
 
                                             } catch (JSONException e) {
@@ -232,14 +404,16 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
                                         }
 
+                                        System.out.println(items.toString());
+
                                         roomRepository.deleteItems();
 
                                         long[] isInserted = roomRepository.insertItemsToRoom(items);
-                                        getStatesByCompany();
+                                       // getStatesByCompany();
 
                                         if (isInserted != null)
                                         {
-                                            getStatesByCompany();
+                                           // getStatesByCompany();
                                             Log.d("Result Message: " ,"Data Successful Loaded to Room Database");
                                         }
                                         else
@@ -265,6 +439,8 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                         }
                         catch (JSONException e)
                         {
+                            e.printStackTrace();
+                        }catch (Exception e){
                             e.printStackTrace();
                         }
                     }
@@ -294,8 +470,9 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
-    private void getAllItemsFromApi()
+    private void getItemsFromApiaLL()
     {
+
         final KProgressHUD Hhdprogress = KProgressHUD.create(StockReportActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel("Please wait")
@@ -313,7 +490,12 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
             }
         });
 
-        Hhdprogress.show();
+       runOnUiThread(new Runnable() {
+           @Override
+           public void run() {
+               Hhdprogress.show();
+           }
+       });
 
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
@@ -334,30 +516,64 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                             {
                                 Hhdprogress.dismiss();
 
-                                for (int i = 0; i < dataArray.length(); i++)
-                                {
-
-                                    Item item = new Item();
-
-                                    JSONObject itemJson = dataArray.getJSONObject(i);
-                                    item.setCmpShortName(itemJson.getString("CmpShortName"));
-                                    item.setItemName(itemJson.getString("ItemName"));
-                                    item.setItemParent(itemJson.getString("ItemParent"));
-                                    item.setItemOpening(itemJson.getString("ItemOpening"));
-                                    item.setItemInwards(itemJson.getString("ItemInwards"));
-                                    item.setItemOutwards(itemJson.getString("ItemOutwards"));
-                                    item.setItemClosing(itemJson.getString("ItemClosing"));
-                                    items.add(item);
-                                }
-
                                 ThreadManager.getInstance(context).executeTask(new Runnable() {
                                     @Override
                                     public void run()
                                     {
+                                        for (int i = 0; i < dataArray.length(); i++)
+                                        {
+                                            Item item = new Item();
+                                            JSONObject itemJson = null;
+
+                                            try {
+                                                itemJson = dataArray.getJSONObject(i);
+                                                item.setCmpShortName(itemJson.getString("CmpShortName"));
+                                                item.setItemName(itemJson.getString("ItemName"));
+                                                item.setItemParent(itemJson.getString("ItemParent").toUpperCase(Locale.ROOT));
+
+                                                if (itemJson.getString("ItemOpening").isEmpty()){
+                                                    item.setItemOpening("0");
+                                                }else {
+                                                    item.setItemOpening(itemJson.getString("ItemOpening"));
+                                                }
+
+                                                if (itemJson.getString("ItemInwards").isEmpty()){
+                                                    item.setItemInwards("0");
+
+                                                }else {
+                                                    item.setItemInwards(itemJson.getString("ItemInwards"));
+                                                }
+
+                                                if (itemJson.getString("ItemOutwards").isEmpty()){
+                                                    item.setItemOutwards( "0" );
+                                                }else {
+                                                    item.setItemOutwards( itemJson.getString("ItemOutwards"));
+                                                }
+
+                                                if (itemJson.getString("ItemClosing").isEmpty()){
+                                                    item.setItemClosing("0" );
+                                                }else {
+                                                    item.setItemClosing( itemJson.getString("ItemClosing"));
+                                                }
+
+                                                items.add(item);
+
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+
+                                        }
+
+                                        System.out.println(items.toString());
+
                                         roomRepository.deleteItems();
+
                                         long[] isInserted = roomRepository.insertItemsToRoom(items);
+                                        getCompanyShortNames();
+
                                         if (isInserted != null)
                                         {
+                                            getCompanyShortNames();
                                             Log.d("Result Message: " ,"Data Successful Loaded to Room Database");
                                         }
                                         else
@@ -377,13 +593,14 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                                 });
 
                                 Hhdprogress.dismiss();
-                                Toast.makeText(StockReportActivity.this, "No items From Api", Toast.LENGTH_LONG).show();
+                                Toast.makeText(StockReportActivity.this, "No items Found", Toast.LENGTH_LONG).show();
                             }
 
                         }
                         catch (JSONException e)
                         {
-                            Log.d("INSIDE","4");
+                            e.printStackTrace();
+                        }catch (Exception e){
                             e.printStackTrace();
                         }
                     }
@@ -394,14 +611,17 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                     public void onErrorResponse(VolleyError error)
                     {
                         Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Hhdprogress.dismiss();
                     }
                 })
         {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError
             {
+                //cmpShortName
+                String cmpShortName = companyData.getCmpShortName();
                 Map<String, String> params = new HashMap<>();
-                params.put("cmpShortName", "All");
+                params.put("cmpShortName", "ALL");
                 return params;
             }
         };
@@ -422,82 +642,83 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                      states.clear();
                      initializeAdapter(states);
                 }else {
-                    manipulateTheDatas(itemsByCompany,cmpShortName);
+                    try {
+                        JSONObject i = manipulateTheDatas(itemsByCompany,cmpShortName);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
 
     }
 
-    private void manipulateTheDatas(List<Item> itemsByCompany,String cmpShortName) {
+    private JSONObject manipulateTheDatas(List<Item> itemsByCompany,String cmpShortName) throws JSONException {
 
            /*Lamda function */
         runOnUiThread( () -> {
             /* Clear ArrayList t Avoid Duplication*/
+            horizontalScrollView.setVisibility(View.VISIBLE);
+            linearLayoutError.setVisibility(View.GONE);
             states.clear();
             initializeAdapter(states);
         });
 
-        System.out.println("Thread:: " + Thread.currentThread().getName());
         int totalValue =0;
-        State state = new State();
-        state.setCmpShortName(cmpShortName);
-        if (itemsByCompany != null && itemsByCompany.size()!=0)
+        JSONObject jsonObject = new JSONObject();;
+        if (itemsByCompany != null && itemsByCompany.size() != 0)
         {
-            for (Item item:itemsByCompany)
+            for (Item item: itemsByCompany)
             {
+                jsonObject.put("CmpShortName" , item.getCmpShortName());
+                jsonObject.put("ItemParent" , item.getItemParent());
+
                 if (item.getItemName().equalsIgnoreCase("1LTR"))
                 {
-                    state.setOneLtr(item.getItemOpening());
-                    Log.d("INSIDE 5: ",item.getItemOpening());
-                    totalValue+=Integer.valueOf(item.getItemOpening());
+                    jsonObject.put("OneLtr" , item.getItemClosing());
+                    totalValue += Integer.valueOf(item.getItemClosing());
                 }
                 else if (item.getItemName().equalsIgnoreCase("500 ML"))
                 {
-                    state.setFiveHundredMl(item.getItemOpening());
-                    totalValue+=Integer.valueOf(item.getItemOpening());
+                    jsonObject.put("FiveHundredMl" , item.getItemClosing());
+                    totalValue += Integer.valueOf(item.getItemClosing());
                 }
                 else if (item.getItemName().equalsIgnoreCase("250 ML"))
                 {
-                    state.setTwoFiftyMl(item.getItemOpening());
-                    totalValue+=Integer.valueOf(item.getItemOpening());
+                    jsonObject.put("TwoFiftyMl" , item.getItemClosing());
+                    totalValue += Integer.valueOf(item.getItemClosing());
                 }
                 else if (item.getItemName().equalsIgnoreCase("100 ML"))
                 {
-                    state.setOneHundredMl(item.getItemOpening());
-                    totalValue+=Integer.valueOf(item.getItemOpening());
+                    jsonObject.put("OneHundredMl" , item.getItemClosing());
+                    totalValue += Integer.valueOf(item.getItemClosing());
                 }
                 else if (item.getItemName().equalsIgnoreCase("20 ML"))
                 {
-                    state.setTwentyMl(item.getItemOpening());
-                    totalValue+=Integer.valueOf(item.getItemOpening());
+                    jsonObject.put("TwentyMl" , item.getItemClosing());
+                    totalValue += Integer.valueOf(item.getItemClosing());
                 }
-                else
-                {
-
-                }
+                else {}
             }
-            state.setTotalMl(String.valueOf(totalValue));
-
-            runOnUiThread(() -> {
-
-                states.clear();
-
-                System.out.println("Thread:: - 1 " + Thread.currentThread().getName());
-                states.add(state);
-
-                System.out.println("Data:: - 1 " + states.toString());
-                System.out.println("Total:: - 1 " + String.valueOf(states.size()));
-
-                initializeAdapter(states);
-
-            });
+            jsonObject.put("TotalMl" , String.valueOf(totalValue));
 
         }
         else
         {
             Log.d("Error Message:: " ,"No items for "+cmpShortName+"From Room Database");
+
+            jsonObject.put("CmpShortName" , "N/A");
+            jsonObject.put("ItemParent" , "N/A");
+            jsonObject.put("OneLtr" , "0");
+            jsonObject.put("FiveHundredMl" , "0");
+            jsonObject.put("TwoFiftyMl" , "0");
+            jsonObject.put("OneHundredMl" , "0");
+            jsonObject.put("TwentyMl" , "0");
+            jsonObject.put("TotalMl" , "0");
         }
+
+        return  jsonObject;
+
     }
 
 
@@ -521,6 +742,7 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
     {
         Intent intent = new Intent(StockReportActivity.this, StateReportActivity.class);
         intent.putExtra("CmpShortName",states.get(position).getCmpShortName());
+        intent.putExtra("ItemParent",states.get(position).getItemParent());
         startActivity(intent);
     }
 

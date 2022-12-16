@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Objects;
 
 
 @Entity(tableName = "itemList")
@@ -129,8 +130,21 @@ public class Item
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Id == item.Id && Objects.equals(CmpShortName, item.CmpShortName) && Objects.equals(ItemName, item.ItemName) && Objects.equals(ItemParent, item.ItemParent) && Objects.equals(ItemOpening, item.ItemOpening) && Objects.equals(ItemInwards, item.ItemInwards) && Objects.equals(ItemOutwards, item.ItemOutwards) && Objects.equals(ItemClosing, item.ItemClosing);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Id, CmpShortName, ItemName, ItemParent, ItemOpening, ItemInwards, ItemOutwards, ItemClosing);
+    }
+
+    @Override
     public String toString() {
-        return "Item{" +
+        return "{" +
                 "Id=" + Id +
                 ", CmpShortName='" + CmpShortName + '\'' +
                 ", ItemName='" + ItemName + '\'' +

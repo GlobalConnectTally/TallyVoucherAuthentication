@@ -54,7 +54,9 @@ public class CompanyHomeAdapter extends RecyclerView.Adapter<CompanyHomeAdapter.
 
 
     @Override
-    public void onBindViewHolder(@NonNull final CompanyHomeAdapter.CompanyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final CompanyHomeAdapter.CompanyViewHolder holder, final int pos) {
+
+        int position = holder.getAdapterPosition();;
 
         holder.companygname.setText(companieslist.get(position).getCompanyName());
 

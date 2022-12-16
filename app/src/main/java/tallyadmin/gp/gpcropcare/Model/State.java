@@ -2,7 +2,7 @@ package tallyadmin.gp.gpcropcare.Model;
 
 public class State
 {
-    String CmpShortName, oneLtr, fiveHundredMl, twoFiftyMl, oneHundredMl, twentyMl,totalMl;
+    String CmpShortName, oneLtr, fiveHundredMl, twoFiftyMl, oneHundredMl, twentyMl,totalMl , ItemParent;
 
     public String getCmpShortName() {
         return CmpShortName;
@@ -60,6 +60,14 @@ public class State
         this.totalMl = totalMl;
     }
 
+    public String getItemParent() {
+        return ItemParent;
+    }
+
+    public void setItemParent(String itemParent) {
+        ItemParent = itemParent;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -70,6 +78,7 @@ public class State
                 ", oneHundredMl='" + oneHundredMl + '\'' +
                 ", twentyMl='" + twentyMl + '\'' +
                 ", totalMl='" + totalMl + '\'' +
+                ", ItemParent='" + ItemParent + '\'' +
                 '}';
     }
 }
