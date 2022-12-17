@@ -5,8 +5,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
-
-
 import tallyadmin.gp.gpcropcare.Model.Item;
 import tallyadmin.gp.gpcropcare.Model.ListOfCompanyShortName;
 

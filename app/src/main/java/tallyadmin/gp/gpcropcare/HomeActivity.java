@@ -545,7 +545,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     public String currentTIme()
     {
-        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm", Locale.US);
         Date time = Calendar.getInstance().getTime();
         return timeFormatter.format(time);
     }

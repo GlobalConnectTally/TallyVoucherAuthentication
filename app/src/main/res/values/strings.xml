@@ -15,7 +15,8 @@
     <string name="from">From</string>
     <string name="date_select">From</string>
     <string name="date_select_to">To</string>
-    <string name="no_report">No Report Found. Try to search new Stock Item Name.</string>
+    <string name="noReportFound">No Report Found.</string>
+    <string name="no_report">Try to search new Stock Item Name Or Swipe Bottom to load more reports.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

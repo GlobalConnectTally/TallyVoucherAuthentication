@@ -23,6 +23,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.widget.HorizontalScrollView;
@@ -73,10 +74,10 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
     LinearLayoutManager linearLayoutManager;
     StateAdapter stateAdapter;
     SearchView searchView;
-    String[] CmpShortNameArray = new String[]{"GS","GJ","AS","CH","BI","MA","MP","OD","RJ","WB","UP"};
     HorizontalScrollView horizontalScrollView;
     LinearLayout linearLayoutError;
     List<ListOfCompanyShortName> cmpShortNameList;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
     @Override
@@ -86,7 +87,6 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
         setContentView(R.layout.activity_stock_report);
         context = this;
 
-
         Toolbar toolbar = findViewById(R.id.toolbarStockReport);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -94,6 +94,7 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
         getSupportActionBar().setTitle("Stock Report");
 
         searchView = findViewById(R.id.searchViewId);
+        swipeRefreshLayout = findViewById(R.id.swipeToRefresh);
 
         states = new ArrayList<>();
 
@@ -145,9 +146,20 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
             }
         });
 
+        swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
+        {
+            @Override
+            public void onRefresh() {
+                getItemsFromApi();
+                swipeRefreshLayout.setRefreshing(true);
+            }
+        });
+
     }
 
-    private void getCompanyShortNames(){
+    private void getCompanyShortNames()
+    {
 
         ThreadManager.getInstance(this).executeTask(new Runnable() {
             @Override
@@ -161,7 +173,8 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
     private void showItemDialog() {
     }
 
-    private void filterByItemParent(String query) {
+    private void filterByItemParent(String query)
+    {
 
         ThreadManager.getInstance(this).executeTask(new Runnable() {
             @Override
@@ -217,7 +230,8 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
         });
     }
 
-    private void populateDataToRecycler(JSONArray jsonArray) {
+    private void populateDataToRecycler(JSONArray jsonArray)
+    {
 
         if (jsonArray.length() != 0){
 
@@ -282,7 +296,8 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
         });
     }
 
-    private JSONObject doSomeOperations(List<Item> itemList , String cmpShortName) throws JSONException {
+    private JSONObject doSomeOperations(List<Item> itemList , String cmpShortName) throws JSONException
+    {
 
         if (itemList.size() == 0){
 
@@ -300,7 +315,8 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
         }
     }
 
-    private void initializeAdapter(ArrayList<State> states){
+    private void initializeAdapter(ArrayList<State> states)
+    {
         stateAdapter = new StateAdapter(states, this);
         runOnUiThread(new Runnable() {
             @Override
@@ -355,13 +371,13 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                             if (dataArray.length() != 0)
                             {
                                 Hhdprogress.dismiss();
+                                swipeRefreshLayout.setRefreshing(false);
 
                                 ThreadManager.getInstance(context).executeTask(new Runnable() {
                                     @Override
                                     public void run()
                                     {
-                                        for (int i = 0; i < dataArray.length(); i++)
-                                        {
+                                        for (int i = 0; i < dataArray.length(); i++) {
                                             Item item = new Item();
                                             JSONObject itemJson = null;
 
@@ -433,6 +449,7 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                                 });
 
                                 Hhdprogress.dismiss();
+                                swipeRefreshLayout.setRefreshing(false);
                                 Toast.makeText(StockReportActivity.this, "No items Found", Toast.LENGTH_LONG).show();
                             }
 
@@ -452,6 +469,7 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                     {
                         Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
                         Hhdprogress.dismiss();
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 })
         {
@@ -465,8 +483,6 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                 return params;
             }
         };
-
-
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
@@ -653,7 +669,8 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
     }
 
-    private JSONObject manipulateTheDatas(List<Item> itemsByCompany,String cmpShortName) throws JSONException {
+    private JSONObject manipulateTheDatas(List<Item> itemsByCompany,String cmpShortName) throws JSONException
+    {
 
            /*Lamda function */
         runOnUiThread( () -> {
