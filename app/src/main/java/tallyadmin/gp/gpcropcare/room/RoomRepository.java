@@ -9,6 +9,7 @@ import java.util.Locale;
 
 import tallyadmin.gp.gpcropcare.Model.Item;
 import tallyadmin.gp.gpcropcare.Model.ListOfCompanyShortName;
+import tallyadmin.gp.gpcropcare.Model.ListOfItemParents;
 
 public class RoomRepository
 {
@@ -43,6 +44,10 @@ public class RoomRepository
 
     public List<ListOfCompanyShortName> getCompanyShortNames(){
          return  roomAppDatabase.getDAOs().getAllCompanyShortName();
+    }
+
+    public List<ListOfItemParents> getAllCompanyItemParents(){
+         return  roomAppDatabase.getDAOs().getAllCompanyItemParents();
     }
 
     /*------------------------ DELETE ----------------------*/

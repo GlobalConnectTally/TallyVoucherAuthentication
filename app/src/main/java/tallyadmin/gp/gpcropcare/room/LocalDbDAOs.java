@@ -7,6 +7,8 @@ import androidx.room.Query;
 import java.util.List;
 import tallyadmin.gp.gpcropcare.Model.Item;
 import tallyadmin.gp.gpcropcare.Model.ListOfCompanyShortName;
+import tallyadmin.gp.gpcropcare.Model.ListOfItemParents;
+
 
 @Dao
 public interface LocalDbDAOs
@@ -27,6 +29,9 @@ public interface LocalDbDAOs
 
     @Query("SELECT DISTINCT CmpShortName FROM itemList")
     List<ListOfCompanyShortName> getAllCompanyShortName();
+
+    @Query("SELECT DISTINCT ItemParent FROM itemList")
+    List<ListOfItemParents> getAllCompanyItemParents();
 
     /*------------------------ DELETE ----------------------*/
     @Query("DELETE FROM itemList")

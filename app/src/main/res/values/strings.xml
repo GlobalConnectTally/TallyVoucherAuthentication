@@ -18,5 +18,8 @@
     <string name="noReportFound">No Report Found.</string>
     <string name="no_report">Try to search new Stock Item Name Or Swipe Bottom to load more reports.</string>
 
+    <string name="search">Search Item</string>
+    <string name="click_to_search">Click To Search</string>
+
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

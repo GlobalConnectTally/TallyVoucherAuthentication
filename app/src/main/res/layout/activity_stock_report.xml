@@ -29,17 +29,37 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <LinearLayout
+            android:padding="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:weightSum="100"
+            android:orientation="horizontal"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.SearchView
-                android:id="@+id/searchViewId"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/searchLayout"
+                app:startIconDrawable="@drawable/search"
+                android:enabled="false"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusTopStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:queryHint="Search here"
-                app:iconifiedByDefault="false" />
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/searchViewId"
+                    android:focusable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:padding="10dp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 

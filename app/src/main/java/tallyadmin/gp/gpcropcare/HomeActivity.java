@@ -1,5 +1,6 @@
 package tallyadmin.gp.gpcropcare;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +13,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import androidx.core.view.GravityCompat;
@@ -24,6 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,6 +38,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.textfield.TextInputEditText;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.nex3z.notificationbadge.NotificationBadge;
 import org.json.JSONArray;
@@ -51,7 +57,9 @@ import tallyadmin.gp.gpcropcare.Activities.SalesOrderActivity;
 import tallyadmin.gp.gpcropcare.Activities.Sixreportactivity;
 import tallyadmin.gp.gpcropcare.Activities.StockReportActivity;
 import tallyadmin.gp.gpcropcare.Adapter.CompanyHomeAdapter;
+import tallyadmin.gp.gpcropcare.Adapter.ItemsListAdapter;
 import tallyadmin.gp.gpcropcare.Model.Company;
+import tallyadmin.gp.gpcropcare.Model.Item;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Sharepreference.Session;
 import tallyadmin.gp.gpcropcare.Sharepreference.UserInfo;
@@ -75,6 +83,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private TextView dashcmp;
     TextView dateText , timeText;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -87,6 +97,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         companydata = new Companysave(getApplicationContext());
         userInfo = new UserInfo(getApplicationContext());
         session = new Session(getApplicationContext());
+
+
 
         mProgressDialog =  new ProgressDialog(HomeActivity.this);
         swipe = findViewById(R.id.swipe_torefresh);
@@ -339,7 +351,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-
     private void companyseting()
     {
         final KProgressHUD Hhdprogress = KProgressHUD.create(HomeActivity.this)
@@ -576,7 +587,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         showbadges();
     }
-
 
 }
 

@@ -5,6 +5,7 @@ import static tallyadmin.gp.gpcropcare.Common.Common.URL_ITEMS;
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_LOGIN;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -14,10 +15,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.InputType;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +32,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -36,6 +44,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.kaopiz.kprogresshud.KProgressHUD;
 
 import org.json.JSONArray;
@@ -50,12 +60,14 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
+import tallyadmin.gp.gpcropcare.Adapter.ItemsListAdapter;
 import tallyadmin.gp.gpcropcare.Adapter.StateAdapter;
 import tallyadmin.gp.gpcropcare.LoginActivity;
 
 import tallyadmin.gp.gpcropcare.Model.Company;
 import tallyadmin.gp.gpcropcare.Model.Item;
 import tallyadmin.gp.gpcropcare.Model.ListOfCompanyShortName;
+import tallyadmin.gp.gpcropcare.Model.ListOfItemParents;
 import tallyadmin.gp.gpcropcare.Model.State;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
@@ -63,8 +75,7 @@ import tallyadmin.gp.gpcropcare.Sharepreference.ThreadManager;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
 import tallyadmin.gp.gpcropcare.room.RoomRepository;
 
-public class StockReportActivity extends AppCompatActivity implements StateAdapter.OnStateAdapterListener
-{
+public class StockReportActivity extends AppCompatActivity implements StateAdapter.OnStateAdapterListener, ItemsListAdapter.OnItemClickListenaer {
     private RoomRepository roomRepository;
     Companysave companyData;
     ArrayList<Item> items;
@@ -73,11 +84,15 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
     RecyclerView stateRecyclerView;
     LinearLayoutManager linearLayoutManager;
     StateAdapter stateAdapter;
-    SearchView searchView;
+    TextInputEditText searchView;
     HorizontalScrollView horizontalScrollView;
     LinearLayout linearLayoutError;
     List<ListOfCompanyShortName> cmpShortNameList;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private ItemsListAdapter adapter;
+    private ArrayList<ListOfItemParents> itemsList;
+    private AlertDialog alertDialogItem;
+    private TextInputLayout searchLayout;
 
 
     @Override
@@ -96,7 +111,10 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
         searchView = findViewById(R.id.searchViewId);
         swipeRefreshLayout = findViewById(R.id.swipeToRefresh);
 
+        searchLayout = findViewById(R.id.searchLayout);
+
         states = new ArrayList<>();
+        itemsList =new  ArrayList<ListOfItemParents>();
 
         cmpShortNameList = new ArrayList<>();
 
@@ -120,29 +138,29 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
         stateRecyclerView = findViewById(R.id.stateRecyclerView);
         stateRecyclerView.setLayoutManager(linearLayoutManager);
 
+
+         //searchView.onTex
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               showItemDialog();
+                showItemDialog();
             }
         });
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
-        {
+        searchView.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String query)
-            {
-                //stateAdapter.getFilter().filter(query);
-                filterByItemParent(query);
-                return false;
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public boolean onQueryTextChange(String newText)
-            {
-                //stateAdapter.getFilter().filter(newText);
-                filterByItemParent(newText);
-                return false;
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //filterByItemParent(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filterByItemParent(s.toString());
             }
         });
 
@@ -170,7 +188,78 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
         });
     }
 
+    private void getCompanyItemParents(){
+        ThreadManager.getInstance(this).executeTask(new Runnable() {
+            @Override
+            public void run() {
+
+                List<ListOfItemParents> items = roomRepository.getAllCompanyItemParents();
+
+                System.out.println("Count ::" + String.valueOf(items.size()));
+
+                itemsList.clear();
+
+                itemsList.addAll(items);
+
+                if (itemsList.size() == 1){
+
+                      runOnUiThread( () -> {
+
+                          searchLayout.setHint("Item Name");
+                          searchView.setText(itemsList.get(0).getItemParent().toUpperCase(Locale.ROOT));
+                      });
+
+                }else {
+
+                      runOnUiThread( () -> {
+                           searchLayout.setHint(getResources().getString(R.string.click_to_search));
+                           searchView.setInputType(InputType.TYPE_NULL);
+                           searchView.setEnabled(true);
+                      });
+                }
+
+            }
+        });
+    }
+
     private void showItemDialog() {
+        AlertDialog.Builder settingdialog = new AlertDialog.Builder(this,R.style.MyDialog);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View settinview = inflater.inflate(R.layout.items_list_dialog, null);
+        final TextInputEditText inputEditTextSearch = settinview.findViewById(R.id.searchEditText);
+        final ImageButton imagecancel = settinview.findViewById(R.id.ib_close);
+        adapter = new ItemsListAdapter(this, itemsList,this);
+        final RecyclerView recyclerdialog = settinview.findViewById(R.id.recycleViewItems);
+        recyclerdialog.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerdialog.setAdapter(adapter);
+        recyclerdialog.setHasFixedSize(true);
+
+        imagecancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialogItem.dismiss();
+            }
+        });
+
+        inputEditTextSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                  adapter.getFilter().filter(s.toString());
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                adapter.getFilter().filter(s.toString());
+            }
+        });
+
+        settingdialog.setView(settinview);
+        alertDialogItem = settingdialog.create();
+        alertDialogItem.show();
+        alertDialogItem.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,900);
     }
 
     private void filterByItemParent(String query)
@@ -425,11 +514,11 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                                         roomRepository.deleteItems();
 
                                         long[] isInserted = roomRepository.insertItemsToRoom(items);
-                                       // getStatesByCompany();
+                                        getCompanyItemParents();
 
                                         if (isInserted != null)
                                         {
-                                           // getStatesByCompany();
+                                            getCompanyItemParents();
                                             Log.d("Result Message: " ,"Data Successful Loaded to Room Database");
                                         }
                                         else
@@ -586,10 +675,12 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
                                         long[] isInserted = roomRepository.insertItemsToRoom(items);
                                         getCompanyShortNames();
+                                        getCompanyItemParents();
 
                                         if (isInserted != null)
                                         {
                                             getCompanyShortNames();
+                                            getCompanyItemParents();
                                             Log.d("Result Message: " ,"Data Successful Loaded to Room Database");
                                         }
                                         else
@@ -767,5 +858,13 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
     public void onPointerCaptureChanged(boolean hasCapture)
     {
         super.onPointerCaptureChanged(hasCapture);
+    }
+
+    @Override
+    public void OnItemClick(int position) {
+        searchView.setText(itemsList.get(position).getItemParent().toUpperCase(Locale.ROOT));
+        alertDialogItem.dismiss();
+
+        System.out.println(itemsList.get(position).getItemParent());
     }
 }
