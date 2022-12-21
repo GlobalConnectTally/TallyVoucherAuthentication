@@ -39,6 +39,7 @@ import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Sharepreference.UserInfo;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
+import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
 
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_AUTHORIZE;
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_SMS;
@@ -54,12 +55,13 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
     int masterID;
     String Legid;
     String ordernn,tallymobilenumber,AuthenticationFlag;
-
+    VolleyErrors volleyErrors;
 
     public SalesOrderAdapter(ArrayList<SalesOrder> orderArrayList, Context context, SalesOrderActivity salesOrderActivity) {
         this.orderArrayList = orderArrayList;
         this.context = context;
         this.salesOrderActivity = salesOrderActivity;
+        this.volleyErrors = new VolleyErrors(context);
     }
 
 
@@ -332,7 +334,11 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                Toast.makeText(
+                                        context,
+                                        volleyErrors.exceptionMessage(error).toString(),
+                                        Toast.LENGTH_SHORT).show();
                             }
                         })
                   {
@@ -404,11 +410,14 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                         */
 
                     }
-                },
-                new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(
+                                context,
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override
@@ -484,7 +493,10 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(
+                                context,
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();
                     }
                 }) {
            //            @Override
@@ -525,14 +537,15 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
 
                         Toast.makeText(context," "+response.toString(),Toast.LENGTH_SHORT).show();
 
-
-
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(
+                                context,
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();
                     }
                 }) {
 

@@ -32,9 +32,9 @@ public class RoomRepository
         return roomAppDatabase.getDAOs().getItemsByCompany(CmpShortNameValue);
     }
 
-    public List<Item> getItemsByCompanyAndParent(String CmpShortNameValue, String ItemParent)
+    public List<Item> getItemsByCompanyAndParent(String CmpShortNameValue, String ItemParent, String appUserID)
     {
-        return roomAppDatabase.getDAOs().getItemsByCompanyAndParent(CmpShortNameValue,ItemParent);
+        return roomAppDatabase.getDAOs().getItemsByCompanyAndParent(CmpShortNameValue,ItemParent,appUserID);
     }
 
     public List<Item> getItemByParentName(String itemParent)

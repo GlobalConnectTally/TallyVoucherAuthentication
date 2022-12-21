@@ -44,6 +44,7 @@ import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Sharepreference.UserInfo;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
+import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
 
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_AUTHORIZE;
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_SALESTRANS;
@@ -64,6 +65,7 @@ public class ShowtransactionOrderActivity extends AppCompatActivity {
     LinearLayout hideview,hidemoon2;
     ImageView hidebtn;
     String ordernn,tallymobileno,AuthenticationFlag;
+    private VolleyErrors volleyErrors;
 
 
     @Override
@@ -73,6 +75,8 @@ public class ShowtransactionOrderActivity extends AppCompatActivity {
 
         companysave = new Companysave(getApplicationContext());
         userInfo = new UserInfo(getApplicationContext());
+
+        volleyErrors = new VolleyErrors(this);
 
         Toolbar toolbar = findViewById(R.id.toolbarSoD);
         setSupportActionBar(toolbar);
@@ -304,7 +308,12 @@ public class ShowtransactionOrderActivity extends AppCompatActivity {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(ShowtransactionOrderActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                                Toast.makeText(
+                                        getApplicationContext(),
+                                        volleyErrors.exceptionMessage(error).toString(),
+                                        Toast.LENGTH_SHORT).show();
+
                             }
                         }) {
                     @Override
@@ -365,7 +374,12 @@ public class ShowtransactionOrderActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ShowtransactionOrderActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(
+                                getApplicationContext(),
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();
+
                     }
                 }) {
             @Override
@@ -416,6 +430,7 @@ public class ShowtransactionOrderActivity extends AppCompatActivity {
     }
 
     private void fetchingJSON() {
+
         final KProgressHUD Hhdprogress = KProgressHUD.create(ShowtransactionOrderActivity.this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setLabel("Please wait")
@@ -429,7 +444,9 @@ public class ShowtransactionOrderActivity extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
+
         Hhdprogress.show();
+
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
                 URL_SALESTRANS,
@@ -524,7 +541,12 @@ public class ShowtransactionOrderActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                         Toast.makeText(
+                                getApplicationContext(),
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();
+
                     }
                 }) {
             @Override
@@ -555,8 +577,6 @@ public class ShowtransactionOrderActivity extends AppCompatActivity {
         recyl_trans.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         sendAllAdapterm = new SendAllAdapter(Sendalldetailld, getApplicationContext());
         recyl_trans.setAdapter(sendAllAdapterm);
-
-
     }
 
     private void sendmessage() {
@@ -581,7 +601,11 @@ public class ShowtransactionOrderActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ShowtransactionOrderActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(
+                                getApplicationContext(),
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();
                     }
                 }) {
 
@@ -613,7 +637,11 @@ public class ShowtransactionOrderActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ShowtransactionOrderActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(
+                                getApplicationContext(),
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();
                     }
                 }) {
 

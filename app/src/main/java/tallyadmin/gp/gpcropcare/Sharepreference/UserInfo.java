@@ -17,6 +17,7 @@ public class UserInfo {
     private static final String KEY_FIRST_LEVEL = "firstLevel";
     private static final String KEY_SECOND_LEVEL = "secondLevel";
 
+
     public UserInfo(Context ctx) {
         this.ctx = ctx;
         prefs = ctx.getSharedPreferences(PREF_NAME, ctx.MODE_PRIVATE);
@@ -27,6 +28,8 @@ public class UserInfo {
         editor.putString(KEY_IMEI, imei);
         editor.apply();
     }
+
+
 
     public void setAllowApprove(String approve){
         editor.putString(KEY_ACCEPT, approve);
@@ -76,4 +79,5 @@ public class UserInfo {
     public String getPassWord(){return prefs.getString(KEY_NAME, "");}
 
     public String getAppLoginUserID(){return prefs.getString(AppLoginUserID, "");}
+
 }

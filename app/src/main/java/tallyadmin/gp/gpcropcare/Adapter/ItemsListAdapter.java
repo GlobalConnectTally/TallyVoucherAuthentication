@@ -76,7 +76,6 @@ public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.View
                     ArrayList<ListOfItemParents> filteredList = new ArrayList<>();
 
                     for (ListOfItemParents row : modelArrayList) {
-
                         // name match condition. this might differ depending on your requirement
                         // here we are looking for name or phone number match
                         if (row.getItemParent().toLowerCase().contains(charString.toLowerCase()) || row.getItemParent().contains(constraint)) {
@@ -105,15 +104,17 @@ public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.View
 
         TextView textView;
         OnItemClickListenaer onItemClickListenaer;
+
         public void bind(int pos){
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos2 = (int) textView.getTag();
-                    onItemClickListenaer.OnItemClick(pos2);
+                    onItemClickListenaer.OnItemClick(FilterModelArrayList.get(pos2));
                 }
             });
         }
+
         public ViewHolder(@NonNull View itemView, OnItemClickListenaer onItemClickListenaer) {
             super(itemView);
             textView = itemView.findViewById(R.id.itemDesc);
@@ -137,7 +138,7 @@ public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.View
     }
 
     public interface OnItemClickListenaer{
-        void OnItemClick(int position);
+        void OnItemClick(ListOfItemParents list);
     }
 
 }

@@ -21,8 +21,8 @@ public interface LocalDbDAOs
     @Query("SELECT * FROM itemList WHERE CmpShortName = :CmpShortNameValue")
     List<Item> getItemsByCompany(String CmpShortNameValue);
 
-    @Query("SELECT * FROM itemList WHERE CmpShortName = :CmpShortNameValue AND ItemParent = :itemParent")
-    List<Item> getItemsByCompanyAndParent(String CmpShortNameValue, String itemParent);
+    @Query("SELECT * FROM itemList WHERE CmpShortName = :CmpShortNameValue AND ItemParent = :itemParent AND AppLoginUserID = :AppUserId")
+    List<Item> getItemsByCompanyAndParent(String CmpShortNameValue, String itemParent, String AppUserId);
 
     @Query("SELECT * FROM itemList WHERE ItemParent = :itemParentName")
     List<Item> getItemsByParentName(String itemParentName);

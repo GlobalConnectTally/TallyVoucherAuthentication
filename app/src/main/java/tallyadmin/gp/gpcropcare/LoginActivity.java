@@ -36,6 +36,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import tallyadmin.gp.gpcropcare.Adapter.CompanyAdapter;
@@ -44,6 +45,7 @@ import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Sharepreference.Session;
 import tallyadmin.gp.gpcropcare.Sharepreference.UserInfo;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
+import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -58,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
     AlertDialog alertDialog;
     Context context;
     NotificationBadge mBage;
+    private VolleyErrors volleyErrors;
 
 
     @Override
@@ -71,6 +74,8 @@ public class LoginActivity extends AppCompatActivity {
         userInfo = new UserInfo(getApplicationContext());
         session = new Session(getApplicationContext());
         context = this;
+
+        volleyErrors = new VolleyErrors(this);
 
         if (!isNetworkConnected())
         {
@@ -171,7 +176,6 @@ public class LoginActivity extends AppCompatActivity {
 
                                 for (int i = 0; i < dataArray.length(); i++)
                                 {
-
                                     Company companyModel = new Company();
                                     JSONObject dataobj = dataArray.getJSONObject(i);
 
@@ -210,7 +214,12 @@ public class LoginActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(
+                                getApplicationContext(),
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();
+
                         Hhdprogress.dismiss();
                     }
                 }) {

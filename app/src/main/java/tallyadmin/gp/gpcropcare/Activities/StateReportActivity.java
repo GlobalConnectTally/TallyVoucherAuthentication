@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import tallyadmin.gp.gpcropcare.Adapter.ItemAdapter;
 import tallyadmin.gp.gpcropcare.Adapter.StateAdapter;
@@ -21,6 +22,7 @@ import tallyadmin.gp.gpcropcare.Model.Item;
 import tallyadmin.gp.gpcropcare.Model.State;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.ThreadManager;
+import tallyadmin.gp.gpcropcare.Sharepreference.UserInfo;
 import tallyadmin.gp.gpcropcare.room.RoomRepository;
 
 public class StateReportActivity extends AppCompatActivity
@@ -39,6 +41,7 @@ public class StateReportActivity extends AppCompatActivity
     int totalInward  =0;
     int totalOutward =0;
     int totalClosing =0;
+    UserInfo userInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -61,6 +64,7 @@ public class StateReportActivity extends AppCompatActivity
         }
 
         ItemParent = getIntent().getStringExtra("ItemParent");
+        userInfo = new UserInfo(this);
 
         stateNameTextView = findViewById(R.id.stateNameId);
         stateNameTextView.setText(CmpShortNameValue);
@@ -98,7 +102,7 @@ public class StateReportActivity extends AppCompatActivity
             @Override
             public void run()
             {
-                items = roomRepository.getItemsByCompanyAndParent(cmpShortName,ItemParent);
+                items = roomRepository.getItemsByCompanyAndParent(cmpShortName,ItemParent,userInfo.getAppLoginUserID());
 
                 if (items != null)
                 {

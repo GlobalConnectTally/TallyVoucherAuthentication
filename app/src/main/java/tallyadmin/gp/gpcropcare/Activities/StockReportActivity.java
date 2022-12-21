@@ -72,13 +72,15 @@ import tallyadmin.gp.gpcropcare.Model.State;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Sharepreference.ThreadManager;
+import tallyadmin.gp.gpcropcare.Sharepreference.UserInfo;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
 import tallyadmin.gp.gpcropcare.room.RoomRepository;
+import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
 
 public class StockReportActivity extends AppCompatActivity implements StateAdapter.OnStateAdapterListener, ItemsListAdapter.OnItemClickListenaer {
     private RoomRepository roomRepository;
-    Companysave companyData;
-    ArrayList<Item> items;
+    private Companysave companyData;
+    private ArrayList<Item> items;
     ArrayList<State> states;
     Context context;
     RecyclerView stateRecyclerView;
@@ -93,6 +95,8 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
     private ArrayList<ListOfItemParents> itemsList;
     private AlertDialog alertDialogItem;
     private TextInputLayout searchLayout;
+    private UserInfo userInfo;
+    private VolleyErrors volleyErrors;
 
 
     @Override
@@ -108,6 +112,9 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
         getSupportActionBar().setTitle("Stock Report");
 
+
+        volleyErrors = new VolleyErrors(this);
+
         searchView = findViewById(R.id.searchViewId);
         swipeRefreshLayout = findViewById(R.id.swipeToRefresh);
 
@@ -120,7 +127,9 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
         roomRepository = new RoomRepository(this);
         companyData = new Companysave(this);
-        System.out.println("CmpShortName-1: "+companyData.getCmpShortName());
+        userInfo = new UserInfo(this);
+
+        System.out.println("AppLoginUserID: "+userInfo.getAppLoginUserID());
 
         horizontalScrollView = findViewById(R.id.horizontalView);
         linearLayoutError = findViewById(R.id.errorMessage);
@@ -130,9 +139,7 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
 
         getItemsFromApi();
-        //getItemsFromApiaLL();
-        //getStatesByCompany();
-        //getCompanyShortNames();
+
 
         linearLayoutManager = new LinearLayoutManager(this);
         stateRecyclerView = findViewById(R.id.stateRecyclerView);
@@ -160,7 +167,9 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
             @Override
             public void afterTextChanged(Editable s) {
-                filterByItemParent(s.toString());
+                if (s.length() > 0){
+                    filterByItemParent(s.toString());
+                }
             }
         });
 
@@ -178,7 +187,6 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
     private void getCompanyShortNames()
     {
-
         ThreadManager.getInstance(this).executeTask(new Runnable() {
             @Override
             public void run() {
@@ -269,52 +277,39 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
             @Override
             public void run() {
 
-                System.out.println(query);
-                JSONArray jsonArray = new JSONArray();
-                String cmpShortName = companyData.getCmpShortName();
-
-                if (cmpShortName.toUpperCase().equalsIgnoreCase("ALL"))
-                {
-
+                try {
+                    JSONArray jsonArray = new JSONArray();
                     List<Item> itemList1 = new ArrayList<>();
                     for (ListOfCompanyShortName list: cmpShortNameList) {
-                          System.out.println(list.getCmpShortName());
-                          itemList1 = roomRepository.getItemsByCompanyAndParent(
-                                  list.getCmpShortName().toUpperCase(Locale.ROOT),
-                                  query.toUpperCase(Locale.ROOT)
-                          );
-                          System.out.println(itemList1.toString());
+
+                        System.out.println(list.getCmpShortName());
+
+                        itemList1 = roomRepository.getItemsByCompanyAndParent(
+                                list.getCmpShortName().toUpperCase(Locale.ROOT),
+                                query.toUpperCase(Locale.ROOT),
+                                userInfo.getAppLoginUserID().toUpperCase(Locale.ROOT)
+                        );
+
+                        System.out.println(itemList1.toString());
                         try {
-
-                            JSONObject data =  doSomeOperations(itemList1,list.getCmpShortName());;
-                            if (data.length() != 0){
-                                jsonArray.put(data);
+                            if (itemList1.size() > 0){
+                                JSONObject data =  doSomeOperations(itemList1,list.getCmpShortName());;
+                                if (data.length() != 0){
+                                    jsonArray.put(data);
+                                }
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
+                        }catch (Exception e){
+                             e.printStackTrace();
                         }
                     }
+
+                    populateDataToRecycler(jsonArray);
+
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
-                else
-                {
-
-                    List<Item> itemList = roomRepository.getItemByParentName(query);
-                    try {
-                       JSONObject data = doSomeOperations(itemList,cmpShortName);
-                        if (data.length() != 0){
-                            jsonArray.put(data);
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-
-                System.out.println("States-D");
-                System.out.println(jsonArray);
-
-                populateDataToRecycler(jsonArray);
             }
         });
     }
@@ -323,7 +318,6 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
     {
 
         if (jsonArray.length() != 0){
-
             for (int i = 0; i < jsonArray.length(); i++){
 
                 State state = new State();
@@ -377,9 +371,6 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
             }
         }
 
-        System.out.println("Datas::");
-        //System.out.println(states.toString());
-
         runOnUiThread(() -> {
             initializeAdapter(states);
         });
@@ -388,7 +379,7 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
     private JSONObject doSomeOperations(List<Item> itemList , String cmpShortName) throws JSONException
     {
 
-        if (itemList.size() == 0){
+        if (itemList.size() == 0 ){
 
             runOnUiThread(() -> {
                 horizontalScrollView.setVisibility(View.INVISIBLE);
@@ -501,12 +492,15 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                                                     item.setItemClosing( itemJson.getString("ItemClosing"));
                                                 }
 
+                                                item.setAppLoginUserID(userInfo.getAppLoginUserID().toUpperCase(Locale.ROOT).toString());
+
                                                 items.add(item);
 
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
+                                            }catch (Exception e1){
+                                                e1.printStackTrace();
                                             }
-
                                         }
 
                                         System.out.println(items.toString());
@@ -515,25 +509,27 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
                                         long[] isInserted = roomRepository.insertItemsToRoom(items);
                                         getCompanyItemParents();
+                                        getCompanyShortNames();
 
-                                        if (isInserted != null)
-                                        {
+                                        if (isInserted != null) {
                                             getCompanyItemParents();
+                                            getCompanyShortNames();
                                             Log.d("Result Message: " ,"Data Successful Loaded to Room Database");
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             Log.d("Result Message: " ,"Fail to Load Data to Room Database");
                                         }
                                     }
                                 });
-                            }
-                            else
-                            {
+
+                            } else {
                                 ThreadManager.getInstance(context).executeTask(new Runnable() {
                                     @Override
                                     public void run() {
-                                        roomRepository.deleteItems();
+                                        try {
+                                            roomRepository.deleteItems();
+                                        }catch (Exception e){
+                                            e.printStackTrace();
+                                        }
                                     }
                                 });
 
@@ -542,21 +538,20 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                                 Toast.makeText(StockReportActivity.this, "No items Found", Toast.LENGTH_LONG).show();
                             }
 
-                        }
-                        catch (JSONException e)
-                        {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }catch (Exception e){
                             e.printStackTrace();
                         }
                     }
-                },
-                new Response.ErrorListener()
-                {
+                }, new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
+                    public void onErrorResponse(VolleyError error) {
+
+                        Toast.makeText(getApplicationContext(),
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();
+
                         Hhdprogress.dismiss();
                         swipeRefreshLayout.setRefreshing(false);
                     }
@@ -565,205 +560,22 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
             @Override
             protected Map<String, String> getParams() throws AuthFailureError
             {
-                //cmpShortName
-                String cmpShortName = companyData.getCmpShortName();
+                //userId
+                String userId = userInfo.getAppLoginUserID();
                 Map<String, String> params = new HashMap<>();
-                params.put("cmpShortName", cmpShortName);
-                return params;
-            }
-        };
-        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
-    }
-
-    private void getItemsFromApiaLL()
-    {
-
-        final KProgressHUD Hhdprogress = KProgressHUD.create(StockReportActivity.this)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setLabel("Please wait")
-                .setCancellable(false)
-                .setAnimationSpeed(2)
-                .setDimAmount(0.5f);
-
-
-        Hhdprogress.setCancellable(new DialogInterface.OnCancelListener()
-        {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                dialog.dismiss();
-                finish();
-            }
-        });
-
-       runOnUiThread(new Runnable() {
-           @Override
-           public void run() {
-               Hhdprogress.show();
-           }
-       });
-
-        StringRequest stringRequest = new StringRequest(
-                Request.Method.POST,
-                URL_ITEMS,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String response)
-                    {
-                        try
-                        {
-                            JSONObject obj = new JSONObject(response);
-                            items = new ArrayList<>();
-                            JSONArray dataArray = obj.getJSONArray("StockDetails");
-                            Log.d("Items Response::", dataArray.toString());
-
-                            if (dataArray.length() != 0)
-                            {
-                                Hhdprogress.dismiss();
-
-                                ThreadManager.getInstance(context).executeTask(new Runnable() {
-                                    @Override
-                                    public void run()
-                                    {
-                                        for (int i = 0; i < dataArray.length(); i++)
-                                        {
-                                            Item item = new Item();
-                                            JSONObject itemJson = null;
-
-                                            try {
-                                                itemJson = dataArray.getJSONObject(i);
-                                                item.setCmpShortName(itemJson.getString("CmpShortName"));
-                                                item.setItemName(itemJson.getString("ItemName"));
-                                                item.setItemParent(itemJson.getString("ItemParent").toUpperCase(Locale.ROOT));
-
-                                                if (itemJson.getString("ItemOpening").isEmpty()){
-                                                    item.setItemOpening("0");
-                                                }else {
-                                                    item.setItemOpening(itemJson.getString("ItemOpening"));
-                                                }
-
-                                                if (itemJson.getString("ItemInwards").isEmpty()){
-                                                    item.setItemInwards("0");
-
-                                                }else {
-                                                    item.setItemInwards(itemJson.getString("ItemInwards"));
-                                                }
-
-                                                if (itemJson.getString("ItemOutwards").isEmpty()){
-                                                    item.setItemOutwards( "0" );
-                                                }else {
-                                                    item.setItemOutwards( itemJson.getString("ItemOutwards"));
-                                                }
-
-                                                if (itemJson.getString("ItemClosing").isEmpty()){
-                                                    item.setItemClosing("0" );
-                                                }else {
-                                                    item.setItemClosing( itemJson.getString("ItemClosing"));
-                                                }
-
-                                                items.add(item);
-
-                                            } catch (JSONException e) {
-                                                e.printStackTrace();
-                                            }
-
-                                        }
-
-                                        System.out.println(items.toString());
-
-                                        roomRepository.deleteItems();
-
-                                        long[] isInserted = roomRepository.insertItemsToRoom(items);
-                                        getCompanyShortNames();
-                                        getCompanyItemParents();
-
-                                        if (isInserted != null)
-                                        {
-                                            getCompanyShortNames();
-                                            getCompanyItemParents();
-                                            Log.d("Result Message: " ,"Data Successful Loaded to Room Database");
-                                        }
-                                        else
-                                        {
-                                            Log.d("Result Message: " ,"Fail to Load Data to Room Database");
-                                        }
-                                    }
-                                });
-                            }
-                            else
-                            {
-                                ThreadManager.getInstance(context).executeTask(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        roomRepository.deleteItems();
-                                    }
-                                });
-
-                                Hhdprogress.dismiss();
-                                Toast.makeText(StockReportActivity.this, "No items Found", Toast.LENGTH_LONG).show();
-                            }
-
-                        }
-                        catch (JSONException e)
-                        {
-                            e.printStackTrace();
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Hhdprogress.dismiss();
-                    }
-                })
-        {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError
-            {
-                //cmpShortName
-                String cmpShortName = companyData.getCmpShortName();
-                Map<String, String> params = new HashMap<>();
-                params.put("cmpShortName", "ALL");
+                params.put("AppLoginUserID", userId);
                 return params;
             }
         };
 
-
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
-    }
-
-    private void getStatesByCompany()
-    {
-        ThreadManager.getInstance(context).executeTask(new Runnable() {
-            @Override
-            public void run()
-            {
-                String cmpShortName = companyData.getCmpShortName();
-                List<Item> itemsByCompany = roomRepository.getItemsByCompany(cmpShortName);
-                if (itemsByCompany.size() == 0){
-                     states.clear();
-                     initializeAdapter(states);
-                }else {
-                    try {
-                        JSONObject i = manipulateTheDatas(itemsByCompany,cmpShortName);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
 
     }
 
     private JSONObject manipulateTheDatas(List<Item> itemsByCompany,String cmpShortName) throws JSONException
     {
 
-           /*Lamda function */
+        /*Lamda function */
         runOnUiThread( () -> {
             /* Clear ArrayList t Avoid Duplication*/
             horizontalScrollView.setVisibility(View.VISIBLE);
@@ -829,7 +641,6 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
     }
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item)
     {
@@ -861,10 +672,13 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
     }
 
     @Override
-    public void OnItemClick(int position) {
-        searchView.setText(itemsList.get(position).getItemParent().toUpperCase(Locale.ROOT));
+    public void OnItemClick(ListOfItemParents list)
+    {
+        //searchView.setText(itemsList.get(position).getItemParent().toUpperCase(Locale.ROOT));
+        searchView.setText(list.getItemParent().toString());
         alertDialogItem.dismiss();
 
-        System.out.println(itemsList.get(position).getItemParent());
+        System.out.println(list);
     }
+
 }

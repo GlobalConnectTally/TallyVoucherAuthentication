@@ -64,6 +64,8 @@ import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Sharepreference.Session;
 import tallyadmin.gp.gpcropcare.Sharepreference.UserInfo;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
+import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
+
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_DASHBOARDSBADGES;
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_LOGIN;
 
@@ -82,8 +84,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     SwipeRefreshLayout swipe;
     private TextView dashcmp;
     TextView dateText , timeText;
-
-
+    private VolleyErrors volleyErrors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -97,8 +98,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         companydata = new Companysave(getApplicationContext());
         userInfo = new UserInfo(getApplicationContext());
         session = new Session(getApplicationContext());
-
-
 
         mProgressDialog =  new ProgressDialog(HomeActivity.this);
         swipe = findViewById(R.id.swipe_torefresh);
@@ -120,16 +119,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         dateText = findViewById(R.id.date);
         timeText = findViewById(R.id.time);
 
-
-        System.out.println("Allow Approve + Reject ");
-        System.out.println(userInfo.getAllowApprove());
-        System.out.println(userInfo.getAllowReject());
-
         mBage = findViewById(R.id.salesbadge);
         //paybadge = findViewById(R.id.paymentrderbadge);
         //orderbadge = findViewById(R.id.salesorderbadge);
 
         showbadges();
+
+        volleyErrors = new VolleyErrors(this);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -359,6 +355,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 .setCancellable(true)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f);
+
          //Hhdprogress.setCancellable()
          Hhdprogress.setCancellable(new DialogInterface.OnCancelListener() {
             @Override
@@ -412,9 +409,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
-                        Hhdprogress.dismiss();
 
+                        Toast.makeText(
+                                getApplicationContext(),
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();
+
+                        Hhdprogress.dismiss();
                     }
                 }) {
             @Override
@@ -429,7 +430,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
-
     @SuppressWarnings("StatementWithEmptyBody")
     //Navigation item
     @Override
@@ -439,12 +439,17 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
+
             startActivity(new Intent(this,HomeActivity.class));
             finish();
+
         } else if (id == R.id.nav_about) {
+
             startActivity(new Intent(HomeActivity.this,AboutActivity.class));
+
         }
          else if (id == R.id.nav_logout) {
+
             startActivity(new Intent(HomeActivity.this,LoginActivity.class));
             session.setLogin(false);
             userInfo.clearUserInfo();

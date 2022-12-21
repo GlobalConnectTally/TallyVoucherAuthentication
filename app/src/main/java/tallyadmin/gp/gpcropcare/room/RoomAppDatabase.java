@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase;
 
 import tallyadmin.gp.gpcropcare.Model.Item;
 
-@Database(entities = {Item.class} , version = 1)
+@Database(entities = {Item.class} , version = 2)
 public abstract class RoomAppDatabase extends RoomDatabase
 {
     public static RoomAppDatabase roomAppDatabase;

@@ -37,8 +37,11 @@ import tallyadmin.gp.gpcropcare.Model.SalesOrder;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Sharepreference.Session;
+import tallyadmin.gp.gpcropcare.Sharepreference.ThreadManager;
 import tallyadmin.gp.gpcropcare.Sharepreference.UserInfo;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
+import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
+
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_SALES;
 
 
@@ -53,6 +56,7 @@ public class SalesOrderActivity extends AppCompatActivity
     UserInfo userInfo;
     Session session;
     EditText editsearch;
+    private VolleyErrors volleyErrors;
 
 
     @Override
@@ -73,6 +77,10 @@ public class SalesOrderActivity extends AppCompatActivity
         session = new Session(getApplicationContext());
         mProgressDialog = new ProgressDialog(SalesOrderActivity.this);
         recyclerOrder = findViewById(R.id.recyle_salesorder);
+
+        volleyErrors = new VolleyErrors(this);
+
+        Saleslist = new ArrayList<>();
 
         if (!isNetworkConnected()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -129,7 +137,7 @@ public class SalesOrderActivity extends AppCompatActivity
                         try {
                             JSONObject obj = new JSONObject(response);
                             System.out.println("response"+obj);
-                            Saleslist = new ArrayList<>();
+
                             JSONArray dataArray = obj.getJSONArray("SalesTransactions");
 
                             if (dataArray.length() == 0) {
@@ -192,6 +200,8 @@ public class SalesOrderActivity extends AppCompatActivity
                         catch (JSONException e)
                         {
                             e.printStackTrace();
+                        }catch (Exception e1){
+                             e1.printStackTrace();
                         }
                     }
                 },
@@ -199,8 +209,13 @@ public class SalesOrderActivity extends AppCompatActivity
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
 
+                        Toast.makeText(
+                                getApplicationContext(),
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();
+
+                        Hhdprogress.dismiss();
                     }
                 })
         {
@@ -275,26 +290,44 @@ public class SalesOrderActivity extends AppCompatActivity
             @Override
             public void afterTextChanged(Editable editable) {
                 //after the change calling the method and passing the search input
-                filter(editable.toString());
+                if (editable.length() > 0){
+                    filter(editable.toString());
+                }
             }
         });
     }
 
-    private void filter(String text)
+    private void filter(String text1)
     {
+        ThreadManager.getInstance(this).executeTask(new Runnable() {
+            @Override
+            public void run() {
+                try {
 
-        text = text.toLowerCase();
-        ArrayList<SalesOrder> filterdNames = new ArrayList<>();
+                    ArrayList<SalesOrder> filterdNames = new ArrayList<>();
 
-        for (SalesOrder s : Saleslist) {
+                    String text = text1.toLowerCase();
 
-            if (s.getPartyName().toLowerCase(Locale.getDefault()).contains(text)||s.getDate().contains(text)||s.getVoucherNumber().toLowerCase().contains(text)) {
-                //adding the element to filtered list
-                filterdNames.add(s);
+                    if ( Saleslist.size() != 0 ){
+
+                        for (SalesOrder s : Saleslist) {
+
+                            if (s.getPartyName().toLowerCase(Locale.getDefault()).contains(text)||s.getDate().contains(text)||s.getVoucherNumber().toLowerCase().contains(text)) {
+                                //adding the element to filtered list
+                                filterdNames.add(s);
+                            }
+                        }
+                    }
+
+                    runOnUiThread(() -> {
+                        salesOrderAdapter.filterList(filterdNames);
+                    });
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
-        }
-
-        salesOrderAdapter.filterList(filterdNames);
+        });
     }
 
     private boolean isNetworkConnected()

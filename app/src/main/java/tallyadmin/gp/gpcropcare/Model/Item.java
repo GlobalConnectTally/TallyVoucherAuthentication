@@ -34,12 +34,15 @@ public class Item
     @ColumnInfo(name = "ItemClosing")
     private String ItemClosing;
 
+    @ColumnInfo(name = "AppLoginUserID")
+    private String AppLoginUserID;
+
     public Item() {
 
     }
 
-    public Item(String cmpShortName, String itemName, String itemParent, String itemOpening, String itemInwards, String itemOutwards, String itemClosing)
-    {
+    public Item(int id, String cmpShortName, String itemName, String itemParent, String itemOpening, String itemInwards, String itemOutwards, String itemClosing, String appLoginUserID) {
+        Id = id;
         CmpShortName = cmpShortName;
         ItemName = itemName;
         ItemParent = itemParent;
@@ -47,6 +50,7 @@ public class Item
         ItemInwards = itemInwards;
         ItemOutwards = itemOutwards;
         ItemClosing = itemClosing;
+        AppLoginUserID = appLoginUserID;
     }
 
     public int getId()
@@ -129,17 +133,12 @@ public class Item
         ItemClosing = itemClosing;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return Id == item.Id && Objects.equals(CmpShortName, item.CmpShortName) && Objects.equals(ItemName, item.ItemName) && Objects.equals(ItemParent, item.ItemParent) && Objects.equals(ItemOpening, item.ItemOpening) && Objects.equals(ItemInwards, item.ItemInwards) && Objects.equals(ItemOutwards, item.ItemOutwards) && Objects.equals(ItemClosing, item.ItemClosing);
+    public String getAppLoginUserID() {
+        return AppLoginUserID;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(Id, CmpShortName, ItemName, ItemParent, ItemOpening, ItemInwards, ItemOutwards, ItemClosing);
+    public void setAppLoginUserID(String appLoginUserID) {
+        AppLoginUserID = appLoginUserID;
     }
 
     @Override
@@ -153,6 +152,7 @@ public class Item
                 ", ItemInwards='" + ItemInwards + '\'' +
                 ", ItemOutwards='" + ItemOutwards + '\'' +
                 ", ItemClosing='" + ItemClosing + '\'' +
+                ", AppLoginUserID='" + AppLoginUserID + '\'' +
                 '}';
     }
 }
