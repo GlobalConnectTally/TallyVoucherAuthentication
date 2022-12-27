@@ -82,7 +82,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     NotificationBadge mBage,paybadge,orderbadge;
     SwipeRefreshLayout swipe;
-    private TextView dashcmp;
+    private TextView dashcmp,userId;
     TextView dateText , timeText;
     private VolleyErrors volleyErrors;
 
@@ -118,6 +118,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         dateText = findViewById(R.id.date);
         timeText = findViewById(R.id.time);
+        userId=  findViewById(R.id.userId);
+
 
         mBage = findViewById(R.id.salesbadge);
         //paybadge = findViewById(R.id.paymentrderbadge);
@@ -211,8 +213,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //            }
 //        });
 
-        timeText.setText(currentTIme().toString());
-        dateText.setText(getFormatedDate(todayformatDate()));
 
          //-----sales on click go to dashboard to Sales order activity-----//
          LinearLayout salesorder = findViewById(R.id.sales_order);
@@ -258,6 +258,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
           //     }
           //   });
 
+          userId.setText(userInfo.getAppLoginUserID().toLowerCase(Locale.ROOT));
           dashcmp = findViewById(R.id.dash_cmpname);
           dashcmp.setText(companydata.getKeyName());
     }
@@ -591,6 +592,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     {
         super.onStart();
         showbadges();
+        timeText.setText(currentTIme().toString());
+        dateText.setText(getFormatedDate(todayformatDate()));
+
     }
 
 }

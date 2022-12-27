@@ -52,6 +52,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -87,7 +88,7 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
     LinearLayoutManager linearLayoutManager;
     StateAdapter stateAdapter;
     TextInputEditText searchView;
-    HorizontalScrollView horizontalScrollView;
+    LinearLayout horizontalScrollView;
     LinearLayout linearLayoutError;
     List<ListOfCompanyShortName> cmpShortNameList;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -327,34 +328,22 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                     if (jsonObject != null){
                         if (jsonObject.has("CmpShortName")){
                             state.setCmpShortName(jsonObject.getString("CmpShortName"));
+                        }else {
+                            state.setCmpShortName("N/A");
                         }
 
                         if (jsonObject.has("ItemParent")){
                             state.setItemParent(jsonObject.getString("ItemParent"));
+                        }else {
+                            state.setItemParent("N/A");
                         }
 
-                        if (jsonObject.has("FiveHundredMl")){
-                            state.setFiveHundredMl(String.valueOf(jsonObject.getInt("FiveHundredMl")));
-                        }
-
-                        if (jsonObject.has("OneHundredMl")){
-                            state.setOneHundredMl(String.valueOf(jsonObject.getString("OneHundredMl")));
-                        }
-
-                        if (jsonObject.has("OneLtr")){
-                            state.setOneLtr(String.valueOf(jsonObject.getString("OneLtr")));
-                        }
-
-                        if (jsonObject.has("TwoFiftyMl")){
-                            state.setTwoFiftyMl(String.valueOf(jsonObject.getString("TwoFiftyMl")));
-                        }
-
-                        if (jsonObject.has("TwentyMl")){
-                            state.setTwentyMl(String.valueOf(jsonObject.getString("TwentyMl")));
-                        }
-
-                        if (jsonObject.has("TotalMl")){
-                            state.setTotalMl(String.valueOf(jsonObject.getString("TotalMl")));
+                        if (jsonObject.has("TotalClosing")){
+                            DecimalFormat numberFormat = new DecimalFormat("#.00");
+                            String total = numberFormat.format(Double.parseDouble(String.valueOf(jsonObject.getString("TotalClosing"))));
+                            state.setTotalClosing(total);
+                        }else {
+                            state.setTotalClosing(String.valueOf("0"));
                         }
                     }
 
@@ -470,26 +459,25 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                                                 if (itemJson.getString("ItemOpening").isEmpty()){
                                                     item.setItemOpening("0");
                                                 }else {
-                                                    item.setItemOpening(itemJson.getString("ItemOpening"));
+                                                    item.setItemOpening(itemJson.getString("ItemOpening").split(" ")[0]);
                                                 }
 
                                                 if (itemJson.getString("ItemInwards").isEmpty()){
                                                     item.setItemInwards("0");
-
                                                 }else {
-                                                    item.setItemInwards(itemJson.getString("ItemInwards"));
+                                                    item.setItemInwards(itemJson.getString("ItemInwards").split(" ")[0]);
                                                 }
 
                                                 if (itemJson.getString("ItemOutwards").isEmpty()){
                                                     item.setItemOutwards( "0" );
                                                 }else {
-                                                    item.setItemOutwards( itemJson.getString("ItemOutwards"));
+                                                    item.setItemOutwards( itemJson.getString("ItemOutwards").split(" ")[0]);
                                                 }
 
                                                 if (itemJson.getString("ItemClosing").isEmpty()){
                                                     item.setItemClosing("0" );
                                                 }else {
-                                                    item.setItemClosing( itemJson.getString("ItemClosing"));
+                                                    item.setItemClosing( itemJson.getString("ItemClosing").split(" ")[0]);
                                                 }
 
                                                 item.setAppLoginUserID(userInfo.getAppLoginUserID().toUpperCase(Locale.ROOT).toString());
@@ -584,7 +572,7 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
             initializeAdapter(states);
         });
 
-        int totalValue =0;
+        double totalValue  = 0.0;
         JSONObject jsonObject = new JSONObject();;
         if (itemsByCompany != null && itemsByCompany.size() != 0)
         {
@@ -593,6 +581,10 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                 jsonObject.put("CmpShortName" , item.getCmpShortName());
                 jsonObject.put("ItemParent" , item.getItemParent());
 
+                if (!item.getItemClosing().equalsIgnoreCase(" ")){
+                    totalValue  += Double.parseDouble(item.getItemClosing().toString());
+                }
+                /*
                 if (item.getItemName().equalsIgnoreCase("1LTR"))
                 {
                     jsonObject.put("OneLtr" , item.getItemClosing());
@@ -618,9 +610,11 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                     jsonObject.put("TwentyMl" , item.getItemClosing());
                     totalValue += Integer.valueOf(item.getItemClosing());
                 }
-                else {}
+                else {
+
+                }*/
             }
-            jsonObject.put("TotalMl" , String.valueOf(totalValue));
+            jsonObject.put("TotalClosing" , String.valueOf(totalValue));
 
         }
         else
@@ -629,12 +623,7 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
             jsonObject.put("CmpShortName" , "N/A");
             jsonObject.put("ItemParent" , "N/A");
-            jsonObject.put("OneLtr" , "0");
-            jsonObject.put("FiveHundredMl" , "0");
-            jsonObject.put("TwoFiftyMl" , "0");
-            jsonObject.put("OneHundredMl" , "0");
-            jsonObject.put("TwentyMl" , "0");
-            jsonObject.put("TotalMl" , "0");
+            jsonObject.put("TotalClosing" , "0");
         }
 
         return  jsonObject;

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -37,10 +38,11 @@ public class StateReportActivity extends AppCompatActivity
     ItemAdapter itemAdapter;
     String ItemParent;
 
-    int totalOpening =0;
-    int totalInward  =0;
-    int totalOutward =0;
-    int totalClosing =0;
+    double totalOpening = 0.0;
+    double totalInward  = 0.0;
+    double totalOutward = 0.0;
+    double totalClosing = 0.0;
+
     UserInfo userInfo;
 
     @Override
@@ -88,14 +90,21 @@ public class StateReportActivity extends AppCompatActivity
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(itemAdapter);
 
-        totalOpeningTextView.setText(String.valueOf(totalOpening));
-        totalInwardTextView.setText(String.valueOf(totalInward));
-        totalOutwardTextView.setText(String.valueOf(totalOutward));
-        totalClosingTextView.setText(String.valueOf(totalClosing));
+        totalOpeningTextView.setText(toTowDecimalPlaces(String.valueOf(totalOpening)));
+        totalInwardTextView.setText(toTowDecimalPlaces(String.valueOf(totalInward)));
+        totalOutwardTextView.setText(toTowDecimalPlaces(String.valueOf(totalOutward)));
+        totalClosingTextView.setText(toTowDecimalPlaces(String.valueOf(totalClosing)));
+    }
+
+    private String toTowDecimalPlaces(String data)
+    {
+        DecimalFormat numberFormat = new DecimalFormat("#.00");
+        return  numberFormat.format(Double.parseDouble(data));
     }
 
     private void getItemsByCompany(String cmpShortName, String ItemParent)
     {
+
         items = new ArrayList<Item>();
 
         ThreadManager.getInstance(context).executeTask(new Runnable() {
@@ -106,15 +115,19 @@ public class StateReportActivity extends AppCompatActivity
 
                 if (items != null)
                 {
-                    for (Item item:items)
-                    {
-                         totalOpening += Integer.valueOf(item.getItemOpening());
-                         totalInward  += Integer.valueOf(item.getItemInwards());
-                         totalOutward += Integer.valueOf(item.getItemOutwards());
-                         totalClosing += Integer.valueOf(item.getItemClosing());
+                    for (Item item:items) {
+                         totalOpening += Double.parseDouble(item.getItemOpening().replace(",",""));
+                         totalInward  += Double.parseDouble(item.getItemInwards().replace(",",""));
+                         totalOutward += Double.parseDouble(item.getItemOutwards().replace(",",""));
+                         totalClosing += Double.parseDouble(item.getItemClosing().replace(",",""));
                     }
 
-                    populateData(items);
+                   runOnUiThread(new Runnable() {
+                       @Override
+                       public void run() {
+                           populateData(items);
+                       }
+                   });
 
                 }
                 else
@@ -123,8 +136,8 @@ public class StateReportActivity extends AppCompatActivity
                 }
             }
         });
-
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item)
     {

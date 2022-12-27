@@ -44,12 +44,8 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>
     public void onBindViewHolder(@NonNull StateAdapter.ViewHolder holder, int position)
     {
         holder.CmpShortNameTextView.setText(states.get(position).getCmpShortName());
-        holder.oneLtrTextView.setText(states.get(position).getOneLtr());
-        holder.fiveHundredMlTextView.setText(states.get(position).getFiveHundredMl());
-        holder.twoFiftyMlTextView.setText(states.get(position).getTwoFiftyMl());
-        holder.oneHundredMlTextView.setText(states.get(position).getOneHundredMl());
-        holder.twentyMlTextView.setText(states.get(position).getTwentyMl());
-        holder.totalMlTextView.setText(states.get(position).getTotalMl());
+        holder.itemParent.setText(states.get(position).getItemParent().toString());
+        holder.totalMlTextView.setText(states.get(position).getTotalClosing());
     }
 
     @Override
@@ -60,7 +56,7 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>
 
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
-        public TextView CmpShortNameTextView, oneLtrTextView, fiveHundredMlTextView, twoFiftyMlTextView, oneHundredMlTextView, twentyMlTextView,totalMlTextView;
+        public TextView CmpShortNameTextView,itemParent, totalMlTextView;
 
         OnStateAdapterListener mOnStateAdapterListener;
         public ViewHolder(@NonNull View itemView, OnStateAdapterListener listener)
@@ -68,11 +64,7 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>
             super(itemView);
             this.mOnStateAdapterListener = listener;
             CmpShortNameTextView = itemView.findViewById(R.id.CmpShortNameId);
-            oneLtrTextView = itemView.findViewById(R.id.oneLtrId);
-            fiveHundredMlTextView = itemView.findViewById(R.id.fiveHundredMl);
-            twoFiftyMlTextView = itemView.findViewById(R.id.twoFiftyMlId);
-            oneHundredMlTextView = itemView.findViewById(R.id.oneHundredMlId);
-            twentyMlTextView = itemView.findViewById(R.id.twentyMlId);
+            itemParent = itemView.findViewById(R.id.itemParent);
             totalMlTextView = itemView.findViewById(R.id.totalMlId);
 
 
@@ -86,6 +78,7 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>
             });
         }
     }
+
     public interface OnStateAdapterListener
     {
         void onClickState(int position, List<State> states);
