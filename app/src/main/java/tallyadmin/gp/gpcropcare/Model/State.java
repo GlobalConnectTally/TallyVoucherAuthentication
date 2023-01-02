@@ -2,7 +2,15 @@ package tallyadmin.gp.gpcropcare.Model;
 
 public class State
 {
-    String CmpShortName , ItemParent , TotalClosing;
+    String CmpShortName , ItemParent , ItemName, ItemClosing;
+
+    public String getItemName() {
+        return ItemName;
+    }
+
+    public void setItemName(String itemName) {
+        ItemName = itemName;
+    }
 
     public String getCmpShortName() {
         return CmpShortName;
@@ -20,20 +28,21 @@ public class State
         ItemParent = itemParent;
     }
 
-    public String getTotalClosing() {
-        return TotalClosing;
+    public String getItemClosing() {
+        return ItemClosing;
     }
 
-    public void setTotalClosing(String totalClosing) {
-        TotalClosing = totalClosing;
+    public void setItemClosing(String totalClosing) {
+        ItemClosing = totalClosing;
     }
 
     @Override
     public String toString() {
         return "{" +
-                "CmpShortName='" + CmpShortName + '\'' +
+                " CmpShortName='" + CmpShortName + '\'' +
                 ", ItemParent='" + ItemParent + '\'' +
-                ", TotalClosing='" + TotalClosing + '\'' +
+                ", ItemName='" + ItemName + '\'' +
+                ", ItemClosing='" + ItemClosing + '\'' +
                 '}';
     }
 }

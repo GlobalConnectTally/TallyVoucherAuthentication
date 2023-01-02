@@ -12,15 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import tallyadmin.gp.gpcropcare.Model.Item;
+import tallyadmin.gp.gpcropcare.Model.ItemListModel;
 import tallyadmin.gp.gpcropcare.Model.State;
 import tallyadmin.gp.gpcropcare.R;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>
 {
 
-    public static List<Item> items;
+    public static List<ItemListModel> items;
 
-    public ItemAdapter(List<Item> items)
+    public ItemAdapter(List<ItemListModel> items)
     {
         this.items = items;
     }
@@ -55,7 +56,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder>
     public static class ViewHolder extends RecyclerView.ViewHolder
     {
         public TextView itemNameTextView, openTextView, inTextView, outTextView, closeTextView;
-
 
         public ViewHolder(@NonNull View itemView)
         {

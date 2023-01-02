@@ -43,8 +43,10 @@ import tallyadmin.gp.gpcropcare.Adapter.CompanyAdapter;
 import tallyadmin.gp.gpcropcare.Model.Company;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Sharepreference.Session;
+import tallyadmin.gp.gpcropcare.Sharepreference.ThreadManager;
 import tallyadmin.gp.gpcropcare.Sharepreference.UserInfo;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
+import tallyadmin.gp.gpcropcare.room.RoomRepository;
 import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
 
 
@@ -61,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     Context context;
     NotificationBadge mBage;
     private VolleyErrors volleyErrors;
+    private RoomRepository roomRepository;
 
 
     @Override
@@ -74,6 +77,8 @@ public class LoginActivity extends AppCompatActivity {
         userInfo = new UserInfo(getApplicationContext());
         session = new Session(getApplicationContext());
         context = this;
+
+        roomRepository = new RoomRepository(this);
 
         volleyErrors = new VolleyErrors(this);
 
@@ -161,54 +166,69 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        try {
-                            JSONObject obj = new JSONObject(response);
-                            Saleslist = new ArrayList<>();
-                            JSONArray dataArray = obj.getJSONArray("response");
-                            Log.d("Response::", dataArray.toString());
+                        ThreadManager.getInstance(context).executeTask(new Runnable() {
+                            @Override
+                            public void run() {
 
-                            if (dataArray.length() != 0) {
+                                try {
+                                    JSONObject obj = new JSONObject(response);
+                                    Saleslist = new ArrayList<>();
+                                    JSONArray dataArray = obj.getJSONArray("response");
+                                    Log.d("Response::", dataArray.toString());
 
-                                Hhdprogress.dismiss();
-                                session.setLogin(true);
-                                userInfo.setAppLoginUserID(username);
-                                userInfo.setpassword(password);
+                                    if (dataArray.length() != 0) {
 
-                                for (int i = 0; i < dataArray.length(); i++)
-                                {
-                                    Company companyModel = new Company();
-                                    JSONObject dataobj = dataArray.getJSONObject(i);
+                                        Hhdprogress.dismiss();
+                                        session.setLogin(true);
+                                        userInfo.setAppLoginUserID(username);
+                                        userInfo.setpassword(password);
 
-                                    /*-------- Authentication ---------*/
-                                    companyModel.setAllowReject(dataobj.getString("AllowReject"));
-                                    companyModel.setAllowedApprove(dataobj.getString("AllowApprove"));
+                                        for (int i = 0; i < dataArray.length(); i++)
+                                        {
+                                            Company companyModel = new Company();
+                                            JSONObject dataobj = dataArray.getJSONObject(i);
 
-                                    /*--------   2 Level Authentication ------------*/
-                                    companyModel.setFirstLevel(dataobj.getString("FirstLevel"));
-                                    companyModel.setSecondLevel(dataobj.getString("SecondLevel"));
+                                            /*-------- Authentication ---------*/
+                                            companyModel.setAllowReject(dataobj.getString("AllowReject"));
+                                            companyModel.setAllowedApprove(dataobj.getString("AllowApprove"));
 
-                                    companyModel.setCmpGUID(dataobj.getString("CmpGUID"));
-                                    companyModel.setCompanyName(dataobj.getString("CompanyName"));
+                                            /*--------   2 Level Authentication ------------*/
+                                            companyModel.setFirstLevel(dataobj.getString("FirstLevel"));
+                                            companyModel.setSecondLevel(dataobj.getString("SecondLevel"));
 
-                                    companyModel.setPendingSales(dataobj.getInt("PendingSales"));
-                                    companyModel.setCmpShortName(dataobj.getString("CmpShortName"));
+                                            companyModel.setCmpGUID(dataobj.getString("CmpGUID"));
+                                            companyModel.setCompanyName(dataobj.getString("CompanyName"));
 
-                                    Saleslist.add(companyModel);
+                                            companyModel.setPendingSales(dataobj.getInt("PendingSales"));
+                                            companyModel.setCmpShortName(dataobj.getString("CmpShortName"));
+
+                                            Saleslist.add(companyModel);
+                                        }
+
+                                        roomRepository.deleteCompanies();
+
+                                        roomRepository.insertCompaniesToRoom(Saleslist);
+
+                                       runOnUiThread(LoginActivity.this::cmpndialog);
+
+                                    } else if (dataArray.length() == 0) {
+
+                                        runOnUiThread(() -> {
+                                            Hhdprogress.dismiss();
+                                            Toast.makeText(LoginActivity.this, "Login Failed please check you credential's", Toast.LENGTH_LONG).show();
+                                        });
+
+                                        session.setLogin(false);
+
+
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
                                 }
 
-                                cmpndialog();
-
-                            } else if (dataArray.length() == 0) {
-
-                                Hhdprogress.dismiss();
-                                session.setLogin(false);
-                                Toast.makeText(LoginActivity.this, "Login Failed please check you credential's", Toast.LENGTH_LONG).show();
-
                             }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        });
                     }
                 },
                 new Response.ErrorListener() {

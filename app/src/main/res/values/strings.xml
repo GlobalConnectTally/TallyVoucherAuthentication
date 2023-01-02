@@ -21,6 +21,8 @@
     <string name="search">Search Item</string>
     <string name="click_to_search">Click To Search</string>
 
+    <string name="state">STATE</string>
+    <string name="total">TOTAL</string>
     <!--ERROR MESSAGES-->
     <string name="netError">There is a problem with your network.</string>
     <string name="connError"> No internet connection. Check your internet connection. </string>

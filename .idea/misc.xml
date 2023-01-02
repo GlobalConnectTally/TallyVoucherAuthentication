@@ -26,7 +26,7 @@
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_reportn.xml" value="0.1675929884566054" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_showtransactionew.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_sixreportactivity.xml" value="0.25" />
-        <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_state_report.xml" value="0.3069620253164557" />
+        <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_state_report.xml" value="0.2" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/activity_stock_report.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/an_item_card.xml" value="0.49" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/an_item_card_dialog.xml" value="0.22" />
@@ -38,8 +38,9 @@
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/items_list_dialog.xml" value="0.25" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/nav_header_home.xml" value="0.14" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/order_redesignewt.xml" value="0.22" />
+        <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/row_layout.xml" value="0.22" />
         <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/spinner_layoutb.xml" value="0.1675929884566054" />
-        <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/state_item.xml" value="0.5" />
+        <entry key="..\:/AndroidStudioProjects/TallyVoucherAuthentication/app/src/main/res/layout/state_item.xml" value="0.22" />
         <entry key="..\:/Office Projects/app/src/main/res/layout-sw600dp/activity_licence.xml" value="0.190625" />
         <entry key="..\:/Office Projects/app/src/main/res/layout-sw600dp/activity_main.xml" value="0.190625" />
         <entry key="..\:/Office Projects/app/src/main/res/layout-sw600dp/setting_layoutrc.xml" value="0.190625" />

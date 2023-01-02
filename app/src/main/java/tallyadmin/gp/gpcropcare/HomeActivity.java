@@ -62,8 +62,10 @@ import tallyadmin.gp.gpcropcare.Model.Company;
 import tallyadmin.gp.gpcropcare.Model.Item;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Sharepreference.Session;
+import tallyadmin.gp.gpcropcare.Sharepreference.ThreadManager;
 import tallyadmin.gp.gpcropcare.Sharepreference.UserInfo;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
+import tallyadmin.gp.gpcropcare.room.RoomRepository;
 import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
 
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_DASHBOARDSBADGES;
@@ -85,6 +87,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private TextView dashcmp,userId;
     TextView dateText , timeText;
     private VolleyErrors volleyErrors;
+    RoomRepository roomRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -98,6 +101,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         companydata = new Companysave(getApplicationContext());
         userInfo = new UserInfo(getApplicationContext());
         session = new Session(getApplicationContext());
+
+        roomRepository = new RoomRepository(this);
 
         mProgressDialog =  new ProgressDialog(HomeActivity.this);
         swipe = findViewById(R.id.swipe_torefresh);
@@ -375,36 +380,52 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     @Override
                     public void onResponse(String response) {
 
-                            try {
-                                JSONObject obj = new JSONObject(response);
+                        ThreadManager.getInstance(getApplicationContext())
+                                .executeTask(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            JSONObject obj = new JSONObject(response);
 
-                                System.out.println("Data Resp::"+obj.toString());
-                                Saleslist = new ArrayList<>();
-                                JSONArray dataArray  = obj.getJSONArray("response");
-                                for (int i = 0; i < dataArray.length(); i++) {
+                                            System.out.println("Data Resp::"+obj.toString());
+                                            Saleslist = new ArrayList<>();
+                                            JSONArray dataArray  = obj.getJSONArray("response");
+                                            for (int i = 0; i < dataArray.length(); i++) {
 
-                                    Company playerModel = new Company();
-                                    JSONObject dataobj = dataArray.getJSONObject(i);
-                                    playerModel.setCmpGUID(dataobj.getString("CmpGUID"));
-                                    playerModel.setCompanyName(dataobj.getString("CompanyName"));
-                                    playerModel.setPendingSales(dataobj.getInt("PendingSales"));
-                                    playerModel.setCmpShortName(dataobj.getString("CmpShortName"));
+                                                Company playerModel = new Company();
+                                                JSONObject dataobj = dataArray.getJSONObject(i);
+                                                playerModel.setCmpGUID(dataobj.getString("CmpGUID"));
+                                                playerModel.setCompanyName(dataobj.getString("CompanyName"));
+                                                playerModel.setPendingSales(dataobj.getInt("PendingSales"));
+                                                playerModel.setCmpShortName(dataobj.getString("CmpShortName"));
 
 
-                                    playerModel.setFirstLevel(dataobj.getString("FirstLevel"));
-                                    playerModel.setSecondLevel(dataobj.getString("SecondLevel"));
-                                    playerModel.setAllowReject(dataobj.getString("AllowReject"));
-                                    playerModel.setAllowedApprove(dataobj.getString("AllowApprove"));
+                                                playerModel.setFirstLevel(dataobj.getString("FirstLevel"));
+                                                playerModel.setSecondLevel(dataobj.getString("SecondLevel"));
+                                                playerModel.setAllowReject(dataobj.getString("AllowReject"));
+                                                playerModel.setAllowedApprove(dataobj.getString("AllowApprove"));
 
-                                    Saleslist.add(playerModel);
+                                                Saleslist.add(playerModel);
+                                            }
 
-                                }
-                               Hhdprogress.dismiss();
-                                cmpndialog();
+                                            roomRepository.deleteCompanies();
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                                            roomRepository.insertCompaniesToRoom(Saleslist);
+
+                                           runOnUiThread(new Runnable() {
+                                               @Override
+                                               public void run() {
+                                                   Hhdprogress.dismiss();
+                                                   cmpndialog();
+                                               }
+                                           });
+
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+                                    }
+                                });
                         }
                 },
                 new Response.ErrorListener() {

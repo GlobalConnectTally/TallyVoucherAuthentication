@@ -1,49 +1,23 @@
 package tallyadmin.gp.gpcropcare.Model;
 
 import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import java.util.Objects;
-
-
-@Entity(tableName = "itemList")
-public class Item
-{
-    @PrimaryKey(autoGenerate = true)
-    private int Id;
-
-    @ColumnInfo(name = "CmpShortName")
+public class ItemListModel {
     private String CmpShortName;
-
-    @ColumnInfo(name = "ItemName")
     private String ItemName;
-
-    @ColumnInfo(name = "ItemParent")
     private String ItemParent;
-
-    @ColumnInfo(name = "ItemOpening")
     private String ItemOpening;
-
-    @ColumnInfo(name = "ItemInwards")
     private String ItemInwards;
-
-    @ColumnInfo(name = "ItemOutwards")
     private String ItemOutwards;
-
-    @ColumnInfo(name = "ItemClosing")
     private String ItemClosing;
-
-    @ColumnInfo(name = "AppLoginUserID")
     private String AppLoginUserID;
 
-    public Item() {
+    public ItemListModel() {
 
     }
 
-    public Item(int id, String cmpShortName, String itemName, String itemParent, String itemOpening, String itemInwards, String itemOutwards, String itemClosing, String appLoginUserID) {
-        Id = id;
+    public ItemListModel( String cmpShortName, String itemName, String itemParent, String itemOpening, String itemInwards, String itemOutwards, String itemClosing, String appLoginUserID) {
         CmpShortName = cmpShortName;
         ItemName = itemName;
         ItemParent = itemParent;
@@ -52,16 +26,6 @@ public class Item
         ItemOutwards = itemOutwards;
         ItemClosing = itemClosing;
         AppLoginUserID = appLoginUserID;
-    }
-
-    public int getId()
-    {
-        return Id;
-    }
-
-    public void setId(int id)
-    {
-        Id = id;
     }
 
     public String getCmpShortName()
@@ -142,5 +106,17 @@ public class Item
         AppLoginUserID = appLoginUserID;
     }
 
-
+    @Override
+    public String toString() {
+        return "{" +
+                "CmpShortName='" + CmpShortName + '\'' +
+                ", ItemName='" + ItemName + '\'' +
+                ", ItemParent='" + ItemParent + '\'' +
+                ", ItemOpening='" + ItemOpening + '\'' +
+                ", ItemInwards='" + ItemInwards + '\'' +
+                ", ItemOutwards='" + ItemOutwards + '\'' +
+                ", ItemClosing='" + ItemClosing + '\'' +
+                ", AppLoginUserID='" + AppLoginUserID + '\'' +
+                '}';
+    }
 }

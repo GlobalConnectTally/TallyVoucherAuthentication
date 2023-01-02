@@ -1,12 +1,41 @@
 package tallyadmin.gp.gpcropcare.Model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "Company")
 public class Company {
 
-    String CmpGUID, CompanyName;
+    @PrimaryKey(autoGenerate = true)
+    public int id;
+
+    @ColumnInfo(name = "CmpGUID")
+    public String CmpGUID;
+
+    @ColumnInfo(name = "CompanyName")
+    public String CompanyName;
+
+    @ColumnInfo(name = "isSelected")
     private boolean isSelected;
+
+    @ColumnInfo(name = "pendingSales")
     private Integer pendingSales;
-    private String allowedApprove, allowReject;
-    private String FirstLevel, SecondLevel,CmpShortName;
+
+    @ColumnInfo(name = "allowedApprove")
+    private String allowedApprove;
+
+    @ColumnInfo(name = "allowReject")
+    private String allowReject;
+
+    @ColumnInfo(name = "FirstLevel")
+    private String FirstLevel;
+
+    @ColumnInfo(name = "SecondLevel")
+    private String  SecondLevel;
+
+    @ColumnInfo(name = "CmpShortName")
+    private String CmpShortName;
 
     public Company() {
 

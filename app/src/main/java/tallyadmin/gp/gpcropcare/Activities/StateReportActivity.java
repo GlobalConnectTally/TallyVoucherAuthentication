@@ -20,6 +20,7 @@ import java.util.Locale;
 import tallyadmin.gp.gpcropcare.Adapter.ItemAdapter;
 import tallyadmin.gp.gpcropcare.Adapter.StateAdapter;
 import tallyadmin.gp.gpcropcare.Model.Item;
+import tallyadmin.gp.gpcropcare.Model.ItemListModel;
 import tallyadmin.gp.gpcropcare.Model.State;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.ThreadManager;
@@ -32,7 +33,7 @@ public class StateReportActivity extends AppCompatActivity
     String CmpShortNameValue;
     TextView stateNameTextView, totalOpeningTextView,totalInwardTextView,totalOutwardTextView,totalClosingTextView;
     Context context;
-    List<Item> items;
+    List<ItemListModel> items;
     RecyclerView recyclerView;
     LinearLayoutManager linearLayoutManager;
     ItemAdapter itemAdapter;
@@ -51,7 +52,6 @@ public class StateReportActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_state_report);
         context = this;
-
         Toolbar toolbar = findViewById(R.id.toolbarStateReport);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -66,13 +66,14 @@ public class StateReportActivity extends AppCompatActivity
         }
 
         ItemParent = getIntent().getStringExtra("ItemParent");
+
         userInfo = new UserInfo(this);
 
         stateNameTextView = findViewById(R.id.stateNameId);
         stateNameTextView.setText(CmpShortNameValue);
 
         roomRepository = new RoomRepository(this);
-        getItemsByCompany(CmpShortNameValue,ItemParent);
+        //getItemsByCompany(CmpShortNameValue,ItemParent);
 
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView = findViewById(R.id.stateReportRecyclerView);
@@ -84,7 +85,7 @@ public class StateReportActivity extends AppCompatActivity
 
     }
 
-    public void populateData(List<Item> items)
+    public void populateData(List<ItemListModel> items)
     {
         itemAdapter = new ItemAdapter(items);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -105,7 +106,7 @@ public class StateReportActivity extends AppCompatActivity
     private void getItemsByCompany(String cmpShortName, String ItemParent)
     {
 
-        items = new ArrayList<Item>();
+        items = new ArrayList<ItemListModel>();
 
         ThreadManager.getInstance(context).executeTask(new Runnable() {
             @Override
@@ -115,7 +116,7 @@ public class StateReportActivity extends AppCompatActivity
 
                 if (items != null)
                 {
-                    for (Item item:items) {
+                    for (ItemListModel item:items) {
                          totalOpening += Double.parseDouble(item.getItemOpening().replace(",",""));
                          totalInward  += Double.parseDouble(item.getItemInwards().replace(",",""));
                          totalOutward += Double.parseDouble(item.getItemOutwards().replace(",",""));

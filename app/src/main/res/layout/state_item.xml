@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -42,4 +43,31 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</LinearLayout>-->
+
+<HorizontalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/itemClosingLay"
+        android:padding="@dimen/_10sdp"
+        android:weightSum="100"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/stock_item_border">
+
+       <!-- <TextView
+            android:layout_weight="50"
+            android:id="@+id/itemParent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Item Parent "
+            android:textColor="@color/color_black"
+            android:gravity="center"/>-->
+
+    </LinearLayout>
+
+</HorizontalScrollView>

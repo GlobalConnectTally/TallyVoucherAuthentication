@@ -17,7 +17,4 @@ public class AboutActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
 
     }
-
-
-
 }

@@ -6,9 +6,10 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import tallyadmin.gp.gpcropcare.Model.Company;
 import tallyadmin.gp.gpcropcare.Model.Item;
 
-@Database(entities = {Item.class} , version = 2)
+@Database(entities = {Item.class , Company.class} , version = 3)
 public abstract class RoomAppDatabase extends RoomDatabase
 {
     public static RoomAppDatabase roomAppDatabase;
