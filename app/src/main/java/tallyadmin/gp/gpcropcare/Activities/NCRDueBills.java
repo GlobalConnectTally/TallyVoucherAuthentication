@@ -38,6 +38,7 @@ import tallyadmin.gp.gpcropcare.Model.NCRBill;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
+import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
 
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_REPORTNrc;
 
@@ -47,6 +48,7 @@ public class NCRDueBills extends AppCompatActivity {
     List<NCRBill> arraylist;
     NCRDueBillsAdapter ncrDueBillsAdapter;
     Companysave companydata;
+    private VolleyErrors volleyErrors;
 
 
     @Override
@@ -90,6 +92,9 @@ public class NCRDueBills extends AppCompatActivity {
         {
             fetchingJSON();
         }
+
+        volleyErrors = new VolleyErrors(this);
+
     }
 
 
@@ -192,7 +197,12 @@ public void fetchingJSON() {
             new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(getApplicationContext(),
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();
+
+                        Hhdprogress.dismiss();
                     }
                 }) {
                     @Override

@@ -20,6 +20,7 @@ import tallyadmin.gp.gpcropcare.Model.State;
 import tallyadmin.gp.gpcropcare.Model.StateModel;
 import tallyadmin.gp.gpcropcare.R;
 import static tallyadmin.gp.gpcropcare.Activities.StockReportActivity.states;
+import static tallyadmin.gp.gpcropcare.Activities.StockReportActivity.max;
 
 
 public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>
@@ -28,15 +29,13 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>
     public List<StateModel> tempStates;
     private final OnStateAdapterListener mOnStateAdapterListener;
     private Context mContext;
-    private  int max = 0;
 
-    public StateAdapter(List<StateModel> states, OnStateAdapterListener mOnStateAdapterListener , Context context , int max)
+    public StateAdapter(List<StateModel> states, OnStateAdapterListener mOnStateAdapterListener , Context context )
     {
         this.mOnStateAdapterListener = mOnStateAdapterListener;
         this.states = states;
         this.tempStates = states;
         this.mContext = context;
-        this.max = max;
     }
 
     @NonNull
@@ -51,13 +50,16 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull StateAdapter.ViewHolder holder, int position)
     {
-        /*  holder.CmpShortNameTextView.setText(states.get(position).getCmpShortName());
-        holder.itemParent.setText(states.get(position).getItemName().toString());
-        holder.totalMlTextView.setText(states.get(position).getItemClosing());
-        */
-        holder.itemClosingLay.removeAllViews();
 
-        TextView tv2 = new TextView(mContext);
+        holder.itemClosingLay.setHasTransientState(true);
+
+        int sizeData = states.get(position).getItemData().size();
+
+       if (holder.itemClosingLay.getChildCount() > 0 ){
+           holder.itemClosingLay.removeAllViews();
+       }
+
+        TextView tv2 = new TextView(mContext.getApplicationContext());
         tv2.setText(states.get(position).getCmpShortName().toString());
         tv2.setTextColor(mContext.getResources().getColor(R.color.color_black));
         tv2.setLayoutParams(new ViewGroup.LayoutParams(
@@ -65,52 +67,29 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>
 
         holder.itemClosingLay.addView(tv2);
 
-        for (int n = 0; n < max; n++) {
-           if (states.get(position).getItemData().size() >= max)
-           {
 
-               TextView tv = new TextView(mContext);
+        for (int n = 0; n < max; n++) {
+
+           if (sizeData >= max) {
+               TextView tv = new TextView(mContext.getApplicationContext());
                tv.setText(states.get(position).getItemData().get(n).getItemClosing().toString());
                tv.setTextColor(mContext.getResources().getColor(R.color.color_black));
                tv.setLayoutParams(new ViewGroup.LayoutParams(
                        400, ViewGroup.LayoutParams.WRAP_CONTENT));
 
                holder.itemClosingLay.addView(tv,n + 1 );
-
-           }
-           else
-           {
-             /*  if (n > states.get(position).getItemData().size()){
-
-                   TextView tv = new TextView(mContext);
-                   tv.setText("0.00");
-                   tv.setTextColor(mContext.getResources().getColor(R.color.color_black));
-                   tv.setLayoutParams(new ViewGroup.LayoutParams(
-                           400, ViewGroup.LayoutParams.WRAP_CONTENT));
-
-                   holder.itemClosingLay.addView(tv,n + 1 );
-
-               }else {
-
-                   TextView tv = new TextView(mContext);
-                   tv.setText(states.get(position).getItemData().get(p).getItemClosing().toString());
-                   tv.setTextColor(mContext.getResources().getColor(R.color.color_black));
-                   tv.setLayoutParams(new ViewGroup.LayoutParams(
-                           400, ViewGroup.LayoutParams.WRAP_CONTENT));
-                   holder.itemClosingLay.addView(tv,n + 1 );
-
-
-               }*/
            }
         }
 
-        TextView tv3 = new TextView(mContext);
+        TextView tv3 = new TextView(mContext.getApplicationContext());
         tv3.setText(String.valueOf(states.get(position).getTotalClosing().toString()));
         tv3.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
         tv3.setTextColor(mContext.getResources().getColor(R.color.color_black));
         tv3.setLayoutParams(new ViewGroup.LayoutParams(
                 300, ViewGroup.LayoutParams.WRAP_CONTENT));
         holder.itemClosingLay.addView(tv3);
+
+        holder.itemClosingLay.setHasTransientState(false);
     }
 
     @Override
@@ -132,6 +111,13 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>
             //CmpShortNameTextView = itemView.findViewById(R.id.CmpShortNameId);
             //itemParent = itemView.findViewById(R.id.itemParent);
             //totalMlTextView = itemView.findViewById(R.id.totalMlId);
+
+           /*
+            CmpShortNameTextView = new TextView(itemView.getContext());
+            itemParent = new TextView(itemView.getContext());
+            totalMlTextView = new TextView(itemView.getContext());
+            */
+
             itemClosingLay = itemView.findViewById(R.id.itemClosingLay);
 
             itemClosingLay.setOnClickListener(new View.OnClickListener()

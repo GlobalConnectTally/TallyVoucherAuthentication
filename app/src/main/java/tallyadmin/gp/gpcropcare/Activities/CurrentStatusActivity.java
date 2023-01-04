@@ -37,6 +37,7 @@ import tallyadmin.gp.gpcropcare.Model.NCRBill;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
+import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
 
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_REPORTNrc;
 
@@ -47,6 +48,7 @@ public class CurrentStatusActivity extends AppCompatActivity {
     String opening,debit,credit,closing;
     private CurrentstatusAdapter currentstatusAdapter;
     Companysave companydata;
+    private VolleyErrors volleyErrors;
 
 
     @Override
@@ -70,6 +72,8 @@ public class CurrentStatusActivity extends AppCompatActivity {
         TextView reportdate = findViewById(R.id.curr_reportdate);
         reportdate.setText(companydata.getKeyVocherdate());
 
+
+        volleyErrors = new VolleyErrors(this);
 
 
         if (!isNetworkConnected()) {
@@ -188,8 +192,9 @@ public class CurrentStatusActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(),error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                        Toast.makeText(getApplicationContext(),
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();                      }
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {

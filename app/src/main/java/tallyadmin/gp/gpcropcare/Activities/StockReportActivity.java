@@ -105,7 +105,7 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
     private UserInfo userInfo;
     private VolleyErrors volleyErrors;
     private HorizontalScrollView dynamicHorizontalView;
-    public  int max = 0;
+    public static int max = 0;
     public int takeIndex = 0;
 
     @Override
@@ -141,21 +141,22 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
         companyData = new Companysave(this);
         userInfo = new UserInfo(this);
 
-        System.out.println("AppLoginUserID: "+userInfo.getAppLoginUserID());
-
         horizontalScrollView = findViewById(R.id.horizontalView);
         linearLayoutError = findViewById(R.id.errorMessage);
 
         horizontalScrollView.setVisibility(View.GONE);
         linearLayoutError.setVisibility(View.VISIBLE);
 
-
         getItemsFromApi();
 
 
-        linearLayoutManager = new LinearLayoutManager(this);
+
         stateRecyclerView = findViewById(R.id.stateRecyclerView);
+        linearLayoutManager = new LinearLayoutManager(this);
+
+        stateRecyclerView.setHasFixedSize(true);
         stateRecyclerView.setLayoutManager(linearLayoutManager);
+        stateAdapter = new StateAdapter(states, this,this);
 
 
          //searchView.onTex
@@ -199,56 +200,46 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
     private void findMinimumCount(JSONArray array) {
 
-        System.out.println("Size::"+ String.valueOf(array.length()));
-        System.out.println("Data::"+ String.valueOf(array.toString()));
-
         try {
-            JSONArray jsonArray = new JSONArray();
-            for (int x = 0; x < array.length(); x++){
-                 JSONObject jsonObject1 = new JSONObject();
-                 JSONObject jsonObject = array.getJSONObject(x);
-                 jsonObject1.put("Count", jsonObject.getJSONArray("ItemData").length());
-                 jsonObject1.put("Index", x);
-                 jsonArray.put(jsonObject1);
-                 System.out.println(jsonObject);
-            }
 
-            System.out.println("Count-Array");
-            System.out.println(jsonArray);
-
-            /*---------Calculate Greates -------------*/
             int temp = 0;
             int temIndex = 0;
             max = 0;
 
-            for (int num = 0; num < jsonArray.length(); num++){
-                  JSONObject jsonObject= jsonArray.getJSONObject(num);
-                  int aNum = Integer.parseInt(jsonObject.getString("Count").toString());
-                  int Index = Integer.parseInt(jsonObject.getString("Index").toString());
-
-                  if (aNum > temp ){
-                      temp = aNum;
-                      temIndex = Index;
-                  }else {
-                      max = temp;
-                      takeIndex = temIndex;
-                  }
+            JSONArray jsonArray = new JSONArray();
+            for (int x = 0; x < array.length(); x++){
+                JSONObject jsonObject1 = new JSONObject();
+                JSONObject jsonObject = array.getJSONObject(x);
+                jsonObject1.put("Count", jsonObject.getJSONArray("ItemData").length());
+                jsonObject1.put("Index", x);
+                jsonArray.put(jsonObject1);
             }
 
-            System.out.println("Maximum::" + String.valueOf(max));
-            System.out.println("takeIndex::" + String.valueOf(takeIndex));
 
-        }catch (JSONException e){
+
+            /*---------Calculate Greates -------------*/
+            for (int num = 0; num < jsonArray.length(); num++){
+
+                JSONObject jsonObject = jsonArray.getJSONObject(num);
+                int aNum = Integer.parseInt(jsonObject.getString("Count").toString());
+                int Index = Integer.parseInt(jsonObject.getString("Index").toString());
+
+                if (aNum > temp ){
+                    temp = aNum;
+                    temIndex = Index;
+                }
+                max = temp;
+                takeIndex = temIndex;
+            }
+        }
+        catch (JSONException e){
              e.printStackTrace();
         }
+
     }
 
     private void setHorizontalScrollView(ArrayList<StateModel> states1)
     {
-        System.out.println("Called");
-        System.out.println(String.valueOf(states1.size()));
-        System.out.println(String.valueOf(states1));
-        //System.out.println(String.valueOf(states.get(0).getItemData()));
 
          runOnUiThread(new Runnable() {
            @Override
@@ -259,9 +250,6 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                            @Override
                            public void run() {
 
-                               System.out.println("Called-1");
-                               System.out.println(String.valueOf(states.size()));
-                               System.out.println(String.valueOf(states));
 
                                containerlay.removeAllViews();
 
@@ -277,7 +265,6 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
                                    for (int n = 0; n< max; n++) {
 
-                                       System.out.println(String.valueOf(states.get(takeIndex).getItemData().get(n).getItemName()));
 
                                        TextView tv = new TextView(context);
                                        tv.setText(states.get(takeIndex).getItemData().get(n).getItemName().toString());
@@ -310,7 +297,6 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
             @Override
             public void run() {
                 cmpShortNameList =  roomRepository.getCompanyShortNames();
-                System.out.println(cmpShortNameList.toString());
             }
         });
     }
@@ -323,8 +309,6 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
                 List<ListOfItemParents> items = roomRepository.getAllCompanyItemParents();
 
-                System.out.println("Count ::" + String.valueOf(items.size()));
-
                 itemsList.clear();
 
                 itemsList.addAll(items);
@@ -332,7 +316,6 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                 if (itemsList.size() == 1){
 
                       runOnUiThread( () -> {
-
                           searchLayout.setHint("Item Name");
                           searchView.setText(itemsList.get(0).getItemParent().toUpperCase(Locale.ROOT));
                       });
@@ -407,20 +390,15 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
                     for (ListOfCompanyShortName list: cmpShortNameList) {
 
-                        System.out.println(list.getCmpShortName());
-
                         itemList1 = roomRepository.getItemsByCompanyAndParent(
                                 list.getCmpShortName().toUpperCase(Locale.ROOT),
                                 query.toUpperCase(Locale.ROOT),
                                 userInfo.getAppLoginUserID().toUpperCase(Locale.ROOT)
                         );
 
-                        System.out.println(itemList1.toString());
                         try {
                          if (itemList1.size() > 0){
-                             JSONObject jsonObject = manipulateTheDatas(itemList1,list.getCmpShortName());
-                             /* StateModel stateModel = gson.fromJson(jsonObject.toString(),StateModel.class);
-                             states.add(stateModel);*/
+                             JSONObject jsonObject = doSomeOperations(itemList1,list.getCmpShortName());
                              jsonArray.put(jsonObject);
                          }
 
@@ -444,33 +422,15 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                         states.add(stateModel);
                     }
 
-                    System.out.println("After-Adding");
-                    System.out.println(states);
-
-
-                    if (states.size()!= 0){
-
+                    if (states.size() != 0){
                          runOnUiThread(new Runnable() {
                            @Override
                            public void run() {
-
-                               new Handler().postDelayed(
-                                       new Runnable() {
-                                   @Override
-                                   public void run() {
-                                       populateDataToRecycler(states);
-                                       setHorizontalScrollView(states);
-                                   }
-                               },
-                                       100
-                               );
-
-                           }
+                               initializeAdapter(states);
+                               setHorizontalScrollView(states);
+                             }
                        });
                     }
-
-                    System.out.println("StateModel");
-                    System.out.println(states);
 
                 }catch (Exception e){
                     e.printStackTrace();
@@ -479,18 +439,21 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
         });
     }
 
-    private JSONArray addDynamicallyEmptyValues(JSONArray jsonArray) {
+    private JSONArray addDynamicallyEmptyValues(JSONArray jsonArray)
+    {
 
         JSONObject jsonObject1 = null;
         JSONArray tempJsonArray = new JSONArray();
 
         try {
             for (int i = 0; i < jsonArray.length(); i++){
+
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
+
                 if (max > jsonObject.getJSONArray("ItemData").length()){
+
                     int diff = (max - jsonObject.getJSONArray("ItemData").length());
                     for (int j = 0; j < diff; j++ ){
-                        System.out.println("Looping::" + String.valueOf(j));
                         jsonObject1  = new JSONObject();
                         jsonObject1.put("CmpShortName" , jsonObject.getString("CmpShortName"));
                         jsonObject1.put("ItemParent" , "N/A");
@@ -498,15 +461,8 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                         jsonObject1.put("ItemClosing" , "0.00");
                         jsonObject.getJSONArray("ItemData").put(jsonObject1);
                     }
-                    System.out.println("Changed On-0::");
-                    System.out.println(jsonObject.toString());
                 }
-                System.out.println("Changed On-1::");
-                System.out.println(jsonObject.getJSONArray("ItemData").toString());
             }
-
-            System.out.println("Changed On::");
-            System.out.println(jsonArray);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -517,98 +473,6 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
         tempJsonArray = jsonArray;
 
         return  tempJsonArray;
-    }
-
-    private void populateDataToRecycler(ArrayList<StateModel> list)
-    {
-        /*
-        JSONObject jsonObject = null;
-        JSONObject jsonObject1 = null;
-        JSONArray jsonArray1 = null;
-
-        List<State> states1= new ArrayList<>();
-
-        if (jsonArray.length() != 0){
-
-            for (int i = 0; i < jsonArray.length(); i++){
-
-                StateModel stateModel = new StateModel();
-
-                try {
-                     jsonObject = jsonArray.getJSONObject(i);
-
-                    if (jsonObject != null){
-                        if (jsonObject.has("CmpShortName"))
-                        {
-                            stateModel.setCmpShortName(jsonObject.getString("CmpShortName"));
-                        }
-                        else
-                        {
-                            stateModel.setCmpShortName("N/A");
-                        }
-
-                        jsonArray1 = jsonObject.getJSONArray("ItemData");
-                        for (int y = 0; y < jsonArray1.length(); y++)
-                        {
-
-                            State state = new State();
-
-                            jsonObject1 = jsonArray1.getJSONObject(y);
-
-                            if (jsonObject1.has("CmpShortName")){
-                                state.setCmpShortName(jsonObject1.getString("CmpShortName"));
-                            }else {
-                                state.setCmpShortName("N/A");
-                            }
-
-                            if (jsonObject1.has("ItemParent")){
-                                state.setItemParent(jsonObject1.getString("ItemParent"));
-                            }else {
-                                state.setItemParent("N/A");
-                            }
-
-                            if (jsonObject1.has("ItemName")){
-                                state.setItemName(jsonObject1.getString("ItemName"));
-                            }else {
-                                state.setItemName("N/A");
-                            }
-
-                            if (jsonObject1.has("ItemClosing")){
-                                DecimalFormat numberFormat = new DecimalFormat("#.00");
-                                String total = numberFormat.format(Double.parseDouble(String.valueOf(jsonObject1.getString("ItemClosing"))));
-                                state.setItemClosing(total);
-                            }else {
-                                state.setItemClosing(String.valueOf("0"));
-                            }
-                            states1.add(state);
-                        }
-                        System.out.println("State-1");
-                        System.out.println(states1.toString());
-                        stateModel.setItemData(states1);
-                        stateModel.setTotalClosing(jsonObject.getString("TotalClosing"));
-                        jsonArray1 = new JSONArray(new ArrayList<String>());
-                    }
-
-                    System.out.println("State-Data");
-                    System.out.println(jsonArray1);
-                    System.out.println(stateModel.toString());
-
-                    runOnUiThread(new Runnable() {
-                      @Override
-                      public void run() {
-                          states.add(stateModel);
-                      }
-                  });
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }*/
-        System.out.println("StateModel-1");
-        System.out.println(list);
-        initializeAdapter(list);
-
     }
 
     private JSONObject doSomeOperations(List<ItemListModel> itemList , String cmpShortName) throws JSONException
@@ -632,18 +496,7 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
     private void initializeAdapter(ArrayList<StateModel> stateModelArrayList)
     {
-
-        System.out.println("StateModel-2");
-        System.out.println(stateModelArrayList);
-
-        stateAdapter = new StateAdapter(stateModelArrayList, this,this , max);
-
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                stateRecyclerView.setAdapter(stateAdapter);
-            }
-        });
+        stateRecyclerView.setAdapter(stateAdapter);
     }
 
     private void getItemsFromApi()
@@ -742,7 +595,7 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                                             }
                                         }
 
-                                        System.out.println(items.toString());
+
 
                                         roomRepository.deleteItems();
 
@@ -842,35 +695,7 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                 if (!item.getItemClosing().equalsIgnoreCase(" ")){
                     totalValue  += Double.parseDouble(String.valueOf(item.getItemClosing().toString()).replace(",",""));
                 }
-                /*
-                if (item.getItemName().equalsIgnoreCase("1LTR"))
-                {
-                    jsonObject.put("OneLtr" , item.getItemClosing());
-                    totalValue += Integer.valueOf(item.getItemClosing());
-                }
-                else if (item.getItemName().equalsIgnoreCase("500 ML"))
-                {
-                    jsonObject.put("FiveHundredMl" , item.getItemClosing());
-                    totalValue += Integer.valueOf(item.getItemClosing());
-                }
-                else if (item.getItemName().equalsIgnoreCase("250 ML"))
-                {
-                    jsonObject.put("TwoFiftyMl" , item.getItemClosing());
-                    totalValue += Integer.valueOf(item.getItemClosing());
-                }
-                else if (item.getItemName().equalsIgnoreCase("100 ML"))
-                {
-                    jsonObject.put("OneHundredMl" , item.getItemClosing());
-                    totalValue += Integer.valueOf(item.getItemClosing());
-                }
-                else if (item.getItemName().equalsIgnoreCase("20 ML"))
-                {
-                    jsonObject.put("TwentyMl" , item.getItemClosing());
-                    totalValue += Integer.valueOf(item.getItemClosing());
-                }
-                else {
 
-                }*/
                 jsonObject.put("ItemClosing" , item.getItemClosing());
 
                 jsonArray.put(jsonObject);
@@ -878,7 +703,6 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
             jsonObject1.put("CmpShortName" , cmpShortName);
             jsonObject1.put("ItemData",jsonArray);
             jsonObject1.put("TotalClosing" , String.valueOf(totalValue));
-            //jsonArray1.put(jsonObject1);
 
         } else {
 
@@ -896,12 +720,8 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
             jsonObject1.put("CmpShortName" , cmpShortName);
             jsonObject1.put("ItemData",jsonArray);
             jsonObject1.put("TotalClosing" , "0.00");
-            //jsonArray1.put(jsonObject1);
-
         }
 
-        System.out.println("Let-See");
-        System.out.println(jsonArray1);
 
         return  jsonObject1;
 
@@ -925,10 +745,7 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
     @Override
     public void onClickState(int position, List<StateModel> states)
     {
-        System.out.println("Clicked");
-        System.out.println(states.get(position).getCmpShortName());
-        System.out.println(states.get(position).getItemData().get(0).getItemParent());
-        Intent intent = new Intent(StockReportActivity.this, StateReportActivity.class);
+        Intent intent = new Intent(this, StateReport2Activity.class);
         intent.putExtra("CmpShortName",states.get(position).getCmpShortName());
         intent.putExtra("ItemParent",states.get(position).getItemData().get(0).getItemParent());
         startActivity(intent);
@@ -943,11 +760,8 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
     @Override
     public void OnItemClick(ListOfItemParents list)
     {
-        //searchView.setText(itemsList.get(position).getItemParent().toUpperCase(Locale.ROOT));
         searchView.setText(list.getItemParent().toString());
         alertDialogItem.dismiss();
-
-        System.out.println(list);
     }
 
 }

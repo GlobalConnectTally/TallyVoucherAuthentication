@@ -46,11 +46,13 @@ public class StateReportActivity extends AppCompatActivity
 
     UserInfo userInfo;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_state_report);
+
         context = this;
         Toolbar toolbar = findViewById(R.id.toolbarStateReport);
         setSupportActionBar(toolbar);
@@ -83,10 +85,12 @@ public class StateReportActivity extends AppCompatActivity
         totalOutwardTextView = findViewById(R.id.totalOutward);
         totalClosingTextView = findViewById(R.id.totalClosing);
 
+
     }
 
     public void populateData(List<ItemListModel> items)
     {
+
         itemAdapter = new ItemAdapter(items);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(itemAdapter);
@@ -95,6 +99,7 @@ public class StateReportActivity extends AppCompatActivity
         totalInwardTextView.setText(toTowDecimalPlaces(String.valueOf(totalInward)));
         totalOutwardTextView.setText(toTowDecimalPlaces(String.valueOf(totalOutward)));
         totalClosingTextView.setText(toTowDecimalPlaces(String.valueOf(totalClosing)));
+
     }
 
     private String toTowDecimalPlaces(String data)

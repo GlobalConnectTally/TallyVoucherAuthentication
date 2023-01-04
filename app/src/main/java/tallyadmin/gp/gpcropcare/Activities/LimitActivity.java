@@ -35,13 +35,14 @@ import tallyadmin.gp.gpcropcare.Model.NCRBill;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
+import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
 
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_REPORTNrc;
 
 //----limitactivity----//
 public class LimitActivity extends AppCompatActivity {
     Companysave companydata;
-
+    private VolleyErrors volleyErrors;
 
 
     @Override
@@ -63,6 +64,8 @@ public class LimitActivity extends AppCompatActivity {
         billvalue.setText(companydata.getKeyBillAmount());
         TextView reportdate = findViewById(R.id.lim_reportdate);
         reportdate.setText(companydata.getKeyVocherdate());
+
+        volleyErrors = new VolleyErrors(this);
 
         if (!isNetworkConnected()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -255,8 +258,9 @@ public class LimitActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                        Toast.makeText(getApplicationContext(),
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();                      }
                 }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {

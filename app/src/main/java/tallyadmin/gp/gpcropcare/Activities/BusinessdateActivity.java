@@ -38,6 +38,7 @@ import tallyadmin.gp.gpcropcare.Model.NCRBill;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
+import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
 
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_REPORTNrc;
 
@@ -48,6 +49,7 @@ public class BusinessdateActivity extends AppCompatActivity {
     String pgr, royal, premium, pestisides, classic, dust, total;
     private BusinessdateAdapter businessdateAdapter;
     Companysave companydata;
+    private VolleyErrors volleyErrors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,7 @@ public class BusinessdateActivity extends AppCompatActivity {
         TextView reportdate = findViewById(R.id.busi_date);
         reportdate.setText(companydata.getKeyVocherdate());
 
+        volleyErrors = new VolleyErrors(this);
 
         //listView = (ListView) findViewById(R.id.ncrlist);
         if (!isNetworkConnected()) {
@@ -200,7 +203,10 @@ public class BusinessdateActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(getApplicationContext(),
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override

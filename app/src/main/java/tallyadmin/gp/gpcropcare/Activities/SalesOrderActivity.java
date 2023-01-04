@@ -229,29 +229,26 @@ public class SalesOrderActivity extends AppCompatActivity
 
                 /*---   USER-LEVELS ------------*/
                 String accessLevel = " ";
-                if (userInfo.getFirstLevel().equalsIgnoreCase("Yes") && userInfo.getSecondLevel().equalsIgnoreCase("Yes"))
-                {
+                if (userInfo.getFirstLevel().equalsIgnoreCase("Yes") &&
+                        userInfo.getSecondLevel().equalsIgnoreCase("Yes")) {
 
                     //B - For Both P & A1
                     accessLevel = "B";
 
-                 }
-                else if (userInfo.getFirstLevel().equalsIgnoreCase("Yes") && userInfo.getSecondLevel().equalsIgnoreCase("No"))
-                {
+                 } else if (userInfo.getFirstLevel().equalsIgnoreCase("Yes") &&
+                        userInfo.getSecondLevel().equalsIgnoreCase("No")) {
 
                     //P - Pending
                     accessLevel = "P";
 
-                }
-                else if (userInfo.getFirstLevel().equalsIgnoreCase("No") && userInfo.getSecondLevel().equalsIgnoreCase("Yes"))
-                {
+                } else if (userInfo.getFirstLevel().equalsIgnoreCase("No") &&
+                        userInfo.getSecondLevel().equalsIgnoreCase("Yes")) {
 
                     //A1 - Approved By First Level
                     accessLevel = "A1";
 
-                }
-                else if (userInfo.getFirstLevel().equalsIgnoreCase("No") && userInfo.getFirstLevel().equalsIgnoreCase("No"))
-                {
+                } else if (userInfo.getFirstLevel().equalsIgnoreCase("No") &&
+                        userInfo.getFirstLevel().equalsIgnoreCase("No")) {
 
                     //Unknown - Returns Empty
                     accessLevel = "P";

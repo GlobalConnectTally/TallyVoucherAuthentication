@@ -29,11 +29,14 @@ import java.util.Map;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
+import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
+
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_REPORTNrc;
 
 
 public class Outstanding extends AppCompatActivity {
     Companysave companydata;
+    private VolleyErrors volleyErrors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,8 @@ public class Outstanding extends AppCompatActivity {
         TextView reportdate = findViewById(R.id.outs_reportdate);
         reportdate.setText(companydata.getKeyVocherdate());
 
+
+        volleyErrors = new VolleyErrors(this);
 
         if (!isNetworkConnected()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -531,7 +536,10 @@ public class Outstanding extends AppCompatActivity {
                 new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), error.getMessage() == null ? "" : error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(getApplicationContext(),
+                                    volleyErrors.exceptionMessage(error).toString(),
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }) {
             @Override
