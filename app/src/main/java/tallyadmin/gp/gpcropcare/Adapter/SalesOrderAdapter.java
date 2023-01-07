@@ -316,7 +316,8 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                                     JSONObject obj = new JSONObject(response);
 
                                     int result = obj.getInt("Status");
-                                    if (result==1){
+                                    if (result == 1){
+
                                         salesOrderActivity.fetchingJSON();
                                         Toast.makeText(context,"Authorized success full",Toast.LENGTH_SHORT).show();
                                         sendmessaged();
@@ -335,9 +336,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                             @Override
                             public void onErrorResponse(VolleyError error) {
 
-                                Toast.makeText(
-                                        context,
-                                        volleyErrors.exceptionMessage(error).toString(),
+                                Toast.makeText( context, volleyErrors.exceptionMessage(error).toString(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -382,7 +381,9 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                             JSONObject obj = new JSONObject(response);
 
                             int result = obj.getInt("Status");
-                            if (result==1){
+
+                            if (result == 1 ){
+
                                 salesOrderActivity.fetchingJSON();
 
                                 if (    userInfo.getSecondLevel().equalsIgnoreCase("Yes") &&
@@ -414,9 +415,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(
-                                context,
-                                volleyErrors.exceptionMessage(error).toString(),
+                        Toast.makeText(context, volleyErrors.exceptionMessage(error).toString(),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }) {
@@ -493,13 +492,11 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(
-                                context,
-                                volleyErrors.exceptionMessage(error).toString(),
+                        Toast.makeText(context, volleyErrors.exceptionMessage(error).toString(),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }) {
-           //            @Override
+               //            @Override
 //            protected Map<String, String> getParams() throws AuthFailureError {
 //                Map<String, String> params = new HashMap<>();
 //                params.put("mobile","9879518214");
@@ -527,9 +524,6 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
         String URLNA = "http://smsidea.co.in/SMS/API/SendTallySMS.aspx?mobile=9879518214&pass=9879518214&to="+mobile_number+"&msg="+msg+"&senderid=GPCCPL&route=4";
 
 
-
-
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URLNA,
                 new Response.Listener<String>() {
                     @Override
@@ -542,9 +536,8 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(
-                                context,
-                                volleyErrors.exceptionMessage(error).toString(),
+
+                        Toast.makeText( context, volleyErrors.exceptionMessage(error).toString(),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }) {

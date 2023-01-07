@@ -50,46 +50,51 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull StateAdapter.ViewHolder holder, int position)
     {
+        try {
 
-        holder.itemClosingLay.setHasTransientState(true);
+            holder.itemClosingLay.setHasTransientState(true);
 
-        int sizeData = states.get(position).getItemData().size();
+            int sizeData = states.get(position).getItemData().size();
 
-       if (holder.itemClosingLay.getChildCount() > 0 ){
-           holder.itemClosingLay.removeAllViews();
-       }
+            if (holder.itemClosingLay.getChildCount() > 0 ){
+                holder.itemClosingLay.removeAllViews();
+            }
 
-        TextView tv2 = new TextView(mContext.getApplicationContext());
-        tv2.setText(states.get(position).getCmpShortName().toString());
-        tv2.setTextColor(mContext.getResources().getColor(R.color.color_black));
-        tv2.setLayoutParams(new ViewGroup.LayoutParams(
-                200, ViewGroup.LayoutParams.WRAP_CONTENT));
+            TextView tv2 = new TextView(mContext.getApplicationContext());
+            tv2.setText(states.get(position).getCmpShortName().toString());
+            tv2.setTextColor(mContext.getResources().getColor(R.color.color_black));
+            tv2.setLayoutParams(new ViewGroup.LayoutParams(
+                    200, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        holder.itemClosingLay.addView(tv2);
+            holder.itemClosingLay.addView(tv2);
 
 
-        for (int n = 0; n < max; n++) {
+            for (int n = 0; n < max; n++) {
 
-           if (sizeData >= max) {
-               TextView tv = new TextView(mContext.getApplicationContext());
-               tv.setText(states.get(position).getItemData().get(n).getItemClosing().toString());
-               tv.setTextColor(mContext.getResources().getColor(R.color.color_black));
-               tv.setLayoutParams(new ViewGroup.LayoutParams(
-                       400, ViewGroup.LayoutParams.WRAP_CONTENT));
+                if (sizeData >= max) {
+                    TextView tv = new TextView(mContext.getApplicationContext());
+                    tv.setText(states.get(position).getItemData().get(n).getItemClosing().toString());
+                    tv.setTextColor(mContext.getResources().getColor(R.color.color_black));
+                    tv.setLayoutParams(new ViewGroup.LayoutParams(
+                            400, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-               holder.itemClosingLay.addView(tv,n + 1 );
-           }
+                    holder.itemClosingLay.addView(tv,n + 1 );
+                }
+            }
+
+            TextView tv3 = new TextView(mContext.getApplicationContext());
+            tv3.setText(String.valueOf(states.get(position).getTotalClosing().toString()));
+            tv3.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
+            tv3.setTextColor(mContext.getResources().getColor(R.color.color_black));
+            tv3.setLayoutParams(new ViewGroup.LayoutParams(
+                    300, ViewGroup.LayoutParams.WRAP_CONTENT));
+            holder.itemClosingLay.addView(tv3);
+
+            holder.itemClosingLay.setHasTransientState(false);
+
+        }catch (Exception e){
+              e.printStackTrace();
         }
-
-        TextView tv3 = new TextView(mContext.getApplicationContext());
-        tv3.setText(String.valueOf(states.get(position).getTotalClosing().toString()));
-        tv3.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
-        tv3.setTextColor(mContext.getResources().getColor(R.color.color_black));
-        tv3.setLayoutParams(new ViewGroup.LayoutParams(
-                300, ViewGroup.LayoutParams.WRAP_CONTENT));
-        holder.itemClosingLay.addView(tv3);
-
-        holder.itemClosingLay.setHasTransientState(false);
     }
 
     @Override

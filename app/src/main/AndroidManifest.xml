@@ -20,9 +20,6 @@
             android:name=".Activities.StateReport2Activity"
             android:exported="false" />
         <activity
-            android:name=".Activities.StateReportActivity"
-            android:exported="false" />
-        <activity
             android:name=".Activities.StockReportActivity"
             android:exported="false" />
         <activity

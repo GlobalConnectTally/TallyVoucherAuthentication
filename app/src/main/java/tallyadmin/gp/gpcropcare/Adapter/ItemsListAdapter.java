@@ -54,9 +54,13 @@ public class ItemsListAdapter extends RecyclerView.Adapter<ItemsListAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.textView.setText(FilterModelArrayList.get(position).getItemParent().toUpperCase().toString());
-        holder.textView.setTag(position);
-        holder.bind(position);
+       try {
+           holder.textView.setText(FilterModelArrayList.get(position).getItemParent().toUpperCase().toString());
+           holder.textView.setTag(position);
+           holder.bind(position);
+       }catch (Exception e){
+           e.printStackTrace();
+       }
     }
 
     @Override

@@ -117,10 +117,10 @@ public class StateReport2Activity extends AppCompatActivity {
                 if (items != null)
                 {
                     for (ItemListModel item:items) {
-                        totalOpening += Double.parseDouble(item.getItemOpening().replace(",",""));
-                        totalInward  += Double.parseDouble(item.getItemInwards().replace(",",""));
-                        totalOutward += Double.parseDouble(item.getItemOutwards().replace(",",""));
-                        totalClosing += Double.parseDouble(item.getItemClosing().replace(",",""));
+                        totalOpening += Double.parseDouble(item.getItemOpening().replace(",","").replace("(-)","-"));
+                        totalInward  += Double.parseDouble(item.getItemInwards().replace(",","").replace("(-)","-"));
+                        totalOutward += Double.parseDouble(item.getItemOutwards().replace(",","").replace("(-)","-"));
+                        totalClosing += Double.parseDouble(item.getItemClosing().replace(",","").replace("(-)","-"));
                     }
 
                     runOnUiThread(new Runnable() {

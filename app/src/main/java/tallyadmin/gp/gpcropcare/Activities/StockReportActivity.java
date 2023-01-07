@@ -313,14 +313,17 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
                 itemsList.addAll(items);
 
-                if (itemsList.size() == 1){
+                if (itemsList.size() == 1)
+                {
 
                       runOnUiThread( () -> {
                           searchLayout.setHint("Item Name");
                           searchView.setText(itemsList.get(0).getItemParent().toUpperCase(Locale.ROOT));
                       });
 
-                }else {
+                }
+                else
+                {
 
                       runOnUiThread( () -> {
                            searchLayout.setHint(getResources().getString(R.string.click_to_search));
@@ -328,6 +331,9 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                            searchView.setEnabled(true);
                       });
                 }
+
+                System.out.println("Items");
+                //System.out.println(itemsList);
 
             }
         });
@@ -693,11 +699,9 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
                 jsonObject.put("ItemName" , item.getItemName());
 
                 if (!item.getItemClosing().equalsIgnoreCase(" ")){
-                    totalValue  += Double.parseDouble(String.valueOf(item.getItemClosing().toString()).replace(",",""));
+                    totalValue  += Double.parseDouble(String.valueOf(item.getItemClosing().toString()).replace(",","").replace("(-)","-"));
                 }
-
                 jsonObject.put("ItemClosing" , item.getItemClosing());
-
                 jsonArray.put(jsonObject);
             }
             jsonObject1.put("CmpShortName" , cmpShortName);

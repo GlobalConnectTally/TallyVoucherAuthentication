@@ -125,7 +125,6 @@ public class SalesOrderActivity extends AppCompatActivity
             }
         });
 
-
         Hhdprogress.show();
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
@@ -133,6 +132,8 @@ public class SalesOrderActivity extends AppCompatActivity
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
+                        Saleslist.clear();
 
                         try {
                             JSONObject obj = new JSONObject(response);
@@ -197,8 +198,7 @@ public class SalesOrderActivity extends AppCompatActivity
                             Hhdprogress.dismiss();
                             setupRecycler();
                         }
-                        catch (JSONException e)
-                        {
+                        catch (JSONException e) {
                             e.printStackTrace();
                         }catch (Exception e1){
                              e1.printStackTrace();
@@ -210,9 +210,7 @@ public class SalesOrderActivity extends AppCompatActivity
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(
-                                getApplicationContext(),
-                                volleyErrors.exceptionMessage(error).toString(),
+                        Toast.makeText( getApplicationContext(), volleyErrors.exceptionMessage(error).toString(),
                                 Toast.LENGTH_SHORT).show();
 
                         Hhdprogress.dismiss();
