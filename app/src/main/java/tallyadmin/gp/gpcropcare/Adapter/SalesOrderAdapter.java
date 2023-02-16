@@ -75,9 +75,9 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final SalesOrderAdapter.SalesOrderViewHolder holder, final int position)
+    public void onBindViewHolder(@NonNull final SalesOrderAdapter.SalesOrderViewHolder holder, final int pos)
     {
-
+        int position = holder.getAdapterPosition();
         String valuecustomername = orderArrayList.get(position).getPartyName();
         if (valuecustomername.equals("#~#") || valuecustomername.equals("")){
             holder.customer_name.setText("");

@@ -53,6 +53,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import tallyadmin.gp.gpcropcare.Activities.BillingActivity;
 import tallyadmin.gp.gpcropcare.Activities.SalesOrderActivity;
 import tallyadmin.gp.gpcropcare.Activities.Sixreportactivity;
 import tallyadmin.gp.gpcropcare.Activities.StockReportActivity;
@@ -262,6 +264,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
           //
           //     }
           //   });
+          LinearLayout billingReport = findViewById(R.id.billing_report);
+          billingReport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this, BillingActivity.class));
+            }
+        });
 
           userId.setText(userInfo.getAppLoginUserID().toLowerCase(Locale.ROOT));
           dashcmp = findViewById(R.id.dash_cmpname);

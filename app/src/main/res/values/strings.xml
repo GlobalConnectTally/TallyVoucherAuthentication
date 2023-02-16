@@ -30,5 +30,12 @@
     <string name="serverError"> Problem connecting to a server. </string>
     <string name="authError"> Authentication failed. </string>
     <string name="timeOutError"> The application takes a long time to process. Try against in a few minutes. </string>
+    <string name="ncr">NCR</string>
+    <string name="rpl">RPL</string>
+    <string name="opening">OPENING</string>
+    <string name="closing">CLOSING</string>
+    <string name="debit">DEBIT</string>
+    <string name="credit">CREDIT</string>
+    <string name="billing_rep">Billing Report</string>
 
 </resources>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.BillingActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        app:titleTextColor="@color/color_white"
+        android:id="@+id/toolbarSo"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/backgroundnav"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+   <androidx.core.widget.NestedScrollView
+       android:layout_below="@id/toolbarSo"
+       android:layout_above="@id/bottomTotal"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <LinearLayout
+           android:orientation="vertical"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+
+           <include  layout="@layout/an_item_bill"/>
+           <include  layout="@layout/an_item_bill"/>
+           <include  layout="@layout/an_item_bill"/>
+           <include  layout="@layout/an_item_bill"/>
+
+       </LinearLayout>
+
+   </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/bottomTotal"
+         android:layout_alignParentBottom="true"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         layout="@layout/billing_report_total" />
+</RelativeLayout>
