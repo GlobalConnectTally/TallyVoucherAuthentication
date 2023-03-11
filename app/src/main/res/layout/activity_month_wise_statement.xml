@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.BillingActivity">
+    tools:context=".Activities.MonthWiseStatementActivity">
 
     <androidx.appcompat.widget.Toolbar
         app:titleTextColor="@color/color_white"
@@ -17,7 +17,6 @@
 
    <androidx.core.widget.NestedScrollView
        android:layout_below="@id/toolbarSo"
-       android:layout_above="@id/bottomTotal"
        android:layout_width="match_parent"
        android:layout_height="match_parent">
 
@@ -26,19 +25,23 @@
            android:layout_width="match_parent"
            android:layout_height="match_parent">
 
-           <include  layout="@layout/an_item_bill"/>
-           <include  layout="@layout/an_item_bill"/>
-           <include  layout="@layout/an_item_bill"/>
-           <include  layout="@layout/an_item_bill"/>
+           <androidx.recyclerview.widget.RecyclerView
+               android:layout_marginTop="5dp"
+               android:id="@+id/recyclerMonthWiseState"
+               android:layout_marginBottom="10dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"/>
+
+           <include
+               android:id="@+id/bottomTotal"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               layout="@layout/month_wise_statement_report_total" />
 
        </LinearLayout>
 
    </androidx.core.widget.NestedScrollView>
 
-    <include
-        android:id="@+id/bottomTotal"
-         android:layout_alignParentBottom="true"
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         layout="@layout/billing_report_total" />
+
+
 </RelativeLayout>

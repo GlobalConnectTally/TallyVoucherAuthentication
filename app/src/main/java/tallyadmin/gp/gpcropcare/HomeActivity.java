@@ -1,6 +1,5 @@
 package tallyadmin.gp.gpcropcare;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,8 +13,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import androidx.core.view.GravityCompat;
@@ -28,7 +25,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -38,7 +34,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.android.material.textfield.TextInputEditText;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.nex3z.notificationbadge.NotificationBadge;
 import org.json.JSONArray;
@@ -54,14 +49,11 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import tallyadmin.gp.gpcropcare.Activities.BillingActivity;
+import tallyadmin.gp.gpcropcare.Activities.MonthWiseStatementActivity;
 import tallyadmin.gp.gpcropcare.Activities.SalesOrderActivity;
-import tallyadmin.gp.gpcropcare.Activities.Sixreportactivity;
 import tallyadmin.gp.gpcropcare.Activities.StockReportActivity;
 import tallyadmin.gp.gpcropcare.Adapter.CompanyHomeAdapter;
-import tallyadmin.gp.gpcropcare.Adapter.ItemsListAdapter;
 import tallyadmin.gp.gpcropcare.Model.Company;
-import tallyadmin.gp.gpcropcare.Model.Item;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Sharepreference.Session;
 import tallyadmin.gp.gpcropcare.Sharepreference.ThreadManager;
@@ -268,7 +260,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
           billingReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, BillingActivity.class));
+                startActivity(new Intent(HomeActivity.this, MonthWiseStatementActivity.class));
             }
         });
 

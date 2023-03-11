@@ -17,7 +17,7 @@ import tallyadmin.gp.gpcropcare.R;
 
 //-----six reports activity-----//
 public class Sixreportactivity extends AppCompatActivity {
-    LinearLayout outstanding,ncrduebill,businessdate,lastyearbus,currentstatus,limit;
+    LinearLayout outstanding,ncrduebill,businessdate,lastyearbus,currentstatus,limit,month_wise_statement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,8 @@ public class Sixreportactivity extends AppCompatActivity {
         lastyearbus = (LinearLayout)findViewById(R.id.lastyearbus);
         currentstatus = (LinearLayout)findViewById(R.id.currentstatus);
         limit = (LinearLayout)findViewById(R.id.limit);
+        month_wise_statement = (LinearLayout)findViewById(R.id.month_wise_statement);
+
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -96,6 +98,14 @@ public class Sixreportactivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Sixreportactivity.this,LimitActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        month_wise_statement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Sixreportactivity.this,MonthWiseStatementActivity.class);
                 startActivity(intent);
             }
         });

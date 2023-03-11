@@ -17,7 +17,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".Activities.BillingActivity"
+            android:name=".Activities.MonthWiseStatementActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.StateReport2Activity"

@@ -198,7 +198,8 @@ public void fetchingJSON() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(getApplicationContext(),
+                        Toast.makeText(
+                                getApplicationContext(),
                                 volleyErrors.exceptionMessage(error).toString(),
                                 Toast.LENGTH_SHORT).show();
 

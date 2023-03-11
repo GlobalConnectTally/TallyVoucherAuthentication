@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:layout_margin="2dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        app:cardElevation="@dimen/_5sdp"
+    <LinearLayout
+        android:background="@drawable/backgroundnav"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:background="@drawable/backgroundnav"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/_10sdp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/aMonth"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:text="DECEMBER"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-            <TextView
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:text="@string/total"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
+    </LinearLayout>
 
     <LinearLayout
         android:weightSum="100"
@@ -89,25 +84,28 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <TextView
-
+            android:id="@+id/totalOpening"
             android:textAlignment="center"
             android:layout_weight="20"
             android:text="215000"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/totalDebt"
             android:textAlignment="center"
             android:layout_weight="20"
             android:text="75000"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/totalCredit"
             android:textAlignment="center"
             android:layout_weight="20"
             android:text="50000"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/totalClosing"
             android:textAlignment="textEnd"
             android:layout_weight="20"
             android:text="240000"
@@ -131,24 +129,28 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/ncrOpening"
             android:textAlignment="center"
             android:layout_weight="20"
             android:text="20000"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/ncrDebt"
             android:textAlignment="center"
             android:layout_weight="20"
             android:text="65000"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/ncrCredit"
             android:textAlignment="center"
             android:layout_weight="20"
             android:text="45000"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/ncrClosing"
             android:textAlignment="textEnd"
             android:layout_weight="20"
             android:text="40000"
@@ -172,24 +174,28 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/rplOpening"
             android:textAlignment="center"
             android:layout_weight="20"
             android:text="195000"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/rplDebt"
             android:textAlignment="center"
             android:layout_weight="20"
             android:text="10000"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/rplCredit"
             android:textAlignment="center"
             android:layout_weight="20"
             android:text="5000"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/rplClosing"
             android:textAlignment="textEnd"
             android:layout_weight="20"
             android:text="200000"

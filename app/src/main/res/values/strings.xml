@@ -37,5 +37,6 @@
     <string name="debit">DEBIT</string>
     <string name="credit">CREDIT</string>
     <string name="billing_rep">Billing Report</string>
+    <string name="month_wise_statement_rep">Month Wise Statement</string>
 
 </resources>

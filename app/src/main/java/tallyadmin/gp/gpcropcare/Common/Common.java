@@ -30,4 +30,6 @@ public class Common {
 
     public  static final String URL_REPORTNrc = BASE_URL + "GPCropCareSendReport";
 
+    public  static final String URL_REPORTMonthWiseStatement = BASE_URL + "SendMonthlyReportDetails";
+
 }
