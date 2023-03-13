@@ -4,6 +4,7 @@ import static tallyadmin.gp.gpcropcare.Common.Common.URL_REPORTMonthWiseStatemen
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_REPORTNrc;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,6 +17,9 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -43,6 +47,7 @@ import tallyadmin.gp.gpcropcare.Model.MonthlyReportDetails;
 import tallyadmin.gp.gpcropcare.Model.NCRBill;
 import tallyadmin.gp.gpcropcare.Model.Opening;
 import tallyadmin.gp.gpcropcare.R;
+import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
 import tallyadmin.gp.gpcropcare.Sharepreference.ThreadManager;
 import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
 import tallyadmin.gp.gpcropcare.utils.Tools;
@@ -50,12 +55,12 @@ import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
 
 public class MonthWiseStatementActivity extends AppCompatActivity {
 
-    Toolbar toolbar;
     private VolleyErrors volleyErrors;
     private ArrayList<MonthlyReportDetails> arraylist;
     private Tools mTools;
-
     private MonthWiseStatementAdapter monthWiseStatementAdapter;
+    private Companysave companydata;
+    private LinearLayout linearTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,17 +97,26 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
 
     private void initView() {
 
+        linearTotal = findViewById(R.id.linearTotal);
+        linearTotal.setVisibility(View.GONE);
+
+
+        companydata = new Companysave(this);
         arraylist = new ArrayList<MonthlyReportDetails>();
 
         monthWiseStatementAdapter = new MonthWiseStatementAdapter(arraylist,this);
 
         mTools = new Tools(this);
 
-        toolbar = findViewById(R.id.toolbarSo);
+        Toolbar toolbar = findViewById(R.id.toolbarSo);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(getResources().getString(R.string.month_wise_statement_rep));
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setTitle(getResources().getString(R.string.month_wise_statement_rep));
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
+        }
+
     }
 
     @Override
@@ -151,14 +165,14 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
                             JSONObject obj = new JSONObject(response);
 
                             JSONArray dataArray = obj.getJSONArray("MonthlyReportDetails");
-                            System.out.println("MonthlyReportDetails:"+dataArray);
+
 
                             if (dataArray.length() == 0) {
                                 AlertDialog.Builder builder = new AlertDialog.Builder(MonthWiseStatementActivity.this);
                                 // Set the Alert Dialog Message
-                                builder.setMessage("No NcrDueBill found for the selected Bill/Party")
+                                builder.setMessage("No Month Wise Statement found for the selected Bill/Party")
                                         .setCancelable(false)
-                                        .setTitle("NcrDueBill Report")
+                                        .setTitle("Month Wise Statement")
                                         .setNegativeButton("OK",
                                                 new DialogInterface.OnClickListener() {
                                                     public void onClick(DialogInterface dialog,
@@ -258,6 +272,7 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
                                 arraylist.add(reportDetails);
                             }
                             getTotalData(arraylist);
+                            linearTotal.setVisibility(View.VISIBLE);
                             Hhdprogress.dismiss();
                             setupRecycler();
 
@@ -281,8 +296,8 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("CmpShortName", "TESTCMP2");
-                params.put("LedgerName", "TESTLEDGER2");
+                params.put("CmpShortName", companydata.getCmpShortName());
+                params.put("LedgerName", companydata.getKeyPartyName());
                 return params;
             }
         };
@@ -307,17 +322,17 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
                      openingTotalRpl = openingTotalRpl + reportDetails.getOpening().getRpl();
 
 
-                    totalDebt = (reportDetails.getDebt().getNcr() + reportDetails.getDebt().getRpl()) + totalDebt;
-                    debtTotalNcr = debtTotalNcr + reportDetails.getDebt().getNcr();
-                    debtTotalRpl = debtTotalRpl + reportDetails.getDebt().getRpl();
+                     totalDebt = (reportDetails.getDebt().getNcr() + reportDetails.getDebt().getRpl()) + totalDebt;
+                     debtTotalNcr = debtTotalNcr + reportDetails.getDebt().getNcr();
+                     debtTotalRpl = debtTotalRpl + reportDetails.getDebt().getRpl();
 
-                    totalCredit = (reportDetails.getCredit().getNcr() + reportDetails.getCredit().getRpl()) + totalCredit;
-                    creditTotalNcr = creditTotalNcr + reportDetails.getCredit().getNcr();
-                    creditTotalRpl = creditTotalRpl + reportDetails.getCredit().getRpl();
+                     totalCredit = (reportDetails.getCredit().getNcr() + reportDetails.getCredit().getRpl()) + totalCredit;
+                     creditTotalNcr = creditTotalNcr + reportDetails.getCredit().getNcr();
+                     creditTotalRpl = creditTotalRpl + reportDetails.getCredit().getRpl();
 
-                    totalClosing = (reportDetails.getClosing().getNcr() + reportDetails.getClosing().getRpl()) + totalClosing;
-                    closingTotalNcr = closingTotalNcr + reportDetails.getClosing().getNcr();
-                    closingTotalRpl = closingTotalRpl + reportDetails.getClosing().getRpl();
+                     totalClosing = (reportDetails.getClosing().getNcr() + reportDetails.getClosing().getRpl()) + totalClosing;
+                     closingTotalNcr = closingTotalNcr + reportDetails.getClosing().getNcr();
+                     closingTotalRpl = closingTotalRpl + reportDetails.getClosing().getRpl();
                 }
 
                 try {
@@ -337,11 +352,57 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
                     jsonObject.put("closingTotalNcr",String.valueOf(closingTotalNcr));
                     jsonObject.put("closingTotalRpl",String.valueOf(closingTotalRpl));
 
-                    System.out.println("Datas Total");
-                    System.out.println(jsonObject.toString());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+
+
+                               if (jsonObject.length() != 0){
+
+                                   System.out.println("Datas Total");
+                                   System.out.println(jsonObject.toString());
+
+                                   TextView totalOpening = findViewById(R.id.totalOpeningT);
+                                   totalOpening.setText(jsonObject.getString("totalOpening").toString());
+                                   TextView rplOpening = findViewById(R.id.rplOpeningT);
+                                   rplOpening.setText(jsonObject.getString("openingTotalRpl").toString());
+                                   TextView ncrOpening = findViewById(R.id.ncrOpeningT);
+                                   ncrOpening.setText(jsonObject.getString("openingTotalNcr").toString());
+
+
+                                   TextView totalDebt = findViewById(R.id.totalDebtT);
+                                   totalDebt.setText(jsonObject.getString("totalDebt").toString());
+                                   TextView rplDebt = findViewById(R.id.rplDebtT);
+                                   rplDebt.setText(jsonObject.getString("debtTotalRpl").toString());
+                                   TextView ncrDebt = findViewById(R.id.ncrDebtT);
+                                   ncrDebt.setText(jsonObject.getString("debtTotalNcr").toString());
+
+
+                                   TextView totalCredit = findViewById(R.id.totalCreditT);
+                                   totalCredit.setText(jsonObject.getString("totalCredit").toString());
+                                   TextView rplCredit = findViewById(R.id.rplCreditT);
+                                   rplCredit.setText(jsonObject.getString("creditTotalRpl").toString());
+                                   TextView ncrCredit = findViewById(R.id.ncrCreditT);
+                                   ncrCredit.setText(jsonObject.getString("creditTotalNcr").toString());
+
+
+                                   TextView totalClosing = findViewById(R.id.totalClosingT);
+                                   totalClosing.setText(jsonObject.getString("totalClosing").toString());
+                                   TextView rplClosing = findViewById(R.id.rplClosingT);
+                                   rplClosing.setText(jsonObject.getString("closingTotalRpl").toString());
+                                   TextView ncrClosing = findViewById(R.id.ncrClosingT);
+                                   ncrClosing.setText(jsonObject.getString("closingTotalNcr").toString());
+
+                               }
+                           }catch (JSONException e){
+                               e.printStackTrace();
+                           }
+                        }
+                    });
 
                 } catch (JSONException e) {
-                    throw new RuntimeException(e);
+                       e.printStackTrace();
                 }
 
             }

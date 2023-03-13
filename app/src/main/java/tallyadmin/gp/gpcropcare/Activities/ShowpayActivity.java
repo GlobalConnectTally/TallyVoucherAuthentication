@@ -1,6 +1,8 @@
 package tallyadmin.gp.gpcropcare.Activities;
 
 import android.content.Intent;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,9 +50,13 @@ public class ShowpayActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbarSoD);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
-        getSupportActionBar().setTitle(getIntent().getStringExtra("Vouchertype")+" Details");
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
+            getSupportActionBar().setTitle(getIntent().getStringExtra("Vouchertype")+" Details");
+        }
 
         narration = findViewById(R.id.txt_narrationp);
         date = findViewById(R.id.txdateP);

@@ -5,6 +5,7 @@ import static tallyadmin.gp.gpcropcare.Common.Common.URL_ITEMS;
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_LOGIN;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -117,10 +118,13 @@ public class StockReportActivity extends AppCompatActivity implements StateAdapt
 
         Toolbar toolbar = findViewById(R.id.toolbarStockReport);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
-        getSupportActionBar().setTitle("Stock Report");
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
+            getSupportActionBar().setTitle("Stock Report");
+        }
 
         volleyErrors = new VolleyErrors(this);
 

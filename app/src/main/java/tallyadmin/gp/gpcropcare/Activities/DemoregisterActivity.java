@@ -2,6 +2,8 @@ package tallyadmin.gp.gpcropcare.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
@@ -38,7 +40,10 @@ public class DemoregisterActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbarSoop);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Registration Details");
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setTitle("Registration Details");
+        }
 
         userInfo = new UserInfo(getApplicationContext());
 

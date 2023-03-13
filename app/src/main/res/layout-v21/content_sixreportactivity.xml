@@ -50,42 +50,11 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="5dp"
                 android:id="@+id/outstanding"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="7dp"
-                android:background="@drawable/roundbgi"
-                android:elevation="12dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="@dimen/_15sdp"
-                android:weightSum="100">
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_weight="20"
-                    android:src="@drawable/ic_orderp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="80"
-                    android:padding="2dp"
-                    android:text="Outstanding "
-                    android:textColor="@color/color_black"
-                    android:textSize="@dimen/fontsize"
-                    android:textStyle="bold" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/outstanding"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="7dp"
-                android:layout_marginTop="@dimen/_25sdp"
                 android:background="@drawable/roundbgi"
                 android:elevation="12dp"
                 android:gravity="center_vertical"

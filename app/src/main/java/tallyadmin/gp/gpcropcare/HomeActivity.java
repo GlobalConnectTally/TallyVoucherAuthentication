@@ -92,7 +92,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Dashboard");
 
-        companydata = new Companysave(getApplicationContext());
+        companydata = new Companysave(this);
         userInfo = new UserInfo(getApplicationContext());
         session = new Session(getApplicationContext());
 
@@ -119,6 +119,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         timeText = findViewById(R.id.time);
         userId=  findViewById(R.id.userId);
 
+        if (userInfo != null) {
+            userId.setText(userInfo.getAppLoginUserID().toLowerCase(Locale.ROOT));
+        }else {
+            userId.setText(" ");
+        }
+
+        dashcmp = findViewById(R.id.dash_cmpname);
+        if (companydata != null) {
+            dashcmp.setText(companydata.getKeyName());
+        }else {
+            dashcmp.setText(" ");
+        }
 
         mBage = findViewById(R.id.salesbadge);
         //paybadge = findViewById(R.id.paymentrderbadge);
@@ -264,9 +276,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
-          userId.setText(userInfo.getAppLoginUserID().toLowerCase(Locale.ROOT));
-          dashcmp = findViewById(R.id.dash_cmpname);
-          dashcmp.setText(companydata.getKeyName());
     }
 
     public  void showbadges()
@@ -313,7 +322,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(HomeActivity.this, String.valueOf(error.getMessage()), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(
+                                HomeActivity.this,
+                                volleyErrors.exceptionMessage(error).toString(),
+                                Toast.LENGTH_SHORT).show();
                     }
                 }) {
             @Override

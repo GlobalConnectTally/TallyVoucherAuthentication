@@ -3,6 +3,8 @@ package tallyadmin.gp.gpcropcare.Activities;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -61,9 +63,14 @@ public class Fragement_managerActivity extends AppCompatActivity {
         userInfo = new UserInfo(getApplicationContext());
         Toolbar toolbar = findViewById(R.id.toolbarSof);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
-        getSupportActionBar().setTitle(null);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
+            getSupportActionBar().setTitle(null);
+        }
+
         TextView tooltext = findViewById(R.id.voucher_tool);
         tooltext.setText(companydata.getVoucher());
 

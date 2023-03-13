@@ -1,5 +1,6 @@
 package tallyadmin.gp.gpcropcare.Activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -58,9 +59,15 @@ public class NCRDueBills extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbarSoD);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
-        getSupportActionBar().setTitle("NCR Due Bills");
+
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
+            getSupportActionBar().setTitle("NCR Due Bills");
+        }
+
         companydata = new Companysave(getApplicationContext());
         TextView partyname = findViewById(R.id.ncr_partyname);
         partyname.setText(companydata.getKeyPartyName());

@@ -1,6 +1,7 @@
 package tallyadmin.gp.gpcropcare.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -60,9 +61,14 @@ public class LastYearbusinessActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbarSoD);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
-        getSupportActionBar().setTitle("Last Year Business");
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
+            getSupportActionBar().setTitle("Last Year Business");
+        }
+
+
 
        // listView = (ListView) findViewById(R.id.ncrlist);
 

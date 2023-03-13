@@ -29,7 +29,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-import tallyadmin.gp.gpcropcare.Activities.ReportActivity;
 import tallyadmin.gp.gpcropcare.Activities.SalesOrderActivity;
 import tallyadmin.gp.gpcropcare.Activities.ShowtransactionOrderActivity;
 import tallyadmin.gp.gpcropcare.Activities.Sixreportactivity;
@@ -42,13 +41,12 @@ import tallyadmin.gp.gpcropcare.Volley.VolleySingleton;
 import tallyadmin.gp.gpcropcare.utils.VolleyErrors;
 
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_AUTHORIZE;
-import static tallyadmin.gp.gpcropcare.Common.Common.URL_SMS;
 
 
 public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.SalesOrderViewHolder> {
 
     private ArrayList<SalesOrder> orderArrayList;
-    Context context;
+    Context mContext;
     Companysave companydata;
     UserInfo userInfo;
     SalesOrderActivity salesOrderActivity;
@@ -59,7 +57,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
 
     public SalesOrderAdapter(ArrayList<SalesOrder> orderArrayList, Context context, SalesOrderActivity salesOrderActivity) {
         this.orderArrayList = orderArrayList;
-        this.context = context;
+        this.mContext = context;
         this.salesOrderActivity = salesOrderActivity;
         this.volleyErrors = new VolleyErrors(context);
     }
@@ -68,8 +66,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
     @NonNull
     @Override
     public SalesOrderAdapter.SalesOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        View itemView = LayoutInflater.from(context)
-                .inflate(R.layout.order_redesignewt, parent, false);
+        View itemView = LayoutInflater.from(mContext).inflate(R.layout.order_redesignewt, parent, false);
 
         return new SalesOrderViewHolder(itemView);
     }
@@ -154,7 +151,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
             public void onClick(View v) {
                 masterID  = orderArrayList.get(position).getMasterID();
                 Legid = orderArrayList.get(position).getLedgerMasterId();
-                companydata = new Companysave(context.getApplicationContext());
+                companydata = new Companysave(mContext);
                 companydata.setMasterId(masterID);
                 companydata.setPartyName(orderArrayList.get(position).getPartyName());
                 companydata.setTallyUsermobile(orderArrayList.get(position).getTallyUsermobileno());
@@ -162,7 +159,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 companydata.setLegId(Legid);
                 companydata.setBillAmount(orderArrayList.get(position).getTotalAmt());
                 companydata.setVocherdate(orderArrayList.get(position).getDate());
-                Intent intent = new Intent(context, ShowtransactionOrderActivity.class);
+                Intent intent = new Intent(mContext, ShowtransactionOrderActivity.class);
                 //intent.putExtra()
                 intent.putExtra("BayerName",orderArrayList.get(position).getBuyerName());
                 intent.putExtra("PartName",orderArrayList.get(position).getPartyName());
@@ -184,7 +181,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 intent.putExtra("TallyUserMobNo",tallymobilenumber);
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                mContext.startActivity(intent);
             }
         });
 
@@ -194,12 +191,12 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
             public void onClick(View v) {
                 masterID  = orderArrayList.get(position).getMasterID();
                 Legid = orderArrayList.get(position).getLedgerMasterId();
-                companydata = new Companysave(context.getApplicationContext());
+                companydata = new Companysave(mContext);
                 companydata.setVoucher(orderArrayList.get(position).getVoucherNumber());
                 companydata.setMasterId(masterID);
                 companydata.setPartyName(orderArrayList.get(position).getPartyName());
                 companydata.setTallyUsermobile(orderArrayList.get(position).getTallyUsermobileno());
-                Intent intent = new Intent(context, ShowtransactionOrderActivity.class);
+                Intent intent = new Intent(mContext, ShowtransactionOrderActivity.class);
                //intent.putExtra
                 companydata.setLegId(Legid);
                 companydata.setBillAmount(orderArrayList.get(position).getTotalAmt());
@@ -223,7 +220,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 intent.putExtra("AuthenticationFlag",orderArrayList.get(position).getAuthenticationFlag());
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                mContext.startActivity(intent);
             }
         });
 
@@ -250,10 +247,10 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
         holder.report_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Sixreportactivity.class);
+                Intent intent = new Intent(mContext, Sixreportactivity.class);
                 masterID  = orderArrayList.get(position).getMasterID();
                 Legid = orderArrayList.get(position).getLedgerMasterId();
-                companydata = new Companysave(context.getApplicationContext());
+                companydata = new Companysave(mContext);
                 companydata.setVoucher(orderArrayList.get(position).getVoucherNumber());
                 companydata.setMasterId(masterID);
                 companydata.setLegId(Legid);
@@ -262,7 +259,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                 companydata.setTallyUsermobile(orderArrayList.get(position).getTallyUsermobileno());
                 companydata.setPartyName(orderArrayList.get(position).getPartyName());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
+                mContext.startActivity(intent);
 
             }
         });
@@ -274,7 +271,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
         //rejectmethod
         final AlertDialog.Builder settingdialog = new AlertDialog.Builder(salesOrderActivity);
 
-        View settinview= LayoutInflater.from(context ).inflate(R.layout.rejectmarks_layoutb, null);
+        View settinview= LayoutInflater.from(mContext).inflate(R.layout.rejectmarks_layoutb, null);
         TextView Okbtn = settinview.findViewById(R.id.btn_ok);
         TextView rejct = settinview.findViewById(R.id.btn_cancel);
 
@@ -293,8 +290,8 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
             @Override
             public void onClick(View v) {
 
-                companydata = new Companysave(context.getApplicationContext());
-                userInfo = new UserInfo(context.getApplicationContext());
+                companydata = new Companysave(mContext.getApplicationContext());
+                userInfo = new UserInfo(mContext.getApplicationContext());
 
                 final String remark = remarkt.getText().toString();
 
@@ -319,11 +316,11 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                                     if (result == 1){
 
                                         salesOrderActivity.fetchingJSON();
-                                        Toast.makeText(context,"Authorized success full",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(mContext,"Authorized success full",Toast.LENGTH_SHORT).show();
                                         sendmessaged();
                                     }
                                     else {
-                                        Toast.makeText(context,"Authorization Failed"+ "  "+result,Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(mContext,"Authorization Failed"+ "  "+result,Toast.LENGTH_SHORT).show();
                                     }
 
                                 } catch (JSONException e) {
@@ -336,7 +333,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                             @Override
                             public void onErrorResponse(VolleyError error) {
 
-                                Toast.makeText( context, volleyErrors.exceptionMessage(error).toString(),
+                                Toast.makeText(mContext, volleyErrors.exceptionMessage(error).toString(),
                                         Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -354,7 +351,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                     }
                  };
 
-                VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+                VolleySingleton.getInstance(mContext).addToRequestQueue(stringRequest);
 
             }
         });
@@ -365,8 +362,8 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
     private void Authorize()
     {
         //authorize method
-        companydata = new Companysave(context.getApplicationContext());
-        userInfo = new UserInfo(context.getApplicationContext());
+        companydata = new Companysave(mContext.getApplicationContext());
+        userInfo = new UserInfo(mContext.getApplicationContext());
 
         StringRequest stringRequest = new StringRequest(
                 Request.Method.POST,
@@ -392,9 +389,9 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                                      sendmessage();
                                 }
 
-                                Toast.makeText(context,"Authorized success full",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext,"Authorized success full",Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(context,"Authorization Failed"+ "  "+result,Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext,"Authorization Failed"+ "  "+result,Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
@@ -415,7 +412,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(context, volleyErrors.exceptionMessage(error).toString(),
+                        Toast.makeText(mContext, volleyErrors.exceptionMessage(error).toString(),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }) {
@@ -464,7 +461,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
             }
         };
 
-        VolleySingleton.getInstance(this.context).addToRequestQueue(stringRequest);
+        VolleySingleton.getInstance(this.mContext).addToRequestQueue(stringRequest);
 
     }
 
@@ -485,14 +482,14 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                     @Override
                     public void onResponse(String response) {
 
-                        Toast.makeText(context," "+response.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext," "+response.toString(),Toast.LENGTH_SHORT).show();
 
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, volleyErrors.exceptionMessage(error).toString(),
+                        Toast.makeText(mContext, volleyErrors.exceptionMessage(error).toString(),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }) {
@@ -509,7 +506,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
 //            }
         };
 
-        VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+        VolleySingleton.getInstance(mContext).addToRequestQueue(stringRequest);
 
     }
 
@@ -529,7 +526,7 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                     @Override
                     public void onResponse(String response) {
 
-                        Toast.makeText(context," "+response.toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext," "+response.toString(),Toast.LENGTH_SHORT).show();
 
                     }
                 },
@@ -537,14 +534,14 @@ public class SalesOrderAdapter  extends RecyclerView.Adapter<SalesOrderAdapter.S
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText( context, volleyErrors.exceptionMessage(error).toString(),
+                        Toast.makeText(mContext, volleyErrors.exceptionMessage(error).toString(),
                                 Toast.LENGTH_SHORT).show();
                     }
                 }) {
 
         };
 
-        VolleySingleton.getInstance(context).addToRequestQueue(stringRequest);
+        VolleySingleton.getInstance(mContext).addToRequestQueue(stringRequest);
 
     }
 

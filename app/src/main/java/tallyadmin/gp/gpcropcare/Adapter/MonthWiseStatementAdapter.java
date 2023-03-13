@@ -5,12 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
-
 import tallyadmin.gp.gpcropcare.Model.MonthlyReportDetails;
 import tallyadmin.gp.gpcropcare.R;
 
@@ -38,7 +35,7 @@ public class MonthWiseStatementAdapter extends RecyclerView.Adapter<MonthWiseSta
         MonthlyReportDetails monthlyReportDetails = mMonthlyReportDetails.get(position);
 
         holder.aMonth.setText(
-                monthlyReportDetails.getMonth()
+                monthlyReportDetails.getMonth().toUpperCase()
         );
 
         double totalOpening = monthlyReportDetails.getOpening().getNcr() + monthlyReportDetails.getOpening().getRpl();
@@ -136,8 +133,6 @@ public class MonthWiseStatementAdapter extends RecyclerView.Adapter<MonthWiseSta
             debtRpl = itemView.findViewById(R.id.rplDebt);
             creditRpl = itemView.findViewById(R.id.rplCredit);
             closingRpl = itemView.findViewById(R.id.rplClosing);
-
-
 
 
         }

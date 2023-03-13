@@ -1,6 +1,7 @@
 package tallyadmin.gp.gpcropcare.Activities;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -52,9 +53,14 @@ public class StateReport2Activity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbarStateReport);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
-        getSupportActionBar().setTitle("State Report");
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
+            getSupportActionBar().setTitle("State Report");
+        }
+
 
         if (getIntent().getStringExtra("CmpShortName")== null || getIntent().getStringExtra("CmpShortName").equals("") )
         {
