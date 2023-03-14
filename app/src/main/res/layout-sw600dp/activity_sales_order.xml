@@ -41,8 +41,6 @@
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-
     <FrameLayout
        android:layout_marginTop="9dp"
         android:layout_below="@+id/juuu"
@@ -56,8 +54,6 @@
             android:fadeScrollbars="false"
             android:scrollbarThumbVertical="@color/colorPrimary"
             android:id="@+id/recyle_salesorder"
-
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

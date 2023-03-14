@@ -53,9 +53,6 @@ public class SalesActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbarSo);
         setSupportActionBar(toolbar);
 
-
-
-
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -70,7 +67,8 @@ public class SalesActivity extends AppCompatActivity {
 
         recyclerOrder = findViewById(R.id.recyle_salesorder);
 
-        if (!isNetworkConnected()) {
+        if (!isNetworkConnected())
+        {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             // Set the Alert Dialog Message
             builder.setMessage("Internet connection is required, Please turn on Wifi or Mobile Data")
@@ -87,7 +85,9 @@ public class SalesActivity extends AppCompatActivity {
                             });
             AlertDialog alert = builder.create();
             alert.show();
-        } else if (isNetworkConnected()) {
+        }
+        else if (isNetworkConnected())
+        {
             fetchingJSON();
         }
 

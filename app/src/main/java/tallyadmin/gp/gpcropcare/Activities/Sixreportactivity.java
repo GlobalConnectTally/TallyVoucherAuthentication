@@ -49,7 +49,7 @@ public class Sixreportactivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                Intent i = new Intent(Sixreportactivity.this, SalesActivity.class);
+                Intent i = new Intent(Sixreportactivity.this, SalesOrderActivity.class);
                 startActivity(i);
             }
         });

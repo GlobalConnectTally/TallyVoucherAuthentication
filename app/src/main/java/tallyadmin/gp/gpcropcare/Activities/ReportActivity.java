@@ -107,7 +107,8 @@ public class ReportActivity extends AppCompatActivity {
                             });
             AlertDialog alert = builder.create();
             alert.show();
-        } else if (isNetworkConnected()) {
+        }
+        else if (isNetworkConnected()) {
             fetchingJSON();
         }
 

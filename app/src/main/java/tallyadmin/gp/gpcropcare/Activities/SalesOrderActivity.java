@@ -77,8 +77,6 @@ public class SalesOrderActivity extends AppCompatActivity
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_back_black_24dp);
         }
 
-
-
         editsearch = findViewById(R.id.edt_seac);
         companydata = new Companysave(getApplicationContext());
         userInfo = new UserInfo(getApplicationContext());
