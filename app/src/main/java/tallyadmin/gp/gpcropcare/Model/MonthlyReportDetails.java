@@ -4,6 +4,9 @@ public class MonthlyReportDetails {
      String CmpShortName;
      String LedgerName;
      String month;
+     int monthNo;
+     int year;
+     int yearmonthcombo;
      Opening opening;
      Debt debt;
      Credit credit;
@@ -12,14 +15,41 @@ public class MonthlyReportDetails {
      public MonthlyReportDetails() {
      }
 
-     public MonthlyReportDetails(String cmpShortName, String ledgerName, String month, Opening opening, Debt debt, Credit credit, Closing closing) {
+     public MonthlyReportDetails(String cmpShortName, String ledgerName, String month, int monthNo, int year, int yearmonthcombo, Opening opening, Debt debt, Credit credit, Closing closing) {
           CmpShortName = cmpShortName;
           LedgerName = ledgerName;
           this.month = month;
+          this.monthNo = monthNo;
+          this.year = year;
+          this.yearmonthcombo = yearmonthcombo;
           this.opening = opening;
           this.debt = debt;
           this.credit = credit;
           this.closing = closing;
+     }
+
+     public int getMonthNo() {
+          return monthNo;
+     }
+
+     public void setMonthNo(int monthNo) {
+          this.monthNo = monthNo;
+     }
+
+     public int getYear() {
+          return year;
+     }
+
+     public void setYear(int year) {
+          this.year = year;
+     }
+
+     public int getYearmonthcombo() {
+          return yearmonthcombo;
+     }
+
+     public void setYearmonthcombo(int yearmonthcombo) {
+          this.yearmonthcombo = yearmonthcombo;
      }
 
      public String getCmpShortName() {
@@ -80,10 +110,13 @@ public class MonthlyReportDetails {
 
      @Override
      public String toString() {
-          return "{" +
+          return "MonthlyReportDetails{" +
                   "CmpShortName='" + CmpShortName + '\'' +
                   ", LedgerName='" + LedgerName + '\'' +
                   ", month='" + month + '\'' +
+                  ", monthNo=" + monthNo +
+                  ", year=" + year +
+                  ", yearmonthcombo=" + yearmonthcombo +
                   ", opening=" + opening +
                   ", debt=" + debt +
                   ", credit=" + credit +

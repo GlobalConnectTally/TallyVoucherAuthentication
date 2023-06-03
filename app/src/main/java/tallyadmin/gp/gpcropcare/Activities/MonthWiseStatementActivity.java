@@ -1,7 +1,6 @@
 package tallyadmin.gp.gpcropcare.Activities;
 
 import static tallyadmin.gp.gpcropcare.Common.Common.URL_REPORTMonthWiseStatement;
-import static tallyadmin.gp.gpcropcare.Common.Common.URL_REPORTNrc;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -16,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -33,9 +33,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,7 +44,6 @@ import tallyadmin.gp.gpcropcare.Model.Closing;
 import tallyadmin.gp.gpcropcare.Model.Credit;
 import tallyadmin.gp.gpcropcare.Model.Debt;
 import tallyadmin.gp.gpcropcare.Model.MonthlyReportDetails;
-import tallyadmin.gp.gpcropcare.Model.NCRBill;
 import tallyadmin.gp.gpcropcare.Model.Opening;
 import tallyadmin.gp.gpcropcare.R;
 import tallyadmin.gp.gpcropcare.Sharepreference.Companysave;
@@ -62,6 +61,8 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
     private Companysave companydata;
     private LinearLayout linearTotal;
 
+    Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +70,7 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
 
         initView();
 
+        mContext = this;
         if (!isNetworkConnected()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             // Set the Alert Dialog Message
@@ -87,15 +89,17 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
             AlertDialog alert = builder.create();
             alert.show();
         }
-        else if (isNetworkConnected())
-        {
+        else if (isNetworkConnected()) {
+            Log.d("Called","fetchingJSON");
+            System.out.println("Called fetchingJSON");
             fetchingJSON();
         }
 
         volleyErrors = new VolleyErrors(this);
     }
 
-    private void initView() {
+    private void initView()
+    {
 
         linearTotal = findViewById(R.id.linearTotal);
         linearTotal.setVisibility(View.GONE);
@@ -103,8 +107,6 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
 
         companydata = new Companysave(this);
         arraylist = new ArrayList<MonthlyReportDetails>();
-
-        monthWiseStatementAdapter = new MonthWiseStatementAdapter(arraylist,this);
 
         mTools = new Tools(this);
 
@@ -134,7 +136,8 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
         }
     }
 
-    public void fetchingJSON() {
+    public void fetchingJSON()
+    {
         //String urlno = "?CmpGUID=" + companydata.getKeyCmpnGid() + "&LedgerName="+companydata.getKeyPartyName()+ "&LedgerID="+companydata.getKeyLegId()+ "&VchNumber=" + companydata.getVoucher();
         final KProgressHUD Hhdprogress = KProgressHUD.create(this)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
@@ -150,6 +153,11 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
             }
         });
 
+        Map<String, String> params = new HashMap<>();
+        params.put("CmpShortName", companydata.getCmpShortName());
+        params.put("LedgerName", companydata.getKeyPartyName());
+        System.out.println(params);
+
         Hhdprogress.show();
 
         StringRequest stringRequest = new StringRequest(
@@ -159,134 +167,170 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        try {
+                        System.out.println("onResponse");
+                     ThreadManager.getInstance(mContext).executeTask(new Runnable() {
+                         @Override
+                         public void run() {
+                             try {
 
+                                 JSONObject obj = new JSONObject(response);
+                                 JSONArray dataArray = obj.getJSONArray("MonthlyReportDetails");
 
-                            JSONObject obj = new JSONObject(response);
+                                 if (dataArray.length() == 0) {
 
-                            JSONArray dataArray = obj.getJSONArray("MonthlyReportDetails");
+                                     runOnUiThread(new Runnable() {
+                                         @Override
+                                         public void run() {
 
+                                             AlertDialog.Builder builder = new AlertDialog.Builder(MonthWiseStatementActivity.this);
+                                             // Set the Alert Dialog Message
+                                             builder.setMessage("No Month Wise Statement found for the selected Bill/Party")
+                                                     .setCancelable(false)
+                                                     .setTitle("Month Wise Statement")
+                                                     .setNegativeButton("OK",
+                                                             new DialogInterface.OnClickListener() {
+                                                                 public void onClick(DialogInterface dialog,
+                                                                                     int id) {
+                                                                     dialog.dismiss();
+                                                                     Hhdprogress.dismiss();
+                                                                     finish();
+                                                                 }
+                                                             });
+                                             AlertDialog alert = builder.create();
 
-                            if (dataArray.length() == 0) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(MonthWiseStatementActivity.this);
-                                // Set the Alert Dialog Message
-                                builder.setMessage("No Month Wise Statement found for the selected Bill/Party")
-                                        .setCancelable(false)
-                                        .setTitle("Month Wise Statement")
-                                        .setNegativeButton("OK",
-                                                new DialogInterface.OnClickListener() {
-                                                    public void onClick(DialogInterface dialog,
-                                                                        int id) {
-                                                        dialog.dismiss();
-                                                        Hhdprogress.dismiss();
-                                                        finish();
-                                                    }
-                                                });
-                                AlertDialog alert = builder.create();
+                                             alert.show();
 
-                                alert.show();
+                                         }
+                                     });
 
+                                 }
 
-                            }
+                                 for (int i = 0; i < dataArray.length(); i++) {
 
-                            for (int i = 0; i < dataArray.length(); i++) {
+                                     MonthlyReportDetails reportDetails = new MonthlyReportDetails();
+                                     JSONObject dataobj = dataArray.getJSONObject(i);
 
-                                MonthlyReportDetails reportDetails = new MonthlyReportDetails();
-                                JSONObject dataobj = dataArray.getJSONObject(i);
+                                     reportDetails.setCmpShortName(
+                                             dataobj.getString("CmpShortName")
+                                     );
+                                     reportDetails.setLedgerName(
+                                             dataobj.getString("LedgerName")
+                                     );
+                                     reportDetails.setMonth(
+                                             dataobj.getString("month")
+                                     );
 
-                                reportDetails.setCmpShortName(
-                                        dataobj.getString("CmpShortName")
-                                );
-                                reportDetails.setLedgerName(
-                                        dataobj.getString("LedgerName")
-                                );
-                                reportDetails.setMonth(
-                                         dataobj.getString("month")
-                                );
+                                     reportDetails.setMonthNo(
+                                             Integer.parseInt(dataobj.getString("monthNo"))
+                                     );
+                                     reportDetails.setYear(
+                                             Integer.parseInt(dataobj.getString("year"))
+                                     );
 
-                                JSONObject objectOpening = dataobj.getJSONObject("opening");
-                                reportDetails.setOpening(
-                                       new Opening(
-                                               Double.parseDouble(
-                                                       mTools.toDouble(
-                                                               objectOpening.getString("ncr")
-                                                       )
-                                               ),
-                                               Double.parseDouble(
-                                                       mTools.toDouble(
-                                                               objectOpening.getString("rpl")
-                                                       )
-                                               )
-                                       )
-                                );
+                                     reportDetails.setYearmonthcombo(
+                                             Integer.parseInt(  dataobj.getString("yearmonthcombo"))
+                                     );
 
-                                JSONObject objectDebt = dataobj.getJSONObject("debt");
-                                reportDetails.setDebt(
-                                        new Debt(
-                                                Double.parseDouble(
-                                                        mTools.toDouble(
-                                                                objectDebt.getString("ncr")
-                                                        )
-                                                ),
-                                                Double.parseDouble(
-                                                        mTools.toDouble(
-                                                                objectDebt.getString("rpl")
-                                                        )
-                                                )
-                                        )
-                               );
+                                     JSONObject objectOpening = dataobj.getJSONObject("opening");
+                                     reportDetails.setOpening(
+                                             new Opening(
+                                                     Double.parseDouble(
+                                                             mTools.toDouble(
+                                                                     objectOpening.getString("ncr")
+                                                             )
+                                                     ),
+                                                     Double.parseDouble(
+                                                             mTools.toDouble(
+                                                                     objectOpening.getString("rpl")
+                                                             )
+                                                     )
+                                             )
+                                     );
 
-                                JSONObject objectCredit = dataobj.getJSONObject("credit");
-                               reportDetails.setCredit(
-                                        new Credit(
-                                                Double.parseDouble(
-                                                        mTools.toDouble(
-                                                                objectCredit.getString("ncr")
-                                                        )
-                                                ),
-                                                Double.parseDouble(
-                                                        mTools.toDouble(
-                                                                objectCredit.getString("rpl")
-                                                        )
-                                                )
-                                        )
-                               );
+                                     JSONObject objectDebt = dataobj.getJSONObject("debt");
+                                     reportDetails.setDebt(
+                                             new Debt(
+                                                     Double.parseDouble(
+                                                             mTools.toDouble(
+                                                                     objectDebt.getString("ncr")
+                                                             )
+                                                     ),
+                                                     Double.parseDouble(
+                                                             mTools.toDouble(
+                                                                     objectDebt.getString("rpl")
+                                                             )
+                                                     )
+                                             )
+                                     );
+                                     JSONObject objectCredit = dataobj.getJSONObject("credit");
+                                     reportDetails.setCredit(
+                                             new Credit(
+                                                     Double.parseDouble(
+                                                             mTools.toDouble(
+                                                                     objectCredit.getString("ncr")
+                                                             )
+                                                     ),
+                                                     Double.parseDouble(
+                                                             mTools.toDouble(
+                                                                     objectCredit.getString("rpl")
+                                                             )
+                                                     )
+                                             )
+                                     );
 
-                                JSONObject objectClosing = dataobj.getJSONObject("closing");
+                                     JSONObject objectClosing = dataobj.getJSONObject("closing");
 
-                                reportDetails.setClosing(
-                                       new Closing(
-                                               Double.parseDouble(
-                                                       mTools.toDouble(
-                                                               objectClosing.getString("ncr")
-                                                       )
-                                               ),
-                                               Double.parseDouble(
-                                                       mTools.toDouble(
-                                                               objectClosing.getString("rpl")
-                                                       )
-                                               )
-                                       )
-                               );
+                                     reportDetails.setClosing(
+                                             new Closing(
+                                                     Double.parseDouble(
+                                                             mTools.toDouble(
+                                                                     objectClosing.getString("ncr")
+                                                             )
+                                                     ),
+                                                     Double.parseDouble(
+                                                             mTools.toDouble(
+                                                                     objectClosing.getString("rpl")
+                                                             )
+                                                     )
+                                             )
+                                     );
 
-                                arraylist.add(reportDetails);
-                            }
-                            getTotalData(arraylist);
-                            linearTotal.setVisibility(View.VISIBLE);
-                            Hhdprogress.dismiss();
-                            setupRecycler();
+                                     arraylist.add(reportDetails);
+                                 }
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                                 System.out.println("Collections");
+                              Collections.sort(arraylist, new Comparator<MonthlyReportDetails>() {
+                                @Override
+                                 public int compare(MonthlyReportDetails o1, MonthlyReportDetails o2) {
+                                     return o2.getYearmonthcombo() - o1.getYearmonthcombo();
+                                  }
+                               });
+
+                               if (arraylist.size() > 0){
+                                   runOnUiThread(new Runnable() {
+                                       @Override
+                                       public void run() {
+                                           //linearTotal.setVisibility(View.VISIBLE);
+                                           setupRecycler(arraylist);
+                                           System.out.println("setupRecycler");
+                                           Hhdprogress.dismiss();
+                                       }
+                                   });
+
+                                   getTotalData(arraylist,Hhdprogress);
+                               }
+
+                             } catch (JSONException e) {
+                                 e.printStackTrace();
+                             }
+                         }
+                     });
                     }
-                },
-                new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(
-                                getApplicationContext(),
+                        Toast.makeText(getApplicationContext(),
                                 volleyErrors.exceptionMessage(error).toString(),
                                 Toast.LENGTH_SHORT).show();
 
@@ -304,8 +348,10 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
-    private void getTotalData(ArrayList<MonthlyReportDetails> arraylist) {
+    private void getTotalData(ArrayList<MonthlyReportDetails> arraylist, KProgressHUD hhdprogress)
+    {
 
+        hhdprogress.show();
         ThreadManager.getInstance(this).executeTask(new Runnable() {
             @Override
             public void run() {
@@ -317,6 +363,8 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
                 double totalClosing = 0.0,closingTotalNcr = 0.0,closingTotalRpl = 0.0;
 
                 for (MonthlyReportDetails reportDetails: arraylist){
+
+                    System.out.println("Called");
                      totalOpening = (reportDetails.getOpening().getNcr() + reportDetails.getOpening().getRpl()) + totalOpening;
                      openingTotalNcr = openingTotalNcr + reportDetails.getOpening().getNcr();
                      openingTotalRpl = openingTotalRpl + reportDetails.getOpening().getRpl();
@@ -334,6 +382,13 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
                      closingTotalNcr = closingTotalNcr + reportDetails.getClosing().getNcr();
                      closingTotalRpl = closingTotalRpl + reportDetails.getClosing().getRpl();
                 }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        hhdprogress.show();
+                    }
+                });
 
                 try {
                     jsonObject.put("totalOpening",String.valueOf(totalOpening));
@@ -359,9 +414,6 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
 
 
                                if (jsonObject.length() != 0){
-
-                                   System.out.println("Datas Total");
-                                   System.out.println(jsonObject.toString());
 
                                    TextView totalOpening = findViewById(R.id.totalOpeningT);
                                    totalOpening.setText(jsonObject.getString("totalOpening").toString());
@@ -394,14 +446,21 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
                                    TextView ncrClosing = findViewById(R.id.ncrClosingT);
                                    ncrClosing.setText(jsonObject.getString("closingTotalNcr").toString());
 
+                                   linearTotal.setVisibility(View.VISIBLE);
+                                   hhdprogress.dismiss();
+                                   //setupRecycler(arraylist);
+
                                }
+
+
                            }catch (JSONException e){
                                e.printStackTrace();
                            }
                         }
                     });
 
-                } catch (JSONException e) {
+                }
+                catch (JSONException e) {
                        e.printStackTrace();
                 }
 
@@ -409,9 +468,11 @@ public class MonthWiseStatementActivity extends AppCompatActivity {
         });
     }
 
-    private void setupRecycler() {
+    private void setupRecycler(ArrayList<MonthlyReportDetails> arraylist) {
         RecyclerView recyclerView = findViewById(R.id.recyclerMonthWiseState);
+        monthWiseStatementAdapter = new MonthWiseStatementAdapter(arraylist,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.hasFixedSize();
         recyclerView.setAdapter(monthWiseStatementAdapter);
     }
 

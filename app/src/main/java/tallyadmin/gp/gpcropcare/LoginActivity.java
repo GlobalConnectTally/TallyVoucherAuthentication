@@ -65,7 +65,6 @@ public class LoginActivity extends AppCompatActivity {
     private VolleyErrors volleyErrors;
     private RoomRepository roomRepository;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -174,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
                                     JSONObject obj = new JSONObject(response);
                                     Saleslist = new ArrayList<>();
                                     JSONArray dataArray = obj.getJSONArray("response");
-                                    Log.d("Response::", dataArray.toString());
+                                    //Log.d("Response::", dataArray.toString());
 
                                     if (dataArray.length() != 0) {
 
@@ -230,8 +229,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
                     }
-                },
-                new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
@@ -251,7 +249,6 @@ public class LoginActivity extends AppCompatActivity {
                 return params;
             }
         };
-
 
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }

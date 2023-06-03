@@ -24,7 +24,7 @@ public class Companysave {
 
     public Companysave(Context ctx) {
         this.ctx = ctx;
-        prefs = ctx.getSharedPreferences(PREF_NAME, ctx.MODE_PRIVATE);
+        prefs = ctx.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         editor = prefs.edit();
     }
 
@@ -82,7 +82,8 @@ public class Companysave {
         editor.apply();
     }
 
-    public void clearCompany(){
+    public void clearCompany()
+    {
         editor.clear();
         editor.commit();
     }

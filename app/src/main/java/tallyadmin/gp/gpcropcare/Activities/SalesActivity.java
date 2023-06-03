@@ -93,7 +93,6 @@ public class SalesActivity extends AppCompatActivity {
 
 
     }
-
     public void fetchingJSON()
     {
 
