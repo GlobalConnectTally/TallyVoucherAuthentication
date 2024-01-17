@@ -211,7 +211,7 @@
                         android:layout_weight="10">
 
                         <ImageView
-                            android:id="@+id/report_img"
+                            android:id="@+id/report_img_1"
                             android:layout_width="90dp"
                             android:layout_height="70dp"
                             android:src="@mipmap/stock_report" />
@@ -264,6 +264,7 @@
                             android:layout_width="90dp"
                             android:layout_height="70dp"
                             android:src="@mipmap/billing" />
+
                     </RelativeLayout>
 
                     <TextView

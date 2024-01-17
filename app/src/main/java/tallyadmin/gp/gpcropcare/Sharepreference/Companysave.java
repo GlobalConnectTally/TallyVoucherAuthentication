@@ -21,7 +21,6 @@ public class Companysave {
     SharedPreferences.Editor editor;
     Context ctx;
 
-
     public Companysave(Context ctx) {
         this.ctx = ctx;
         prefs = ctx.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
